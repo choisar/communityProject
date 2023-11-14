@@ -2,10 +2,14 @@ package all;
 
 import all.boardService.BoardService;
 import all.boardService.BoardServiceImp;
+import all.button.idFind;
+import all.button.idFindImp;
 import all.button.joinButton;
 import all.button.joinButtonImp;
 import all.button.loginButton;
 import all.button.loginButtonImp;
+import all.button.pwFind;
+import all.button.pwFindImp;
 import all.userService.admin.AdminService;
 import all.userService.admin.AdminServiceImp;
 import all.userService.user.UserService;
@@ -20,6 +24,9 @@ public class Controller{
 	private loginButton lb;
 	private joinButton jb;
 	
+	private idFind idF;
+	private pwFind pwF;
+	
 	public Controller() {
 		// TODO Auto-generated constructor stub
 		us = new UserServiceImp();
@@ -27,6 +34,9 @@ public class Controller{
 		bs = new BoardServiceImp();
 		lb = new loginButtonImp();
 		jb = new joinButtonImp();
+		
+		idF = new idFindImp();
+		pwF = new pwFindImp();
 	}
 	
 	public void setRoot(Parent root) {
@@ -39,7 +49,16 @@ public class Controller{
 	public void membershipProc() {
 		jb.membershipProc(root);
 	}
-
 	
+	
+	
+	
+	public void idFindProc() {
+		idF.idFindProc(root);
+	}
+	
+	public void pwFindProc() {
+		pwF.pwFindProc(root);
+	}
 	
 }
