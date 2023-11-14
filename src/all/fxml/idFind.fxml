@@ -17,7 +17,7 @@
       <TextField fx:id="txtPhoneNum" layoutX="118.0" layoutY="109.0" />
       <Label layoutX="59.0" layoutY="74.0" text="이름" />
       <Label layoutX="47.0" layoutY="113.0" text="전화번호" />
-      <Button layoutX="125.0" layoutY="153.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" text="확인" />
+      <Button layoutX="125.0" layoutY="153.0" mnemonicParsing="false" onAction="#idFindOkProc" prefHeight="30.0" prefWidth="50.0" text="확인" />
       <Button layoutX="196.0" layoutY="153.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="30.0" prefWidth="50.0" text="취소" />
    </children>
 </AnchorPane>

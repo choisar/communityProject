@@ -56,7 +56,9 @@ public class Controller{
 	public void cancelProc(ActionEvent event) {
 		cs.windowClose(event);
 	}
-	
+	public void idFindOkProc() {
+		idF.idFindOkProc(root);
+	}
 	
 	public void idFindProc() {
 		idF.idFindProc(root);

@@ -6,4 +6,6 @@ public interface idFind {
 
 	void idFindProc(Parent root);
 
+	void idFindOkProc(Parent root);
+
 }
