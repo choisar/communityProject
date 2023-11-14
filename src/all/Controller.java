@@ -29,6 +29,9 @@ public class Controller{
 		jb = new joinButtonImp();
 	}
 	
+	public void setRoot(Parent root) {
+		this.root = root;
+	}
 	public void loginProc() {
 		lb.loginProc(root);
 	}
@@ -37,10 +40,6 @@ public class Controller{
 		jb.membershipProc(root);
 	}
 
-	public void setRoot(Parent root2) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 }

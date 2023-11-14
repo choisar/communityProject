@@ -13,7 +13,7 @@ public class SystemMain extends Application {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		// fxml 파일 읽어오기
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/main.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/main.fxml"));
 
 		// 읽어온 소스를 객체화 - scene 객체
 		Parent root = loader.load();
@@ -31,4 +31,5 @@ public class SystemMain extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }
