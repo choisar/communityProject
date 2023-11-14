@@ -11,6 +11,6 @@
       <Label layoutX="61.0" layoutY="38.0" text="님의 비밀번호는" />
       <Label layoutX="266.0" layoutY="38.0" text="입니다." />
       <TextField fx:id="findPw" layoutX="155.0" layoutY="34.0" prefHeight="23.0" prefWidth="105.0" />
-      <Label fx:id="findName" layoutX="14.0" layoutY="38.0" text="홍길동" />
+      <Label fx:id="findName" layoutX="14.0" layoutY="38.0" text="회원이름" />
    </children>
 </AnchorPane>

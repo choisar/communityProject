@@ -59,7 +59,6 @@ public class pwFindImp implements pwFind {
 			phoneNum.clear();
 			id.requestFocus();
 		}
-
 	}
 
 	@Override
