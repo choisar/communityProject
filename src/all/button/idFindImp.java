@@ -16,6 +16,7 @@ public class idFindImp implements idFind {
 	public idFindImp() {
 		// TODO Auto-generated constructor stub
 		dao = new DatabaseDAOImp();
+		cs = new CommonServiceImp();
 	}
 
 	@Override
@@ -44,7 +45,6 @@ public class idFindImp implements idFind {
 
 		membershipForm.setTitle("아이디찾기");
 		// 항상 맨 위로 - 기본값 false
-		membershipForm.setAlwaysOnTop(true);
 		membershipForm.setResizable(false);
 		membershipForm.show();
 	}
@@ -55,11 +55,15 @@ public class idFindImp implements idFind {
 		TextField name = (TextField)root.lookup("#txtname");
 		TextField phoneNum  = (TextField)root.lookup("#txtPhoneNum");
 		
-		System.out.println(name.getText());
-		System.out.println(phoneNum.getText());
 		
 		if(dao.idChk(name.getText(), phoneNum.getText())) {
-			userLogin(root);
+			System.out.println("아이디찾기 성공");
+			try {
+				userLogin(root);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 		} else {
 			cs.msgBox("아이디 찾기", "아이디 찾기 여부", "아이디 찾기에 실패하셨습니다. 이름과 전화번호를 확인하세요");
 			name.clear();
