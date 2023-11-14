@@ -13,7 +13,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="txtName" layoutX="118.0" layoutY="70.0" />
+      <TextField fx:id="txtname" layoutX="118.0" layoutY="70.0" />
       <TextField fx:id="txtPhoneNum" layoutX="118.0" layoutY="109.0" />
       <Label layoutX="59.0" layoutY="74.0" text="이름" />
       <Label layoutX="47.0" layoutY="113.0" text="전화번호" />

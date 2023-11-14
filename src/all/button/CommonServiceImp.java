@@ -2,6 +2,8 @@ package all.button;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class CommonServiceImp implements CommonService{
@@ -14,4 +16,12 @@ public class CommonServiceImp implements CommonService{
 		s.close();
 	}
 
+	public void msgBox(String title, String subject, String content) {
+		// TODO Auto-generated method stub
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(subject);
+		alert.setContentText(content);
+		alert.showAndWait();
+	}
 }
