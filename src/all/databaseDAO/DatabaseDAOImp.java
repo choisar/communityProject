@@ -3,7 +3,7 @@ package all.databaseDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DatabaseDAOImp{
+public class DatabaseDAOImp implements DatabaseDAO{
 
 	Connection con;
 	
