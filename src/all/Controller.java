@@ -2,6 +2,8 @@ package all;
 
 import all.boardService.BoardService;
 import all.boardService.BoardServiceImp;
+import all.button.CommonService;
+import all.button.CommonServiceImp;
 import all.button.idFind;
 import all.button.idFindImp;
 import all.button.joinButton;
@@ -14,6 +16,7 @@ import all.userService.admin.AdminService;
 import all.userService.admin.AdminServiceImp;
 import all.userService.user.UserService;
 import all.userService.user.UserServiceImp;
+import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 
 public class Controller{
@@ -23,7 +26,7 @@ public class Controller{
 	private BoardService bs;
 	private loginButton lb;
 	private joinButton jb;
-	
+	private CommonService cs;
 	private idFind idF;
 	private pwFind pwF;
 	
@@ -34,7 +37,7 @@ public class Controller{
 		bs = new BoardServiceImp();
 		lb = new loginButtonImp();
 		jb = new joinButtonImp();
-		
+		cs = new CommonServiceImp();
 		idF = new idFindImp();
 		pwF = new pwFindImp();
 	}
@@ -50,7 +53,9 @@ public class Controller{
 		jb.membershipProc(root);
 	}
 	
-	
+	public void cancelProc(ActionEvent event) {
+		cs.windowClose(event);
+	}
 	
 	
 	public void idFindProc() {

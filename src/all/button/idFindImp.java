@@ -1,7 +1,5 @@
 package all.button;
 
-import all.databaseDAO.DatabaseDAO;
-import all.databaseDAO.DatabaseDAOImp;
 import all.Controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,11 +8,9 @@ import javafx.stage.Stage;
 
 public class idFindImp implements idFind {
 	
-	DatabaseDAO dao;
 	
 	public idFindImp() {
 		// TODO Auto-generated constructor stub
-		dao = new DatabaseDAOImp();
 	}
 
 	@Override
@@ -24,27 +20,29 @@ public class idFindImp implements idFind {
 
 		// Stage membershipForm = (Stage)root.getScene().getWindow();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../membershipForm.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/idFind.fxml"));
 
-		Parent member = null;
+		root = null;
 
 		try {
-			member = loader.load();
-			membershipForm.setScene(new Scene(member));
+			root = loader.load();
+			membershipForm.setScene(new Scene(root));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 
 		Controller ctrl = loader.getController();
-		ctrl.setMember(member);
+		ctrl.setMember(root);
 
 
 
 		membershipForm.setTitle("아이디찾기");
 		// 항상 맨 위로 - 기본값 false
 		membershipForm.setAlwaysOnTop(true);
+		membershipForm.setResizable(false);
 		membershipForm.show();
 	}
+	
 
 }
