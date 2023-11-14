@@ -10,20 +10,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class pwFindImp implements pwFind {
+public class IdFindButtonImp implements IdFindButton {
 	DatabaseDAO dao;
 	CommonService cs;
-
-	public pwFindImp() {
+	
+	public IdFindButtonImp() {
 		dao = new DatabaseDAOImp();
 		cs = new CommonServiceImp();
 	}
 
 	@Override
-	public void pwFindProc(Parent root) {
+	public void idFindProc(Parent root) {
 		Stage membershipForm = new Stage();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/pwFind.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/idFind.fxml"));
 
 		root = null;
 
@@ -31,43 +31,39 @@ public class pwFindImp implements pwFind {
 			root = loader.load();
 			membershipForm.setScene(new Scene(root));
 		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
-
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		membershipForm.setTitle("비밀번호찾기");
+		membershipForm.setTitle("아이디찾기");
 		membershipForm.setResizable(false);
 		membershipForm.show();
 	}
-
-	@Override
-	public void pwFindOkProc(Parent root) {
-		TextField id = (TextField) root.lookup("#txtId");
-		TextField phoneNum = (TextField) root.lookup("#txtPhoneNum");
-		String findId = id.getText();
+	
+	public void idFindOkProc(Parent root) {
+		TextField name = (TextField)root.lookup("#txtName");
+		TextField phoneNum  = (TextField)root.lookup("#txtPhoneNum");
+		String findName = name.getText();
 		String findPhoneNum = phoneNum.getText();
-
-		if (dao.pwChk(id.getText(), phoneNum.getText())) {
-			String pw = dao.findPw(findId, findPhoneNum);
-			String findName = dao.findUserName(findId, findPhoneNum);
-			findPwResult(root, pw, findName);
+		
+		if(dao.idChk(name.getText(), phoneNum.getText())) {
+				String id = dao.findId(findName,findPhoneNum);
+				findIdResult(root, id, findName);
 		} else {
-			cs.msgBox("비밀번호 찾기", "비밀번호 찾기 오류", "아이디와 전화번호를 확인해주세요.");
-			id.clear();
+			cs.msgBox("아이디 찾기", "아이디 찾기 오류", "이름과 전화번호를 확인해주세요.");
+			name.clear();
 			phoneNum.clear();
-			id.requestFocus();
+			name.requestFocus();
 		}
 	}
 
-	@Override
-	public void findPwResult(Parent root, String pw, String findName) {
-		// TODO Auto-generated method stub
+	public void findIdResult(Parent root, String id, String findName) {
 		Stage membershipForm = new Stage();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/pwFindResult.fxml"));
-
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/idFindResult.fxml"));
+		
 		root = null;
 
 		try {
@@ -79,18 +75,17 @@ public class pwFindImp implements pwFind {
 
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
-
-		TextField findId = (TextField) root.lookup("#findPw");
-		findId.setText(pw);
+		
+		TextField findId = (TextField) root.lookup("#findId");
+		findId.setText(id);
 		
 		Label findNameLb = (Label) root.lookup("#findName");
 		findNameLb.setText("\""+findName+"\"");
 
-		membershipForm.setTitle("비밀번호 찾기");
+		membershipForm.setTitle("아이디 찾기");
 		membershipForm.setAlwaysOnTop(true);
 		membershipForm.setResizable(false);
 		membershipForm.show();
-
 	}
 
 }

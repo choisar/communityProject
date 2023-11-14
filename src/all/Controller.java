@@ -4,14 +4,14 @@ import all.boardService.BoardService;
 import all.boardService.BoardServiceImp;
 import all.button.CommonService;
 import all.button.CommonServiceImp;
-import all.button.idFind;
-import all.button.idFindImp;
+import all.button.IdFindButton;
+import all.button.IdFindButtonImp;
 import all.button.joinButton;
 import all.button.joinButtonImp;
 import all.button.loginButton;
 import all.button.loginButtonImp;
-import all.button.pwFind;
-import all.button.pwFindImp;
+import all.button.PwFindButton;
+import all.button.PwFindButtonImp;
 import all.userService.admin.AdminService;
 import all.userService.admin.AdminServiceImp;
 import all.userService.user.UserService;
@@ -27,8 +27,8 @@ public class Controller{
 	private loginButton lb;
 	private joinButton jb;
 	private CommonService cs;
-	private idFind idF;
-	private pwFind pwF;
+	private IdFindButton idF;
+	private PwFindButton pwF;
 	
 	public Controller() {
 		// TODO Auto-generated constructor stub
@@ -38,8 +38,8 @@ public class Controller{
 		lb = new loginButtonImp();
 		jb = new joinButtonImp();
 		cs = new CommonServiceImp();
-		idF = new idFindImp();
-		pwF = new pwFindImp();
+		idF = new IdFindButtonImp();
+		pwF = new PwFindButtonImp();
 	}
 	
 	public void setRoot(Parent root) {
