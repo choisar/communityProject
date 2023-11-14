@@ -2,7 +2,7 @@ package all.button;
 
 import javafx.scene.Parent;
 
-public class joinButtonImp implements joinButton{
+public class JoinButtonImp implements JoinButton{
 
 	@Override
 	public void membershipProc(Parent root) {

@@ -6,8 +6,8 @@ import all.button.CommonService;
 import all.button.CommonServiceImp;
 import all.button.IdFindButton;
 import all.button.IdFindButtonImp;
-import all.button.joinButton;
-import all.button.joinButtonImp;
+import all.button.JoinButton;
+import all.button.JoinButtonImp;
 import all.button.loginButton;
 import all.button.loginButtonImp;
 import all.button.PwFindButton;
@@ -25,7 +25,7 @@ public class Controller{
 	private AdminService as;
 	private BoardService bs;
 	private loginButton lb;
-	private joinButton jb;
+	private JoinButton jb;
 	private CommonService cs;
 	private IdFindButton idF;
 	private PwFindButton pwF;
@@ -36,7 +36,7 @@ public class Controller{
 		as = new AdminServiceImp();
 		bs = new BoardServiceImp();
 		lb = new loginButtonImp();
-		jb = new joinButtonImp();
+		jb = new JoinButtonImp();
 		cs = new CommonServiceImp();
 		idF = new IdFindButtonImp();
 		pwF = new PwFindButtonImp();
