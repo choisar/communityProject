@@ -1,6 +1,8 @@
-package all.button;
+package all.button.find_idpw;
 
 import all.Controller;
+import all.button.CommonService;
+import all.button.CommonServiceImp;
 import all.databaseDAO.DatabaseDAO;
 import all.databaseDAO.DatabaseDAOImp;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +25,7 @@ public class PwFindButtonImp implements PwFindButton {
 	public void pwFindProc(Parent root) {
 		Stage membershipForm = new Stage();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/pwFind.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/pwFind.fxml"));
 
 		root = null;
 
@@ -66,7 +68,7 @@ public class PwFindButtonImp implements PwFindButton {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/pwFindResult.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/pwFindResult.fxml"));
 
 		root = null;
 
