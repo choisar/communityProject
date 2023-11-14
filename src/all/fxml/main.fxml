@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="831.0" prefWidth="966.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="56.0" layoutY="253.0" mnemonicParsing="false" text="로그인" />
+      <Button layoutX="132.0" layoutY="253.0" mnemonicParsing="false" text="회원가입" />
+      <Button layoutX="473.0" layoutY="155.0" mnemonicParsing="false" text="검색" />
+      <Button layoutX="826.0" layoutY="157.0" mnemonicParsing="false" text="글쓰기" />
+      <PasswordField layoutX="63.0" layoutY="195.0" />
+      <TextField layoutX="63.0" layoutY="155.0" />
+      <TextField layoutX="263.0" layoutY="155.0" prefHeight="23.0" prefWidth="202.0" />
+      <Label layoutX="35.0" layoutY="159.0" text="ID">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="199.0" text="PW">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="228.0" text="아이디 찾기" />
+      <Label layoutX="126.0" layoutY="228.0" text="비밀번호 찾기" />
+      <Label layoutX="117.0" layoutY="228.0" text="/" textFill="#3c3a3a" />
+      <Label contentDisplay="CENTER" layoutX="321.0" layoutY="36.0" prefHeight="58.0" prefWidth="343.0" text="커뮤니티 이름">
+         <font>
+            <Font size="46.0" />
+         </font>
+      </Label>
+      <Pagination layoutX="263.0" layoutY="187.0" prefHeight="607.0" prefWidth="615.0" />
+      <Button layoutX="47.0" layoutY="334.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="자유 게시판" />
+      <Button layoutX="47.0" layoutY="393.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="구매 게시판" />
+      <Button layoutX="47.0" layoutY="454.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="판매 게시판" />
+      <Button layoutX="47.0" layoutY="512.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="나눔 게시판" />
+      <Button layoutX="47.0" layoutY="754.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="102.0" text="건의 / 신고하기" />
+   </children>
+</AnchorPane>
