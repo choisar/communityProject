@@ -35,7 +35,7 @@ public class idFindImp implements idFind {
 			e.printStackTrace();
 		}
 		Controller ctrl = loader.getController();
-		ctrl.setMember(root);
+		ctrl.setRoot(root);
 
 		membershipForm.setTitle("아이디찾기");
 		membershipForm.setResizable(false);
@@ -74,7 +74,7 @@ public class idFindImp implements idFind {
 		}
 
 		Controller ctrl = loader.getController();
-		ctrl.setMember(root);
+		ctrl.setRoot(root);
 		
 		TextField findId = (TextField) root.lookup("#findId");
 		findId.setText(id);

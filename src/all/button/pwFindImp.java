@@ -35,7 +35,7 @@ public class pwFindImp implements pwFind {
 		}
 
 		Controller ctrl = loader.getController();
-		ctrl.setMember(root);
+		ctrl.setRoot(root);
 
 		membershipForm.setTitle("비밀번호찾기");
 		membershipForm.setResizable(false);
@@ -78,7 +78,7 @@ public class pwFindImp implements pwFind {
 		}
 
 		Controller ctrl = loader.getController();
-		ctrl.setMember(root);
+		ctrl.setRoot(root);
 
 		TextField findId = (TextField) root.lookup("#findPw");
 		findId.setText(pw);

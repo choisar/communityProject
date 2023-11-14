@@ -21,7 +21,6 @@ import javafx.scene.Parent;
 
 public class Controller{
 	private Parent root;
-	private Parent member;
 	private UserService us;
 	private AdminService as;
 	private BoardService bs;
@@ -59,11 +58,11 @@ public class Controller{
 	}
 	
 	public void idFindOkProc() {
-		idF.idFindOkProc(member);
+		idF.idFindOkProc(root);
 	}
 	
 	public void pwFindOkProc() {
-		pwF.pwFindOkProc(member);
+		pwF.pwFindOkProc(root);
 	}
 	
 	public void idFindProc() {
@@ -74,9 +73,5 @@ public class Controller{
 		pwF.pwFindProc(root);
 	}
 
-	public void setMember(Parent member) {
-		// TODO Auto-generated method stub
-		this.member = member;
-	}
 	
 }
