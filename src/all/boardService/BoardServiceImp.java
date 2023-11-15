@@ -133,6 +133,7 @@ public class BoardServiceImp implements BoardService{
 		
 		rootStage.setTitle("회원정보");
 		rootStage.show();
+		rootStage.setResizable(false);
 	}
 	
 	

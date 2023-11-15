@@ -24,7 +24,10 @@ public class SystemMain extends Application {
 		BoardServiceImp boardService = new BoardServiceImp();
 
 		// Call the boardListView method
+		
+		
 		boardService.boardListView2(root);
+		
 	}
 	
 }
