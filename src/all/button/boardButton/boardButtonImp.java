@@ -1,7 +1,7 @@
 package all.button.boardButton;
 
 import all.Controller;
-import all.boardService.freeBoardServiceImp;
+import all.boardService.boardViewServiceImp;
 import all.button.common.CommonServiceImp;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class boardButtonImp implements boardButton {
 	
 	CommonServiceImp cs = new CommonServiceImp();
-	freeBoardServiceImp fbs = new freeBoardServiceImp();
+	boardViewServiceImp bvs = new boardViewServiceImp();
 
 	// 검색 버튼
 	@Override
@@ -67,9 +67,9 @@ public class boardButtonImp implements boardButton {
 		
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView(root);
-			fbs.freeBoardView(root);
+			bvs.freeBoardView(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-			fbs.freeBoardView(root);
+			bvs.freeBoardView(root);
 		}
 	}
 	
@@ -81,8 +81,9 @@ public class boardButtonImp implements boardButton {
 		
 		if(logChk.getText().equals("비회원")) {
 			cs.errorView(root);
+			bvs.buyBoardView(root);
 		} else if (logChk.getText().equals("회원")||logChk.getText().equals("관리자")) {
-			System.out.println("기능 실행");
+			bvs.buyBoardView(root);
 		}
 	}
 	
@@ -94,8 +95,9 @@ public class boardButtonImp implements boardButton {
 		
 		if(logChk.getText().equals("비회원")) {
 			cs.errorView(root);
+			bvs.sellBoardView(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-			System.out.println("기능 실행");
+			bvs.sellBoardView(root);
 		}
 	}
 	
@@ -108,8 +110,9 @@ public class boardButtonImp implements boardButton {
 		
 		if(logChk.getText().equals("비회원")) {
 			cs.errorView(root);
+			bvs.sharingBoardView(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-			System.out.println("기능 실행");
+			bvs.sharingBoardView(root);
 		}
 	}
 	
