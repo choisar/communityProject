@@ -1,6 +1,7 @@
 package all.button.boardButton;
 
 import all.Controller;
+import all.boardService.freeBoardServiceImp;
 import all.button.common.CommonServiceImp;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 public class boardButtonImp implements boardButton {
 	
 	CommonServiceImp cs = new CommonServiceImp();
+	freeBoardServiceImp fbs = new freeBoardServiceImp();
 
 	// 검색 버튼
 	@Override
@@ -65,8 +67,9 @@ public class boardButtonImp implements boardButton {
 		
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView(root);
+			fbs.freeBoardView(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-			System.out.println("기능 실행");
+			fbs.freeBoardView(root);
 		}
 	}
 	
