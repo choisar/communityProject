@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import all.boardService.Board;
 import all.button.CommonService;
 import all.button.CommonServiceImp;
 
@@ -134,5 +138,34 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<Board> selectAll() {
+		// TODO Auto-generated method stub
+		
+		List<Board> boardList = new ArrayList<Board>();
+		String sql = "select * from board";
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				Board b = new Board();
+//				b.setId(rs.getString(1));
+				b.setNickname(rs.getString(2));
+				b.setTitle(rs.getString(3));
+				b.setDate(rs.getTimestamp(4).toString());
+				
+				boardList.add(b);
+				
+			}
+			return boardList;
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 
 }

@@ -1,4 +1,4 @@
-package all.boardService_hong;
+package all.boardService;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

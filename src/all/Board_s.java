@@ -3,7 +3,7 @@ package all;
 
 import java.sql.Date;
 
-public class Board {
+public class Board_s {
 	private String id;
 	private String nicName;
 	private int No;

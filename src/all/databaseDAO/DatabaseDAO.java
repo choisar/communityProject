@@ -11,4 +11,6 @@ public interface DatabaseDAO {
 	boolean pwChk(String findId, String findPhoneNum);
 	String findPw(String findId, String findPhoneNum);
 	String findUserName(String findId, String findPhoneNum);
+	List<Board> selectAll();
+	
 }

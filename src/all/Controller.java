@@ -72,6 +72,8 @@ public class Controller{
 	public void pwFindProc() {
 		pwF.pwFindProc(root);
 	}
-
+	public void boardListView() {
+		bs.boardListView(root);
+	}
 	
 }
