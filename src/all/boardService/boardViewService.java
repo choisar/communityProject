@@ -11,4 +11,6 @@ public interface boardViewService {
 	public void sellBoardView(Parent root);
 	// 나눔 게시판
 	public void sharingBoardView(Parent root);
+	// 검색 결과 게시판
+	public void searchResultBoardView(Parent root, String text1, String text2);
 }

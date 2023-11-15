@@ -1,14 +1,12 @@
 package all.button.boardButton;
 
-import all.Controller;
 import all.boardService.boardViewServiceImp;
 import all.button.common.CommonServiceImp;
-import javafx.fxml.FXMLLoader;
+import javafx.collections.FXCollections;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 public class boardButtonImp implements boardButton {
 	
@@ -20,15 +18,26 @@ public class boardButtonImp implements boardButton {
 	public void searchProc(Parent root) {
 		// TODO Auto-generated method stub
 		Label logChk  = (Label)root.lookup("#logChk");
+		
+		
+		ComboBox<String> combo = (ComboBox<String>)root.lookup("#searchCombo");
+		String str[] = {"Title", "nickname", "ca", "dat"};
+		combo.getItems().addAll(FXCollections.observableArrayList(str));
+		String text1 = combo.getSelectionModel().getSelectedItem();
+		
 		TextField searchBoard  = (TextField)root.lookup("#boardNameSearch");
+		String text2 = searchBoard.getText();
+		
+		
 		
 		if(searchBoard.getText().isEmpty()) {
 			cs.errorView2(root);
 		} else {
 			if(logChk.getText().equals("비회원")) {
 				cs.errorView1(root);
+				bvs.searchResultBoardView(root, text1, text2);
 			} else if (logChk.getText().equals("회원")||logChk.getText().equals("관리자")) {
-				System.out.println("기능 실행");
+				bvs.searchResultBoardView(root, text1, text2);
 			}
 		}
 	}

@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -113,6 +114,41 @@ public class BoardServiceImp implements BoardService {
 				System.out.println(b.getNickname());
 				System.out.println(b.getTitle());
 				System.out.println(b.getDate());
+			}
+		});
+	}
+
+	// 카테고리에 상관없이 검색 결과가 포함된 모든 게시물을 출력하는 테이블뷰 생성
+	public void serchResultListView(Parent root, String text1, String text2) {
+		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
+		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+		List<Board> boardList = dao.searchResultAll(text1,text2);
+		if (boardList != null) {
+			TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
+			TableColumn<Board, String> title = new TableColumn<Board, String>("제목");
+			TableColumn<Board, String> date = new TableColumn<Board, String>("날짜");
+			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nickname"));
+			title.setCellValueFactory(new PropertyValueFactory<Board, String>("title"));
+			date.setCellValueFactory(new PropertyValueFactory<Board, String>("date"));
+
+			listView.getColumns().addAll(nickname, title, date);
+			listView.setItems(FXCollections.observableArrayList(boardList));
+
+		} else {
+			System.out.println("게시판 목록을 가져올 수 없습니다.");
+		}
+
+		listView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				// TODO Auto-generated method stub
+				Board b = (Board) listView.getSelectionModel().getSelectedItem();
+				System.out.println(b.getNickname());
+				System.out.println(b.getTitle());
+				System.out.println(b.getDate());
+
 			}
 		});
 	}
