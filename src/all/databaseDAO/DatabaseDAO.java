@@ -12,5 +12,6 @@ public interface DatabaseDAO {
 	String findPw(String findId, String findPhoneNum);
 	String findUserName(String findId, String findPhoneNum);
 	List<Board> selectAll();
+	List<Board> categoryBoardAll(String category);
 	
 }

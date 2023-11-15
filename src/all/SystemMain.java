@@ -11,23 +11,17 @@ public class SystemMain extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/main.fxml"));
 		Parent root = loader.load();
 
 		primaryStage.setScene(new Scene(root));
-		primaryStage.setTitle("User Login");
+		primaryStage.setTitle("main");
 
-		// Create an instance of BoardServiceImp
-		BoardServiceImp boardService = new BoardServiceImp();
-
-		// Call the boardListView method
+		BoardServiceImp bs = new BoardServiceImp();
 		
-		
-		boardService.boardListView2(root);
-		
+		bs.mainView(root);
 	}
 	
 }

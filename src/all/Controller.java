@@ -1,6 +1,7 @@
 package all;
 
 import all.boardService.BoardService;
+
 import all.boardService.BoardServiceImp;
 import all.button.JoinButton;
 import all.button.JoinButtonImp;
@@ -26,7 +27,9 @@ public class Controller{
 	private UserService us;
 	private AdminService as;
 	private BoardService bs;
+	// 로그인 버튼
 	private loginButton lb;
+	// 회원가입 버튼
 	private JoinButton jb;
 	// 윈도우창 닫기, 에러 창 호출
 	private CommonService cs;
@@ -41,7 +44,9 @@ public class Controller{
 		us = new UserServiceImp();
 		as = new AdminServiceImp();
 		bs = new BoardServiceImp();
+		// 로그인 버튼
 		lb = new loginButtonImp();
+		// 회원가입 버튼
 		jb = new JoinButtonImp();
 		// 윈도우창 닫기, 에러 창 호출
 		cs = new CommonServiceImp();
@@ -55,25 +60,22 @@ public class Controller{
 	public void setRoot(Parent root) {
 		this.root = root;
 	}
+	// 로그인 버튼
 	public void loginProc() {
 		lb.loginProc(root);
 	}
-	
+	// 회원가입 버튼
 	public void membershipProc() {
 		jb.membershipProc(root);
 	}
-	
+	// 취소 버튼
 	public void cancelProc(ActionEvent event) {
 		cs.windowClose(event);
 	}
-	
-	public void boardListView() {
-		bs.boardListView(root);
-	}
+	// main 화면
 	public void boardListView2() {
-		bs.boardListView2(root);
+		bs.mainView(root);
 	}
-	
 	// id, pw 찾기
 	public void idFindProc() {
 		idF.idFindProc(root);

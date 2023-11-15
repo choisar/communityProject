@@ -1,12 +1,27 @@
 package all.boardService;
 
+
 import all.Controller;
+import all.button.common.CommonService;
+import all.button.common.CommonServiceImp;
+import all.databaseDAO.DatabaseDAO;
+import all.databaseDAO.DatabaseDAOImp;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class boardViewServiceImp implements boardViewService{
+	
+	DatabaseDAO dao;
+	CommonService cs;
+	BoardService bs;
+	
+	public boardViewServiceImp() {
+		dao = new DatabaseDAOImp();
+		cs = new CommonServiceImp();
+		bs = new BoardServiceImp();
+	}
 
 	// 자유 게시판
 	@Override
@@ -27,6 +42,8 @@ public class boardViewServiceImp implements boardViewService{
 		}
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
+		
+		bs.createCategoryListView(root,"자유");
 
 		membershipForm.setTitle("자유 게시판");
 		membershipForm.setResizable(false);
@@ -52,6 +69,8 @@ public class boardViewServiceImp implements boardViewService{
 		}
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
+		
+		bs.createCategoryListView(root,"구매");
 
 		membershipForm.setTitle("구매 게시판");
 		membershipForm.setResizable(false);
@@ -77,6 +96,8 @@ public class boardViewServiceImp implements boardViewService{
 		}
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
+		
+		bs.createCategoryListView(root,"판매");
 
 		membershipForm.setTitle("판매 게시판");
 		membershipForm.setResizable(false);
@@ -102,6 +123,8 @@ public class boardViewServiceImp implements boardViewService{
 		}
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
+		
+		bs.createCategoryListView(root,"나눔");
 
 		membershipForm.setTitle("나눔 게시판");
 		membershipForm.setResizable(false);

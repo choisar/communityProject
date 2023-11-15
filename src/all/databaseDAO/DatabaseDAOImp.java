@@ -18,6 +18,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	ResultSet rs;
 	PreparedStatement pstmt;
 
+	// 오라클 SQL 연결
 	public DatabaseDAOImp() {
 		cs = new CommonServiceImp();
 		String url = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
@@ -34,6 +35,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		}
 	}
 
+	// 아이디 체크
 	public boolean idChk(String name, String phoneNum) {
 		// TODO Auto-generated method stub
 		String sql = "select decode(count(*), 1, 'true', 'false') "
@@ -55,7 +57,8 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		}
 		return false;
 	}
-
+	
+	// 아이디 찾기
 	@Override
 	public String findId(String findName, String findPhoneNum) {
 		String sql = "select member_id from member " + "where member_name = ? and member_phonenum = ?";
@@ -76,7 +79,8 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		}
 		return null;
 	}
-
+	
+	// 비밀번호 체크
 	@Override
 	public boolean pwChk(String findId, String findPhoneNum) {
 		String sql = "select decode(count(*), 1, 'true', 'false') "
@@ -97,6 +101,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return false;
 	}
 
+	// 비밀번호 찾기
 	@Override
 	public String findPw(String findId, String findPhoneNum) {
 		String sql = "select member_pw from member " 
@@ -119,9 +124,11 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 
+	// 이름 찾기
 	@Override
 	public String findUserName(String findId, String findPhoneNum) {
-		String sql = "select member_Name from member " + "where member_id = ? and member_phonenum = ?";
+		String sql = "select member_Name from member " 
+	+ "where member_id = ? and member_phonenum = ?";
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -140,6 +147,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 	
+	// 모든 카테고리의 모든 게시판
 	@Override
 	public List<Board> selectAll() {
 		// TODO Auto-generated method stub
@@ -152,10 +160,10 @@ public class DatabaseDAOImp implements DatabaseDAO {
 			
 			while (rs.next()) {
 				Board b = new Board();
-//				b.setId(rs.getString(1));
 				b.setNickname(rs.getString(2));
 				b.setTitle(rs.getString(3));
-				b.setDate(rs.getTimestamp(4).toString());
+				b.setCat(rs.getString(4));
+				b.setDate(rs.getTimestamp(5).toString());
 				
 				boardList.add(b);
 				
@@ -168,5 +176,33 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 	
+	// 카테고리 안에 있는 모든 게시판
+	@Override
+	public List<Board> categoryBoardAll(String category) {
+		// TODO Auto-generated method stub
+		
+		List<Board> boardList = new ArrayList<Board>();
+		String sql = "select * from board where ca = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, category);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				Board b = new Board();
+				b.setNickname(rs.getString(2));
+				b.setTitle(rs.getString(3));
+				b.setCat(rs.getString(4));
+				b.setDate(rs.getTimestamp(5).toString());
+				
+				boardList.add(b);
+			}
+			return boardList;
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

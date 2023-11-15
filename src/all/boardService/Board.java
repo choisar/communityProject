@@ -4,7 +4,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Board {
-	private String id, nickname, title, date;
+	private String id, nickname, title, date, cat;
+
+	public String getCat() {
+		return cat;
+	}
+
+	public void setCat(String cat) {
+		this.cat = cat;
+	}
 
 	public String getId() {
 		return id;
