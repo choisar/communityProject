@@ -75,5 +75,8 @@ public class Controller{
 	public void boardListView() {
 		bs.boardListView(root);
 	}
+	public void boardListView2() {
+		bs.boardListView2(root);
+	}
 	
 }
