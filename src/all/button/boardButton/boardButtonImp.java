@@ -1,8 +1,11 @@
 package all.button.boardButton;
 
+import java.util.Arrays;
+
 import all.boardService.boardViewServiceImp;
 import all.button.common.CommonServiceImp;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -23,6 +26,9 @@ public class boardButtonImp implements boardButton {
 		ComboBox<String> combo = (ComboBox<String>)root.lookup("#searchCombo");
 		String str[] = {"Title", "nickname", "ca", "dat"};
 		combo.getItems().addAll(FXCollections.observableArrayList(str));
+		ObservableList<String> fxComboNameList = FXCollections.observableArrayList(str);
+		combo.setItems(fxComboNameList);
+		
 		String text1 = combo.getSelectionModel().getSelectedItem();
 		
 		TextField searchBoard  = (TextField)root.lookup("#boardNameSearch");
