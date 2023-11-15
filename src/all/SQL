@@ -1,3 +1,4 @@
+1. 멤버 테이블
 drop table member;
 
 create table member (
@@ -15,3 +16,19 @@ create SEQUENCE mem_seq
 insert into member values(mem_seq.nextval,'hong','1234','홍길동','01045699923');
 
 commit;
+
+2. board 테이블
+
+create sequence board_seq 
+    start with 1
+    INCREMENT by 1
+    nocache;
+    
+create table board3 (
+	board_no number primary key,
+	title varchar2(50) not null,
+	contents varchar2(1000) not null,
+	imagepath blob
+	);
+    
+select * from board3;
