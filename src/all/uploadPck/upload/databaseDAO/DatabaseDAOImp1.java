@@ -8,13 +8,13 @@ import java.sql.SQLException;
 
 import upload.Board;
 
-public class DatabaseDAOImp implements DatabaseDAO{
+public class DatabaseDAOImp1 implements DatabaseDAO1{
 
 	Connection con;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	public DatabaseDAOImp() {
+	public DatabaseDAOImp1() {
 		String url="jdbc:oracle:thin:@127.0.0.1:1521:XE";
 		String user="c##sqluser";
 		String pass="1234";

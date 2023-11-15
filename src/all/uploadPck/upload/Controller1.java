@@ -5,13 +5,13 @@ import javafx.scene.Parent;
 import upload.userService.user.UploadBoard;
 import upload.userService.user.UploadBoardImpl;
 
-public class Controller {
+public class Controller1 {
 	private Parent root;
 	private Parent Board;
 	private Parent info;
 	private UploadBoard ub;
 	
-	public Controller() {
+	public Controller1() {
 		// TODO Auto-generated constructor stub
 		ub=new UploadBoardImpl();
 	}
