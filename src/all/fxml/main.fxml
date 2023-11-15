@@ -14,11 +14,11 @@
    <children>
       <Button layoutX="56.0" layoutY="253.0" mnemonicParsing="false" text="로그인" />
       <Button layoutX="132.0" layoutY="253.0" mnemonicParsing="false" text="회원가입" />
-      <Button layoutX="167.0" layoutY="306.0" mnemonicParsing="false" text="검색" />
+      <Button layoutX="167.0" layoutY="306.0" mnemonicParsing="false" onAction="#searchProc" text="검색" />
       <Button layoutX="47.0" layoutY="367.0" mnemonicParsing="false" onAction="#writingProc" prefHeight="30.0" prefWidth="140.0" text="게시물 작성" />
       <PasswordField layoutX="63.0" layoutY="195.0" promptText="비밀번호 입력" />
       <TextField layoutX="63.0" layoutY="155.0" promptText="아이디 입력" />
-      <TextField layoutX="29.0" layoutY="306.0" prefHeight="23.0" prefWidth="126.0" promptText="게시물 제목 입력" />
+      <TextField fx:id="boardNameSearch" layoutX="29.0" layoutY="306.0" prefHeight="23.0" prefWidth="126.0" promptText="게시물 제목 입력" />
       <Label layoutX="35.0" layoutY="159.0" text="ID">
          <font>
             <Font size="14.0" />

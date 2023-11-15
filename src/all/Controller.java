@@ -2,6 +2,8 @@ package all;
 
 import all.boardService.BoardService;
 import all.boardService.BoardServiceImp;
+import all.boardService.boardNameSearchService;
+import all.boardService.boardNameSearchServiceImp;
 import all.boardService.buyBoardService;
 import all.boardService.buyBoardServiceImp;
 import all.boardService.freeBoardService;
@@ -43,6 +45,8 @@ public class Controller{
 	// id, pw 찾기
 	private IdFindButton idF;
 	private PwFindButton pwF;
+	// 검색 버튼 
+	private boardNameSearchService bns;
 	// 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
 	private writingService ws;
 	private freeBoardService fB;
@@ -63,6 +67,8 @@ public class Controller{
 		// id, pw 찾기
 		idF = new IdFindButtonImp();
 		pwF = new PwFindButtonImp();
+		// 검색 버튼 
+		bns = new boardNameSearchServiceImp();
 		// 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
 		ws = new writingServiceImp();
 		fB = new freeBoardServiceImp();
@@ -106,6 +112,10 @@ public class Controller{
 	}
 	public void pwFindOkProc() {
 		pwF.pwFindOkProc(root);
+	}
+	// 검색 버튼 
+	public void searchProc() {
+		bns.searchProc(root);
 	}
 	// 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
 	public void writingProc() {

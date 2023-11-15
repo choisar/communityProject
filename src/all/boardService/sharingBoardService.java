@@ -5,5 +5,6 @@ import javafx.scene.Parent;
 public interface sharingBoardService {
 
 	void sharingBoardProc(Parent root);
+	void sharingBoardView(Parent root);
 
 }
