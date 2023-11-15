@@ -1,5 +1,8 @@
 package all.databaseDAO;
 
+import java.util.List;
+
+import all.boardService.Board;
 
 public interface DatabaseDAO {
 
@@ -8,5 +11,4 @@ public interface DatabaseDAO {
 	boolean pwChk(String findId, String findPhoneNum);
 	String findPw(String findId, String findPhoneNum);
 	String findUserName(String findId, String findPhoneNum);
-	
 }
