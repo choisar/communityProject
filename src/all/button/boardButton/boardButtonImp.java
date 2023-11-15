@@ -23,40 +23,14 @@ public class boardButtonImp implements boardButton {
 		TextField searchBoard  = (TextField)root.lookup("#boardNameSearch");
 		
 		if(searchBoard.getText().isEmpty()) {
-			searchViewError2(root);
+			cs.errorView2(root);
 		} else {
 			if(logChk.getText().equals("비회원")) {
-				cs.errorView(root);
+				cs.errorView1(root);
 			} else if (logChk.getText().equals("회원")||logChk.getText().equals("관리자")) {
 				System.out.println("기능 실행");
 			}
 		}
-	}
-
-	// 검색창 비어있으면 호출되는 오류
-	@Override
-	public void searchViewError2(Parent root) {
-		// TODO Auto-generated method stub
-		Stage membershipForm = new Stage();
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/isEmptyError.fxml"));
-
-		root = null;
-
-		try {
-			root = loader.load();
-			membershipForm.setScene(new Scene(root));
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		Controller ctrl = loader.getController();
-		ctrl.setRoot(root);
-
-		membershipForm.setTitle("Error");
-		membershipForm.setResizable(false);
-		membershipForm.setAlwaysOnTop(true);
-		membershipForm.show();
 	}
 	
 	// 자유 게시판 버튼
@@ -66,7 +40,7 @@ public class boardButtonImp implements boardButton {
 		Label logChk = (Label) root.lookup("#logChk");
 		
 		if (logChk.getText().equals("비회원")) {
-			cs.errorView(root);
+			cs.errorView1(root);
 			bvs.freeBoardView(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			bvs.freeBoardView(root);
@@ -80,7 +54,7 @@ public class boardButtonImp implements boardButton {
 		Label logChk  = (Label)root.lookup("#logChk");
 		
 		if(logChk.getText().equals("비회원")) {
-			cs.errorView(root);
+			cs.errorView1(root);
 			bvs.buyBoardView(root);
 		} else if (logChk.getText().equals("회원")||logChk.getText().equals("관리자")) {
 			bvs.buyBoardView(root);
@@ -94,7 +68,7 @@ public class boardButtonImp implements boardButton {
 		Label logChk  = (Label)root.lookup("#logChk");
 		
 		if(logChk.getText().equals("비회원")) {
-			cs.errorView(root);
+			cs.errorView1(root);
 			bvs.sellBoardView(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			bvs.sellBoardView(root);
@@ -109,7 +83,7 @@ public class boardButtonImp implements boardButton {
 		Label logChk  = (Label)root.lookup("#logChk");
 		
 		if(logChk.getText().equals("비회원")) {
-			cs.errorView(root);
+			cs.errorView1(root);
 			bvs.sharingBoardView(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			bvs.sharingBoardView(root);
@@ -123,7 +97,7 @@ public class boardButtonImp implements boardButton {
 		Label logChk  = (Label)root.lookup("#logChk");
 		
 		if(logChk.getText().equals("비회원")) {
-			cs.errorView(root);
+			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원")||logChk.getText().equals("관리자")) {
 			System.out.println("기능 실행");
 		}
@@ -136,7 +110,7 @@ public class boardButtonImp implements boardButton {
 		Label logChk  = (Label)root.lookup("#logChk");
 		
 		if(logChk.getText().equals("비회원")) {
-			cs.errorView(root);
+			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			System.out.println("기능 실행");
 		}
