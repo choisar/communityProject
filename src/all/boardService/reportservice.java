@@ -5,6 +5,5 @@ import javafx.scene.Parent;
 public interface reportservice {
 
 	void reportProc(Parent root);
-	void reportView(Parent root);
 
 }

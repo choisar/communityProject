@@ -47,8 +47,9 @@ public class Controller{
 	private PwFindButton pwF;
 	// 검색 버튼 
 	private boardNameSearchService bns;
-	// 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
+	// 게시물 작성 
 	private writingService ws;
+	// 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
 	private freeBoardService fB;
 	private buyBoardService bB;
 	private sellBoardService slB;
@@ -69,8 +70,9 @@ public class Controller{
 		pwF = new PwFindButtonImp();
 		// 검색 버튼 
 		bns = new boardNameSearchServiceImp();
-		// 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
+		// 게시물 작성
 		ws = new writingServiceImp();
+		// 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
 		fB = new freeBoardServiceImp();
 		bB = new buyBoardServiceImp();
 		slB = new sellBoardServiceImp();
@@ -117,10 +119,11 @@ public class Controller{
 	public void searchProc() {
 		bns.searchProc(root);
 	}
-	// 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
+	// 게시물 작성
 	public void writingProc() {
 		ws.writingProc(root);
 	}
+	// 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
 	public void freeBoardProc() {
 		fB.freeBoardProc(root);
 	}
