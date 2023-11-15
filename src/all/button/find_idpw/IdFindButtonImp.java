@@ -1,8 +1,8 @@
 package all.button.find_idpw;
 
 import all.Controller;
-import all.button.CommonService;
-import all.button.CommonServiceImp;
+import all.button.common.CommonService;
+import all.button.common.CommonServiceImp;
 import all.databaseDAO.DatabaseDAO;
 import all.databaseDAO.DatabaseDAOImp;
 import javafx.fxml.FXMLLoader;

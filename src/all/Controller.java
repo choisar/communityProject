@@ -2,14 +2,14 @@ package all;
 
 import all.boardService.BoardService;
 import all.boardService.BoardServiceImp;
-import all.button.CommonService;
-import all.button.CommonServiceImp;
 import all.button.JoinButton;
 import all.button.JoinButtonImp;
 import all.button.loginButton;
 import all.button.loginButtonImp;
 import all.button.boardButton.boardButton;
 import all.button.boardButton.boardButtonImp;
+import all.button.common.CommonService;
+import all.button.common.CommonServiceImp;
 import all.button.find_idpw.IdFindButton;
 import all.button.find_idpw.IdFindButtonImp;
 import all.button.find_idpw.PwFindButton;

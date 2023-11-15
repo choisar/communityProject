@@ -1,4 +1,4 @@
-package all.button;
+package all.button.common;
 
 import all.Controller;
 import javafx.event.ActionEvent;
@@ -31,7 +31,7 @@ public class CommonServiceImp implements CommonService{
 	public void errorView(Parent root) {
 		Stage membershipForm = new Stage();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/notLoginError.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/notLoginError.fxml"));
 
 		root = null;
 

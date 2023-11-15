@@ -1,7 +1,7 @@
 package all.button.boardButton;
 
 import all.Controller;
-import all.button.CommonServiceImp;
+import all.button.common.CommonServiceImp;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

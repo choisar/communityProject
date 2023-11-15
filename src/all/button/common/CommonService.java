@@ -1,4 +1,4 @@
-package all.button;
+package all.button.common;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;

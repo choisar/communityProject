@@ -1,6 +1,7 @@
 package all.databaseDAO;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import all.boardService.Board;
-import all.button.CommonService;
-import all.button.CommonServiceImp;
+import all.button.common.CommonService;
+import all.button.common.CommonServiceImp;
 
 public class DatabaseDAOImp implements DatabaseDAO {
 	CommonService cs;
