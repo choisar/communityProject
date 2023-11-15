@@ -2,26 +2,14 @@ package all;
 
 import all.boardService.BoardService;
 import all.boardService.BoardServiceImp;
-import all.boardService.boardNameSearchService;
-import all.boardService.boardNameSearchServiceImp;
-import all.boardService.buyBoardService;
-import all.boardService.buyBoardServiceImp;
-import all.boardService.freeBoardService;
-import all.boardService.freeBoardServiceImp;
-import all.boardService.reportservice;
-import all.boardService.reportserviceImp;
-import all.boardService.sellBoardService;
-import all.boardService.sellBoardServiceImp;
-import all.boardService.sharingBoardService;
-import all.boardService.sharingBoardServiceImp;
-import all.boardService.writingService;
-import all.boardService.writingServiceImp;
 import all.button.CommonService;
 import all.button.CommonServiceImp;
 import all.button.JoinButton;
 import all.button.JoinButtonImp;
 import all.button.loginButton;
 import all.button.loginButtonImp;
+import all.button.boardButton.boardButton;
+import all.button.boardButton.boardButtonImp;
 import all.button.find_idpw.IdFindButton;
 import all.button.find_idpw.IdFindButtonImp;
 import all.button.find_idpw.PwFindButton;
@@ -45,16 +33,8 @@ public class Controller{
 	// id, pw 찾기
 	private IdFindButton idF;
 	private PwFindButton pwF;
-	// 검색 버튼 
-	private boardNameSearchService bns;
-	// 게시물 작성 
-	private writingService ws;
-	// 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
-	private freeBoardService fB;
-	private buyBoardService bB;
-	private sellBoardService slB;
-	private sharingBoardService sgB;
-	private reportservice rp;
+	// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
+	private boardButton bBt;
 	
 	public Controller() {
 		// TODO Auto-generated constructor stub
@@ -68,16 +48,8 @@ public class Controller{
 		// id, pw 찾기
 		idF = new IdFindButtonImp();
 		pwF = new PwFindButtonImp();
-		// 검색 버튼 
-		bns = new boardNameSearchServiceImp();
-		// 게시물 작성
-		ws = new writingServiceImp();
-		// 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
-		fB = new freeBoardServiceImp();
-		bB = new buyBoardServiceImp();
-		slB = new sellBoardServiceImp();
-		sgB = new sharingBoardServiceImp();
-		rp = new reportserviceImp();
+		// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼 
+		bBt = new boardButtonImp();
 	}
 	
 	public void setRoot(Parent root) {
@@ -117,26 +89,26 @@ public class Controller{
 	}
 	// 검색 버튼 
 	public void searchProc() {
-		bns.searchProc(root);
+		bBt.searchProc(root);
 	}
 	// 게시물 작성
 	public void writingProc() {
-		ws.writingProc(root);
+		bBt.writingProc(root);
 	}
 	// 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
 	public void freeBoardProc() {
-		fB.freeBoardProc(root);
+		bBt.freeBoardProc(root);
 	}
 	public void buyBoardProc() {
-		bB.buyBoardProc(root);
+		bBt.buyBoardProc(root);
 	}
 	public void sellBoardProc() {
-		slB.sellBoardProc(root);
+		bBt.sellBoardProc(root);
 	}
 	public void sharingBoardProc() {
-		sgB.sharingBoardProc(root);
+		bBt.sharingBoardProc(root);
 	}
 	public void reportProc() {
-		rp.reportProc(root);
+		bBt.reportProc(root);
 	}
 }
