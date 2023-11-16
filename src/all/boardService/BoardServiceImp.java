@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -41,6 +42,11 @@ public class BoardServiceImp implements BoardService {
 
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
+		
+		ComboBox<String> combo = (ComboBox<String>)root.lookup("#searchCombo");
+		String str[] = {"제목", "닉네임", "카테고리", "날짜"};
+		combo.getItems().addAll(FXCollections.observableArrayList(str));
+		
 
 		createAllListView(root);
 
@@ -124,6 +130,7 @@ public class BoardServiceImp implements BoardService {
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 		List<Board> boardList = dao.searchResultAll(text1,text2);
+		
 		if (boardList != null) {
 			TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
 			TableColumn<Board, String> title = new TableColumn<Board, String>("제목");

@@ -21,6 +21,8 @@ public class SystemMain extends Application {
 
 		BoardServiceImp bs = new BoardServiceImp();
 		
+		
+		
 		bs.mainView(root);
 	}
 	

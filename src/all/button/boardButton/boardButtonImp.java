@@ -21,20 +21,25 @@ public class boardButtonImp implements boardButton {
 	public void searchProc(Parent root) {
 		// TODO Auto-generated method stub
 		Label logChk  = (Label)root.lookup("#logChk");
-		
-		
+
 		ComboBox<String> combo = (ComboBox<String>)root.lookup("#searchCombo");
-		String str[] = {"Title", "nickname", "ca", "dat"};
+		String str[] = {"제목", "닉네임", "카테고리", "날짜"};
 		combo.getItems().addAll(FXCollections.observableArrayList(str));
-		ObservableList<String> fxComboNameList = FXCollections.observableArrayList(str);
-		combo.setItems(fxComboNameList);
 		
 		String text1 = combo.getSelectionModel().getSelectedItem();
 		
+		if(text1.equals("제목")) {
+			text1 = "Title";
+		} else if (text1.equals("닉네임")) {
+			text1 = "nickname";
+		} else if (text1.equals("카테고리")) {
+			text1 = "ca";
+		}else if (text1.equals("날짜")) {
+			text1 = "dat";
+		}
+		
 		TextField searchBoard  = (TextField)root.lookup("#boardNameSearch");
 		String text2 = searchBoard.getText();
-		
-		
 		
 		if(searchBoard.getText().isEmpty()) {
 			cs.errorView2(root);
