@@ -2,6 +2,7 @@ package all.button.boardButton;
 
 import java.util.Arrays;
 
+import all.boardService.BoardServiceImp;
 import all.boardService.boardViewServiceImp;
 import all.button.common.CommonServiceImp;
 import javafx.collections.FXCollections;
@@ -22,11 +23,8 @@ public class boardButtonImp implements boardButton {
 		// TODO Auto-generated method stub
 		Label logChk  = (Label)root.lookup("#logChk");
 
-		ComboBox<String> combo = (ComboBox<String>)root.lookup("#searchCombo");
-		String str[] = {"제목", "닉네임", "카테고리", "날짜"};
-		combo.getItems().addAll(FXCollections.observableArrayList(str));
-		
-		String text1 = combo.getSelectionModel().getSelectedItem();
+		 BoardServiceImp boardService = new BoardServiceImp();
+		 String text1 = boardService.mainCombo(root);
 		
 		if(text1.equals("제목")) {
 			text1 = "Title";

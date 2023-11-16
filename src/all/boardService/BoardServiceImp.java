@@ -43,11 +43,7 @@ public class BoardServiceImp implements BoardService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 		
-		ComboBox<String> combo = (ComboBox<String>)root.lookup("#searchCombo");
-		String str[] = {"제목", "닉네임", "카테고리", "날짜"};
-		combo.getItems().addAll(FXCollections.observableArrayList(str));
-		
-
+		mainCombo(root);
 		createAllListView(root);
 
 		rootStage.setTitle("회원정보");
@@ -158,6 +154,15 @@ public class BoardServiceImp implements BoardService {
 
 			}
 		});
+	}
+	
+	// 메인화면 콤보 박스
+	public String mainCombo(Parent root) {
+		ComboBox<String> combo = (ComboBox<String>)root.lookup("#searchCombo");
+		String str[] = {"제목", "닉네임", "카테고리", "날짜"};
+		String selectedValue = combo.getValue(); // 선택된 콤보박스의 값 가져오기
+		combo.getItems().addAll(FXCollections.observableArrayList(str));
+		return selectedValue;
 	}
 
 }

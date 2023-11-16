@@ -208,28 +208,32 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	// 카테고리에 상관없이 검색 결과가 포함된 모든 게시물을 갖는 리스트 생성
 	@Override
 	public List<Board> searchResultAll(String text1,String text2) {
-		// TODO Auto-generated method stub
-		List<Board> boardList = new ArrayList<Board>();
+//		// TODO Auto-generated method stub
+	    List<Board> boardList = new ArrayList<>();
 		String sql = "select * from board where ? LIKE ?";
-		try {
-			pstmt = con.prepareStatement(sql);
+//	    String sql = "SELECT * FROM board WHERE " + text1 + " LIKE ?";
+	    
+	    try {
+	        pstmt = con.prepareStatement(sql);
+//	        pstmt.setString(1, "%" + text2 + "%");
 			pstmt.setString(1, text1);
 			pstmt.setString(2, "%"+text2+"%");
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				Board b = new Board();
-				b.setNickname(rs.getString(2));
-				b.setTitle(rs.getString(3));
-				b.setCat(rs.getString(4));
-				b.setDate(rs.getTimestamp(5).toString());
-				boardList.add(b);
-			}
-			return boardList;
-		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return null;
+	        
+	        rs = pstmt.executeQuery();
+	        
+	        while (rs.next()) {
+	            Board b = new Board();
+	            b.setNickname(rs.getString(2));
+	            b.setTitle(rs.getString(3));
+	            b.setCat(rs.getString(4));
+	            b.setDate(rs.getTimestamp(5).toString());
+	            boardList.add(b);
+	        }
+	        return boardList;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return null;
 	}
 
 }
