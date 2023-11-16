@@ -144,16 +144,14 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("게시판 목록을 가져올 수 없습니다.");
 		}
 
-		listView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				// TODO Auto-generated method stub
-				Board b = (Board) listView.getSelectionModel().getSelectedItem();
-				System.out.println(b.getNickname());
-				System.out.println(b.getTitle());
-				System.out.println(b.getDate());
-			}
+		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Board b = listView.getSelectionModel().getSelectedItem();
+                if (b != null) {
+                    openBoardDetailWindow(b);
+                }
+            }
 		});
 	}
 
@@ -179,17 +177,14 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("게시판 목록을 가져올 수 없습니다.");
 		}
 
-		listView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				// TODO Auto-generated method stub
-				Board b = (Board) listView.getSelectionModel().getSelectedItem();
-				System.out.println(b.getNickname());
-				System.out.println(b.getTitle());
-				System.out.println(b.getDate());
-
-			}
+		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Board b = listView.getSelectionModel().getSelectedItem();
+                if (b != null) {
+                    openBoardDetailWindow(b);
+                }
+            }
 		});
 	}
 	

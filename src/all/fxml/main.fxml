@@ -38,7 +38,7 @@
             <Font size="46.0" />
          </font>
       </Label>
-      <Pagination fx:id="tableView" layoutX="226.0" layoutY="137.0" prefHeight="675.0" prefWidth="726.0" />
+      <Pagination fx:id="tableView" layoutX="226.0" layoutY="155.0" prefHeight="657.0" prefWidth="726.0" />
       <Button layoutX="52.0" layoutY="319.0" mnemonicParsing="false" onAction="#freeBoardProc" prefHeight="30.0" prefWidth="140.0" text="자유 게시판" />
       <Button layoutX="52.0" layoutY="379.0" mnemonicParsing="false" onAction="#buyBoardProc" prefHeight="30.0" prefWidth="140.0" text="구매 게시판" />
       <Button layoutX="52.0" layoutY="439.0" mnemonicParsing="false" onAction="#sellBoardProc" prefHeight="30.0" prefWidth="140.0" text="판매 게시판" />

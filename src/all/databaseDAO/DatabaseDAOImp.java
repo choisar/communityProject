@@ -210,8 +210,8 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	public List<Board> searchResultAll(String text1,String text2) {
 //		// TODO Auto-generated method stub
 	    List<Board> boardList = new ArrayList<>();
-		String sql = "select * from board where ? LIKE ?";
-//	    String sql = "SELECT * FROM board WHERE " + text1 + " LIKE ?";
+//		String sql = "select * from board where ? LIKE ?";
+	    String sql = "SELECT * FROM board WHERE " + text1 + " LIKE ?";
 	    
 	    try {
 	        pstmt = con.prepareStatement(sql);
