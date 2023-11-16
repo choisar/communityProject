@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import all.Board_s;
 import all.boardService.Board;
 import all.button.common.CommonService;
 import all.button.common.CommonServiceImp;
@@ -236,6 +238,30 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	        e.printStackTrace();
 	    }
 	    return null;
+	}
+
+	// db에 게시글 등록하기
+	@Override
+	public boolean uploadBoard(Board_s b) {
+		// TODO Auto-generated method stub
+		String sql="insert into board values(board_seq.nextval, ?, ?, ?,?)";
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, b.getTitle());
+			pstmt.setString(2, b.getCategori());
+			pstmt.setString(3, b.getContents());
+			pstmt.setBytes(4, b.getImagePath());
+			
+			int result=pstmt.executeUpdate();
+			
+			if(result==1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	

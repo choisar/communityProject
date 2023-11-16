@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import all.Controller;
+import all.button.common.CommonServiceImp;
 import all.databaseDAO.DatabaseDAO;
 import all.databaseDAO.DatabaseDAOImp;
 import javafx.collections.FXCollections;
@@ -47,10 +48,10 @@ public class BoardServiceImp implements BoardService {
 
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
-		
+
 		mainCombo(root);
 		createAllListView(root);
-		
+
 		rootStage.setTitle("회원정보");
 		rootStage.show();
 		rootStage.setResizable(false);
@@ -77,19 +78,29 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("게시판 목록을 가져올 수 없습니다.");
 		}
 
+		Label logChk = (Label) root.lookup("#logChk");
+
+		CommonServiceImp cs = new CommonServiceImp();
+
+		// 게시물을 클릭 했을 때 회원이면 게시물 내용 표시하는 창 출력, 비회원이면 로그인 오류창 출력
 		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Board b = listView.getSelectionModel().getSelectedItem();
-                if (b != null) {
-                    openBoardDetailWindow(b);
-                }
-            }
+			@Override
+			public void handle(MouseEvent event) {
+				Board b = listView.getSelectionModel().getSelectedItem();
+				if (b != null) {
+					if (logChk.getText().equals("비회원")) {
+						cs.errorView1(root);
+						openBoardDetailWindow(b);
+					} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+						openBoardDetailWindow(b);
+					}
+				}
+			}
 		});
-		
+
 	}
-	
-	// 게시물 목록에서 클릭하면 해당 게시물 내용이 포함된 창이 출력되는 메서드 . 스크롤페인 
+
+	// 게시물 목록에서 클릭하면 해당 게시물 내용이 포함된 창이 출력되는 메서드 . 스크롤페인
 	@Override
 	public void openBoardDetailWindow(Board selectedBoard) {
 		try {
@@ -100,24 +111,23 @@ public class BoardServiceImp implements BoardService {
 			Text nicknameText = (Text) detailRoot.lookup("#nicknameText");
 			Label titleText = (Label) detailRoot.lookup("#titleText");
 			Text dateText = (Text) detailRoot.lookup("#dateText");
-			
+
 			nicknameText.setText(selectedBoard.getNickname());
 			dateText.setText(selectedBoard.getDate());
 			titleText.setText(selectedBoard.getTitle());
 
 			Stage detailStage = new Stage();
 			detailStage.setScene(new Scene(detailRoot));
-			
-			// ScrollPane
-	        ScrollPane scrollPane = new ScrollPane();
-	        scrollPane.setContent(detailRoot);
-	       
-	        // Pannable.
-	        scrollPane.setPannable(true);
 
-	        Scene scene = new Scene(scrollPane, 980, 891);
-	        detailStage.setScene(scene);
-			
+			// ScrollPane
+			ScrollPane scrollPane = new ScrollPane();
+			scrollPane.setContent(detailRoot);
+
+			// Pannable.
+			scrollPane.setPannable(true);
+
+			Scene scene = new Scene(scrollPane, 980, 891);
+			detailStage.setScene(scene);
 
 			detailStage.setTitle("게시물 상세 정보");
 			detailStage.setResizable(false);
@@ -127,6 +137,7 @@ public class BoardServiceImp implements BoardService {
 			showAlert("Error", "Error opening detail window.");
 		}
 	}
+
 	// ▲ ▲ ▲ 부속 메서드
 	@Override
 	public void showAlert(String title, String content) {
@@ -160,13 +171,13 @@ public class BoardServiceImp implements BoardService {
 		}
 
 		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Board b = listView.getSelectionModel().getSelectedItem();
-                if (b != null) {
-                    openBoardDetailWindow(b);
-                }
-            }
+			@Override
+			public void handle(MouseEvent event) {
+				Board b = listView.getSelectionModel().getSelectedItem();
+				if (b != null) {
+					openBoardDetailWindow(b);
+				}
+			}
 		});
 	}
 
@@ -176,8 +187,8 @@ public class BoardServiceImp implements BoardService {
 		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		List<Board> boardList = dao.searchResultAll(text1,text2);
-		
+		List<Board> boardList = dao.searchResultAll(text1, text2);
+
 		if (boardList != null) {
 			TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
 			TableColumn<Board, String> title = new TableColumn<Board, String>("제목");
@@ -194,21 +205,21 @@ public class BoardServiceImp implements BoardService {
 		}
 
 		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Board b = listView.getSelectionModel().getSelectedItem();
-                if (b != null) {
-                    openBoardDetailWindow(b);
-                }
-            }
+			@Override
+			public void handle(MouseEvent event) {
+				Board b = listView.getSelectionModel().getSelectedItem();
+				if (b != null) {
+					openBoardDetailWindow(b);
+				}
+			}
 		});
 	}
-	
+
 	// 메인화면 콤보 박스
 	@Override
 	public String mainCombo(Parent root) {
-		ComboBox<String> combo = (ComboBox<String>)root.lookup("#searchCombo");
-		String str[] = {"제목", "닉네임", "카테고리"};
+		ComboBox<String> combo = (ComboBox<String>) root.lookup("#searchCombo");
+		String str[] = { "제목", "닉네임", "카테고리" };
 		String selectedValue = combo.getValue(); // 선택된 콤보박스의 값 가져오기
 		combo.getItems().addAll(FXCollections.observableArrayList(str));
 		return selectedValue;

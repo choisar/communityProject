@@ -14,5 +14,5 @@ public interface boardViewService {
 	// 검색 결과 게시판
 	public void searchResultBoardView(Parent root, String text1, String text2);
 	// 글쓰기 창
-	public void writingView(Parent root);
+	public void uploadBoardView(Parent root);
 }

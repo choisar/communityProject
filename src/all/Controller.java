@@ -38,6 +38,7 @@ public class Controller{
 	private IdFindButton idF;
 	private PwFindButton pwF;
 	// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
+	// 업로드 버튼
 	private boardButton bBt;
 	
 	public Controller() {
@@ -56,6 +57,7 @@ public class Controller{
 		idF = new IdFindButtonImp();
 		pwF = new PwFindButtonImp();
 		// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼 
+		// 업로드 버튼
 		bBt = new boardButtonImp();
 		
 	}
@@ -114,6 +116,16 @@ public class Controller{
 	}
 	public void reportProc() {
 		bBt.reportProc(root);
+	}
+
+	// 게시하기 버튼
+	public void uploadProc() throws Exception {
+		bBt.uploadProc(root);
+	}
+
+	// 파일 선택 버튼
+	public void selOpenFile(ActionEvent e) {
+		bBt.fileUpload(root);
 	}
 	
 }

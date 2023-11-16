@@ -18,5 +18,12 @@ public interface boardButton {
 	void sharingBoardProc(Parent root);
 	// 신고 버튼
 	void reportProc(Parent root);
-
+	
+	
+	// 게시하기 버튼
+	void uploadProc(Parent root) throws Exception;
+	// 파일선택 버튼
+	String fileUpload(Parent root);
+	// 이미지를 바이트화 시키는 함수
+	byte[] convertImageToBytes(String imgAddr) throws Exception;
 }

@@ -2,6 +2,7 @@ package all.databaseDAO;
 
 import java.util.List;
 
+import all.Board_s;
 import all.boardService.Board;
 
 public interface DatabaseDAO {
@@ -20,5 +21,7 @@ public interface DatabaseDAO {
 	List<Board> categoryBoardAll(String category);
 	// 전체 카테고리에서 검색 결과가 포함된 모든 게시물
 	List<Board> searchResultAll(String text1, String text2);
+	// db에 게시글 등록하기
+	boolean uploadBoard(Board_s b);
 	
 }

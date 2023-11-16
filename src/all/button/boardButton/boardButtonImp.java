@@ -1,16 +1,31 @@
 package all.button.boardButton;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Date;
+import java.time.LocalDate;
+
+import all.Board_s;
 import all.boardService.BoardServiceImp;
 import all.boardService.boardViewServiceImp;
 import all.button.common.CommonServiceImp;
+import all.databaseDAO.DatabaseDAO;
+import all.databaseDAO.DatabaseDAOImp;
 import javafx.scene.Parent;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class boardButtonImp implements boardButton {
 	
 	CommonServiceImp cs = new CommonServiceImp();
 	boardViewServiceImp bvs = new boardViewServiceImp();
+	DatabaseDAOImp dao = new DatabaseDAOImp();
 
 	// 검색 버튼
 	@Override
@@ -86,7 +101,6 @@ public class boardButtonImp implements boardButton {
 		}
 	}
 	
-	
 	// 나눔 게시판 버튼
 	@Override
 	public void sharingBoardProc(Parent root) {
@@ -109,9 +123,9 @@ public class boardButtonImp implements boardButton {
 		
 		if(logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
-			bvs.writingView(root);
+			bvs.uploadBoardView(root);
 		} else if (logChk.getText().equals("회원")||logChk.getText().equals("관리자")) {
-			bvs.writingView(root);
+			bvs.uploadBoardView(root);
 		}
 	}
 	
@@ -128,5 +142,103 @@ public class boardButtonImp implements boardButton {
 		}
 	}
 
+	// 게시하기 버튼
+	@Override
+	public void uploadProc(Parent root) throws Exception {
+		// TODO Auto-generated method stub
+		TextField title=(TextField)root.lookup("#txtTitle");
+		TextArea contents=(TextArea)root.lookup("#txtContents");
+		TextArea imgAddr=(TextArea)root.lookup("#imgAddr");
+		ComboBox<String> cmbCateg=(ComboBox<String>)root.lookup("#cmbCateg");
+		
+		if(title.getText().isEmpty()) {
+			cs.msgBox("입력", "입력 오류", "제목을 입력하세요");
+			title.requestFocus();
+			return;
+		} else if(contents.getText().isEmpty()) {
+			cs.msgBox("입력", "입력 오류", "본문을 입력하세요");
+			contents.requestFocus();
+			return;
+		} 
+		
+		Board_s b=new Board_s();
+		b.setTitle(title.getText());
+		b.setContents(contents.getText());
+		
+		if(cmbCateg.getValue()==null) {
+			cs.msgBox("입력", "입력오류", "카테고리를 선택해주세요.");
+			cmbCateg.requestFocus();
+			return;
+		}else {
+			switch(cmbCateg.getValue()) {
+			case "자유 게시판":
+				b.setCategori("자유 게시판");
+				break;
+			case "구매 게시판":
+				b.setCategori("구매 게시판");
+				break;
+			case "판매 게시판":
+				b.setCategori("판매 게시판");
+				break;
+			case "나눔 게시판":
+				b.setCategori("나눔 게시판");
+				break;
+			}
+		}
+		
+		DatePicker UploadDate = (DatePicker) root.lookup("#UploadDate");
+		LocalDate date = UploadDate.getValue();
+		Date d = Date.valueOf(date);
+		b.setUploadDate(d);
+		
+		
+		byte[] imageBytes=null;
+		if (imgAddr != null) {			
+			imageBytes = convertImageToBytes((String)imgAddr.getText());			
+			b.setImagePath(imageBytes);
+		}
+		
+		if(dao.uploadBoard(b)) {
+			System.out.println("게시 완료");
+			Stage s=(Stage)root.getScene().getWindow();
+			s.close();
+		}else {
+			System.out.println("게시 실패");
+		}
+		
+	}
+
+	// 파일선택 버튼
+	@Override
+	public String fileUpload(Parent root) {
+		// TODO Auto-generated method stub
+		TextArea imgAddr=(TextArea)root.lookup("#imgAddr");
+		FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+        File selectedFile = fileChooser.showOpenDialog(root.getScene().getWindow());
+
+        if (selectedFile != null) {
+			imgAddr.setText(selectedFile.getPath());
+			return (String)imgAddr.getText();
+		}else {
+			imgAddr.setText("아무것도 지정하지 않았습니다.");
+		}
+        return null;
+	}
+	
+	// 이미지를 바이트화 시키는 함수
+	public byte[] convertImageToBytes(String imgAddr) throws Exception{
+		// TODO Auto-generated method stub
+		File imageFile = new File(imgAddr);
+        byte[] imageBytes = new byte[(int) imageFile.length()];
+
+        try (FileInputStream fis = new FileInputStream(imageFile)) {
+            fis.read(imageBytes);
+        }
+
+        return imageBytes;
+	}
+
+	
 
 }
