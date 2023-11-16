@@ -26,6 +26,7 @@ public class Controller{
 	private Parent root;
 	private UserService us;
 	private AdminService as;
+	// 테이블 뷰 관련된 기능
 	private BoardService bs;
 	// 로그인 버튼
 	private loginButton lb;
@@ -43,6 +44,7 @@ public class Controller{
 		// TODO Auto-generated constructor stub
 		us = new UserServiceImp();
 		as = new AdminServiceImp();
+		// 테이블 뷰 관련된 기능
 		bs = new BoardServiceImp();
 		// 로그인 버튼
 		lb = new loginButtonImp();
@@ -57,7 +59,6 @@ public class Controller{
 		bBt = new boardButtonImp();
 		
 	}
-	
 	public void setRoot(Parent root) {
 		this.root = root;
 	}

@@ -6,8 +6,6 @@ import java.util.List;
 import all.Controller;
 import all.databaseDAO.DatabaseDAO;
 import all.databaseDAO.DatabaseDAOImp;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -60,6 +57,7 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	// 전체 카테고리의 모든 게시물을 출력하는 테이블뷰 생성
+	@Override
 	public void createAllListView(Parent root) {
 		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -91,7 +89,9 @@ public class BoardServiceImp implements BoardService {
 		
 	}
 	
-	private void openBoardDetailWindow(Board selectedBoard) {
+	// 게시물 목록에서 클릭하면 해당 게시물 내용이 포함된 창이 출력되는 메서드 . 스크롤페인 
+	@Override
+	public void openBoardDetailWindow(Board selectedBoard) {
 		try {
 			FXMLLoader detailLoader = new FXMLLoader(getClass().getResource("../fxml/boardDetail.fxml"));
 			Parent detailRoot = detailLoader.load();
@@ -127,16 +127,17 @@ public class BoardServiceImp implements BoardService {
 			showAlert("Error", "Error opening detail window.");
 		}
 	}
-
-	private void showAlert(String title, String content) {
+	// ▲ ▲ ▲ 부속 메서드
+	@Override
+	public void showAlert(String title, String content) {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle(title);
 		alert.setContentText(content);
 		alert.showAndWait();
 	}
 
-
 	// 선택한 카테고리 <자유, 구매, 판매, 나눔> 의 모든 게시물을 출력하는 테이블뷰 생성
+	@Override
 	public void createCategoryListView(Parent root, String category) {
 		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -170,6 +171,7 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	// 카테고리에 상관없이 검색 결과가 포함된 모든 게시물을 출력하는 테이블뷰 생성
+	@Override
 	public void serchResultListView(Parent root, String text1, String text2) {
 		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -203,6 +205,7 @@ public class BoardServiceImp implements BoardService {
 	}
 	
 	// 메인화면 콤보 박스
+	@Override
 	public String mainCombo(Parent root) {
 		ComboBox<String> combo = (ComboBox<String>)root.lookup("#searchCombo");
 		String str[] = {"제목", "닉네임", "카테고리"};

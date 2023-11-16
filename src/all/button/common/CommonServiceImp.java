@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 public class CommonServiceImp implements CommonService{
 	
 	// 창 닫기 
+	@Override
 	public void windowClose(ActionEvent event) {
 		// TODO Auto-generated method stub
 		// ActionEvent.getSource() -> 실제 이벤트 발생한 객체
@@ -21,6 +22,7 @@ public class CommonServiceImp implements CommonService{
 	}
 
 	// 에러 메세지 박스 호출
+	@Override
 	public void msgBox(String title, String subject, String content) {
 		// TODO Auto-generated method stub
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -31,6 +33,7 @@ public class CommonServiceImp implements CommonService{
 	}
 	
 	// 비회원일 때 버튼 작동시 호출되는 오류
+	@Override
 	public void errorView1(Parent root) {
 		Stage membershipForm = new Stage();
 
@@ -55,6 +58,7 @@ public class CommonServiceImp implements CommonService{
 	}
 	
 	// 검색창 비어있으면 호출되는 오류
+	@Override
 	public void errorView2(Parent root) {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();

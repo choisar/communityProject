@@ -21,6 +21,7 @@ public class PwFindButtonImp implements PwFindButton {
 		cs = new CommonServiceImp();
 	}
 
+	// 비밀번호 찾기 버튼을 눌렀을 때 비밀번호 찾기 창 호출
 	@Override
 	public void pwFindProc(Parent root) {
 		Stage membershipForm = new Stage();
@@ -44,6 +45,7 @@ public class PwFindButtonImp implements PwFindButton {
 		membershipForm.show();
 	}
 
+	// 호출된 비밀번호 찾기 창에서 확인 버튼 눌렀을 때
 	@Override
 	public void pwFindOkProc(Parent root) {
 		TextField id = (TextField) root.lookup("#txtId");
@@ -63,6 +65,7 @@ public class PwFindButtonImp implements PwFindButton {
 		}
 	}
 
+	// 비밀번호 찾기 결과창 호출
 	@Override
 	public void findPwResult(Parent root, String pw, String findName) {
 		// TODO Auto-generated method stub

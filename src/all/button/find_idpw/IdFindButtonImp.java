@@ -21,6 +21,7 @@ public class IdFindButtonImp implements IdFindButton {
 		cs = new CommonServiceImp();
 	}
 
+	// 아이디 찾기 버튼을 눌렀을 때 아이디 찾기 창 호출
 	@Override
 	public void idFindProc(Parent root) {
 		Stage membershipForm = new Stage();
@@ -44,6 +45,8 @@ public class IdFindButtonImp implements IdFindButton {
 		membershipForm.show();
 	}
 	
+	// 호출된 아이디 찾기 창에서 확인 버튼 눌렀을 때
+	@Override
 	public void idFindOkProc(Parent root) {
 		TextField name = (TextField)root.lookup("#txtName");
 		TextField phoneNum  = (TextField)root.lookup("#txtPhoneNum");
@@ -61,6 +64,8 @@ public class IdFindButtonImp implements IdFindButton {
 		}
 	}
 
+	// 아이디 찾기 결과창 호출
+	@Override
 	public void findIdResult(Parent root, String id, String findName) {
 		Stage membershipForm = new Stage();
 

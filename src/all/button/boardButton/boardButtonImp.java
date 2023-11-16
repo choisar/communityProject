@@ -1,14 +1,9 @@
 package all.button.boardButton;
 
-import java.util.Arrays;
-
 import all.boardService.BoardServiceImp;
 import all.boardService.boardViewServiceImp;
 import all.button.common.CommonServiceImp;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Parent;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 

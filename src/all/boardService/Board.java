@@ -1,7 +1,5 @@
 package all.boardService;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Board {
 	private String id, nickname, title, date, cat;

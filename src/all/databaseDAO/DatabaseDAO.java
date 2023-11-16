@@ -14,11 +14,11 @@ public interface DatabaseDAO {
 	String findPw(String findId, String findPhoneNum);
 	// 이름 찾기
 	String findUserName(String findId, String findPhoneNum);
-	// 전체 리스트
+	// 전체 게시판 - 모든 카테고리의 모든 게시물
 	List<Board> selectAll();
-	// 카테고리 리스트
+	// 해당 카테고리에 있는 모든 게시물
 	List<Board> categoryBoardAll(String category);
-	// 검색 리스트
+	// 전체 카테고리에서 검색 결과가 포함된 모든 게시물
 	List<Board> searchResultAll(String text1, String text2);
 	
 }

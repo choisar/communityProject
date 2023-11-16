@@ -149,7 +149,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 	
-	// 모든 카테고리의 모든 게시판
+	// 전체 게시판 - 모든 카테고리의 모든 게시물
 	@Override
 	public List<Board> selectAll() {
 		// TODO Auto-generated method stub
@@ -179,7 +179,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 	
-	// 카테고리 안에 있는 모든 게시판
+	// 해당 카테고리에 있는 모든 게시물
 	@Override
 	public List<Board> categoryBoardAll(String category) {
 		// TODO Auto-generated method stub
@@ -208,7 +208,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 	
-	// 카테고리에 상관없이 검색 결과가 포함된 모든 게시물을 갖는 리스트 생성
+	// 전체 카테고리에서 검색 결과가 포함된 모든 게시물
 	@Override
 	public List<Board> searchResultAll(String text1,String text2) {
 //		// TODO Auto-generated method stub
