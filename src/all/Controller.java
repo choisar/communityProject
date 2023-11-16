@@ -55,6 +55,7 @@ public class Controller{
 		pwF = new PwFindButtonImp();
 		// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼 
 		bBt = new boardButtonImp();
+		
 	}
 	
 	public void setRoot(Parent root) {
@@ -113,4 +114,5 @@ public class Controller{
 	public void reportProc() {
 		bBt.reportProc(root);
 	}
+	
 }

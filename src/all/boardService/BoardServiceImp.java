@@ -15,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -51,7 +53,7 @@ public class BoardServiceImp implements BoardService {
 		
 		mainCombo(root);
 		createAllListView(root);
-
+		
 		rootStage.setTitle("회원정보");
 		rootStage.show();
 		rootStage.setResizable(false);
@@ -96,17 +98,29 @@ public class BoardServiceImp implements BoardService {
 
 			// 직접 FXML 요소에 접근
 			Text nicknameText = (Text) detailRoot.lookup("#nicknameText");
-			TextField titleText = (TextField) detailRoot.lookup("#titleText");
+			Label titleText = (Label) detailRoot.lookup("#titleText");
 			Text dateText = (Text) detailRoot.lookup("#dateText");
 			
 			nicknameText.setText(selectedBoard.getNickname());
-			titleText.setText(selectedBoard.getTitle());
 			dateText.setText(selectedBoard.getDate());
+			titleText.setText(selectedBoard.getTitle());
 
 			Stage detailStage = new Stage();
 			detailStage.setScene(new Scene(detailRoot));
+			
+			// ScrollPane
+	        ScrollPane scrollPane = new ScrollPane();
+	        scrollPane.setContent(detailRoot);
+	       
+	        // Pannable.
+	        scrollPane.setPannable(true);
+
+	        Scene scene = new Scene(scrollPane, 980, 891);
+	        detailStage.setScene(scene);
+			
 
 			detailStage.setTitle("게시물 상세 정보");
+			detailStage.setResizable(false);
 			detailStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();

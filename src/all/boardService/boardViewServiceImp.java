@@ -158,4 +158,30 @@ public class boardViewServiceImp implements boardViewService{
 		membershipForm.setResizable(false);
 		membershipForm.show();
 	}
+	
+	// 글쓰기 창
+	@Override
+	public void writingView(Parent root) {
+		// TODO Auto-generated method stub
+		Stage membershipForm = new Stage();
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/writing.fxml"));
+
+		root = null;
+
+		try {
+			root = loader.load();
+			membershipForm.setScene(new Scene(root));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		Controller ctrl = loader.getController();
+		ctrl.setRoot(root);
+
+		membershipForm.setTitle("게시물 작성");
+		membershipForm.setResizable(false);
+		membershipForm.show();
+	}
+	
 }

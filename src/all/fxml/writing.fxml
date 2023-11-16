@@ -4,20 +4,33 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.web.HTMLEditor?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Button layoutX="616.0" layoutY="743.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" text="저장" />
-      <Button layoutX="529.0" layoutY="743.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" text="취소" />
-      <TextField layoutX="120.0" layoutY="45.0" prefHeight="23.0" prefWidth="313.0" />
-      <Label layoutX="57.0" layoutY="49.0" text="제목" />
-      <Label layoutX="57.0" layoutY="93.0" text="카테고리" />
-      <ChoiceBox layoutX="120.0" layoutY="89.0" prefHeight="23.0" prefWidth="313.0" />
-      <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="33.0" layoutY="135.0" prefHeight="601.0" prefWidth="653.0" />
-      <DatePicker layoutX="529.0" layoutY="89.0" prefHeight="23.0" prefWidth="145.0" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0"
+	prefWidth="708.0" xmlns="http://javafx.com/javafx/21"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
+	<children>
+		<Label layoutX="57.0" layoutY="49.0" text="제목" />
+		<TextField fx:id="txtTitle" layoutX="120.0" layoutY="45.0"
+			prefHeight="23.0" prefWidth="313.0" />
+		<Label layoutX="57.0" layoutY="93.0" text="카테고리" />
+		<ChoiceBox layoutX="120.0" layoutY="89.0" prefHeight="23.0"
+			prefWidth="313.0" />
+		<DatePicker layoutX="506.0" layoutY="89.0"
+			prefHeight="23.0" prefWidth="145.0" />
+		<TextArea fx:id="txtContents" layoutX="56.0" layoutY="224.0"
+			prefHeight="489.0" prefWidth="596.0" />
+		<Button layoutX="56.0" layoutY="139.0" mnemonicParsing="false"
+			text="파일첨부" onAction="#selOpenFile" 
+			/>
+		<TextArea fx:id="imgAddr" layoutX="148.0" layoutY="139.0"
+			prefHeight="62.0" prefWidth="503.0" />
+		<Button layoutX="616.0" layoutY="743.0" mnemonicParsing="false"
+			prefHeight="30.0" prefWidth="70.0" text="저장" />
+		<Button layoutX="529.0" layoutY="743.0" mnemonicParsing="false"
+			prefHeight="30.0" prefWidth="70.0" text="취소" />
+	</children>
 </AnchorPane>

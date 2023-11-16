@@ -1,7 +1,6 @@
 package all.databaseDAO;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +16,9 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	Connection con;
 	ResultSet rs;
 	PreparedStatement pstmt;
+	
+	// 합치기
+	boolean idChkCom;
 
 	// 오라클 SQL 연결
 	public DatabaseDAOImp() {
@@ -165,6 +167,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				b.setCat(rs.getString(4));
 				b.setDate(rs.getTimestamp(5).toString());
 				
+				
 				boardList.add(b);
 				
 			}
@@ -234,5 +237,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	    }
 	    return null;
 	}
+
+	
 
 }

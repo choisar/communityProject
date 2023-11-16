@@ -114,8 +114,9 @@ public class boardButtonImp implements boardButton {
 		
 		if(logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
+			bvs.writingView(root);
 		} else if (logChk.getText().equals("회원")||logChk.getText().equals("관리자")) {
-			System.out.println("기능 실행");
+			bvs.writingView(root);
 		}
 	}
 	
