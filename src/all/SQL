@@ -1,34 +1,79 @@
-1. 멤버 테이블
-drop table member;
-
+-- 1. 멤버 테이블
 create table member (
-    no number not null,
+    member_no number not null,
     member_id varchar2(50) not null primary key,
     member_pw varchar2(50) not null,
     member_name varchar2(50) not null,
+    member_nickname varchar2(50) not null,
+    member_birthdate date not null,
+    member_gender varchar2(50) not null,
+    member_email varchar2(100) not null,
     member_phonenum varchar2(50) not null
     );
-
+-- 멤버 시퀀스
 create SEQUENCE mem_seq
     start with 1
-    increment by 1;
-
-insert into member values(mem_seq.nextval,'hong','1234','홍길동','01045699923');
+    increment by 1
+    nocache;
+    
+-- 멤버 테이블 입력 예시
+insert into member values(mem_seq.nextval,'hong','1234','홍길동','코리아히어로','1600.08.01','남성','hong801@exma.com','01045699923');
 
 commit;
 
-2. board 테이블
-
-create sequence board_seq 
-    start with 1
-    INCREMENT by 1
-    nocache;
-    
-create table board3 (
+--2. board 테이블 
+create table board (
 	board_no number primary key,
 	title varchar2(50) not null,
+    category varchar2(50) not null,
+    contents_date date,
 	contents varchar2(1000) not null,
-	imagepath blob
+    howmanypost number not null,
+	imagepath blob,
+    board_memid varchar2(50),
+    board_memnick varchar2(50),
+    foreign key(board_memid) references member(member_id),
+    foreign key(board_memnick) references member(member_nickname)
 	);
     
-select * from board3;
+-- 보드 시퀀스
+create sequence board_seq 
+start with 1
+INCREMENT by 1
+nocache;
+
+-- 보드 시퀀스 입력 예시
+insert into board values(board_seq.nextval,'전우치전','자유게시판',sysdate,'코리아히어로 전우치의 이야기','2',null,'hong');
+
+commit;
+
+--3. 코멘트 테이블
+create table comment1 (
+    com_no number primary key,
+    com_membid varchar2(50),
+    com_memnick varchar2(50),
+    com_contents varchar2(300),
+    com_date date,
+    foreign key(com_membid) references member(member_id)
+	);
+
+-- 코멘트 시퀀스
+create sequence comment_seq 
+start with 1
+INCREMENT by 1
+nocache;
+
+-- 코멘트 테이블 입력 예시
+DECLARE
+    nickname1 VARCHAR2(50);
+BEGIN
+    SELECT member_nickname INTO nickname1 FROM member WHERE member_id = 'hong';
+    insert into comment1 values(comment_seq.nextval,'hong',nickname1,'잘 봤습니다.', sysdate);
+    commit;
+EXCEPTION
+    WHEN OTHERS THEN
+        -- 예외 처리 로직 추가
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLCODE || ' - ' || SQLERRM);
+        ROLLBACK; -- 롤백을 사용하여 트랜잭션을 취소
+END;
+/
