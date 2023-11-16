@@ -32,8 +32,6 @@ public class boardButtonImp implements boardButton {
 			text1 = "nickname";
 		} else if (text1.equals("카테고리")) {
 			text1 = "ca";
-		}else if (text1.equals("날짜")) {
-			text1 = "dat";
 		}
 		
 		TextField searchBoard  = (TextField)root.lookup("#boardNameSearch");
