@@ -1,5 +1,6 @@
 package all.boardService;
 
+import java.io.IOException;
 import java.util.List;
 
 import all.Controller;
@@ -8,14 +9,19 @@ import all.databaseDAO.DatabaseDAOImp;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class BoardServiceImp implements BoardService {
@@ -71,19 +77,50 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("게시판 목록을 가져올 수 없습니다.");
 		}
 
-		listView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				// TODO Auto-generated method stub
-				Board b = (Board) listView.getSelectionModel().getSelectedItem();
-				System.out.println(b.getNickname());
-				System.out.println(b.getTitle());
-				System.out.println(b.getDate());
-
-			}
+		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Board b = listView.getSelectionModel().getSelectedItem();
+                if (b != null) {
+                    openBoardDetailWindow(b);
+                }
+            }
 		});
+		
 	}
+	
+	private void openBoardDetailWindow(Board selectedBoard) {
+		try {
+			FXMLLoader detailLoader = new FXMLLoader(getClass().getResource("../fxml/boardDetail.fxml"));
+			Parent detailRoot = detailLoader.load();
+
+			// 직접 FXML 요소에 접근
+			Text nicknameText = (Text) detailRoot.lookup("#nicknameText");
+			TextField titleText = (TextField) detailRoot.lookup("#titleText");
+			Text dateText = (Text) detailRoot.lookup("#dateText");
+			
+			nicknameText.setText(selectedBoard.getNickname());
+			titleText.setText(selectedBoard.getTitle());
+			dateText.setText(selectedBoard.getDate());
+
+			Stage detailStage = new Stage();
+			detailStage.setScene(new Scene(detailRoot));
+
+			detailStage.setTitle("게시물 상세 정보");
+			detailStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+			showAlert("Error", "Error opening detail window.");
+		}
+	}
+
+	private void showAlert(String title, String content) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle(title);
+		alert.setContentText(content);
+		alert.showAndWait();
+	}
+
 
 	// 선택한 카테고리 <자유, 구매, 판매, 나눔> 의 모든 게시물을 출력하는 테이블뷰 생성
 	public void createCategoryListView(Parent root, String category) {
