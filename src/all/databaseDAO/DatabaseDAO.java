@@ -30,4 +30,7 @@ public interface DatabaseDAO {
 	boolean dupID(String txtId);
 	List<Member> selectAll1();
 	
+	// 로그인하면 입력받은 아이디와 같은 정보를 가지고 있는 Member m 객체 생성
+	Member memberInfo(String id);
+	
 }

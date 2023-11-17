@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class PwFindButtonImp implements PwFindButton {
@@ -42,7 +43,9 @@ public class PwFindButtonImp implements PwFindButton {
 
 		membershipForm.setTitle("비밀번호찾기");
 		membershipForm.setResizable(false);
-		membershipForm.show();
+		membershipForm.initModality(Modality.APPLICATION_MODAL);
+		membershipForm.setAlwaysOnTop(true);
+		membershipForm.showAndWait();
 	}
 
 	// 호출된 비밀번호 찾기 창에서 확인 버튼 눌렀을 때
@@ -53,15 +56,30 @@ public class PwFindButtonImp implements PwFindButton {
 		String findId = id.getText();
 		String findPhoneNum = phoneNum.getText();
 
-		if (dao.pwChk(id.getText(), phoneNum.getText())) {
-			String pw = dao.findPw(findId, findPhoneNum);
+		if(dao.pwChk(findId, findPhoneNum)) {
+			String pw = dao.findPw(findId,findPhoneNum);
 			String findName = dao.findUserName(findId, findPhoneNum);
 			findPwResult(root, pw, findName);
-		} else {
-			cs.msgBox("비밀번호 찾기", "비밀번호 찾기 오류", "아이디와 전화번호를 확인해주세요.");
-			id.clear();
-			phoneNum.clear();
+			Stage currentStage = (Stage) id.getScene().getWindow();
+			currentStage.close();
+		} else if(id.getText().isEmpty() && phoneNum.getText().isEmpty()){
+			cs.customErrorView(root, "정보를 입력해주세요.");
 			id.requestFocus();
+		} else if(id.getText().isEmpty() && !(phoneNum.getText().isEmpty())){
+			cs.customErrorView(root, "아이디를 입력해주세요.");
+			id.requestFocus();
+		} else if(!(id.getText().isEmpty()) && phoneNum.getText().isEmpty()){
+			cs.customErrorView(root, "전화번호를 입력해주세요.");
+			phoneNum.requestFocus();
+		}else if(!(id.getText().isEmpty()) && !(phoneNum.getText().isEmpty())) {
+			if(!(dao.idChk(id.getText(), phoneNum.getText()))) {
+				cs.customErrorView(root,"입력하신 내용과\n 일치하는 정보가 없습니다.");
+				id.clear();
+				phoneNum.clear();
+				id.requestFocus();
+			} else {
+				System.err.println("아이디, 전화번호 둘 다 입력했고 dao에서 일치하는 정보도 없는데 오류 발생");
+			}
 		}
 	}
 
@@ -85,17 +103,16 @@ public class PwFindButtonImp implements PwFindButton {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		TextField findId = (TextField) root.lookup("#findPw");
-		findId.setText(pw);
+		TextField findPw = (TextField) root.lookup("#findPw");
+		findPw.setText(pw);
 		
 		Label findNameLb = (Label) root.lookup("#findName");
 		findNameLb.setText("\""+findName+"\"");
 
-		membershipForm.setTitle("비밀번호 찾기");
-		membershipForm.setAlwaysOnTop(true);
 		membershipForm.setResizable(false);
-		membershipForm.show();
-
+		membershipForm.initModality(Modality.APPLICATION_MODAL);
+		membershipForm.setAlwaysOnTop(true);
+		membershipForm.showAndWait();
 	}
 
 }

@@ -7,6 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class CommonServiceImp implements CommonService{
@@ -53,8 +56,9 @@ public class CommonServiceImp implements CommonService{
 
 		membershipForm.setTitle("Error");
 		membershipForm.setResizable(false);
+		membershipForm.initModality(Modality.APPLICATION_MODAL);
 		membershipForm.setAlwaysOnTop(true);
-		membershipForm.show();
+		membershipForm.showAndWait();
 	}
 	
 	// 검색창 비어있으면 호출되는 오류
@@ -79,8 +83,9 @@ public class CommonServiceImp implements CommonService{
 
 		membershipForm.setTitle("Error");
 		membershipForm.setResizable(false);
+		membershipForm.initModality(Modality.APPLICATION_MODAL);
 		membershipForm.setAlwaysOnTop(true);
-		membershipForm.show();
+		membershipForm.showAndWait();
 	}
 	
 	// 카테고리 선택이 안되어있으면 호출되는 오류
@@ -105,8 +110,9 @@ public class CommonServiceImp implements CommonService{
 
 			membershipForm.setTitle("Error");
 			membershipForm.setResizable(false);
+			membershipForm.initModality(Modality.APPLICATION_MODAL);
 			membershipForm.setAlwaysOnTop(true);
-			membershipForm.show();
+			membershipForm.showAndWait();
 		}
 
 		// 게시물 검색창에 아무것도 입력되지 않았고, 카테고리 선택도 되어있지 않으면 호출되는 오류
@@ -126,13 +132,45 @@ public class CommonServiceImp implements CommonService{
 				// TODO: handle exception
 				e.printStackTrace();
 			}
+			
 			Controller ctrl = loader.getController();
 			ctrl.setRoot(root);
 
 			membershipForm.setTitle("Error");
 			membershipForm.setResizable(false);
+			membershipForm.initModality(Modality.APPLICATION_MODAL);
 			membershipForm.setAlwaysOnTop(true);
-			membershipForm.show();
+			membershipForm.showAndWait();
+		}
+		
+		// 내가 원하는 문구로 에러창을 띄우는 메서드
+		@Override
+		public void customErrorView(Parent root, String text) {
+			// TODO Auto-generated method stub
+			Stage membershipForm = new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/customErrorTextView.fxml"));
+
+			root = null;
+
+			try {
+				root = loader.load();
+				membershipForm.setScene(new Scene(root));
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+
+			Label insertText = (Label) root.lookup("#errorText");
+			insertText.setText(text);
+			
+			Controller ctrl = loader.getController();
+			ctrl.setRoot(root);
+
+			membershipForm.setTitle("Error");
+			membershipForm.setResizable(false);
+			membershipForm.initModality(Modality.APPLICATION_MODAL);
+			membershipForm.setAlwaysOnTop(true);
+			membershipForm.showAndWait();
 		}
 	
 }

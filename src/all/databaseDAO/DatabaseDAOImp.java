@@ -153,6 +153,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 	
+	// 입력받은 아이디와 비밀번호가 dao에 있는 아이디, 비밀번호와 일치하면 true를 일치하지 않으면 false를 반환
 	@Override
 	public boolean loginChk(String id,String pw) {
 		// TODO Auto-generated method stub
@@ -430,6 +431,37 @@ public class DatabaseDAOImp implements DatabaseDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public Member memberInfo(String id) {
+		// TODO Auto-generated method stub
+		String sql = "select * from member where member_id = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				Member m = new Member();
+				m.setNum(rs.getInt(1));
+				m.setId(rs.getString(2));
+				m.setPw(rs.getString(3));
+				m.setName(rs.getString(4));
+				m.setNickName(rs.getString(5));
+				m.setBirthDate(rs.getDate(6));
+				m.setGender(rs.getString(7));
+				m.setEmail(rs.getString(8));
+				m.setPhoneNum(rs.getString(9));
+				return m;
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	

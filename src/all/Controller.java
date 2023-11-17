@@ -108,7 +108,10 @@ public class Controller{
 	public void writingProc() {
 		bBt.writingProc(root);
 	}
-	// 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
+	// 전체 게시판, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
+	public void allBoardProc() {
+		bBt.allBoardProc(root);
+	}
 	public void freeBoardProc() {
 		bBt.freeBoardProc(root);
 	}
@@ -125,11 +128,13 @@ public class Controller{
 		bBt.reportProc(root);
 	}
 	
+	// 회원가입
 	public void joinMember(ActionEvent event) {
 		// TODO Auto-generated method stub
 		jb.joinMember(event);
 	}
 	
+	// 로그아웃
 	public void logoutProc() {
 		lb.logoutProc(root);
 	}
@@ -166,6 +171,11 @@ public class Controller{
 	// 파일 선택 버튼
 	public void selOpenFile(ActionEvent e) {
 		bBt.fileUpload(root);
+	}
+	
+	// 신고화면 검색 버튼
+	public void reportSearchProc() {
+		bBt.reportSearchProc(root);
 	}
 	
 }

@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -52,7 +53,7 @@ public class BoardServiceImp implements BoardService {
 		mainCombo(root);
 		createAllListView(root);
 
-		rootStage.setTitle("회원정보");
+		rootStage.setTitle("중고거래 커뮤니티");
 		rootStage.show();
 		rootStage.setResizable(false);
 	}
@@ -75,8 +76,7 @@ public class BoardServiceImp implements BoardService {
 			TableColumn<Board, String> category1 = new TableColumn<Board, String>("카테고리");
 			category1.setMinWidth(75);
 			category1.setMaxWidth(75);
-			
-			
+
 			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nicName"));
 			title.setCellValueFactory(new PropertyValueFactory<Board, String>("title"));
 			date.setCellValueFactory(new PropertyValueFactory<Board, String>("uploadDate"));
@@ -93,11 +93,11 @@ public class BoardServiceImp implements BoardService {
 		CommonServiceImp cs = new CommonServiceImp();
 
 		// 게시물을 클릭 했을 때 회원이면 게시물 내용 표시하는 창 출력, 비회원이면 로그인 오류창 출력
-		
+
 		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				if(event.getClickCount() > 1) {
+				if (event.getClickCount() > 1) {
 					Board b = listView.getSelectionModel().getSelectedItem();
 					if (b != null) {
 						if (logChk.getText().equals("비회원")) {
@@ -163,7 +163,6 @@ public class BoardServiceImp implements BoardService {
 	@Override
 	public void createCategoryListView(Parent root, String category) {
 		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
-		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 		List<Board> boardList = dao.categoryBoardAll(category);
 
@@ -180,7 +179,7 @@ public class BoardServiceImp implements BoardService {
 			TableColumn<Board, String> category1 = new TableColumn<Board, String>("카테고리");
 			category1.setMinWidth(75);
 			category1.setMaxWidth(75);
-			
+
 			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nicName"));
 			title.setCellValueFactory(new PropertyValueFactory<Board, String>("title"));
 			date.setCellValueFactory(new PropertyValueFactory<Board, String>("uploadDate"));
@@ -225,7 +224,52 @@ public class BoardServiceImp implements BoardService {
 			TableColumn<Board, String> category1 = new TableColumn<Board, String>("카테고리");
 			category1.setMinWidth(75);
 			category1.setMaxWidth(75);
-			
+
+			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nicName"));
+			title.setCellValueFactory(new PropertyValueFactory<Board, String>("title"));
+			date.setCellValueFactory(new PropertyValueFactory<Board, String>("uploadDate"));
+			category1.setCellValueFactory(new PropertyValueFactory<Board, String>("categori"));
+
+			listView.getColumns().addAll(nickname, category1, title, date);
+			listView.setItems(FXCollections.observableArrayList(boardList));
+
+		} else {
+			System.out.println("게시판 목록을 가져올 수 없습니다.");
+		}
+
+		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				Board b = listView.getSelectionModel().getSelectedItem();
+				if (b != null) {
+					openBoardDetailWindow(b);
+				}
+			}
+		});
+	}
+
+	// 신고화면 에서 입력받은 콤보박스 + 입력 내용 값 테이블 뷰
+	public void reportSerchResultListView(Parent root, String text1, String text2) {
+		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
+
+		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+		List<Board> boardList = dao.searchResultAll(text1, text2);
+
+		if (boardList != null) {
+			TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
+			nickname.setMinWidth(75);
+			nickname.setMaxWidth(150);
+			TableColumn<Board, String> title = new TableColumn<Board, String>("제목");
+			title.setMinWidth(423);
+			title.setMaxWidth(423);
+			TableColumn<Board, String> date = new TableColumn<Board, String>("날짜");
+			date.setMinWidth(125);
+			date.setMaxWidth(125);
+			TableColumn<Board, String> category1 = new TableColumn<Board, String>("카테고리");
+			category1.setMinWidth(75);
+			category1.setMaxWidth(75);
+
 			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nicName"));
 			title.setCellValueFactory(new PropertyValueFactory<Board, String>("title"));
 			date.setCellValueFactory(new PropertyValueFactory<Board, String>("uploadDate"));
@@ -254,9 +298,40 @@ public class BoardServiceImp implements BoardService {
 	public String mainCombo(Parent root) {
 		ComboBox<String> combo = (ComboBox<String>) root.lookup("#searchCombo");
 		String str[] = { "제목", "닉네임", "카테고리" };
+
+		// 메인화면 검색창에 있는 콤보박스에 배열값이 들어있지 않을 때만 넣어주기 - 이거 안 넣으면 카테고리 값이 중복 추가됨
+		if (combo.getItems().isEmpty()) {
+			combo.getItems().addAll(FXCollections.observableArrayList(str));
+		}
+
 		String selectedValue = combo.getValue(); // 선택된 콤보박스의 값 가져오기
-		combo.getItems().addAll(FXCollections.observableArrayList(str));
 		return selectedValue;
+	}
+
+	// 신고화면 콤보 박스
+	@Override
+	public String reportCombo(Parent root) {
+		ComboBox<String> combo = (ComboBox<String>) root.lookup("#searchReportCombo");
+		String str[] = { "게시물 이름", "닉네임", "아이디" };
+
+		// 신고화면 검색창에 있는 콤보박스에 배열값이 들어있지 않을 때만 넣어주기 - 이거 안 넣으면 카테고리 값이 중복 추가됨
+		if (combo.getItems().isEmpty()) {
+			combo.getItems().addAll(FXCollections.observableArrayList(str));
+		}
+
+		String selectedValue = combo.getValue(); // 선택된 콤보박스의 값 가져오기
+		return selectedValue;
+	}
+
+	// 로그인 화면 체크 박스1 (새 창 띄우기, 안 띄우기)
+	@Override
+	public boolean chk1(Parent root) {
+		CheckBox chk1 = (CheckBox) root.lookup("#newViewBoolean");
+		if (chk1.isSelected()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

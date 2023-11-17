@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class IdFindButtonImp implements IdFindButton {
@@ -42,7 +43,9 @@ public class IdFindButtonImp implements IdFindButton {
 
 		membershipForm.setTitle("아이디찾기");
 		membershipForm.setResizable(false);
-		membershipForm.show();
+		membershipForm.initModality(Modality.APPLICATION_MODAL);
+		membershipForm.setAlwaysOnTop(true);
+		membershipForm.showAndWait();
 	}
 	
 	// 호출된 아이디 찾기 창에서 확인 버튼 눌렀을 때
@@ -54,13 +57,28 @@ public class IdFindButtonImp implements IdFindButton {
 		String findPhoneNum = phoneNum.getText();
 		
 		if(dao.idChk(name.getText(), phoneNum.getText())) {
-				String id = dao.findId(findName,findPhoneNum);
-				findIdResult(root, id, findName);
-		} else {
-			cs.msgBox("아이디 찾기", "아이디 찾기 오류", "이름과 전화번호를 확인해주세요.");
-			name.clear();
-			phoneNum.clear();
+			String id = dao.findId(findName,findPhoneNum);
+			findIdResult(root, id, findName);
+			Stage currentStage = (Stage) name.getScene().getWindow();
+			currentStage.close();
+		} else if(name.getText().isEmpty() && phoneNum.getText().isEmpty()){
+			cs.customErrorView(root, "정보를 입력해주세요.");
 			name.requestFocus();
+		} else if(name.getText().isEmpty() && !(phoneNum.getText().isEmpty())){
+			cs.customErrorView(root, "이름을 입력해주세요.");
+			name.requestFocus();
+		} else if(!(name.getText().isEmpty()) && phoneNum.getText().isEmpty()){
+			cs.customErrorView(root, "전화번호를 입력해주세요.");
+			phoneNum.requestFocus();
+		}else if(!(name.getText().isEmpty()) && !(phoneNum.getText().isEmpty())) {
+			if(!(dao.idChk(name.getText(), phoneNum.getText()))) {
+				cs.customErrorView(root,"입력하신 내용과\n 일치하는 정보가 없습니다.");
+				name.clear();
+				phoneNum.clear();
+				name.requestFocus();
+			} else {
+				System.err.println("이름, 전화번호 둘 다 입력했고 dao에서 일치하는 정보도 없는데 오류 발생");
+			}
 		}
 	}
 
@@ -90,9 +108,10 @@ public class IdFindButtonImp implements IdFindButton {
 		findNameLb.setText("\""+findName+"\"");
 
 		membershipForm.setTitle("아이디 찾기");
-		membershipForm.setAlwaysOnTop(true);
 		membershipForm.setResizable(false);
-		membershipForm.show();
+		membershipForm.initModality(Modality.APPLICATION_MODAL);
+		membershipForm.setAlwaysOnTop(true);
+		membershipForm.showAndWait();
 	}
 
 }
