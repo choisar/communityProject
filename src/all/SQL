@@ -10,6 +10,7 @@ create table member (
     member_email varchar2(100) not null,
     member_phonenum varchar2(50) not null
     );
+    
 -- 멤버 시퀀스
 create SEQUENCE mem_seq
     start with 1
@@ -22,18 +23,36 @@ insert into member values(mem_seq.nextval,'hong','1234','홍길동','코리아�
 commit;
 
 --2. board 테이블 
-create table board (
+/* create table board (
 	board_no number primary key,
     board_memnick varchar2(50),
 	title varchar2(50) not null,
     category varchar2(50) not null,
+    -- 카테고리는 (자유, 구매, 판매, 나눔)
     contents_date date,
 	contents varchar2(1000) not null,
     howmanypost number not null,
 	imagepath blob,
     board_memid varchar2(50),
-    foreign key(board_memid) references member(member_id),
-    foreign key(board_memnick) references member(member_nickname)
+    -- foreign key(board_memid) references member(member_id),
+    -- foreign key(board_memnick) references member(member_nickname)
+	); */
+    
+    
+--2. board 테이블 
+create table board (
+	board_no number primary key,
+    board_memnick varchar2(50),
+	title varchar2(50) not null,
+    category varchar2(50) not null,
+    -- 카테고리는 (자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판)
+    contents_date date,
+	contents varchar2(1000) not null,
+    howmanypost number not null,
+	imagepath blob,
+    board_memid varchar2(50)
+    --foreign key(board_memid) references member(member_id),
+    --foreign key(board_memnick) references member(member_nickname)
 	);
     
 -- 보드 시퀀스
@@ -42,8 +61,17 @@ start with 1
 INCREMENT by 1
 nocache;
 
--- 보드 시퀀스 입력 예시
-insert into board values(board_seq.nextval,'전우치전','자유게시판',sysdate,'코리아히어로 전우치의 이야기','2',null,'hong');
+-- 보드 테이블 입력 예시
+insert into board values(board_seq.nextval,'홍길동','전우치전','자유 게시판',sysdate,'코리아히어로 전우치의 이야기','2',null,'hong');
+insert into board values(board_seq.nextval,'멤버1','자유제목','자유 게시판',sysdate ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'멤버2','자유제목','자유 게시판',sysdate ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'멤버3','구매제목','구매 게시판',sysdate ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'멤버4','구매제목','구매 게시판',sysdate ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'멤버5','판매제목','판매 게시판',sysdate ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'멤버6','판매제목','판매 게시판',sysdate ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'멤버7','나눔제목','나눔 게시판',sysdate ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'멤버8','나눔제목','나눔 게시판',sysdate ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'멤버9','나눔제목','나눔 게시판',sysdate ,'게시글 내용','2',null,'hong');
 
 commit;
 
@@ -77,3 +105,11 @@ EXCEPTION
         ROLLBACK; -- 롤백을 사용하여 트랜잭션을 취소
 END;
 /
+
+select * from board;
+
+commit;
+select * from board;
+drop table comment1;
+drop table board;
+drop table member;

@@ -27,7 +27,6 @@ import javafx.scene.Parent;
 
 public class Controller{
 	private Parent root;
-	private Parent member;
 	private UserService us;
 	private AdminService as;
 	// 테이블 뷰 관련된 기능
@@ -103,57 +102,52 @@ public class Controller{
 	}
 	// 검색 버튼 
 	public void searchProc() {
-		bBt.searchProc(member);
+		bBt.searchProc(root);
 	}
 	// 게시물 작성
 	public void writingProc() {
-		bBt.writingProc(member);
+		bBt.writingProc(root);
 	}
 	// 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
 	public void freeBoardProc() {
-		bBt.freeBoardProc(member);
+		bBt.freeBoardProc(root);
 	}
 	public void buyBoardProc() {
-		bBt.buyBoardProc(member);
+		bBt.buyBoardProc(root);
 	}
 	public void sellBoardProc() {
-		bBt.sellBoardProc(member);
+		bBt.sellBoardProc(root);
 	}
 	public void sharingBoardProc() {
-		bBt.sharingBoardProc(member);
+		bBt.sharingBoardProc(root);
 	}
 	public void reportProc() {
 		bBt.reportProc(root);
 	}
 	
-	public void setMember(Parent member) {
-		// TODO Auto-generated method stub
-		this.member = member;
-		
-	}
 	public void joinMember(ActionEvent event) {
 		// TODO Auto-generated method stub
 		jb.joinMember(event);
 	}
 	
 	public void logoutProc() {
-		lb.logoutProc(member);
+		lb.logoutProc(root);
 	}
 	
 	public void idChkProc(ActionEvent e) {
-		jb.idChkProc(member);
+		jb.idChkProc(root);
 	}
 	
 	public void infoProc() {
-		ib.infoProc(member);
+		ib.infoProc(root);
 	}
 	
 	public void backProc() {
-		ib.backProc(member);
+		ib.backProc(root);
 	}
 	
 	public void deleteProc() {
-		ib.deleteProc(member);
+		ib.deleteProc(root);
 	}
 	
 	public void profileProc() {

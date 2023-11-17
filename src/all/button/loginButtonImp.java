@@ -17,6 +17,8 @@ public class loginButtonImp implements loginButton {
 	DatabaseDAOImp dao;
 	CommonService cs;
 	BoardService bs;
+	Parent root;
+	
 	public loginButtonImp() {
 		// TODO Auto-generated constructor stub
 		dao =new DatabaseDAOImp();
@@ -34,20 +36,36 @@ public class loginButtonImp implements loginButton {
 			System.out.println("로그인 성공");
 			Stage membershipForm = (Stage)root.getScene().getWindow();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/userLogin.fxml"));
-			Parent member = null;
+//			Parent member = null;
+//			try {
+//				member = loader.load();
+//				membershipForm.setScene(new Scene(member));
+//			} catch (Exception e) {
+//				// TODO:handle exception
+//				e.printStackTrace();
+//			}
+//			
+			root = null;
+
 			try {
-				member = loader.load();
-				membershipForm.setScene(new Scene(member));
+				root = loader.load();
+				membershipForm.setScene(new Scene(root));
 			} catch (Exception e) {
-				// TODO:handle exception
+				// TODO: handle exception
 				e.printStackTrace();
 			}
 			
-			Controller ctrl = loader.getController();
-			ctrl.setMember(member);
+//			Controller ctrl = loader.getController();
+//			ctrl.setMember(member);
+//			
+//			bs.mainCombo(member);
+//			bs.createAllListView(member);
 			
-			bs.mainCombo(member);
-			bs.createAllListView(member);
+			Controller ctrl = loader.getController();
+			ctrl.setRoot(root);
+			
+			bs.mainCombo(root);
+			bs.createAllListView(root);
 			
 			membershipForm.setTitle("로그인");
 			membershipForm.show();

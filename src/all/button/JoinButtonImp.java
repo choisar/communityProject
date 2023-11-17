@@ -19,7 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class JoinButtonImp implements JoinButton{
-
+	
+	Parent root;
 	CommonService cs;
 	DatabaseDAO dao;
 	boolean idChk;
@@ -34,17 +35,20 @@ public class JoinButtonImp implements JoinButton{
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/membership.fxml"));
-		Parent member = null;
+		
+		root = null;
+		
 		try {
-			member = loader.load();
-			membershipForm.setScene(new Scene(member));
+			root = loader.load();
+			membershipForm.setScene(new Scene(root));
 		} catch (Exception e) {
-			// TODO:handle exception
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 		
 		Controller ctrl = loader.getController();
-		ctrl.setMember(member);
+		
+		ctrl.setRoot(root);
 			
 		membershipForm.setTitle("회원가입장"); 
 		membershipForm.setAlwaysOnTop(false);
@@ -52,11 +56,12 @@ public class JoinButtonImp implements JoinButton{
 	}
 
 	@Override
-	public void stageChange(Parent member) {
+	public void stageChange(Parent root) {
 		// TODO Auto-generated method stub
-		Stage membershipForm = (Stage)member.getScene().getWindow();
+		Stage membershipForm = (Stage)root.getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/main.fxml"));
-		Parent root = null;
+		
+		root = null;
 		try {
 			root = loader.load();
 			membershipForm.setScene(new Scene(root));
@@ -77,18 +82,19 @@ public class JoinButtonImp implements JoinButton{
 	@Override
 	public void joinMember(ActionEvent e) {
 		// TODO Auto-generated method stub
-		Parent mem = (Parent) e.getSource();
-		Parent member = mem.getParent().getParent();
+		root = null;
+//		Parent mem = (Parent) e.getSource();
+//		Parent member = mem.getParent().getParent();
 		all.Member m = new all.Member();
 		
-		TextField txtName = (TextField) member.lookup("#txtName");
-		TextField txtId = (TextField) member.lookup("#txtId");
-		TextField txtnickName = (TextField) member.lookup("#txtnickName");
-		PasswordField txtPw = (PasswordField) member.lookup("#txtPw");
-		PasswordField txtPwOk = (PasswordField) member.lookup("#txtPwOk");
-		TextField txtEmail = (TextField) member.lookup("#txtEmail");
-		TextField txtphoneNum = (TextField) member.lookup("#txtphoneNum");
-		DatePicker birthDate = (DatePicker) member.lookup("#birthDate");
+		TextField txtName = (TextField) root.lookup("#txtName");
+		TextField txtId = (TextField) root.lookup("#txtId");
+		TextField txtnickName = (TextField) root.lookup("#txtnickName");
+		PasswordField txtPw = (PasswordField) root.lookup("#txtPw");
+		PasswordField txtPwOk = (PasswordField) root.lookup("#txtPwOk");
+		TextField txtEmail = (TextField) root.lookup("#txtEmail");
+		TextField txtphoneNum = (TextField) root.lookup("#txtphoneNum");
+		DatePicker birthDate = (DatePicker) root.lookup("#birthDate");
 
 		System.out.println(txtName.getText());
 
@@ -142,8 +148,8 @@ public class JoinButtonImp implements JoinButton{
 		m.setBirthDate(d);
 		
 	
-		RadioButton rdoMan = (RadioButton) member.lookup("#rdoMan");
-		RadioButton rdoWoman = (RadioButton) member.lookup("#rdoWoman");
+		RadioButton rdoMan = (RadioButton) root.lookup("#rdoMan");
+		RadioButton rdoWoman = (RadioButton) root.lookup("#rdoWoman");
 		
 		if(rdoMan.isSelected()) {
 //			System.out.println("남성");
@@ -157,7 +163,7 @@ public class JoinButtonImp implements JoinButton{
 	
 	
 	if( dao.insertMember(m)) {
-		Stage s = (Stage) member.getScene().getWindow();
+		Stage s = (Stage) root.getScene().getWindow();
 		s.close();
 	 } else {
 		 txtId.clear();
