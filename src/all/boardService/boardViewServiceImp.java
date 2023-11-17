@@ -43,7 +43,7 @@ public class boardViewServiceImp implements boardViewService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		bs.createCategoryListView(root, "자유");
+		bs.createCategoryListView(root, "자유 게시판");
 
 		membershipForm.setTitle("자유 게시판");
 		membershipForm.setResizable(false);
@@ -70,7 +70,7 @@ public class boardViewServiceImp implements boardViewService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		bs.createCategoryListView(root, "구매");
+		bs.createCategoryListView(root, "구매 게시판");
 
 		membershipForm.setTitle("구매 게시판");
 		membershipForm.setResizable(false);
@@ -97,7 +97,7 @@ public class boardViewServiceImp implements boardViewService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		bs.createCategoryListView(root, "판매");
+		bs.createCategoryListView(root, "판매 게시판");
 
 		membershipForm.setTitle("판매 게시판");
 		membershipForm.setResizable(false);
@@ -124,7 +124,7 @@ public class boardViewServiceImp implements boardViewService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		bs.createCategoryListView(root, "나눔");
+		bs.createCategoryListView(root, "나눔 게시판");
 
 		membershipForm.setTitle("나눔 게시판");
 		membershipForm.setResizable(false);

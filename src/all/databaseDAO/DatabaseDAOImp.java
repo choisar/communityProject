@@ -269,7 +269,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	@Override
 	public boolean uploadBoard(Board b) {
 		// TODO Auto-generated method stub
-		String sql="insert into board values(board_seq.nextval, ?, ?, ?,?)";
+		String sql="insert into board values(board_seq.nextval, ?, ?, ?, ?)";
 		try {
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, b.getTitle());

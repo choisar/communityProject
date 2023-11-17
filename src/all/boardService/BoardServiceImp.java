@@ -61,21 +61,29 @@ public class BoardServiceImp implements BoardService {
 	@Override
 	public void createAllListView(Parent root) {
 		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
-		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		List<Board> boardList = dao.selectAll();
 		if (boardList != null) {
 			TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
+			nickname.setMinWidth(75);
+			nickname.setMaxWidth(150);
 			TableColumn<Board, String> title = new TableColumn<Board, String>("제목");
+			title.setMinWidth(423);
+			title.setMaxWidth(423);
 			TableColumn<Board, String> date = new TableColumn<Board, String>("날짜");
+			date.setMinWidth(125);
+			date.setMaxWidth(125);
 			TableColumn<Board, String> category1 = new TableColumn<Board, String>("카테고리");
-			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nickname"));
+			category1.setMinWidth(75);
+			category1.setMaxWidth(75);
+			
+			
+			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nicName"));
 			title.setCellValueFactory(new PropertyValueFactory<Board, String>("title"));
-			date.setCellValueFactory(new PropertyValueFactory<Board, String>("date"));
-			category1.setCellValueFactory(new PropertyValueFactory<Board, String>("category"));
+			date.setCellValueFactory(new PropertyValueFactory<Board, String>("uploadDate"));
+			category1.setCellValueFactory(new PropertyValueFactory<Board, String>("categori"));
 
 			listView.getColumns().addAll(nickname, category1, title, date);
 			listView.setItems(FXCollections.observableArrayList(boardList));
-
 		} else {
 			System.out.println("게시판 목록을 가져올 수 없습니다.");
 		}
@@ -85,16 +93,19 @@ public class BoardServiceImp implements BoardService {
 		CommonServiceImp cs = new CommonServiceImp();
 
 		// 게시물을 클릭 했을 때 회원이면 게시물 내용 표시하는 창 출력, 비회원이면 로그인 오류창 출력
+		
 		listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				Board b = listView.getSelectionModel().getSelectedItem();
-				if (b != null) {
-					if (logChk.getText().equals("비회원")) {
-						cs.errorView1(root);
-						openBoardDetailWindow(b);
-					} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-						openBoardDetailWindow(b);
+				if(event.getClickCount() > 1) {
+					Board b = listView.getSelectionModel().getSelectedItem();
+					if (b != null) {
+						if (logChk.getText().equals("비회원")) {
+							cs.errorView1(root);
+							openBoardDetailWindow(b);
+						} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+							openBoardDetailWindow(b);
+						}
 					}
 				}
 			}
@@ -159,13 +170,22 @@ public class BoardServiceImp implements BoardService {
 
 		if (boardList != null) {
 			TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
+			nickname.setMinWidth(75);
+			nickname.setMaxWidth(150);
 			TableColumn<Board, String> title = new TableColumn<Board, String>("제목");
+			title.setMinWidth(423);
+			title.setMaxWidth(423);
 			TableColumn<Board, String> date = new TableColumn<Board, String>("날짜");
+			date.setMinWidth(125);
+			date.setMaxWidth(125);
 			TableColumn<Board, String> category1 = new TableColumn<Board, String>("카테고리");
-			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nickname"));
+			category1.setMinWidth(75);
+			category1.setMaxWidth(75);
+			
+			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nicName"));
 			title.setCellValueFactory(new PropertyValueFactory<Board, String>("title"));
-			date.setCellValueFactory(new PropertyValueFactory<Board, String>("date"));
-			category1.setCellValueFactory(new PropertyValueFactory<Board, String>("category"));
+			date.setCellValueFactory(new PropertyValueFactory<Board, String>("uploadDate"));
+			category1.setCellValueFactory(new PropertyValueFactory<Board, String>("categori"));
 
 			listView.getColumns().addAll(nickname, category1, title, date);
 			listView.setItems(FXCollections.observableArrayList(boardList));
@@ -195,13 +215,24 @@ public class BoardServiceImp implements BoardService {
 
 		if (boardList != null) {
 			TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
+			nickname.setMinWidth(75);
+			nickname.setMaxWidth(150);
 			TableColumn<Board, String> title = new TableColumn<Board, String>("제목");
+			title.setMinWidth(423);
+			title.setMaxWidth(423);
 			TableColumn<Board, String> date = new TableColumn<Board, String>("날짜");
-			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nickname"));
+			date.setMinWidth(125);
+			date.setMaxWidth(125);
+			TableColumn<Board, String> category1 = new TableColumn<Board, String>("카테고리");
+			category1.setMinWidth(75);
+			category1.setMaxWidth(75);
+			
+			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nicName"));
 			title.setCellValueFactory(new PropertyValueFactory<Board, String>("title"));
-			date.setCellValueFactory(new PropertyValueFactory<Board, String>("date"));
+			date.setCellValueFactory(new PropertyValueFactory<Board, String>("uploadDate"));
+			category1.setCellValueFactory(new PropertyValueFactory<Board, String>("categori"));
 
-			listView.getColumns().addAll(nickname, title, date);
+			listView.getColumns().addAll(nickname, category1, title, date);
 			listView.setItems(FXCollections.observableArrayList(boardList));
 
 		} else {
