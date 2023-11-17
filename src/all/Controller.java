@@ -111,16 +111,16 @@ public class Controller{
 	}
 	// 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
 	public void freeBoardProc() {
-		bBt.freeBoardProc(root);
+		bBt.freeBoardProc(member);
 	}
 	public void buyBoardProc() {
-		bBt.buyBoardProc(root);
+		bBt.buyBoardProc(member);
 	}
 	public void sellBoardProc() {
-		bBt.sellBoardProc(root);
+		bBt.sellBoardProc(member);
 	}
 	public void sharingBoardProc() {
-		bBt.sharingBoardProc(root);
+		bBt.sharingBoardProc(member);
 	}
 	public void reportProc() {
 		bBt.reportProc(root);
