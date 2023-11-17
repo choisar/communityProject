@@ -67,11 +67,13 @@ public class BoardServiceImp implements BoardService {
 			TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
 			TableColumn<Board, String> title = new TableColumn<Board, String>("제목");
 			TableColumn<Board, String> date = new TableColumn<Board, String>("날짜");
+			TableColumn<Board, String> category1 = new TableColumn<Board, String>("카테고리");
 			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nickname"));
 			title.setCellValueFactory(new PropertyValueFactory<Board, String>("title"));
 			date.setCellValueFactory(new PropertyValueFactory<Board, String>("date"));
+			category1.setCellValueFactory(new PropertyValueFactory<Board, String>("category"));
 
-			listView.getColumns().addAll(nickname, title, date);
+			listView.getColumns().addAll(nickname, category1, title, date);
 			listView.setItems(FXCollections.observableArrayList(boardList));
 
 		} else {
@@ -112,8 +114,8 @@ public class BoardServiceImp implements BoardService {
 			Label titleText = (Label) detailRoot.lookup("#titleText");
 			Text dateText = (Text) detailRoot.lookup("#dateText");
 
-			nicknameText.setText(selectedBoard.getNickname());
-			dateText.setText(selectedBoard.getDate());
+			nicknameText.setText(selectedBoard.getNicName());
+			dateText.setText(selectedBoard.getUploadDate());
 			titleText.setText(selectedBoard.getTitle());
 
 			Stage detailStage = new Stage();
@@ -159,11 +161,13 @@ public class BoardServiceImp implements BoardService {
 			TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
 			TableColumn<Board, String> title = new TableColumn<Board, String>("제목");
 			TableColumn<Board, String> date = new TableColumn<Board, String>("날짜");
+			TableColumn<Board, String> category1 = new TableColumn<Board, String>("카테고리");
 			nickname.setCellValueFactory(new PropertyValueFactory<Board, String>("nickname"));
 			title.setCellValueFactory(new PropertyValueFactory<Board, String>("title"));
 			date.setCellValueFactory(new PropertyValueFactory<Board, String>("date"));
+			category1.setCellValueFactory(new PropertyValueFactory<Board, String>("category"));
 
-			listView.getColumns().addAll(nickname, title, date);
+			listView.getColumns().addAll(nickname, category1, title, date);
 			listView.setItems(FXCollections.observableArrayList(boardList));
 
 		} else {

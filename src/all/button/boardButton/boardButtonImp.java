@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 import all.Board_s;
+import all.boardService.Board;
 import all.boardService.BoardServiceImp;
 import all.boardService.boardViewServiceImp;
 import all.button.common.CommonServiceImp;
@@ -37,11 +38,11 @@ public class boardButtonImp implements boardButton {
 		 String text1 = boardService.mainCombo(root);
 		
 		if(text1.equals("제목")) {
-			text1 = "Title";
+			text1 = "title";
 		} else if (text1.equals("닉네임")) {
-			text1 = "nickname";
+			text1 = "board_memnick";
 		} else if (text1.equals("카테고리")) {
-			text1 = "ca";
+			text1 = "category";
 		}
 		
 		TextField searchBoard  = (TextField)root.lookup("#boardNameSearch");
@@ -161,7 +162,7 @@ public class boardButtonImp implements boardButton {
 			return;
 		} 
 		
-		Board_s b=new Board_s();
+		Board b = new Board();
 		b.setTitle(title.getText());
 		b.setContents(contents.getText());
 		
@@ -189,7 +190,8 @@ public class boardButtonImp implements boardButton {
 		DatePicker UploadDate = (DatePicker) root.lookup("#UploadDate");
 		LocalDate date = UploadDate.getValue();
 		Date d = Date.valueOf(date);
-		b.setUploadDate(d);
+		
+		b.setUploadDate(d.toString());
 		
 		
 		byte[] imageBytes=null;

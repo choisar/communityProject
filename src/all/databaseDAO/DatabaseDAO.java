@@ -22,6 +22,6 @@ public interface DatabaseDAO {
 	// 전체 카테고리에서 검색 결과가 포함된 모든 게시물
 	List<Board> searchResultAll(String text1, String text2);
 	// db에 게시글 등록하기
-	boolean uploadBoard(Board_s b);
+	boolean uploadBoard(Board b);
 	
 }

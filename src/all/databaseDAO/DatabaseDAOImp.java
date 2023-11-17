@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import all.Board_s;
@@ -164,11 +167,18 @@ public class DatabaseDAOImp implements DatabaseDAO {
 			
 			while (rs.next()) {
 				Board b = new Board();
-				b.setNickname(rs.getString(2));
+				b.setNicName(rs.getString(2));
 				b.setTitle(rs.getString(3));
-				b.setCat(rs.getString(4));
-				b.setDate(rs.getTimestamp(5).toString());
+				b.setCategori(rs.getString(4));
 				
+				// 타임스탬프 분까지만 자리수 끊기
+				Timestamp timestamp = rs.getTimestamp(5);
+				
+	            if (timestamp != null) {
+	                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	                String dateStr = sdf.format(timestamp);
+	                b.setUploadDate(dateStr);
+	            }
 				
 				boardList.add(b);
 				
@@ -187,7 +197,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		// TODO Auto-generated method stub
 		
 		List<Board> boardList = new ArrayList<Board>();
-		String sql = "select * from board where ca = ?";
+		String sql = "select * from board where category = ?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, category);
@@ -195,10 +205,17 @@ public class DatabaseDAOImp implements DatabaseDAO {
 			
 			while (rs.next()) {
 				Board b = new Board();
-				b.setNickname(rs.getString(2));
+				b.setNicName(rs.getString(2));
 				b.setTitle(rs.getString(3));
-				b.setCat(rs.getString(4));
-				b.setDate(rs.getTimestamp(5).toString());
+				b.setCategori(rs.getString(4));
+				
+				// 타임스탬프 분까지만 자리수 끊기
+				Timestamp timestamp = rs.getTimestamp(5);
+	            if (timestamp != null) {
+	                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	                String dateStr = sdf.format(timestamp);
+	                b.setUploadDate(dateStr);
+	            }
 				
 				boardList.add(b);
 			}
@@ -227,10 +244,18 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	        
 	        while (rs.next()) {
 	            Board b = new Board();
-	            b.setNickname(rs.getString(2));
+	            b.setNicName(rs.getString(2));
 	            b.setTitle(rs.getString(3));
-	            b.setCat(rs.getString(4));
-	            b.setDate(rs.getTimestamp(5).toString());
+	            b.setCategori(rs.getString(4));
+	            
+				// 타임스탬프 분까지만 자리수 끊기
+				Timestamp timestamp = rs.getTimestamp(5);
+	            if (timestamp != null) {
+	                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	                String dateStr = sdf.format(timestamp);
+	                b.setUploadDate(dateStr);
+	            }
+	            
 	            boardList.add(b);
 	        }
 	        return boardList;
@@ -242,7 +267,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 
 	// db에 게시글 등록하기
 	@Override
-	public boolean uploadBoard(Board_s b) {
+	public boolean uploadBoard(Board b) {
 		// TODO Auto-generated method stub
 		String sql="insert into board values(board_seq.nextval, ?, ?, ?,?)";
 		try {

@@ -1,8 +1,6 @@
 package all;
 
 
-import java.sql.Date;
-
 public class Board_s {
 	private String id;
 	private String nicName;
@@ -12,8 +10,7 @@ public class Board_s {
 	private String categori;
 	private byte[] imagePath;  	
 	private String commet;
-	private Date uploadDate;
-	
+	private String uploadDate;
 	
 	public String getId() {
 		return id;
@@ -52,21 +49,24 @@ public class Board_s {
 		this.categori = categori;
 	}
 	public byte[] getImagePath() {
-        return imagePath;
-    }
+		return imagePath;
+	}
 	public void setImagePath(byte[] imagePath) {
-        this.imagePath = imagePath;
-    }
+		this.imagePath = imagePath;
+	}
 	public String getCommet() {
 		return commet;
 	}
 	public void setCommet(String commet) {
 		this.commet = commet;
 	}
-	public Date getUploadDate() {
+	public String getUploadDate() {
 		return uploadDate;
 	}
-	public void setUploadDate(Date uploadDate) {
+	public void setUploadDate(String uploadDate) {
 		this.uploadDate = uploadDate;
 	}
+	
+	
+	
 }
