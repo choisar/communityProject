@@ -2,7 +2,8 @@ package all.databaseDAO;
 
 import java.util.List;
 
-import all.Board_s;
+import all.boardService.Board;
+import all.Member;
 import all.boardService.Board;
 
 public interface DatabaseDAO {
@@ -23,5 +24,10 @@ public interface DatabaseDAO {
 	List<Board> searchResultAll(String text1, String text2);
 	// db에 게시글 등록하기
 	boolean uploadBoard(Board b);
+	
+	boolean loginChk(String id,String pw);
+	boolean insertMember(Member m);
+	boolean dupID(String txtId);
+	List<Member> selectAll1();
 	
 }

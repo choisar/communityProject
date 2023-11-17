@@ -5,12 +5,10 @@ import java.io.FileInputStream;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import all.Board_s;
 import all.boardService.Board;
 import all.boardService.BoardServiceImp;
 import all.boardService.boardViewServiceImp;
 import all.button.common.CommonServiceImp;
-import all.databaseDAO.DatabaseDAO;
 import all.databaseDAO.DatabaseDAOImp;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
@@ -19,8 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 public class boardButtonImp implements boardButton {
 	
@@ -46,10 +44,10 @@ public class boardButtonImp implements boardButton {
 			 
 			// 카테고리 선택 X, 검색내용 X
 			if(text1 == null && text2.isEmpty()) {
-				cs.msgBox("오류", "카테고리 선택, 검색어 입력이 안 되어있음", "카테고리를 선택하고, 검색어를 입력해주세요.");
+				cs.errorView4(root);
 			// 카테고리 선택만 X
 			} else if (text1 == null && !text2.isEmpty()) {
-				cs.msgBox("오류", "카테고리가 선택이 안 되어있음", "카테고리를 선택해주세요");
+				cs.errorView3(root);
 			// 검색내용만 X
 			} else if (text2.isEmpty() && text1 != null) {
 				cs.errorView2(root);
@@ -78,8 +76,6 @@ public class boardButtonImp implements boardButton {
 		} catch (Exception e) {
 			System.out.println("기타오류 - 관리자에게 문의하세요.");
 		}
-		
-		
 	}
 	
 	// 자유 게시판 버튼
@@ -90,7 +86,6 @@ public class boardButtonImp implements boardButton {
 		
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
-			bvs.freeBoardView(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			bvs.freeBoardView(root);
 		}
@@ -104,7 +99,6 @@ public class boardButtonImp implements boardButton {
 		
 		if(logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
-			bvs.buyBoardView(root);
 		} else if (logChk.getText().equals("회원")||logChk.getText().equals("관리자")) {
 			bvs.buyBoardView(root);
 		}
@@ -118,7 +112,6 @@ public class boardButtonImp implements boardButton {
 		
 		if(logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
-			bvs.sellBoardView(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			bvs.sellBoardView(root);
 		}
@@ -132,7 +125,6 @@ public class boardButtonImp implements boardButton {
 		
 		if(logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
-			bvs.sharingBoardView(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			bvs.sharingBoardView(root);
 		}
@@ -146,7 +138,6 @@ public class boardButtonImp implements boardButton {
 		
 		if(logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
-			bvs.uploadBoardView(root);
 		} else if (logChk.getText().equals("회원")||logChk.getText().equals("관리자")) {
 			bvs.uploadBoardView(root);
 		}

@@ -62,9 +62,9 @@ public class CommonServiceImp implements CommonService{
 	public void errorView2(Parent root) {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/isEmptyError.fxml"));
-
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/searchIsEmptyError.fxml"));
+		
 		root = null;
 
 		try {
@@ -82,4 +82,57 @@ public class CommonServiceImp implements CommonService{
 		membershipForm.setAlwaysOnTop(true);
 		membershipForm.show();
 	}
+	
+	// 카테고리 선택이 안되어있으면 호출되는 오류
+		@Override
+		public void errorView3(Parent root) {
+			// TODO Auto-generated method stub
+			Stage membershipForm = new Stage();
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/categoryIsEmptyError.fxml"));
+
+			root = null;
+
+			try {
+				root = loader.load();
+				membershipForm.setScene(new Scene(root));
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			Controller ctrl = loader.getController();
+			ctrl.setRoot(root);
+
+			membershipForm.setTitle("Error");
+			membershipForm.setResizable(false);
+			membershipForm.setAlwaysOnTop(true);
+			membershipForm.show();
+		}
+
+		// 게시물 검색창에 아무것도 입력되지 않았고, 카테고리 선택도 되어있지 않으면 호출되는 오류
+		@Override
+		public void errorView4(Parent root) {
+			// TODO Auto-generated method stub
+			Stage membershipForm = new Stage();
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/searchAndCategoryisEmptyError.fxml"));
+
+			root = null;
+
+			try {
+				root = loader.load();
+				membershipForm.setScene(new Scene(root));
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			Controller ctrl = loader.getController();
+			ctrl.setRoot(root);
+
+			membershipForm.setTitle("Error");
+			membershipForm.setResizable(false);
+			membershipForm.setAlwaysOnTop(true);
+			membershipForm.show();
+		}
+	
 }

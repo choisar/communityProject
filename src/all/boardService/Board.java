@@ -2,15 +2,15 @@ package all.boardService;
 
 
 public class Board {
-	private String id;
-	private String nicName;
 	private int No;
+	private String nicName;
 	private String title;
-	private String contents;
 	private String categori;
+	private String uploadDate;
+	private String contents;
 	private byte[] imagePath;  	
 	private String commet;
-	private String uploadDate;
+	private String id;
 	
 	public String getId() {
 		return id;

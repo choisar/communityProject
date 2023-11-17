@@ -11,7 +11,7 @@ public class Member {
 		private String nickName;
 		private String phoneNum;
 		private String email;
-		private boolean gender;
+		private String gender;
 		private Date birthDate;
 		
 		public int getNum() {
@@ -56,10 +56,10 @@ public class Member {
 		public void setEmail(String email) {
 			this.email = email;
 		}
-		public boolean isGender() {
+		public String isGender() {
 			return gender;
 		}
-		public void setGender(boolean gender) {
+		public void setGender(String gender) {
 			this.gender = gender;
 		}
 		public Date getBirthDate() {

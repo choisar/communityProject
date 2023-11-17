@@ -1,7 +1,6 @@
 package all;
 
 import all.boardService.BoardService;
-
 import all.boardService.BoardServiceImp;
 import all.button.JoinButton;
 import all.button.JoinButtonImp;
@@ -15,6 +14,10 @@ import all.button.find_idpw.IdFindButton;
 import all.button.find_idpw.IdFindButtonImp;
 import all.button.find_idpw.PwFindButton;
 import all.button.find_idpw.PwFindButtonImp;
+import all.button.infoButton.infoButton;
+import all.button.infoButton.infoButtonImp;
+import all.button.infoButton.proButton;
+import all.button.infoButton.proButtonImp;
 import all.userService.admin.AdminService;
 import all.userService.admin.AdminServiceImp;
 import all.userService.user.UserService;
@@ -24,6 +27,7 @@ import javafx.scene.Parent;
 
 public class Controller{
 	private Parent root;
+	private Parent member;
 	private UserService us;
 	private AdminService as;
 	// 테이블 뷰 관련된 기능
@@ -40,6 +44,9 @@ public class Controller{
 	// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
 	// 업로드 버튼
 	private boardButton bBt;
+	private proButton pb;
+	private infoButton ib;
+	
 	
 	public Controller() {
 		// TODO Auto-generated constructor stub
@@ -59,7 +66,8 @@ public class Controller{
 		// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼 
 		// 업로드 버튼
 		bBt = new boardButtonImp();
-		
+		ib = new infoButtonImp();
+		pb = new proButtonImp();
 	}
 	public void setRoot(Parent root) {
 		this.root = root;
@@ -116,6 +124,44 @@ public class Controller{
 	}
 	public void reportProc() {
 		bBt.reportProc(root);
+	}
+	
+	public void setMember(Parent member) {
+		// TODO Auto-generated method stub
+		this.member = member;
+		
+	}
+	public void joinMember(ActionEvent event) {
+		// TODO Auto-generated method stub
+		jb.joinMember(event);
+	}
+	
+	public void logoutProc() {
+		lb.logoutProc(member);
+	}
+	
+	public void idChkProc(ActionEvent e) {
+		jb.idChkProc(member);
+	}
+	
+	public void infoProc() {
+		ib.infoProc(member);
+	}
+	
+	public void backProc() {
+		ib.backProc(member);
+	}
+	
+	public void deleteProc() {
+		ib.deleteProc(member);
+	}
+	
+	public void profileProc() {
+		pb.profileProc();
+	}
+	
+	public Parent getRoot() {
+		return root;
 	}
 
 	// 게시하기 버튼

@@ -8,11 +8,10 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import all.Board_s;
 import all.boardService.Board;
+import all.Member;
 import all.button.common.CommonService;
 import all.button.common.CommonServiceImp;
 
@@ -150,6 +149,150 @@ public class DatabaseDAOImp implements DatabaseDAO {
 
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
+		return null;
+	}
+	
+	@Override
+	public boolean loginChk(String id,String pw) {
+		// TODO Auto-generated method stub
+		String sql = "select decode(count(*), 1, 'true', 'false') from member where member_id=? and member_pw=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				return Boolean.parseBoolean(rs.getString(1));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean insertMember(Member m) {
+		// TODO Auto-generated method stub
+		 if(idChkCom) {
+			 String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,?,?)";
+			 
+			 try {
+				 pstmt = con.prepareStatement(sql);
+				
+				 pstmt.setString(1, m.getName());
+				 pstmt.setString(2, m.getId());
+				 pstmt.setString(3, m.getNickName());
+				 pstmt.setString(4, m.getPw());
+				 pstmt.setDate(5, m.getBirthDate());
+				 pstmt.setString(6, m.isGender());
+				 pstmt.setString(7,m.getEmail());
+				 pstmt.setString(8, m.getPhoneNum());
+				 
+				 int result = pstmt.executeUpdate();
+				 
+				 if(result == 1) {
+					 cs.msgBox("회원가입","회원가입여부","회원가입에 성공하셨습니다.");
+					 return true;
+				 	}
+			 	} catch(Exception e) {
+			 		// TODO: handle exception
+			 		e.printStackTrace();
+			 		}
+		 } else { // 아이디 중복
+			 cs.msgBox("아이디","아이디중복","아이디 중복 확인하세요");
+		 	}
+		return false;
+	}
+	
+	public String getGender(boolean gender) {
+		// TODO Auto-generated method stub
+		if(gender) {
+			return "여성";
+		} 	
+		return "남성";
+	}
+
+	private boolean chkId(String id) {
+		// TODO Auto-generated method stub
+			boolean result = false;
+			String sql = "select decode(count(*),1,'false','true')" + "from member where member_id=?";
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1,id);
+				
+				rs = pstmt.executeQuery();
+		
+				if(rs.next()) {
+					result = Boolean.parseBoolean(rs.getString(1));
+				} 
+				return result;
+			} catch(Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			 } 
+			 return true;
+	
+	}
+	
+	@Override
+	public boolean dupID(String txtId) {
+		// TODO Auto-generated method stub
+		if(txtId.isEmpty()) {
+
+			cs.msgBox("아이디","아이디중복","아이디를 입력하세요");
+
+			return false;
+
+		}else {
+
+			if(!chkId(txtId)) {
+
+				cs.msgBox("아이디","아이디중복","같은 아이디가 존재합니다. 다시 입력하세요");
+				idChkCom = false;
+				return false;
+
+			}else {
+
+				cs.msgBox("아이디","아이디중복","사용가능한 아이디입니다.");
+				idChkCom = true;
+				
+				return true;
+
+
+			}
+		}
+	}
+	
+	public List<Member> selectAll1() {
+		// TODO Auto-generated method stub
+		List<Member> memberList = new ArrayList<Member>();
+		String sql = "select*from member";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Member m =new Member();
+				pstmt.setString(1, m.getName());
+				pstmt.setString(2, m.getId());
+				pstmt.setString(3, m.getNickName());
+				pstmt.setString(4, m.getPw());
+				pstmt.setDate(5, m.getBirthDate());
+				pstmt.setString(6, m.isGender());
+				pstmt.setString(7,m.getEmail());
+				pstmt.setString(8, m.getPhoneNum());
+
+				memberList.add(m);
+			}
+			return memberList;
+		} catch (Exception e) {
+			//TODO: handle exception
+			e.printStackTrace();
 		}
 		return null;
 	}

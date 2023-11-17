@@ -103,7 +103,6 @@ public class BoardServiceImp implements BoardService {
 					if (b != null) {
 						if (logChk.getText().equals("비회원")) {
 							cs.errorView1(root);
-							openBoardDetailWindow(b);
 						} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 							openBoardDetailWindow(b);
 						}
