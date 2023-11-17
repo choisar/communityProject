@@ -41,7 +41,7 @@ public class boardButtonImp implements boardButton {
 			// 텍스트 필드 - 검색내용
 			TextField searchBoard  = (TextField)root.lookup("#boardNameSearch");
 			String text2 = searchBoard.getText();
-			 
+			
 			// 카테고리 선택 X, 검색내용 X
 			if(text1 == null && text2.isEmpty()) {
 				cs.errorView4(root);

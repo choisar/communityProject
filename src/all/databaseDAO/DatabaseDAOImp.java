@@ -183,15 +183,15 @@ public class DatabaseDAOImp implements DatabaseDAO {
 			 try {
 				 pstmt = con.prepareStatement(sql);
 				
-				 pstmt.setString(1, m.getName());
-				 pstmt.setString(2, m.getId());
-				 pstmt.setString(3, m.getNickName());
-				 pstmt.setString(4, m.getPw());
-				 pstmt.setDate(5, m.getBirthDate());
-				 pstmt.setString(6, m.isGender());
-				 pstmt.setString(7,m.getEmail());
-				 pstmt.setString(8, m.getPhoneNum());
-				 
+				 pstmt.setString(1, m.getId());
+	             pstmt.setString(2, m.getPw());
+	             pstmt.setString(3, m.getName());
+	             pstmt.setString(4, m.getNickName());            
+	             pstmt.setDate(5, m.getBirthDate());
+	             pstmt.setString(6, m.isGender());
+	             pstmt.setString(7,m.getEmail());
+	             pstmt.setString(8, m.getPhoneNum());
+
 				 int result = pstmt.executeUpdate();
 				 
 				 if(result == 1) {
