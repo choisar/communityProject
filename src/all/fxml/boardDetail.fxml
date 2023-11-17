@@ -10,9 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane layoutX="-1.0" prefHeight="3100.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/8.0.171" 
-xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="all.Controller">
+<AnchorPane layoutX="-1.0" prefHeight="3100.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
    <children>
       <Text layoutX="69.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="닉네임:">
          <font>
@@ -54,7 +52,7 @@ fx:controller="all.Controller">
             <Font name="System Bold" size="33.0" />
          </font>
       </Label>
-      <TextArea layoutX="23.0" layoutY="227.0" prefHeight="664.0" prefWidth="913.0" />
+      <TextArea fx:id="contents" layoutX="23.0" layoutY="227.0" prefHeight="664.0" prefWidth="913.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="675.0" layoutX="17.0" layoutY="941.0" stroke="BLACK" strokeType="INSIDE" width="924.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="675.0" layoutX="19.0" layoutY="1661.0" stroke="BLACK" strokeType="INSIDE" width="924.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="675.0" layoutX="19.0" layoutY="2381.0" stroke="BLACK" strokeType="INSIDE" width="924.0" />

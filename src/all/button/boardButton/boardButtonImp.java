@@ -32,32 +32,54 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void searchProc(Parent root) {
 		// TODO Auto-generated method stub
+		// 회원 비회원 확인하는 레이블
 		Label logChk  = (Label)root.lookup("#logChk");
+		BoardServiceImp boardService = new BoardServiceImp();
 
-		 BoardServiceImp boardService = new BoardServiceImp();
-		 String text1 = boardService.mainCombo(root);
-		
-		if(text1.equals("제목")) {
-			text1 = "title";
-		} else if (text1.equals("닉네임")) {
-			text1 = "board_memnick";
-		} else if (text1.equals("카테고리")) {
-			text1 = "category";
-		}
-		
-		TextField searchBoard  = (TextField)root.lookup("#boardNameSearch");
-		String text2 = searchBoard.getText();
-		
-		if(searchBoard.getText().isEmpty()) {
-			cs.errorView2(root);
-		} else {
-			if(logChk.getText().equals("비회원")) {
-				cs.errorView1(root);
-				bvs.searchResultBoardView(root, text1, text2);
-			} else if (logChk.getText().equals("회원")||logChk.getText().equals("관리자")) {
-				bvs.searchResultBoardView(root, text1, text2);
+		try {
+			// 콤보박스 - 카테고리값
+			String text1 = boardService.mainCombo(root);
+			 
+			// 텍스트 필드 - 검색내용
+			TextField searchBoard  = (TextField)root.lookup("#boardNameSearch");
+			String text2 = searchBoard.getText();
+			 
+			// 카테고리 선택 X, 검색내용 X
+			if(text1 == null && text2.isEmpty()) {
+				cs.msgBox("오류", "카테고리 선택, 검색어 입력이 안 되어있음", "카테고리를 선택하고, 검색어를 입력해주세요.");
+			// 카테고리 선택만 X
+			} else if (text1 == null && !text2.isEmpty()) {
+				cs.msgBox("오류", "카테고리가 선택이 안 되어있음", "카테고리를 선택해주세요");
+			// 검색내용만 X
+			} else if (text2.isEmpty() && text1 != null) {
+				cs.errorView2(root);
+			} else if (!(text1 == null && text2.isEmpty())) {
+				
+				if(text1.equals("제목")) {
+					text1 = "title";
+				} else if (text1.equals("닉네임")) {
+					text1 = "board_memnick";
+				} else if (text1.equals("카테고리")) {
+					text1 = "category";
+				}
+				
+				if(logChk.getText().equals("비회원")) {
+					cs.errorView1(root);
+					bvs.searchResultBoardView(root, text1, text2);
+				} else if (logChk.getText().equals("회원")||logChk.getText().equals("관리자")) {
+					bvs.searchResultBoardView(root, text1, text2);
+				}
 			}
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			System.out.println("눌값");
+			
+			
+		} catch (Exception e) {
+			System.out.println("기타오류 - 관리자에게 문의하세요.");
 		}
+		
+		
 	}
 	
 	// 자유 게시판 버튼
