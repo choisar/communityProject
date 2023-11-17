@@ -103,11 +103,11 @@ public class Controller{
 	}
 	// 검색 버튼 
 	public void searchProc() {
-		bBt.searchProc(root);
+		bBt.searchProc(member);
 	}
 	// 게시물 작성
 	public void writingProc() {
-		bBt.writingProc(root);
+		bBt.writingProc(member);
 	}
 	// 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
 	public void freeBoardProc() {
