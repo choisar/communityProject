@@ -16,61 +16,21 @@
 <AnchorPane layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="26.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
-      <ImageView layoutX="43.0" layoutY="41.0">
-         <image>
-            <Image url="@../../../../../Desktop/제목%20없음.png" />
-         </image>
-      </ImageView>
       <TextField fx:id="txtId" layoutX="73.0" layoutY="39.0" prefHeight="25.0" prefWidth="320.0" promptText="아이디" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="74.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="122.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
-      <ImageView layoutX="39.0" layoutY="84.0">
-         <image>
-            <Image url="@../../../../../Desktop/비밀번호.png" />
-         </image>
-      </ImageView>
       <TextField fx:id="txtPw" layoutX="73.0" layoutY="88.0" prefHeight="25.0" prefWidth="320.0" promptText="비밀번호" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="276.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="170.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
-      <ImageView layoutX="39.0" layoutY="182.0">
-         <image>
-            <Image url="@../../../../../Desktop/이메일.png" />
-         </image>
-      </ImageView>
       <TextField fx:id="txtEmail" layoutX="73.0" layoutY="184.0" prefHeight="25.0" prefWidth="320.0" promptText="이메일" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
-      <ImageView layoutX="39.0" layoutY="132.0">
-         <image>
-            <Image url="@../../../../../Desktop/비밀번호.png" />
-         </image>
-      </ImageView>
       <TextField fx:id="txtPw" layoutX="73.0" layoutY="136.0" prefHeight="25.0" prefWidth="320.0" promptText="비밀번호 확인" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="324.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="372.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="420.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
-      <ImageView layoutX="39.0" layoutY="286.0">
-         <image>
-            <Image url="@../../../../../Desktop/제목%20없음.png" />
-         </image>
-      </ImageView>
       <TextField fx:id="txtName2" layoutX="73.0" layoutY="290.0" prefHeight="25.0" prefWidth="320.0" promptText="이름" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
-      <ImageView layoutX="39.0" layoutY="334.0">
-         <image>
-            <Image url="@제목%20없음.png" />
-         </image>
-      </ImageView>
       <TextField fx:id="txtName21" layoutX="73.0" layoutY="338.0" prefHeight="25.0" prefWidth="320.0" promptText="닉네임" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
       <DatePicker fx:id="birthDate" layoutX="147.0" layoutY="386.0" prefHeight="23.0" prefWidth="153.0" />
-      <ImageView layoutX="39.0" layoutY="380.0">
-         <image>
-            <Image url="@달력.png" />
-         </image>
-      </ImageView>
       <Label layoutX="81.0" layoutY="390.0" text="생년월일" textFill="#bbbbbb" />
-      <ImageView layoutX="42.0" layoutY="428.0">
-         <image>
-            <Image url="@핸드폰.png" />
-         </image>
-      </ImageView>
       <TextField fx:id="txtName211" layoutX="73.0" layoutY="433.0" prefHeight="25.0" prefWidth="320.0" promptText="핸드폰 번호" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="468.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
       <ToggleButton layoutX="90.0" layoutY="481.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: transparent; -fx-border-color: #b5adad; -fx-border-radius: 10;" text="남자" textFill="#b5adad">
@@ -85,5 +45,45 @@
          </font>
       </Button>
       <TextArea layoutX="38.0" layoutY="226.0" prefHeight="43.0" prefWidth="360.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
+      <ImageView layoutX="45.0" layoutY="41.0">
+         <image>
+            <Image url="@../image/정보.png" />
+         </image>
+      </ImageView>
+      <ImageView layoutX="46.0" layoutY="91.0">
+         <image>
+            <Image url="@../image/비밀번호.png" />
+         </image>
+      </ImageView>
+      <ImageView layoutX="40.0" layoutY="181.0">
+         <image>
+            <Image url="@../image/이메일.png" />
+         </image>
+      </ImageView>
+      <ImageView layoutX="46.0" layoutY="139.0">
+         <image>
+            <Image url="@../image/비밀번호.png" />
+         </image>
+      </ImageView>
+      <ImageView layoutX="45.0" layoutY="292.0">
+         <image>
+            <Image url="@../image/정보.png" />
+         </image>
+      </ImageView>
+      <ImageView layoutX="45.0" layoutY="340.0">
+         <image>
+            <Image url="@../image/정보.png" />
+         </image>
+      </ImageView>
+      <ImageView layoutX="42.0" layoutY="429.0">
+         <image>
+            <Image url="@../image/핸드폰.png" />
+         </image>
+      </ImageView>
+      <ImageView layoutX="39.0" layoutY="382.0">
+         <image>
+            <Image url="@../image/달력.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
