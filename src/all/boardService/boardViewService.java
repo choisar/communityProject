@@ -22,5 +22,5 @@ public interface boardViewService {
 	// 신고하기 창
 	public void reportView(Parent root);
 	
-	public void getBoardViewByCategory(Parent root, String category); 
+	// public void getBoardViewByCategory(Parent root, String category); 
 }

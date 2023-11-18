@@ -41,7 +41,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		}
 	}
 
-	// 아이디 체크
+	// 아이디 찾기 과정1 - 이름과 핸드폰 번호를 받아 일치하는 정보가 있으면 true, 없으면 false 반환
 	public boolean idChk(String name, String phoneNum) {
 		// TODO Auto-generated method stub
 		String sql = "select decode(count(*), 1, 'true', 'false') "
@@ -64,7 +64,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return false;
 	}
 	
-	// 아이디 찾기
+	// 아이디 찾기 과정2 - 과정1이 true이면 (일치하는 정보가 있으면) 일치하는 정보중 member_id를 문자열 값으로 반환, false면 null값 반환
 	@Override
 	public String findId(String findName, String findPhoneNum) {
 		String sql = "select member_id from member " + "where member_name = ? and member_phonenum = ?";
@@ -86,7 +86,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 	
-	// 비밀번호 체크
+	// 비밀번호 찾기 과정1 - 아이디와 핸드폰 번호를 받아 일치하는 정보가 있으면 true, 없으면 false 반환
 	@Override
 	public boolean pwChk(String findId, String findPhoneNum) {
 		String sql = "select decode(count(*), 1, 'true', 'false') "
@@ -107,7 +107,8 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return false;
 	}
 
-	// 비밀번호 찾기
+	// 비밀번호 찾기 과정2 - 과정1이 true이면 (일치하는 정보가 있으면)
+	// 입력받은 아이디, 핸드폰번호와 일치하는 정보중 비밀번호(member_pw)를 문자열 값으로 반환, false면 null값 반환
 	@Override
 	public String findPw(String findId, String findPhoneNum) {
 		String sql = "select member_pw from member " 
@@ -130,7 +131,8 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 
-	// 이름 찾기
+	// 비밀번호 찾기 결과창에 이름 띄우기 - 과정 1이 true이면 (일치하는 정보가 있으면) 
+	// 입력받은 아이디, 핸드폰번호와 일치하는 정보중 이름(member_name)을 문자열 값으로 반환, false면 null값 반환
 	@Override
 	public String findUserName(String findId, String findPhoneNum) {
 		String sql = "select member_Name from member " 
@@ -153,7 +155,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 	
-	// 입력받은 아이디와 비밀번호가 dao에 있는 아이디, 비밀번호와 일치하면 true를 일치하지 않으면 false를 반환
+	// 입력받은 아이디와 비밀번호가 dao에 있는 아이디, 비밀번호와 일치하는 정보가 있으면 true를 일치하지 않으면 false를 반환
 	@Override
 	public boolean loginChk(String id,String pw) {
 		// TODO Auto-generated method stub
@@ -243,27 +245,17 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	public boolean dupID(String txtId) {
 		// TODO Auto-generated method stub
 		if(txtId.isEmpty()) {
-
 			cs.msgBox("아이디","아이디중복","아이디를 입력하세요");
-
 			return false;
-
 		}else {
-
 			if(!chkId(txtId)) {
-
 				cs.msgBox("아이디","아이디중복","같은 아이디가 존재합니다. 다시 입력하세요");
 				idChkCom = false;
 				return false;
-
 			}else {
-
 				cs.msgBox("아이디","아이디중복","사용가능한 아이디입니다.");
 				idChkCom = true;
-				
 				return true;
-
-
 			}
 		}
 	}
@@ -311,10 +303,10 @@ public class DatabaseDAOImp implements DatabaseDAO {
 			
 			while (rs.next()) {
 				Board b = new Board();
+				b.setNo(rs.getInt(1));
 				b.setNicName(rs.getString(2));
 				b.setTitle(rs.getString(3));
 				b.setCategori(rs.getString(4));
-				
 				// 타임스탬프 분까지만 자리수 끊기
 				Timestamp timestamp = rs.getTimestamp(5);
 				
@@ -323,9 +315,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	                String dateStr = sdf.format(timestamp);
 	                b.setUploadDate(dateStr);
 	            }
-				
 				boardList.add(b);
-				
 			}
 			return boardList;
 		}catch (Exception e) {
@@ -335,7 +325,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 	
-	// 해당 카테고리에 있는 모든 게시물
+	// 카테고리 값을 정해주면 해당 카테고리에 있는 모든 게시물 정보를 갖는 리스트 생성
 	@Override
 	public List<Board> categoryBoardAll(String category) {
 		// TODO Auto-generated method stub
@@ -349,6 +339,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 			
 			while (rs.next()) {
 				Board b = new Board();
+				b.setNo(rs.getInt(1));
 				b.setNicName(rs.getString(2));
 				b.setTitle(rs.getString(3));
 				b.setCategori(rs.getString(4));
@@ -371,7 +362,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 	
-	// 전체 카테고리에서 검색 결과가 포함된 모든 게시물
+	// 메인화면 검색 - 전체 카테고리에서 검색 결과가 포함된 모든 게시물
 	@Override
 	public List<Board> searchResultAll(String text1,String text2) {
 //		// TODO Auto-generated method stub
@@ -388,6 +379,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	        
 	        while (rs.next()) {
 	            Board b = new Board();
+	            b.setNo(rs.getInt(1));
 	            b.setNicName(rs.getString(2));
 	            b.setTitle(rs.getString(3));
 	            b.setCategori(rs.getString(4));
@@ -433,6 +425,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return false;
 	}
 
+	// 로그인하면 입력받은 아이디와 같은 정보를 가지고 있는 Member m 객체 생성
 	public Member memberInfo(String id) {
 		// TODO Auto-generated method stub
 		String sql = "select * from member where member_id = ?";
@@ -464,6 +457,76 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 
+	// 신고화면 검색 (게시물/board) - 검색 결과가 포함된 모든 정보
+	@Override
+	public List<Board> reportSearchResultAll1(String text1,String text2) {
+//		// TODO Auto-generated method stub
+	    
+		    try {
+		    	List<Board> reportBoardList = new ArrayList<>();
+		    	String sql = "SELECT * FROM board WHERE " + text1 + " LIKE ?";
+		    	
+		        pstmt = con.prepareStatement(sql);
+		        pstmt.setString(1, "%" + text2 + "%");
+		        rs = pstmt.executeQuery();
+		        
+		        while (rs.next()) {
+		            Board b = new Board();
+		            
+		            b.setNo(rs.getInt(1));
+		            b.setNicName(rs.getString(2));
+		            b.setTitle(rs.getString(3));
+		            b.setCategori(rs.getString(4));
+		            
+					// 타임스탬프 분까지만 자리수 끊기
+					Timestamp timestamp = rs.getTimestamp(5);
+		            if (timestamp != null) {
+		                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		                String dateStr = sdf.format(timestamp);
+		                b.setUploadDate(dateStr);
+		            }
+		            
+		            reportBoardList.add(b);
+		        }
+		        return reportBoardList;
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    
+	    return null;
+	}
 	
+	
+	// 신고화면 검색 (회원/member) - 검색 결과가 포함된 모든 정보
+	@Override
+	public List<Member> reportSearchResultAll2(String text1,String text2) {
+	    try {
+	    	List<Member> reportBoardList = new ArrayList<>();
+	    	String sql = "select * from member where "+ text1 + " LIKE ?";
+	    	
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, "%" + text2 + "%");
+	        rs = pstmt.executeQuery();
+	        
+	        while (rs.next()) {
+	            Member m = new Member();
+				m.setNum(rs.getInt(1));
+				m.setId(rs.getString(2));
+				m.setPw(rs.getString(3));
+				m.setName(rs.getString(4));
+				m.setNickName(rs.getString(5));
+				m.setBirthDate(rs.getDate(6));
+				m.setGender(rs.getString(7));
+				m.setEmail(rs.getString(8));
+				m.setPhoneNum(rs.getString(9));
+	            
+	            reportBoardList.add(m);
+	        }
+	        return reportBoardList;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
 
 }

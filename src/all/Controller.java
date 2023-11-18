@@ -40,9 +40,9 @@ public class Controller{
 	// id, pw 찾기
 	private IdFindButton idF;
 	private PwFindButton pwF;
-	// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
-	// 업로드 버튼
+	// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼, 업로드 버튼
 	private boardButton bBt;
+	// 
 	private proButton pb;
 	private infoButton ib;
 	
@@ -59,17 +59,23 @@ public class Controller{
 		jb = new JoinButtonImp();
 		// 윈도우창 닫기, 에러 창 호출
 		cs = new CommonServiceImp();
-		// id, pw 찾기
+		// id 찾기
 		idF = new IdFindButtonImp();
+		// pw 찾기
 		pwF = new PwFindButtonImp();
-		// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼 
-		// 업로드 버튼
+		// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼, 업로드 버튼
 		bBt = new boardButtonImp();
+		// 
 		ib = new infoButtonImp();
 		pb = new proButtonImp();
 	}
+	// root 설정
 	public void setRoot(Parent root) {
 		this.root = root;
+	}
+	// root 가져오기
+	public Parent getRoot() {
+		return root;
 	}
 	// 로그인 버튼
 	public void loginProc() {
@@ -87,16 +93,19 @@ public class Controller{
 	public void boardListView2() {
 		bs.mainView(root);
 	}
-	// id, pw 찾기
+	// 아이디 찾기
 	public void idFindProc() {
 		idF.idFindProc(root);
 	}
+	// 비밀번호 찾기
 	public void pwFindProc() {
 		pwF.pwFindProc(root);
 	}
+	// 아이디 찾기 확인 버튼
 	public void idFindOkProc() {
 		idF.idFindOkProc(root);
 	}
+	// 비밀번호 찾기 확인 버튼
 	public void pwFindOkProc() {
 		pwF.pwFindOkProc(root);
 	}
@@ -108,61 +117,59 @@ public class Controller{
 	public void writingProc() {
 		bBt.writingProc(root);
 	}
-	// 전체 게시판, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼
+	// 전체 게시판 버튼
 	public void allBoardProc() {
 		bBt.allBoardProc(root);
 	}
+	// 자유 게시판 버튼
 	public void freeBoardProc() {
 		bBt.freeBoardProc(root);
 	}
+	// 구매 게시판 버튼
 	public void buyBoardProc() {
 		bBt.buyBoardProc(root);
 	}
+	// 판매 게시판 버튼
 	public void sellBoardProc() {
 		bBt.sellBoardProc(root);
 	}
+	// 나눔 게시판 버튼
 	public void sharingBoardProc() {
 		bBt.sharingBoardProc(root);
 	}
+	// 신고하기 버튼
 	public void reportProc() {
 		bBt.reportProc(root);
 	}
-	
-	// 회원가입
+	// 회원가입 
 	public void joinMember(ActionEvent event) {
 		// TODO Auto-generated method stub
 		jb.joinMember(event);
 	}
-	
-	// 로그아웃
+	// 로그아웃 버튼
 	public void logoutProc() {
 		lb.logoutProc(root);
 	}
-	
+	// 아이디 중복 확인
 	public void idChkProc(ActionEvent e) {
 		jb.idChkProc(root);
 	}
-	
+	//
 	public void infoProc() {
 		ib.infoProc(root);
 	}
-	
+	// 
 	public void backProc() {
 		ib.backProc(root);
 	}
-	
+	// 
 	public void deleteProc() {
 		ib.deleteProc(root);
 	}
-	
+	// 
 	public void profileProc() {
 		pb.profileProc();
 	}
-	
-	public Parent getRoot() {
-		return root;
-	}
-
 	// 게시하기 버튼
 	public void uploadProc() throws Exception {
 		bBt.uploadProc(root);
@@ -176,6 +183,10 @@ public class Controller{
 	// 신고화면 검색 버튼
 	public void reportSearchProc() {
 		bBt.reportSearchProc(root);
+	}
+	// 테스트 버튼
+	public void testProc() {
+		bBt.testProc(root);
 	}
 	
 }

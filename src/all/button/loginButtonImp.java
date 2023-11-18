@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,6 +31,7 @@ public class loginButtonImp implements loginButton {
 		bs = new BoardServiceImp();
 	}
 
+	// 로그인 버튼
 	@Override
 	public void loginProc(Parent root) {
 		// TODO Auto-generated method stub
@@ -76,6 +78,16 @@ public class loginButtonImp implements loginButton {
 		                bs.mainCombo(root);
 		                bs.createAllListView(root);
 		                
+		    			// ScrollPane
+		    			ScrollPane scrollPane = new ScrollPane();
+		    			scrollPane.setContent(root);
+
+		    			// Pannable.
+		    			scrollPane.setPannable(true);
+
+		    			Scene scene = new Scene(scrollPane, 981, 831);
+		    			membershipForm.setScene(scene);
+		                
 		                membershipForm.setTitle("중고거래 커뮤니티");
 		                membershipForm.show();
 		                membershipForm.setResizable(false);
@@ -99,22 +111,8 @@ public class loginButtonImp implements loginButton {
 		}
 	}
 
-	@Override
-	public void cancelProc(Parent root) {
-		// TODO Auto-generated method stub
-		TextField id = (TextField) root.lookup("#txtid");
-		TextField pw = (TextField) root.lookup("#txtpw");
 
-		id.clear();
-		pw.clear();
-		System.out.println("취소 버튼 클릭");
-	}
-
-	@Override
-	public void membershipProc(Parent root) {
-		// TODO Auto-generated method stub
-	}
-
+	// 로그아웃 버튼
 	@Override
 	public void logoutProc(Parent root) {
 		// TODO Auto-generated method stub
@@ -141,6 +139,12 @@ public class loginButtonImp implements loginButton {
 		s.setTitle("중고거래 커뮤니티");
 		s.show();
 		s.setResizable(false);
+	}
+	
+	// 회원가입 버튼
+	@Override
+	public void membershipProc(Parent root) {
+		// TODO Auto-generated method stub
 	}
 	
 	// 로그인시 환영인사

@@ -267,36 +267,36 @@ public class boardViewServiceImp implements boardViewService {
         membershipForm.show();
     }
     
-    @Override
-    public void getBoardViewByCategory(Parent root, String category) {
-        TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
-        listView.getItems().clear();
-        List<Board> boardList = dao.categoryBoardAll(category);
-
-        if (boardList != null) {
-            TableColumn<Board, String> nickname = new TableColumn<>("닉네임");
-            nickname.setMinWidth(75);
-            nickname.setMaxWidth(150);
-            TableColumn<Board, String> title = new TableColumn<>("제목");
-            title.setMinWidth(423);
-            title.setMaxWidth(423);
-            TableColumn<Board, String> date = new TableColumn<>("날짜");
-            date.setMinWidth(125);
-            date.setMaxWidth(125);
-            TableColumn<Board, String> category1 = new TableColumn<>("카테고리");
-            category1.setMinWidth(75);
-            category1.setMaxWidth(75);
-
-            nickname.setCellValueFactory(new PropertyValueFactory<>("nicName"));
-            title.setCellValueFactory(new PropertyValueFactory<>("title"));
-            date.setCellValueFactory(new PropertyValueFactory<>("uploadDate"));
-            category1.setCellValueFactory(new PropertyValueFactory<>("categori"));
-
-            listView.getColumns().addAll(nickname, category1, title, date);
-            listView.setItems(FXCollections.observableArrayList(boardList));
-        } else {
-            System.out.println("게시판 목록을 가져올 수 없습니다.");
-        }
-    }
+//    @Override
+//    public void getBoardViewByCategory(Parent root, String category) {
+//        TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
+//        listView.getItems().clear();
+//        List<Board> boardList = dao.categoryBoardAll(category);
+//
+//        if (boardList != null) {
+//            TableColumn<Board, String> nickname = new TableColumn<>("닉네임");
+//            nickname.setMinWidth(75);
+//            nickname.setMaxWidth(150);
+//            TableColumn<Board, String> title = new TableColumn<>("제목");
+//            title.setMinWidth(423);
+//            title.setMaxWidth(423);
+//            TableColumn<Board, String> date = new TableColumn<>("날짜");
+//            date.setMinWidth(125);
+//            date.setMaxWidth(125);
+//            TableColumn<Board, String> category1 = new TableColumn<>("카테고리");
+//            category1.setMinWidth(75);
+//            category1.setMaxWidth(75);
+//
+//            nickname.setCellValueFactory(new PropertyValueFactory<>("nicName"));
+//            title.setCellValueFactory(new PropertyValueFactory<>("title"));
+//            date.setCellValueFactory(new PropertyValueFactory<>("uploadDate"));
+//            category1.setCellValueFactory(new PropertyValueFactory<>("categori"));
+//
+//            listView.getColumns().addAll(nickname, category1, title, date);
+//            listView.setItems(FXCollections.observableArrayList(boardList));
+//        } else {
+//            System.out.println("게시판 목록을 가져올 수 없습니다.");
+//        }
+//    }
     
 }

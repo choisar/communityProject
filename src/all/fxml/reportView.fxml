@@ -13,7 +13,7 @@
 		<ComboBox fx:id="searchReportCombo" layoutX="23.0" layoutY="24.0" prefHeight="23.0" prefWidth="119.0" promptText="선택" />
 		<Button layoutX="528.0" layoutY="24.0" mnemonicParsing="false" onAction="#reportSearchProc" text="검색" />
 		<TextField fx:id="reportSearchText" layoutX="150.0" layoutY="24.0" prefHeight="23.0" prefWidth="371.0" promptText="게시물 이름 or 닉네임 or 아이디" />
-		<TableView layoutX="25.0" layoutY="60.0" prefHeight="265.0" prefWidth="544.0" />
+		<TableView fx:id="reportTable" layoutX="25.0" layoutY="60.0" prefHeight="265.0" prefWidth="544.0" />
 		<Button layoutX="529.0" layoutY="575.0" mnemonicParsing="false" text="신고" />
 		<Button layoutX="474.0" layoutY="575.0" mnemonicParsing="false" onAction="#cancelProc" text="취소" />
 		<Label layoutX="25.0" layoutY="336.0" text="신고사유" />

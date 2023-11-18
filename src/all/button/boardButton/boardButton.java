@@ -21,8 +21,6 @@ public interface boardButton {
 	void reportProc(Parent root);
 	// 신고화면 검색 버튼
 	void reportSearchProc(Parent root);
-	// 코드 줄이려고 만든 메서드
-	void handleBoardView(Parent root, Label logChk, String category);
 	
 	// 글쓰기 버튼
 	void writingProc(Parent root);
@@ -32,5 +30,8 @@ public interface boardButton {
 	String fileUpload(Parent root);
 	// 이미지를 바이트화 시키는 함수
 	byte[] convertImageToBytes(String imgAddr) throws Exception;
+	
+	// 테스트 버튼
+	void testProc(Parent root);
 	
 }

@@ -21,15 +21,16 @@ import javafx.stage.Stage;
 public class JoinButtonImp implements JoinButton{
 	
 	Parent root;
-	CommonService cs;
-	DatabaseDAO dao;
 	boolean idChk;
+	CommonService cs = new CommonServiceImp();
+	DatabaseDAO dao = new DatabaseDAOImp();
 
 	public JoinButtonImp() {
 		// TODO Auto-generated constructor stub
 		cs = new CommonServiceImp();
 		dao = new DatabaseDAOImp();
 	}
+	
 	@Override
 	public void membershipProc(Parent root) {
 		// TODO Auto-generated method stub

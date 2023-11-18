@@ -2,14 +2,24 @@ package all.boardService;
 
 
 public class Board {
+	
+	// 게시물 번호 - board_seq
 	private int No;
+	// 닉네임 - board_memnick / foreign key(board_memnick) references member(member_nickname)
 	private String nicName;
+	// 게시물 제목 - title
 	private String title;
+	// 카테고리 - category (자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판)
 	private String categori;
+	// 업로드 날자 - contents_date
 	private String uploadDate;
+	// 게시물 내용 - contents
 	private String contents;
+	// 이미지 첨부 주소 - imagepath
 	private byte[] imagePath;  	
+	// howmanypost? 이게 뭔지 모르겠어요 주석 달아주세요. - 선준
 	private String commet;
+	// 아이디 - board_memid / foreign key(board_memid) references member(member_id)
 	private String id;
 	
 	public String getId() {

@@ -1,7 +1,6 @@
 package all.boardService;
 
 import javafx.scene.Parent;
-import javafx.scene.control.TextField;
 
 public interface BoardService {
 
@@ -25,4 +24,5 @@ public interface BoardService {
 	String reportCombo(Parent root);
 	// 로그인 화면 체크 박스1 (새 창 띄우기, 안 띄우기)
 	boolean chk1(Parent root);
+	
 }
