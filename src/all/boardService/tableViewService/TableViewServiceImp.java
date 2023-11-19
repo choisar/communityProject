@@ -48,6 +48,7 @@ public class TableViewServiceImp implements TableViewService {
 	public void loadAllBoardListView(Parent root) {
 
 		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
+//		listView.getStylesheets().add(getClass().getResource("tableview.css").toExternalForm());
 		listView.getItems().clear();
 		listView.getColumns().clear();
 
@@ -66,11 +67,11 @@ public class TableViewServiceImp implements TableViewService {
 	public void configureBoardTableView(TableView<Board> listView) {
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		TableColumn<Board, Integer> boardNum = new TableColumn<>("No.");
-		boardNum.setMinWidth(20);
+		boardNum.setMinWidth(30);
 		TableColumn<Board, String> category = new TableColumn<Board, String>("카테고리");
-		category.setMinWidth(65);
+		category.setMinWidth(80);
 		TableColumn<Board, String> title = new TableColumn<Board, String>("제목");
-		title.setMinWidth(348);
+		title.setMinWidth(330);
 		TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
 		nickname.setMinWidth(75);
 		TableColumn<Board, String> date = new TableColumn<Board, String>("날짜");
