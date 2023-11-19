@@ -278,6 +278,18 @@ public class boardViewServiceImp implements boardViewService {
         // 콤보박스의 선택 변경 이벤트 처리
         reportCombo2.setOnAction(event -> {
             String selectedValue = reportCombo2.getValue(); // 선택된 값 가져오기
+            
+            // 확인되면 문자열을 추가하기 전에 맨 윗줄이 #으로 시작하는지 확인
+            String[] lines = reportContentsText.getText().split("\n");
+            if (lines.length > 0 && lines[0].startsWith("#")) {
+                // 맨 윗줄이 #으로 시작하는 경우 해당 줄 삭제
+                StringBuilder newText = new StringBuilder();
+                for (int i = 1; i < lines.length; i++) {
+                    newText.append(lines[i]).append("\n");
+                }
+                reportContentsText.setText(newText.toString());
+            }
+            
             // 선택된 값에 따라 원하는 작업 수행
             switch (selectedValue) {
                 case "게시물 신고":
@@ -286,7 +298,7 @@ public class boardViewServiceImp implements boardViewService {
                 	reportContentsText.insertText(0, "### 게시물 신고 ###\n");
                     break;
                 case "유저 신고":
-                    // 유저 신고에 대한 처리
+                    // 유저 신고에 대한 처리ㅇ
                 	reportComboResultText.setText("유저 신고 - 사기, 비매너, 욕설 등");
                 	reportContentsText.insertText(0, "### 유저 신고 ###\n");
                     break;
