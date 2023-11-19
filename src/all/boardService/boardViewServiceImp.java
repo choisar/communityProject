@@ -274,6 +274,7 @@ public class boardViewServiceImp implements boardViewService {
         ComboBox<String> reportCombo2 = (ComboBox<String>) root.lookup("#searchReportCombo2");
         Label reportComboResultText = (Label) root.lookup("#comboResultText");
         TextArea reportContentsText = (TextArea) root.lookup("#reportContentsText");
+        Label logChk = (Label) root.lookup("#logChk");
         
         // 콤보박스의 선택 변경 이벤트 처리
         reportCombo2.setOnAction(event -> {
