@@ -33,10 +33,11 @@ import javafx.stage.Stage;
 public class boardButtonImp implements boardButton {
 
 	DatabaseDAO dao = new DatabaseDAOImp();
-	BoardService bs = new BoardServiceImp();
 	CommonService cs = new CommonServiceImp();
-	boardViewService bvs = new boardViewServiceImp();
+	BoardService bs = new BoardServiceImp();
 	TableViewService tvs = new TableViewServiceImp();
+	boardViewService bvs = new boardViewServiceImp();
+	
 
 	// 검색 게시판 버튼 - 메인화면 게시물 검색 버튼
 	@Override
@@ -220,7 +221,7 @@ public class boardButtonImp implements boardButton {
 		
 		try {
 			// 콤보박스 - 카테고리값
-			String text1 = bs.reportCombo(root);
+			String text1 = bs.reportCombo1(root);
 			
 			// 텍스트 필드 - 검색내용
 			TextField searchText = (TextField) root.lookup("#reportSearchText");
@@ -252,7 +253,7 @@ public class boardButtonImp implements boardButton {
 					List<Board> titleReportList = dao.searchResultAll(text1, text2);
 					
 					if (titleReportList != null) {
-						tvs.configureBoardTableView1(titleReportListView);
+						tvs.configureBoardTableView1(titleReportListView, root);
 						titleReportListView.setItems(FXCollections.observableArrayList(titleReportList));
 					} else {
 						System.out.println("게시판 목록을 가져올 수 없습니다.");
@@ -264,7 +265,7 @@ public class boardButtonImp implements boardButton {
 					List<Member> nickNameReportList = dao.reportSearchResultAll2(text1, text2);
 					
 					if (nickNameReportList != null) {
-						tvs.configureBoardTableView2(nickNameReportListView);
+						tvs.configureBoardTableView2(nickNameReportListView, root);
 						nickNameReportListView.setItems(FXCollections.observableArrayList(nickNameReportList));
 					} else {
 						System.out.println("게시판 목록을 가져올 수 없습니다.");
@@ -276,7 +277,7 @@ public class boardButtonImp implements boardButton {
 					List<Member> idReportList = dao.reportSearchResultAll2(text1, text2);
 					
 					if (idReportList != null) {
-						tvs.configureBoardTableView3(idReportListView);
+						tvs.configureBoardTableView3(idReportListView, root);
 						idReportListView.setItems(FXCollections.observableArrayList(idReportList));
 					} else {
 						System.out.println("게시판 목록을 가져올 수 없습니다.");

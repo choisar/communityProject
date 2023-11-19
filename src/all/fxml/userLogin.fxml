@@ -53,6 +53,5 @@
          </columnResizePolicy>
       </TableView>
       <Label layoutX="251.0" layoutY="159.0" text="게시판" textFill="#bbbbbb" />
-      <Button layoutX="791.0" layoutY="125.0" mnemonicParsing="false" onAction="#testProc" text="Button" />
 	</children>
 </AnchorPane>

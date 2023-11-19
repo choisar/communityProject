@@ -16,10 +16,10 @@ public interface TableViewService {
 	// 중복 코드 줄이려고 만든 메서드 - 테이블 뷰에 컬럼 설정
 	void configureBoardTableView(TableView<Board> listView);
 	// 중복 코드 줄이려고 만든 메서드 - 테이블 뷰에 컬럼 설정 - 신고 기능 게시물용
-	void configureBoardTableView1(TableView<Board> listView);
+	void configureBoardTableView1(TableView<Board> listView, Parent root);
 	// 중복 코드 줄이려고 만든 메서드 - 테이블 뷰에 컬럼 설정 - 신고 기능 게시물용
-	void configureBoardTableView2(TableView<Member> listView);
+	void configureBoardTableView2(TableView<Member> listView, Parent root);
 	// 중복 코드 줄이려고 만든 메서드 - 테이블 뷰에 컬럼 설정 - 신고 기능 게시물용
-	void configureBoardTableView3(TableView<Member> listView);
+	void configureBoardTableView3(TableView<Member> listView, Parent root);
 	
 }

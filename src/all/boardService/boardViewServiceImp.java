@@ -12,8 +12,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -21,7 +24,12 @@ public class boardViewServiceImp implements boardViewService {
 
 	DatabaseDAO dao = new DatabaseDAOImp();
 	CommonService cs = new CommonServiceImp();
-	BoardService bs = new BoardServiceImp();
+	BoardService bs;
+//	BoardService bs = new BoardServiceImp();
+	
+    public boardViewServiceImp() {
+    	bs = new BoardServiceImp();
+    }
 
 	// 전체 게시판
 	@Override
@@ -260,43 +268,45 @@ public class boardViewServiceImp implements boardViewService {
         Controller ctrl = loader.getController();
         ctrl.setRoot(root);
 
-        bs.reportCombo(root);
+        bs.reportCombo1(root);
+        bs.reportCombo2(root);
+        
+        ComboBox<String> reportCombo2 = (ComboBox<String>) root.lookup("#searchReportCombo2");
+        Label reportComboResultText = (Label) root.lookup("#comboResultText");
+        TextArea reportContentsText = (TextArea) root.lookup("#reportContentsText");
+        
+        // 콤보박스의 선택 변경 이벤트 처리
+        reportCombo2.setOnAction(event -> {
+            String selectedValue = reportCombo2.getValue(); // 선택된 값 가져오기
+            // 선택된 값에 따라 원하는 작업 수행
+            switch (selectedValue) {
+                case "게시물 신고":
+                    // 게시물 신고에 대한 처리
+                	reportComboResultText.setText("게시물 신고 - 광고글, 욕설글, 부적절한글 등");
+                	reportContentsText.insertText(0, "### 게시물 신고 ###\n");
+                    break;
+                case "유저 신고":
+                    // 유저 신고에 대한 처리
+                	reportComboResultText.setText("유저 신고 - 사기, 비매너, 욕설 등");
+                	reportContentsText.insertText(0, "### 유저 신고 ###\n");
+                    break;
+                case "닉네임 신고":
+                    // 닉네임 신고에 대한 처리
+                	reportComboResultText.setText("닉네임 신고 - 부적절한 닉네임 등");
+                	reportContentsText.insertText(0, "### 닉네임 신고 ###\n");
+                    break;
+                default:
+                    // 기본적으로 처리할 내용
+                	reportComboResultText.setText("신고 사유를 선택해주세요.");
+                    break;
+            }
+        });
+        
 
         membershipForm.setTitle("신고하기");
         membershipForm.setResizable(false);
         membershipForm.show();
     }
     
-//    @Override
-//    public void getBoardViewByCategory(Parent root, String category) {
-//        TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
-//        listView.getItems().clear();
-//        List<Board> boardList = dao.categoryBoardAll(category);
-//
-//        if (boardList != null) {
-//            TableColumn<Board, String> nickname = new TableColumn<>("닉네임");
-//            nickname.setMinWidth(75);
-//            nickname.setMaxWidth(150);
-//            TableColumn<Board, String> title = new TableColumn<>("제목");
-//            title.setMinWidth(423);
-//            title.setMaxWidth(423);
-//            TableColumn<Board, String> date = new TableColumn<>("날짜");
-//            date.setMinWidth(125);
-//            date.setMaxWidth(125);
-//            TableColumn<Board, String> category1 = new TableColumn<>("카테고리");
-//            category1.setMinWidth(75);
-//            category1.setMaxWidth(75);
-//
-//            nickname.setCellValueFactory(new PropertyValueFactory<>("nicName"));
-//            title.setCellValueFactory(new PropertyValueFactory<>("title"));
-//            date.setCellValueFactory(new PropertyValueFactory<>("uploadDate"));
-//            category1.setCellValueFactory(new PropertyValueFactory<>("categori"));
-//
-//            listView.getColumns().addAll(nickname, category1, title, date);
-//            listView.setItems(FXCollections.observableArrayList(boardList));
-//        } else {
-//            System.out.println("게시판 목록을 가져올 수 없습니다.");
-//        }
-//    }
     
 }

@@ -21,7 +21,9 @@ public interface BoardService {
 	// 메인화면 콤보 박스
 	String mainCombo(Parent root);
 	// 신고하기 콤보 박스
-	String reportCombo(Parent root);
+	String reportCombo1(Parent root);
+	// 신고하기 콤보 박스
+	String reportCombo2(Parent root);
 	// 로그인 화면 체크 박스1 (새 창 띄우기, 안 띄우기)
 	boolean chk1(Parent root);
 	

@@ -27,7 +27,11 @@ import javafx.stage.Stage;
 public class BoardServiceImp implements BoardService {
 	DatabaseDAO dao = new DatabaseDAOImp();
 	CommonService cs = new CommonServiceImp();
-	TableViewService tvs = new TableViewServiceImp();
+	TableViewService tvs;
+	
+	public BoardServiceImp() {
+		tvs = new TableViewServiceImp();
+	}
 
 	// 메인화면
 	@Override
@@ -192,10 +196,10 @@ public class BoardServiceImp implements BoardService {
 		return selectedValue;
 	}
 
-	// 신고화면 콤보 박스
+	// 신고화면 콤보 박스 1
 	@Override
-	public String reportCombo(Parent root) {
-		ComboBox<String> combo = (ComboBox<String>) root.lookup("#searchReportCombo");
+	public String reportCombo1(Parent root) {
+		ComboBox<String> combo = (ComboBox<String>) root.lookup("#searchReportCombo1");
 		String str[] = { "게시물 이름", "닉네임", "아이디" };
 
 		// 신고화면 검색창에 있는 콤보박스에 배열값이 들어있지 않을 때만 넣어주기 - 이거 안 넣으면 카테고리 값이 중복 추가됨
@@ -206,8 +210,23 @@ public class BoardServiceImp implements BoardService {
 		String selectedValue = combo.getValue(); // 선택된 콤보박스의 값 가져오기
 		return selectedValue;
 	}
+	
+	// 신고화면 콤보 박스 2
+	@Override
+	public String reportCombo2(Parent root) {
+		ComboBox<String> combo = (ComboBox<String>) root.lookup("#searchReportCombo2");
+		String str[] = { "게시물 신고", "유저 신고", "닉네임 신고" };
 
-	// 로그인 화면 체크 박스1 (새 창 띄우기, 안 띄우기)
+		// 신고화면 검색창에 있는 콤보박스에 배열값이 들어있지 않을 때만 넣어주기 - 이거 안 넣으면 카테고리 값이 중복 추가됨
+		if (combo.getItems().isEmpty()) {
+			combo.getItems().addAll(FXCollections.observableArrayList(str));
+		}
+
+		String selectedValue = combo.getValue(); // 선택된 콤보박스의 값 가져오기
+		return selectedValue;
+	}
+
+	// 로그인 화면 체크 박스 (새 창 띄우기, 안 띄우기)
 	@Override
 	public boolean chk1(Parent root) {
 		CheckBox chk1 = (CheckBox) root.lookup("#newViewBoolean");
