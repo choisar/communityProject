@@ -48,7 +48,6 @@ public class TableViewServiceImp implements TableViewService {
 	public void loadAllBoardListView(Parent root) {
 
 		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
-//		listView.getStylesheets().add(getClass().getResource("tableview.css").toExternalForm());
 		listView.getItems().clear();
 		listView.getColumns().clear();
 
@@ -268,6 +267,13 @@ public class TableViewServiceImp implements TableViewService {
 	    // 셀 가운데 왼쪽 정렬
 	    memId.setStyle("-fx-alignment: CENTER-LEFT;");
 	    memNickName.setStyle("-fx-alignment: CENTER-LEFT;");
+	}
+	
+	// TableColumn의 컬럼명(Label) 가운데 정렬하는 메서드
+	private <T> void setColumnHeaderAlignment(TableColumn<T, ?> column) {
+	    Label label = new Label(column.getText());
+	    label.setStyle("-fx-alignment: CENTER;");
+	    column.setGraphic(label);
 	}
 
 }

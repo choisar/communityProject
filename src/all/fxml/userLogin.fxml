@@ -47,7 +47,7 @@
       </Label>
       <ComboBox fx:id="searchCombo" layoutX="248.0" layoutY="126.0" prefHeight="23.0" prefWidth="112.0" promptText="선택" style="-fx-background-color: transparent; -fx-border-color: #bbbbbb;" />
       <CheckBox fx:id="newViewBoolean" layoutX="53.0" layoutY="321.0" mnemonicParsing="false" selected="true" style="-fx-background-color: transparent;" text="새 창 띄우기" textFill="#bbbbbb" />
-      <TableView fx:id="ListView" layoutX="248.0" layoutY="179.0" prefHeight="636.0" prefWidth="699.0">
+      <TableView fx:id="ListView" layoutX="248.0" layoutY="179.0" prefHeight="636.0" prefWidth="699.0" stylesheets="@tableview.css">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
