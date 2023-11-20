@@ -10,54 +10,42 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane layoutX="-1.0" prefHeight="3100.0"
-	prefWidth="963.0" xmlns="http://javafx.com/javafx/8.0.171"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
+<AnchorPane layoutX="-1.0" prefHeight="3100.0" prefWidth="963.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
 	<children>
-		<Text layoutX="69.0" layoutY="144.0" strokeType="OUTSIDE"
-			strokeWidth="0.0" text="닉네임:">
+		<Text layoutX="69.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="닉네임:">
 			<font>
 				<Font name="Arial Bold" size="18.0" />
 			</font>
 		</Text>
-		<Text layoutX="45.0" layoutY="200.0" strokeType="OUTSIDE"
-			strokeWidth="0.0" text="작성 날짜:">
+		<Text layoutX="45.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="작성 날짜:">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</Text>
-		<Text layoutX="69.0" layoutY="172.0" strokeType="OUTSIDE"
-			strokeWidth="0.0" text="아이디:">
+		<Text layoutX="69.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="아이디:">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</Text>
-		<Text fx:id="nicknameText" layoutX="138.0" layoutY="145.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="닉네임 내용">
+		<Text fx:id="nicknameText" layoutX="138.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="닉네임 내용">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</Text>
-		<Text fx:id="dateText" layoutX="138.0" layoutY="200.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="날짜 내용">
+		<Text fx:id="dateText" layoutX="138.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날짜 내용">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</Text>
-		<Text fx:id="idText" layoutX="138.0" layoutY="173.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="아이디 내용">
+		<Text fx:id="idText" layoutX="138.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="아이디 내용">
 			<font>
 				<Font size="18.0" />
 			</font>
 		</Text>
-		<Button layoutX="834.0" layoutY="183.0" mnemonicParsing="false"
-			prefHeight="30.0" prefWidth="102.0" text="건의 / 신고하기" />
+		<Button layoutX="834.0" layoutY="183.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="102.0" stylesheets="@button.css" text="Report" />
 		<AmbientLight color="CHARTREUSE" lightOn="true" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE"
-			height="675.0" layoutX="17.0" layoutY="221.0" stroke="BLACK"
-			strokeType="INSIDE" width="924.0" />
-		<Label fx:id="titleText" contentDisplay="CENTER" layoutX="346.0"
-			layoutY="58.0" prefHeight="58.0" prefWidth="557.0" text="제목 내용">
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="675.0" layoutX="17.0" layoutY="221.0" stroke="BLACK" strokeType="INSIDE" width="924.0" />
+		<Label fx:id="titleText" contentDisplay="CENTER" layoutX="346.0" layoutY="58.0" prefHeight="58.0" prefWidth="557.0" text="제목 내용">
 			<font>
 				<Font size="33.0" />
 			</font>
@@ -67,28 +55,16 @@
 				<Font name="System Bold" size="33.0" />
 			</font>
 		</Label>
-		<TextArea fx:id="contents" layoutX="23.0" layoutY="227.0"
-			prefHeight="664.0" prefWidth="913.0" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE"
-			height="675.0" layoutX="17.0" layoutY="941.0" stroke="BLACK"
-			strokeType="INSIDE" width="924.0" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE"
-			height="675.0" layoutX="19.0" layoutY="1661.0" stroke="BLACK"
-			strokeType="INSIDE" width="924.0" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE"
-			height="675.0" layoutX="19.0" layoutY="2381.0" stroke="BLACK"
-			strokeType="INSIDE" width="924.0" />
+		<TextArea fx:id="contents" layoutX="23.0" layoutY="227.0" prefHeight="664.0" prefWidth="913.0" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="675.0" layoutX="17.0" layoutY="941.0" stroke="BLACK" strokeType="INSIDE" width="924.0" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="675.0" layoutX="19.0" layoutY="1661.0" stroke="BLACK" strokeType="INSIDE" width="924.0" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="675.0" layoutX="19.0" layoutY="2381.0" stroke="BLACK" strokeType="INSIDE" width="924.0" />
 		<Label layoutX="23.0" layoutY="916.0" text="첨부파일1" />
 		<Label layoutX="23.0" layoutY="1636.0" text="첨부파일2" />
 		<Label layoutX="23.0" layoutY="2356.0" text="첨부파일3" />
-		<ImageView fitHeight="675.0" fitWidth="924.0" layoutX="17.0"
-			layoutY="941.0" pickOnBounds="true" preserveRatio="true" />
-		<ImageView fitHeight="675.0" fitWidth="924.0" layoutX="20.0"
-			layoutY="1661.0" pickOnBounds="true" preserveRatio="true" />
-		<ImageView fitHeight="675.0" fitWidth="924.0" layoutX="20.0"
-			layoutY="2381.0" pickOnBounds="true" preserveRatio="true" />
-		<Button layoutX="891.0" layoutY="3067.0"
-			mnemonicParsing="false" onAction="#cancelProc" prefHeight="25.0"
-			prefWidth="50.0" text="확인" />
+		<ImageView fitHeight="675.0" fitWidth="924.0" layoutX="17.0" layoutY="941.0" pickOnBounds="true" preserveRatio="true" />
+		<ImageView fitHeight="675.0" fitWidth="924.0" layoutX="20.0" layoutY="1661.0" pickOnBounds="true" preserveRatio="true" />
+		<ImageView fitHeight="675.0" fitWidth="924.0" layoutX="20.0" layoutY="2381.0" pickOnBounds="true" preserveRatio="true" />
+		<Button layoutX="891.0" layoutY="3067.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="25.0" prefWidth="50.0" text="확인" />
 	</children>
 </AnchorPane>

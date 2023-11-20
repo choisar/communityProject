@@ -67,13 +67,13 @@ public class TableViewServiceImp implements TableViewService {
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		TableColumn<Board, Integer> boardNum = new TableColumn<>("No.");
 		boardNum.setMinWidth(30);
-		TableColumn<Board, String> category = new TableColumn<Board, String>("카테고리");
+		TableColumn<Board, String> category = new TableColumn<Board, String>("Categori");
 		category.setMinWidth(80);
-		TableColumn<Board, String> title = new TableColumn<Board, String>("제목");
+		TableColumn<Board, String> title = new TableColumn<Board, String>("Title");
 		title.setMinWidth(330);
-		TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
+		TableColumn<Board, String> nickname = new TableColumn<Board, String>("NickName");
 		nickname.setMinWidth(75);
-		TableColumn<Board, String> date = new TableColumn<Board, String>("날짜");
+		TableColumn<Board, String> date = new TableColumn<Board, String>("Date");
 		date.setMinWidth(130);
 
 		boardNum.setCellValueFactory(new PropertyValueFactory<>("No"));
@@ -99,17 +99,17 @@ public class TableViewServiceImp implements TableViewService {
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		TableColumn<Board, Integer> boardNum = new TableColumn<>("No.");
 		boardNum.setMinWidth(30);
-		TableColumn<Board, String> category = new TableColumn<>("카테고리");
+		TableColumn<Board, String> category = new TableColumn<>("Categori");
 		category.setMinWidth(65);
-		TableColumn<Board, String> title = new TableColumn<>("제목");
+		TableColumn<Board, String> title = new TableColumn<>("Title");
 		title.setMinWidth(150);
-		TableColumn<Board, String> nickname = new TableColumn<Board, String>("닉네임");
+		TableColumn<Board, String> nickname = new TableColumn<Board, String>("NickName");
 		nickname.setMinWidth(75);
-		TableColumn<Board, String> date = new TableColumn<Board, String>("날짜");
+		TableColumn<Board, String> date = new TableColumn<Board, String>("Date");
 		date.setMinWidth(110);
 
 		// 버튼을 추가하는 새로운 컬럼 생성
-		TableColumn<Board, Void> buttonColumn = new TableColumn<>("선택");
+		TableColumn<Board, Void> buttonColumn = new TableColumn<>(" ");
 		buttonColumn.setMinWidth(35);
 
 		Callback<TableColumn<Board, Void>, TableCell<Board, Void>> cellFactory = param -> {
@@ -163,13 +163,13 @@ public class TableViewServiceImp implements TableViewService {
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		TableColumn<Member, Integer> memNum = new TableColumn<>("No.");
 		memNum.setMinWidth(30);
-		TableColumn<Member, String> memNickName = new TableColumn<>("닉네임");
+		TableColumn<Member, String> memNickName = new TableColumn<>("NickName");
 		memNickName.setMinWidth(200);
-		TableColumn<Member, String> memId = new TableColumn<>("아이디");
+		TableColumn<Member, String> memId = new TableColumn<>("ID");
 		memId.setMinWidth(200);
 		
 		// 버튼을 추가하는 새로운 컬럼 생성
-		TableColumn<Member, Void> buttonColumn = new TableColumn<>("선택");
+		TableColumn<Member, Void> buttonColumn = new TableColumn<>(" ");
 		buttonColumn.setMinWidth(50);
 
 		Callback<TableColumn<Member, Void>, TableCell<Member, Void>> cellFactory = param -> {
@@ -208,9 +208,8 @@ public class TableViewServiceImp implements TableViewService {
 	    // 셀 가운데 정렬
 		memNum.setStyle("-fx-alignment: CENTER;");
 	    buttonColumn.setStyle("-fx-alignment: CENTER;");
-	    // 셀 가운데 왼쪽 정렬
-	    memNickName.setStyle("-fx-alignment: CENTER-LEFT;");
-	    memId.setStyle("-fx-alignment: CENTER-LEFT;");
+	    memNickName.setStyle("-fx-alignment: CENTER;");
+	    memId.setStyle("-fx-alignment: CENTER;");
 	}
 
 	// 중복 코드 줄이려고 만든 메서드 - 테이블 뷰에 컬럼 설정 - 신고 기능 - 아이디 테이블뷰
@@ -219,13 +218,13 @@ public class TableViewServiceImp implements TableViewService {
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		TableColumn<Member, Integer> memNum = new TableColumn<>("No.");
 		memNum.setMinWidth(30);
-		TableColumn<Member, String> memId = new TableColumn<>("아이디");
+		TableColumn<Member, String> memId = new TableColumn<>("ID");
 		memId.setMinWidth(200);
-		TableColumn<Member, String> memNickName = new TableColumn<>("닉네임");
+		TableColumn<Member, String> memNickName = new TableColumn<>("NickName");
 		memNickName.setMinWidth(200);
 		
 		// 버튼을 추가하는 새로운 컬럼 생성
-		TableColumn<Member, Void> buttonColumn = new TableColumn<>("선택");
+		TableColumn<Member, Void> buttonColumn = new TableColumn<>(" ");
 		buttonColumn.setMinWidth(50);
 
 		Callback<TableColumn<Member, Void>, TableCell<Member, Void>> cellFactory = param -> {
@@ -264,9 +263,8 @@ public class TableViewServiceImp implements TableViewService {
 	    // 셀 가운데 정렬
 	    buttonColumn.setStyle("-fx-alignment: CENTER;");
 	    memNum.setStyle("-fx-alignment: CENTER;");
-	    // 셀 가운데 왼쪽 정렬
-	    memId.setStyle("-fx-alignment: CENTER-LEFT;");
-	    memNickName.setStyle("-fx-alignment: CENTER-LEFT;");
+	    memId.setStyle("-fx-alignment: CENTER;");
+	    memNickName.setStyle("-fx-alignment: CENTER;");
 	}
 	
 	// TableColumn의 컬럼명(Label) 가운데 정렬하는 메서드

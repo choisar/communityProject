@@ -1,5 +1,6 @@
 package all.databaseDAO;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,8 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import all.boardService.Board;
 import all.Member;
+import all.boardService.Board;
 import all.button.common.CommonService;
 import all.button.common.CommonServiceImp;
 
@@ -39,6 +40,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 			System.err.println("오라클 연결 실패");
 			e.printStackTrace();
 		}
+		
 	}
 
 	// 아이디 찾기 과정1 - 이름과 핸드폰 번호를 받아 일치하는 정보가 있으면 true, 없으면 false 반환
