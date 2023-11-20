@@ -23,7 +23,9 @@ import all.userService.admin.AdminServiceImp;
 import all.userService.user.UserService;
 import all.userService.user.UserServiceImp;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.TextField;
 
 public class Controller{
 	private Parent root;
@@ -45,6 +47,7 @@ public class Controller{
 	// 
 	private proButton pb;
 	private infoButton ib;
+
 	
 	
 	public Controller() {

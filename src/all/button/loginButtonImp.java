@@ -161,7 +161,7 @@ public class loginButtonImp implements loginButton {
 			loginHello.setScene(new Scene(root));
 			
 			Label helloNicName = (Label) root.lookup("#helloNicName");
-			helloNicName.setText("\""+m.getNickName()+"\"");
+			helloNicName.setText("★"+m.getNickName()+"★");
 			
 			Label helloId1 = (Label) root.lookup("#helloId");
 			
@@ -172,6 +172,7 @@ public class loginButtonImp implements loginButton {
 			    sb.append("*");
 			}
 			String helloId3 = helloId2.substring(0, 4) + sb.toString();
+			
 			
 			helloId1.setText("("+helloId3+")님 안녕하세요!");
 			
