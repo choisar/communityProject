@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
@@ -27,9 +28,18 @@
          </font></TextField>
       <Group layoutX="50.0" layoutY="225.0">
          <children>
-      		<Label layoutX="22.0" onMouseClicked="#idFindProc" text="Find ID" textFill="#1e1636" />
-      		<Label layoutX="78.0" onMouseClicked="#pwFindProc" text="Find PW" textFill="#1e1636" />
-      		<Label layoutX="67.0" text="/" textFill="#1e1636" />
+      		<Label layoutX="22.0" onMouseClicked="#idFindProc" text="Find ID" textFill="#1e1636">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+      		<Label layoutX="78.0" onMouseClicked="#pwFindProc" text="Find PW" textFill="#1e1636">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+      		<Label layoutX="67.0" text="/" textFill="#1e1636">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
          </children>
       </Group>
 		<Label contentDisplay="CENTER" layoutX="360.0" layoutY="30.0" prefHeight="58.0" prefWidth="278.0" text="Community" textAlignment="CENTER" textFill="#1e1636">
