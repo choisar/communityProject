@@ -32,12 +32,15 @@ import javafx.stage.Stage;
 
 public class boardButtonImp implements boardButton {
 
-	DatabaseDAO dao = new DatabaseDAOImp();
+	DatabaseDAO dao;
 	CommonService cs = new CommonServiceImp();
 	BoardService bs = new BoardServiceImp();
 	TableViewService tvs = new TableViewServiceImp();
 	boardViewService bvs = new boardViewServiceImp();
 	
+	public boardButtonImp() {
+		dao = new DatabaseDAOImp();
+	}
 
 	// 검색 게시판 버튼 - 메인화면 게시물 검색 버튼
 	@Override
@@ -184,6 +187,22 @@ public class boardButtonImp implements boardButton {
 	            bvs.sharingBoardView(root);
 	        } else {
 	        	tvs.handleBoardView(root, logChk, "나눔 게시판");
+	        }
+	    }
+    }
+    
+    // Q&A 게시판 버튼
+    @Override
+    public void QAProc(Parent root) {
+        Label logChk = (Label) root.lookup("#logChk");
+        
+	    if (logChk.getText().equals("비회원")) {
+	        cs.errorView1(root);
+	    } else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+	        if (bs.chk1(root)) {
+	            bvs.QABoardView(root);
+	        } else {
+	        	tvs.handleBoardView(root, logChk, "QA 게시판");
 	        }
 	    }
     }

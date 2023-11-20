@@ -10,10 +10,10 @@ import all.button.boardButton.boardButton;
 import all.button.boardButton.boardButtonImp;
 import all.button.common.CommonService;
 import all.button.common.CommonServiceImp;
-import all.button.find_idpw.IdFindButton;
-import all.button.find_idpw.IdFindButtonImp;
-import all.button.find_idpw.PwFindButton;
-import all.button.find_idpw.PwFindButtonImp;
+import all.button.find_IdPw.IdFindButton;
+import all.button.find_IdPw.IdFindButtonImp;
+import all.button.find_IdPw.PwFindButton;
+import all.button.find_IdPw.PwFindButtonImp;
 import all.button.infoButton.infoButton;
 import all.button.infoButton.infoButtonImp;
 import all.button.infoButton.proButton;
@@ -23,7 +23,9 @@ import all.userService.admin.AdminServiceImp;
 import all.userService.user.UserService;
 import all.userService.user.UserServiceImp;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.TextField;
 
 public class Controller{
 	private Parent root;
@@ -43,8 +45,9 @@ public class Controller{
 	// 검색 버튼, 게시물 작성, 자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, 신고하기 버튼, 업로드 버튼
 	private boardButton bBt;
 	// 
-	private proButton pb;
 	private infoButton ib;
+	private proButton pb;
+
 	
 	
 	public Controller() {
@@ -136,6 +139,10 @@ public class Controller{
 	// 나눔 게시판 버튼
 	public void sharingBoardProc() {
 		bBt.sharingBoardProc(root);
+	}
+	// Q&A 게시판 버튼
+	public void QAProc() {
+		bBt.QAProc(root);
 	}
 	// 신고하기 버튼
 	public void reportProc() {

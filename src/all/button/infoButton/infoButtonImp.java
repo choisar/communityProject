@@ -25,52 +25,44 @@ public class infoButtonImp implements infoButton {
 	}
 
 	@Override
-	public void infoProc(Parent info) {
-		// TODO Auto-generated method stub
-		
-		Stage s = (Stage) info.getScene().getWindow();
-		s.close();
-		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource("../fxml/aaa.fxml"));
-		
-		Parent root = null;
-		
-		try {
-			root = loader.load();
-			s.setScene(new Scene(root));
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		Controller ctrl = loader.getController();
-		ctrl.setRoot(root);
+	public void infoProc(Parent root) {
+	    Stage s = (Stage) root.getScene().getWindow();
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/aaa.fxml"));
+	    Parent newRoot = null;
 
-		
-		Label txtlabel = (Label) root.lookup("#txtlabel");
-		
-		txtlabel.setOnMouseClicked(e -> {
-			backProc(ctrl.getRoot());
-		});
-		
-		
-		s.setTitle("내정보");
-		s.show();
-		
-		
+	    try {
+	        newRoot = loader.load();
+	        s.close(); // 이전 root를 닫는 부분을 root를 로드한 후에 실행하도록 변경
+	        s.setScene(new Scene(newRoot));
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    Controller ctrl = loader.getController();
+	    ctrl.setRoot(newRoot);
+
+	    Label txtlabel = (Label) newRoot.lookup("#txtlabel");
+	    if (txtlabel != null) { // txtlabel이 null인지 안전하게 체크
+	        txtlabel.setOnMouseClicked(e -> {
+	            backProc(ctrl.getRoot());
+	        });
+	    }
+
+	    s.setTitle("내정보");
+	    s.show();
 	}
 
 	@Override
-	public void backProc(Parent info) {
+	public void backProc(Parent root) {
 		// TODO Auto-generated method stub
-		Stage s = (Stage) info.getScene().getWindow();
+		Stage s = (Stage) root.getScene().getWindow();
 		s.close();
 
 
 		FXMLLoader loader = new FXMLLoader(
 				getClass().getResource("../fxml/userLogin.fxml"));
 		
-		Parent root = null;
+		root = null;
 		
 		try {
 			root = loader.load();
@@ -91,19 +83,19 @@ public class infoButtonImp implements infoButton {
 	}
 
 	@Override
-	public void deleteProc(Parent info) {
+	public void deleteProc(Parent root) {
 		// TODO Auto-generated method stub
 		List<Member> memberList = dao.selectAll1();
 			memberList.remove(dao);
 			System.out.println("회 원 탈 퇴");
 			cs.msgBox("회원탈최","회원탈퇴 여부","탈퇴 완료했습니다.");
 			
-			Stage s = (Stage) info.getScene().getWindow();
+			Stage s = (Stage) root.getScene().getWindow();
 			s.close();
 			FXMLLoader loader = new FXMLLoader(
 					getClass().getResource("../fxml/main.fxml"));
 			
-			Parent root = null;
+			root = null;
 			
 			try {
 				root = loader.load();

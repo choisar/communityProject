@@ -32,6 +32,9 @@ public interface DatabaseDAO {
 	// 신고화면 검색 (회원/member) - 검색 결과가 포함된 모든 정보
 	List<Member> reportSearchResultAll2(String text1, String text2);
 	
+	// 메인화면에 띄울 가장 최신글 2개값만 가져오기 
+	List<Board> getLatestBoardList(String Category);
+	
 	// db에 게시글 등록하기
 	boolean uploadBoard(Board b);
 	

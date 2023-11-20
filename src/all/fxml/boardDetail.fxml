@@ -1,71 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.AmbientLight?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane layoutX="-1.0" prefHeight="3100.0" prefWidth="963.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
+<AnchorPane layoutX="-1.0" prefHeight="1323.0" prefWidth="963.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
 	<children>
-		<Text layoutX="69.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="닉네임:">
+		<Text fx:id="nicknameText" layoutX="80.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="닉네임 내용">
 			<font>
-				<Font name="Arial Bold" size="18.0" />
+				<Font size="14.0" />
 			</font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
 		</Text>
-		<Text layoutX="45.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="작성 날짜:">
-			<font>
-				<Font size="18.0" />
-			</font>
-		</Text>
-		<Text layoutX="69.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="아이디:">
-			<font>
-				<Font size="18.0" />
-			</font>
-		</Text>
-		<Text fx:id="nicknameText" layoutX="138.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="닉네임 내용">
-			<font>
-				<Font size="18.0" />
-			</font>
-		</Text>
-		<Text fx:id="dateText" layoutX="138.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날짜 내용">
-			<font>
-				<Font size="18.0" />
-			</font>
-		</Text>
-		<Text fx:id="idText" layoutX="138.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="아이디 내용">
-			<font>
-				<Font size="18.0" />
-			</font>
-		</Text>
-		<Button layoutX="834.0" layoutY="183.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="102.0" text="건의 / 신고하기" />
+		<Text fx:id="dateText" fill="#7c7c7c" layoutX="80.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날짜 내용" />
+		<Button layoutX="832.0" layoutY="145.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="102.0" stylesheets="@button.css" text="Report" />
 		<AmbientLight color="CHARTREUSE" lightOn="true" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="675.0" layoutX="17.0" layoutY="221.0" stroke="BLACK" strokeType="INSIDE" width="924.0" />
-		<Label fx:id="titleText" contentDisplay="CENTER" layoutX="346.0" layoutY="58.0" prefHeight="58.0" prefWidth="557.0" text="제목 내용">
+		<Label fx:id="titleText" contentDisplay="CENTER" layoutX="41.0" layoutY="68.0" prefHeight="58.0" prefWidth="557.0" text="제목 내용">
 			<font>
-				<Font size="33.0" />
+				<Font size="30.0" />
 			</font>
 		</Label>
-		<Label layoutX="255.0" layoutY="67.0" text="제목 : ">
-			<font>
-				<Font name="System Bold" size="33.0" />
-			</font>
-		</Label>
-		<TextArea fx:id="contents" layoutX="23.0" layoutY="227.0" prefHeight="664.0" prefWidth="913.0" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="675.0" layoutX="17.0" layoutY="941.0" stroke="BLACK" strokeType="INSIDE" width="924.0" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="675.0" layoutX="19.0" layoutY="1661.0" stroke="BLACK" strokeType="INSIDE" width="924.0" />
-		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="675.0" layoutX="19.0" layoutY="2381.0" stroke="BLACK" strokeType="INSIDE" width="924.0" />
-		<Label layoutX="23.0" layoutY="916.0" text="첨부파일1" />
-		<Label layoutX="23.0" layoutY="1636.0" text="첨부파일2" />
-		<Label layoutX="23.0" layoutY="2356.0" text="첨부파일3" />
-		<ImageView fitHeight="675.0" fitWidth="924.0" layoutX="17.0" layoutY="941.0" pickOnBounds="true" preserveRatio="true" />
-		<ImageView fitHeight="675.0" fitWidth="924.0" layoutX="20.0" layoutY="1661.0" pickOnBounds="true" preserveRatio="true" />
-		<ImageView fitHeight="675.0" fitWidth="924.0" layoutX="20.0" layoutY="2381.0" pickOnBounds="true" preserveRatio="true" />
-		<Button layoutX="891.0" layoutY="3067.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="25.0" prefWidth="50.0" text="확인" />
-      <Label fx:id="logChk" layoutX="71.0" layoutY="108.0" text="회원" textFill="TRANSPARENT" />
+		<TextArea fx:id="contents" editable="false" layoutX="29.0" layoutY="562.0" prefHeight="698.0" prefWidth="906.0" style="-fx-border-color: #8c8c8c; -fx-border-width: 2; -fx-background-radius: 4; -fx-border-radius: 4;" text="asdads">
+         <font>
+            <Font size="14.0" />
+         </font></TextArea>
+		<Button layoutX="860.0" layoutY="1277.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="30.0" prefWidth="73.0" stylesheets="@button.css" text="Cancel" />
+      <Label fx:id="logChk" layoutX="71.0" layoutY="97.0" text="회원" textFill="TRANSPARENT" />
+      <Button layoutX="732.0" layoutY="18.0" mnemonicParsing="false" prefWidth="73.0" stylesheets="@button.css" text="▲ Prev" />
+      <Button layoutX="815.0" layoutY="18.0" mnemonicParsing="false" stylesheets="@button.css" text="▼ Next" />
+      <Button layoutX="898.0" layoutY="18.0" mnemonicParsing="false" stylesheets="@button.css" text="List" />
+      <ImageView layoutX="30.0" layoutY="130.0">
+         <image>
+            <Image url="@../image/profile.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Text fx:id="nicknameText1" fill="#163bbf" layoutX="39.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categori &gt;" wrappingWidth="142.4296875">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Line endX="106.0" layoutX="834.0" layoutY="185.0" startX="-807.0" />
+      <ImageView fitHeight="350.0" fitWidth="382.0" layoutX="40.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="351.0" fitWidth="453.0" layoutX="39.0" layoutY="198.0">
+         <image>
+            <Image url="@../image/noneImg.jpg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="84.0" fitWidth="111.0" layoutX="497.0" layoutY="198.0">
+         <image>
+            <Image url="@../image/noneImg.jpg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="84.0" fitWidth="111.0" layoutX="497.0" layoutY="287.0">
+         <image>
+            <Image url="@../image/noneImg.jpg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="84.0" fitWidth="111.0" layoutX="497.0" layoutY="376.0">
+         <image>
+            <Image url="@../image/noneImg.jpg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="84.0" fitWidth="111.0" layoutX="497.0" layoutY="465.0">
+         <image>
+            <Image url="@../image/noneImg.jpg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
 	</children>
 </AnchorPane>

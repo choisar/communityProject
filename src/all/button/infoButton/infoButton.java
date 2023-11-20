@@ -4,7 +4,7 @@ import javafx.scene.Parent;
 
 public interface infoButton {
 
-	void infoProc(Parent info);
-	void backProc(Parent info);
-	void deleteProc(Parent info);
+	void infoProc(Parent root);
+	void backProc(Parent root);
+	void deleteProc(Parent root);
 }

@@ -17,6 +17,8 @@ public interface boardButton {
 	void sellBoardProc(Parent root);
 	// 나눔 게시판 버튼
 	void sharingBoardProc(Parent root);
+    // Q&A 게시판 버튼
+    public void QAProc(Parent root);
 	// 신고하기 버튼
 	void reportProc(Parent root);
 	// 신고화면 검색 버튼

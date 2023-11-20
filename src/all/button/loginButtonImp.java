@@ -1,7 +1,10 @@
 package all.button;
 
+import java.util.List;
+
 import all.Controller;
 import all.Member;
+import all.boardService.Board;
 import all.boardService.BoardService;
 import all.boardService.BoardServiceImp;
 import all.button.common.CommonService;
@@ -84,9 +87,61 @@ public class loginButtonImp implements loginButton {
 
 		    			// Pannable.
 		    			scrollPane.setPannable(true);
+		    			
+		    			// ######## 최신글 ###########
+		    			
+		    			
+		    			
+		    			// 구매 게시판, 판매 게시판의 최신글 각각 2개씩 정보 가져옴
+		    			List<Board> buyLatestBoard = dao.getLatestBoardList("구매 게시판");
+		    			
+		    			Label BuyBoardTitle1 = (Label)root.lookup("#BuyBoardTitle1");
+		    			Label BuyBoardTitle2 = (Label)root.lookup("#BuyBoardTitle2");
+		    			Label BuyBoardNickName1 = (Label)root.lookup("#BuyBoardNickName1");
+		    			Label BuyBoardNickName2 = (Label)root.lookup("#BuyBoardNickName2");
+		    			Label BuyBoardTime1 = (Label)root.lookup("#BuyBoardTime1");
+		    			Label BuyBoardTime2 = (Label)root.lookup("#BuyBoardTime2");
+		    			
+		    			if (buyLatestBoard.size() >= 2) {
+		    			    // 첫 번째 줄 정보 가져오기
+		    			    Board buyBoard1 = buyLatestBoard.get(0);
+		    			    BuyBoardTitle1.setText(buyBoard1.getTitle());
+		    			    BuyBoardNickName1.setText(buyBoard1.getNicName());
+		    			    BuyBoardTime1.setText(buyBoard1.getUploadDate());
+		    			    // 두 번째 줄 정보 가져오기
+		    			    Board buyBoard2 = buyLatestBoard.get(1);
+		    			    BuyBoardTitle2.setText(buyBoard2.getTitle());
+		    			    BuyBoardNickName2.setText(buyBoard2.getNicName());
+		    			    BuyBoardTime2.setText(buyBoard2.getUploadDate());
 
-		    			Scene scene = new Scene(scrollPane, 981, 831);
+		    			}
+		    			
+		    			List<Board> sellLatestBoard = dao.getLatestBoardList("판매 게시판");
+		    			
+		    			Label SellBoardTitle1 = (Label)root.lookup("#SellBoardTitle1");
+		    			Label SellBoardTitle2 = (Label)root.lookup("#SellBoardTitle2");
+		    			Label SellBoardNickName1 = (Label)root.lookup("#SellBoardNickName1");
+		    			Label SellBoardNickName2 = (Label)root.lookup("#SellBoardNickName2");
+		    			Label SellBoardTime1 = (Label)root.lookup("#SellBoardTime1");
+		    			Label SellBoardTime2 = (Label)root.lookup("#SellBoardTime2");
+		    			
+		    			if (buyLatestBoard.size() >= 2) {
+		    			    // 첫 번째 줄 정보 가져오기
+		    			    Board sellBoard1 = sellLatestBoard.get(0);
+		    			    SellBoardTitle1.setText(sellBoard1.getTitle());
+		    			    SellBoardNickName1.setText(sellBoard1.getNicName());
+		    			    SellBoardTime1.setText(sellBoard1.getUploadDate());
+		    			    // 두 번째 줄 정보 가져오기
+		    			    Board sellBoard2 = sellLatestBoard.get(1);
+		    			    SellBoardTitle2.setText(sellBoard2.getTitle());
+		    			    SellBoardNickName2.setText(sellBoard2.getNicName());
+		    			    SellBoardTime2.setText(sellBoard2.getUploadDate());
+
+		    			}
+		    			
+		    			Scene scene = new Scene(scrollPane, 981, 1000);
 		    			membershipForm.setScene(scene);
+
 		                
 		                membershipForm.setTitle("중고거래 커뮤니티");
 		                membershipForm.show();
@@ -161,7 +216,7 @@ public class loginButtonImp implements loginButton {
 			loginHello.setScene(new Scene(root));
 			
 			Label helloNicName = (Label) root.lookup("#helloNicName");
-			helloNicName.setText("\""+m.getNickName()+"\"");
+			helloNicName.setText("★"+m.getNickName()+"★");
 			
 			Label helloId1 = (Label) root.lookup("#helloId");
 			
@@ -172,6 +227,7 @@ public class loginButtonImp implements loginButton {
 			    sb.append("*");
 			}
 			String helloId3 = helloId2.substring(0, 4) + sb.toString();
+			
 			
 			helloId1.setText("("+helloId3+")님 안녕하세요!");
 			

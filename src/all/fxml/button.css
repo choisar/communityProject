@@ -1,0 +1,41 @@
+/* button.css */
+
+/* 
+ * .button {
+    -fx-text-fill: #1e1636;
+    -fx-background-color: transparent;
+    -fx-background-radius: 4px;
+    -fx-padding: 10px 20px;
+    -fx-border-color: #1e1636;
+    -fx-border-width: 2px;
+    -fx-border-radius: 4px;
+    -fx-box-shadow: 0px 0px 0px 2px #1e1636;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+*/
+
+.button {
+    -fx-text-fill: #1e1636;
+    -fx-background-color: transparent;
+    -fx-background-radius: 4px;
+    -fx-border-color: #1e1636;
+    -fx-border-radius: 4px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+.button:hover {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #1e1636;
+}
+
+.loginButton {
+    -fx-background-color:  transparent;
+    -fx-border-color:  #1e1636;
+    -fx-background-radius: 15px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}

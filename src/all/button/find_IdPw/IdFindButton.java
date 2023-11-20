@@ -1,4 +1,4 @@
-package all.button.find_idpw;
+package all.button.find_IdPw;
 
 import javafx.scene.Parent;
 

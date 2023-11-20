@@ -21,16 +21,19 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class BoardServiceImp implements BoardService {
-	DatabaseDAO dao = new DatabaseDAOImp();
-	CommonService cs = new CommonServiceImp();
+	DatabaseDAO dao;
+	CommonService cs;
 	TableViewService tvs;
 	
 	public BoardServiceImp() {
 		tvs = new TableViewServiceImp();
+		dao = new DatabaseDAOImp();
+		cs = new CommonServiceImp();
 	}
 
 	// 메인화면
@@ -54,7 +57,7 @@ public class BoardServiceImp implements BoardService {
 
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
-
+		
 		// 검색창 콤보박스
 		mainCombo(root);
 		// 메인화면에 띄울 전체 게시판 테이블뷰
@@ -248,7 +251,9 @@ public class BoardServiceImp implements BoardService {
 			Text nicknameText = (Text) detailRoot.lookup("#nicknameText");
 			Label titleText = (Label) detailRoot.lookup("#titleText");
 			Text dateText = (Text) detailRoot.lookup("#dateText");
-
+			TextArea cts = (TextArea) detailRoot.lookup("#contents");
+			
+			cts.setText(selectedBoard.getContents());
 			nicknameText.setText(selectedBoard.getNicName());
 			dateText.setText(selectedBoard.getUploadDate());
 			titleText.setText(selectedBoard.getTitle());

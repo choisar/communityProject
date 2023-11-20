@@ -37,7 +37,7 @@ public class boardViewServiceImp implements boardViewService {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/allBoardView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/boardView/allBoardView.fxml"));
 		
 		root = null;
 		
@@ -64,7 +64,7 @@ public class boardViewServiceImp implements boardViewService {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/freeBoardView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/boardView/freeBoardView.fxml"));
 
 		root = null;
 
@@ -91,7 +91,7 @@ public class boardViewServiceImp implements boardViewService {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/buyBoardView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/boardView/buyBoardView.fxml"));
 
 		root = null;
 
@@ -118,7 +118,7 @@ public class boardViewServiceImp implements boardViewService {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/sellBoardView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/boardView/sellBoardView.fxml"));
 
 		root = null;
 
@@ -145,7 +145,7 @@ public class boardViewServiceImp implements boardViewService {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/sharingBoardView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/boardView/sharingBoardView.fxml"));
 
 		root = null;
 
@@ -165,6 +165,33 @@ public class boardViewServiceImp implements boardViewService {
 		membershipForm.setResizable(false);
 		membershipForm.show();
 	}
+	
+	// Q&A 게시판
+	@Override
+	public void QABoardView(Parent root) {
+		// TODO Auto-generated method stub
+		Stage membershipForm = new Stage();
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/boardView/Q&ABoardView.fxml"));
+
+		root = null;
+
+		try {
+			root = loader.load();
+			membershipForm.setScene(new Scene(root));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		Controller ctrl = loader.getController();
+		ctrl.setRoot(root);
+
+		bs.createCategoryListView(root, "QA 게시판");
+
+		membershipForm.setTitle("Q&A 게시판");
+		membershipForm.setResizable(false);
+		membershipForm.show();
+	}
 
 	// 검색 결과 게시판
 	@Override
@@ -172,7 +199,7 @@ public class boardViewServiceImp implements boardViewService {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/searchResult.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/boardView/searchResultView.fxml"));
 
 		root = null;
 
@@ -185,7 +212,6 @@ public class boardViewServiceImp implements boardViewService {
 		}
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
-
 		bs.serchResultListView(root, text1, text2);
 
 		membershipForm.setTitle("검색 결과 게시판");
@@ -193,32 +219,32 @@ public class boardViewServiceImp implements boardViewService {
 		membershipForm.show();
 	}
 	
-	// 신고화면 검색 결과 게시판
-	@Override
-	public void reportSearchResultBoardView(Parent root, String text1, String text2) {
-		// TODO Auto-generated method stub
-		Stage membershipForm = new Stage();
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/searchResult.fxml"));
-
-		root = null;
-
-		try {
-			root = loader.load();
-			membershipForm.setScene(new Scene(root));
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		Controller ctrl = loader.getController();
-		ctrl.setRoot(root);
-
-		bs.reportSerchResultListView(root, text1, text2);
-
-		membershipForm.setTitle("신고화면 검색 결과 게시판");
-		membershipForm.setResizable(false);
-		membershipForm.show();
-	}
+//	// 신고화면 검색 결과 게시판
+//	@Override
+//	public void reportSearchResultBoardView(Parent root, String text1, String text2) {
+//		// TODO Auto-generated method stub
+//		Stage membershipForm = new Stage();
+//
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/boardView/searchResult.fxml"));
+//
+//		root = null;
+//
+//		try {
+//			root = loader.load();
+//			membershipForm.setScene(new Scene(root));
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+//		Controller ctrl = loader.getController();
+//		ctrl.setRoot(root);
+//
+//		bs.reportSerchResultListView(root, text1, text2);
+//
+//		membershipForm.setTitle("신고화면 검색 결과 게시판");
+//		membershipForm.setResizable(false);
+//		membershipForm.show();
+//	}
 
 	// 글쓰기 창
 	@Override
@@ -254,7 +280,7 @@ public class boardViewServiceImp implements boardViewService {
         // TODO Auto-generated method stub
         Stage membershipForm = new Stage();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/reportView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/boardView/reportView.fxml"));
 
         root = null;
 

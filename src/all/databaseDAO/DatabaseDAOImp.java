@@ -1,5 +1,6 @@
 package all.databaseDAO;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,8 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import all.boardService.Board;
 import all.Member;
+import all.boardService.Board;
 import all.button.common.CommonService;
 import all.button.common.CommonServiceImp;
 
@@ -39,6 +40,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 			System.err.println("오라클 연결 실패");
 			e.printStackTrace();
 		}
+		
 	}
 
 	// 아이디 찾기 과정1 - 이름과 핸드폰 번호를 받아 일치하는 정보가 있으면 true, 없으면 false 반환
@@ -260,6 +262,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		}
 	}
 	
+	// 전체 멤버 - 모든 멤버객체
 	public List<Member> selectAll1() {
 		// TODO Auto-generated method stub
 		List<Member> memberList = new ArrayList<Member>();
@@ -307,6 +310,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				b.setNicName(rs.getString(2));
 				b.setTitle(rs.getString(3));
 				b.setCategori(rs.getString(4));
+				b.setContents(rs.getString(6));
 				// 타임스탬프 분까지만 자리수 끊기
 				Timestamp timestamp = rs.getTimestamp(5);
 				
@@ -376,14 +380,12 @@ public class DatabaseDAOImp implements DatabaseDAO {
 //		     pstmt.setString(1, text1);
 //			pstmt.setString(2, "%"+text2+"%");
 	        rs = pstmt.executeQuery();
-	        
 	        while (rs.next()) {
 	            Board b = new Board();
 	            b.setNo(rs.getInt(1));
 	            b.setNicName(rs.getString(2));
 	            b.setTitle(rs.getString(3));
 	            b.setCategori(rs.getString(4));
-	            
 				// 타임스탬프 분까지만 자리수 끊기
 				Timestamp timestamp = rs.getTimestamp(5);
 	            if (timestamp != null) {
@@ -525,8 +527,59 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	        return reportBoardList;
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	    }
+	    } 
 	    return null;
 	}
 
+	// 리소스 닫는 메서드 추가
+	public void closeResources() {
+	    try {
+	        if (rs != null) {
+	            rs.close();
+	        }
+	        if (pstmt != null) {
+	            pstmt.close();
+	        }
+	        if (con != null) {
+	            con.close();
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	// 메인화면에 띄울 가장 최신글 2개값만 가져오기 
+    public List<Board> getLatestBoardList(String Category) {
+        List<Board> latestList = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT * FROM board WHERE category = '"+ Category +"' ORDER BY board_no DESC) WHERE ROWNUM <= 2";
+
+        try (Connection con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE", "c##sqluser", "1234");
+             PreparedStatement pstmt = con.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                Board board = new Board();
+                board.setNo(rs.getInt("board_no"));
+                board.setNicName(rs.getString("board_memnick"));
+                board.setTitle(rs.getString("title"));
+                board.setCategori(rs.getString("category"));
+                board.setUploadDate(rs.getDate("contents_date").toString());
+				// 타임스탬프 분까지만 자리수 끊기
+				Timestamp timestamp = rs.getTimestamp("contents_date");
+	            if (timestamp != null) {
+	                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+	                String dateStr = sdf.format(timestamp);
+	                board.setUploadDate(dateStr);
+	            }
+//                board.setImagePath(null);
+                board.setContents(rs.getString("contents"));
+                board.setId(rs.getString("board_memid"));
+                latestList.add(board);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return latestList;
+    }
+	
 }

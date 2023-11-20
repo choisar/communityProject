@@ -18,7 +18,7 @@
 		<TextArea fx:id="txtContents" layoutX="56.0" layoutY="224.0" prefHeight="489.0" prefWidth="596.0" />
 		<Button layoutX="56.0" layoutY="139.0" mnemonicParsing="false" onAction="#selOpenFile" text="파일첨부" />
 		<TextArea fx:id="imgAddr" layoutX="148.0" layoutY="139.0" prefHeight="62.0" prefWidth="503.0" />
-		<Button layoutX="616.0" layoutY="743.0" mnemonicParsing="false" onAction="#uploadProc" prefHeight="30.0" prefWidth="70.0" text="저장" />
-		<Button layoutX="529.0" layoutY="743.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="30.0" prefWidth="70.0" text="취소" />
+		<Button layoutX="616.0" layoutY="743.0" mnemonicParsing="false" onAction="#uploadProc" prefHeight="30.0" prefWidth="70.0" stylesheets="@button.css" text="저장" />
+		<Button layoutX="529.0" layoutY="743.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="30.0" prefWidth="70.0" stylesheets="@button.css" text="취소" />
 	</children>
 </AnchorPane>
