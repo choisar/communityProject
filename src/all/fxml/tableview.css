@@ -1,5 +1,5 @@
 .table-view{
-    -fx-border-color:#868E95;
+    -fx-border-color:#1e1636;
     -fx-border-width:1;
     -fx-border-radius:2;
     -fx-font-family: "Roboto";
@@ -20,7 +20,7 @@
     -fx-background-color: white;
     -fx-border-width:0 0 1 0;
     -fx-border-style:solid;
-    -fx-border-color:#B3B9BF;
+    -fx-border-color:#1e1636;
     -fx-padding: 3 0 3 10;
 }
 

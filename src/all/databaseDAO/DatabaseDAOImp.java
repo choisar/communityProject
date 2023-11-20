@@ -307,6 +307,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				b.setNicName(rs.getString(2));
 				b.setTitle(rs.getString(3));
 				b.setCategori(rs.getString(4));
+				b.setContents(rs.getString(6));
 				// 타임스탬프 분까지만 자리수 끊기
 				Timestamp timestamp = rs.getTimestamp(5);
 				
@@ -525,8 +526,24 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	        return reportBoardList;
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	    }
+	    } 
 	    return null;
 	}
 
+	// 리소스 닫는 메서드 추가
+	public void closeResources() {
+	    try {
+	        if (rs != null) {
+	            rs.close();
+	        }
+	        if (pstmt != null) {
+	            pstmt.close();
+	        }
+	        if (con != null) {
+	            con.close();
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 }

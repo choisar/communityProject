@@ -98,7 +98,7 @@ public class TableViewServiceImp implements TableViewService {
 	public void configureBoardTableView1(TableView<Board> listView, Parent root) {
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		TableColumn<Board, Integer> boardNum = new TableColumn<>("No.");
-		boardNum.setMinWidth(20);
+		boardNum.setMinWidth(30);
 		TableColumn<Board, String> category = new TableColumn<>("카테고리");
 		category.setMinWidth(65);
 		TableColumn<Board, String> title = new TableColumn<>("제목");
@@ -162,7 +162,7 @@ public class TableViewServiceImp implements TableViewService {
 	public void configureBoardTableView2(TableView<Member> listView, Parent root) {
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		TableColumn<Member, Integer> memNum = new TableColumn<>("No.");
-		memNum.setMinWidth(20);
+		memNum.setMinWidth(30);
 		TableColumn<Member, String> memNickName = new TableColumn<>("닉네임");
 		memNickName.setMinWidth(200);
 		TableColumn<Member, String> memId = new TableColumn<>("아이디");
@@ -218,7 +218,7 @@ public class TableViewServiceImp implements TableViewService {
 	public void configureBoardTableView3(TableView<Member> listView, Parent root) {
 		listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		TableColumn<Member, Integer> memNum = new TableColumn<>("No.");
-		memNum.setMinWidth(20);
+		memNum.setMinWidth(30);
 		TableColumn<Member, String> memId = new TableColumn<>("아이디");
 		memId.setMinWidth(200);
 		TableColumn<Member, String> memNickName = new TableColumn<>("닉네임");
