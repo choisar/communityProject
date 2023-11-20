@@ -19,6 +19,8 @@ create SEQUENCE mem_seq
     
 -- 멤버 테이블 입력 예시
 insert into member values(mem_seq.nextval,'hong','1234','홍길동','코리아히어로','1600.08.01','남성','hong801@exma.com','01045699923');
+insert into member values(mem_seq.nextval,'1111','1','김유신','테스트용 닉네임','1600.08.01','남성','kim801@exma.com','01012345678');
+insert into member values(mem_seq.nextval,'wlfjddl4256','sunzun1234','황선준','국비 황선준','1998.07.28','남성','wlfjddl4256@naver.com','01045699923');
 
 commit;
 
@@ -48,6 +50,7 @@ create table board (
     -- 카테고리는 (자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판)
     contents_date date,
 	contents varchar2(1000) not null,
+    -- 이게 뭔지 모름
     howmanypost number not null,
 	imagepath blob,
     board_memid varchar2(50)
@@ -55,6 +58,18 @@ create table board (
     --foreign key(board_memnick) references member(member_nickname)
 	);
     
+SELECT * FROM board;
+SELECT * FROM board ORDER BY board_no DESC;
+
+SELECT * FROM (
+    SELECT * FROM board 
+    WHERE category = '나눔 게시판'
+    ORDER BY board_no DESC
+) WHERE ROWNUM <= 2;
+
+
+SELECT * FROM (SELECT * FROM board WHERE category = 'QA 게시판' ORDER BY board_no DESC) WHERE ROWNUM = 1;
+
 -- 보드 시퀀스
 create sequence board_seq 
 start with 1
@@ -63,15 +78,26 @@ nocache;
 
 -- 보드 테이블 입력 예시
 insert into board values(board_seq.nextval,'홍길동','전우치전','자유 게시판',sysdate,'코리아히어로 전우치의 이야기','2',null,'hong');
-insert into board values(board_seq.nextval,'멤버1','자유제목','자유 게시판',sysdate ,'게시글 내용','2',null,'hong');
-insert into board values(board_seq.nextval,'멤버2','자유제목','자유 게시판',sysdate ,'게시글 내용','2',null,'hong');
-insert into board values(board_seq.nextval,'멤버3','구매제목','구매 게시판',sysdate ,'게시글 내용','2',null,'hong');
-insert into board values(board_seq.nextval,'멤버4','구매제목','구매 게시판',sysdate ,'게시글 내용','2',null,'hong');
-insert into board values(board_seq.nextval,'멤버5','판매제목','판매 게시판',sysdate ,'게시글 내용','2',null,'hong');
-insert into board values(board_seq.nextval,'멤버6','판매제목','판매 게시판',sysdate ,'게시글 내용','2',null,'hong');
-insert into board values(board_seq.nextval,'멤버7','나눔제목','나눔 게시판',sysdate ,'게시글 내용','2',null,'hong');
-insert into board values(board_seq.nextval,'멤버8','나눔제목','나눔 게시판',sysdate ,'게시글 내용','2',null,'hong');
-insert into board values(board_seq.nextval,'멤버9','나눔제목','나눔 게시판',sysdate ,'게시글 내용','2',null,'hong');
+-- 자유 게시판
+insert into board values(board_seq.nextval,'말똥가리','오늘 점심 뭐 먹지','자유 게시판',TO_DATE('2023-11-17 19:15:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'까마귀','내일 점심 뭐 먹지','자유 게시판',TO_DATE('2023-11-18 12:14:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'두견','오늘 저녁 뭐 먹지','자유 게시판',TO_DATE('2023-11-19 15:23:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+-- 구매 게시판
+insert into board values(board_seq.nextval,'아비','아이폰13 pro 구매 원해요','구매 게시판',TO_DATE('2023-11-14 19:51:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'부엉이','기계식 키보드 구매 원해요','구매 게시판',TO_DATE('2023-11-16 21:35:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'메추라기','아이폰 충전기 삽니다','구매 게시판',TO_DATE('2023-11-17 05:41:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+-- 판매 게시판
+insert into board values(board_seq.nextval,'꿩','어제 먹다 남은 치킨 팔아요','판매 게시판',TO_DATE('2023-11-16 12:31:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'마도요','디스커버리 롱패딩 팔아요','판매 게시판',TO_DATE('2023-11-15 18:06:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+-- 나눔 게시판
+insert into board values(board_seq.nextval,'닭','C타입 충전기 가져가세요','나눔 게시판',TO_DATE('2023-11-13 22:16:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'독수리','거실에 있는 소파 나눔합니다','나눔 게시판',TO_DATE('2023-11-12 08:01:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'종다리','어제 먹다 남은 햄버거 나눔합니다','나눔 게시판',TO_DATE('2023-11-11 03:48:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'병아리','영화티켓 나눔합니다','나눔 게시판',TO_DATE('2023-11-15 14:34:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+-- Q&A 게시판
+insert into board values(board_seq.nextval,'갈매기','회원탈퇴가 안됩니다.','QA 게시판',TO_DATE('2023-11-11 03:48:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+insert into board values(board_seq.nextval,'비둘기','이벤트 열어주세요.','QA 게시판',TO_DATE('2023-11-15 14:34:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','2',null,'hong');
+
 
 commit;
 
@@ -104,12 +130,17 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLCODE || ' - ' || SQLERRM);
         ROLLBACK; -- 롤백을 사용하여 트랜잭션을 취소
 END;
-/
 
-select * from board;
+
+select * from member where member_id LIKE '%h%';
+select * from member where member_nickname LIKE '%히어로%';
+SELECT * FROM board WHERE TITLE LIKE '%자유%';
 
 commit;
 select * from board;
+select * from member;
 drop table comment1;
+
 drop table board;
+
 drop table member;

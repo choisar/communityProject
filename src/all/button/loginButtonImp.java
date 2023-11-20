@@ -87,12 +87,10 @@ public class loginButtonImp implements loginButton {
 
 		    			// Pannable.
 		    			scrollPane.setPannable(true);
-		    			
+		    			Scene scene = new Scene(scrollPane, 981, 1000);
 		    			// ######## 최신글 ###########
 		    			
-		    			
-		    			
-		    			// 구매 게시판, 판매 게시판의 최신글 각각 2개씩 정보 가져옴
+		    			// 구매 게시판, 판매 게시판, 나눔 게시판, 자유 게시판의 최신글 각각 2개씩 정보 가져옴
 		    			List<Board> buyLatestBoard = dao.getLatestBoardList("구매 게시판");
 		    			
 		    			Label BuyBoardTitle1 = (Label)root.lookup("#BuyBoardTitle1");
@@ -125,7 +123,7 @@ public class loginButtonImp implements loginButton {
 		    			Label SellBoardTime1 = (Label)root.lookup("#SellBoardTime1");
 		    			Label SellBoardTime2 = (Label)root.lookup("#SellBoardTime2");
 		    			
-		    			if (buyLatestBoard.size() >= 2) {
+		    			if (sellLatestBoard.size() >= 2) {
 		    			    // 첫 번째 줄 정보 가져오기
 		    			    Board sellBoard1 = sellLatestBoard.get(0);
 		    			    SellBoardTitle1.setText(sellBoard1.getTitle());
@@ -139,13 +137,57 @@ public class loginButtonImp implements loginButton {
 
 		    			}
 		    			
-		    			Scene scene = new Scene(scrollPane, 981, 1000);
-		    			membershipForm.setScene(scene);
+		    			List<Board> sharingLatestBoard = dao.getLatestBoardList("나눔 게시판");
+		    			Label SharingBoardTitle1 = (Label) root.lookup("#SharingBoardTitle1");
+		    			Label SharingBoardTitle2 = (Label) root.lookup("#SharingBoardTitle2");
+		    			Label SharingBoardNickName1 = (Label) root.lookup("#SharingBoardNickName1");
+		    			Label SharingBoardNickName2 = (Label) root.lookup("#SharingBoardNickName2");
+		    			Label SharingBoardTime1 = (Label) root.lookup("#SharingBoardTime1");
+		    			Label SharingBoardTime2 = (Label) root.lookup("#SharingBoardTime2");
+		    			
+		    			
+		    			
+		    			if (sharingLatestBoard.size() >= 2) {
+		    			    // 첫 번째 줄 정보 가져오기
+		    			    Board sharingBoard1 = sharingLatestBoard.get(0);
+		    			    SharingBoardTitle1.setText(sharingBoard1.getTitle());
+		    			    SharingBoardNickName1.setText(sharingBoard1.getNicName());
+		    			    SharingBoardTime1.setText(sharingBoard1.getUploadDate());
 
-		                
+		    			    // 두 번째 줄 정보 가져오기
+		    			    Board sharingBoard2 = sharingLatestBoard.get(1);
+		    			    SharingBoardTitle2.setText(sharingBoard2.getTitle());
+		    			    SharingBoardNickName2.setText(sharingBoard2.getNicName());
+		    			    SharingBoardTime2.setText(sharingBoard2.getUploadDate());
+		    			}
+		    			
+		    			List<Board> freeLatestBoard = dao.getLatestBoardList("자유 게시판");
+		    			
+		    			Label freeBoardTitle1 = (Label)root.lookup("#FreeBoardTitle1");
+		    			Label freeBoardTitle2 = (Label)root.lookup("#FreeBoardTitle2");
+		    			Label freeBoardNickName1 = (Label)root.lookup("#FreeBoardNickName1");
+		    			Label freeBoardNickName2 = (Label)root.lookup("#FreeBoardNickName2");
+		    			Label freeBoardTime1 = (Label)root.lookup("#FreeBoardTime1");
+		    			Label freeBoardTime2 = (Label)root.lookup("#FreeBoardTime2");
+		    			
+		    			if (freeLatestBoard.size() >= 2) {
+		    			    // 첫 번째 줄 정보 가져오기
+		    			    Board freeBoard1 = freeLatestBoard.get(0);
+		    			    freeBoardTitle1.setText(freeBoard1.getTitle());
+		    			    freeBoardNickName1.setText(freeBoard1.getNicName());
+		    			    freeBoardTime1.setText(freeBoard1.getUploadDate());
+		    			    // 두 번째 줄 정보 가져오기
+		    			    Board freeBoard2 = freeLatestBoard.get(1);
+		    			    freeBoardTitle2.setText(freeBoard2.getTitle());
+		    			    freeBoardNickName2.setText(freeBoard2.getNicName());
+		    			    freeBoardTime2.setText(freeBoard2.getUploadDate());
+
+		    			}
+		    			
+		    			membershipForm.setScene(scene);
 		                membershipForm.setTitle("중고거래 커뮤니티");
 		                membershipForm.show();
-		                membershipForm.setResizable(false);
+//		                membershipForm.setResizable(false);
 		                // 환영인사
 		                helloView(root, m);
 		            } else {

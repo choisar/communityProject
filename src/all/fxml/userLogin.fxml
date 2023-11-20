@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1637.0" prefWidth="966.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2491.0" prefWidth="966.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
 	<children>
 		<Button layoutX="50.0" layoutY="249.0" mnemonicParsing="false" onAction="#infoProc" prefHeight="30.0" prefWidth="58.0" stylesheets="@button.css" text="Info" textFill="#bbbbbb" />
 		<Button layoutX="128.0" layoutY="249.0" mnemonicParsing="false" onAction="#logoutProc" stylesheets="@button.css" text="Logout" textFill="#bbbbbb" />
@@ -26,7 +26,7 @@
 		<Label layoutX="85.0" layoutY="217.0" text="새 소식 0개" textFill="#1e1636" />
 		<Line endX="100.0" layoutX="124.0" layoutY="136.0" startX="-100.0" />
 		<Line endX="100.0" layoutX="124.0" layoutY="292.0" startX="-100.0" />
-		<Line endX="100.0" layoutX="124.0" layoutY="1618.0" startX="-100.0" />
+		<Line endX="100.0" layoutX="124.0" layoutY="2470.0" startX="-100.0" />
 		<Label fx:id="logChk" layoutX="32.0" layoutY="114.0" text="회원" textFill="#1d163600" />
       <Label fx:id="memberName" alignment="CENTER_RIGHT" layoutX="29.0" layoutY="166.0" prefHeight="18.0" prefWidth="104.0" text="memName" textFill="#1e1636" underline="true">
          <font>
@@ -36,8 +36,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Button layoutX="52.0" layoutY="1564.0" mnemonicParsing="false" onAction="#reportProc" prefHeight="35.0" prefWidth="140.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Report" textFill="#bbbbbb" />
-      <Line endX="100.0" layoutX="124.0" layoutY="1544.0" startX="-100.0" />
+      <Button layoutX="52.0" layoutY="2416.0" mnemonicParsing="false" onAction="#reportProc" prefHeight="35.0" prefWidth="140.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Report" textFill="#bbbbbb" />
+      <Line endX="100.0" layoutX="124.0" layoutY="2396.0" startX="-100.0" />
       <Label contentDisplay="CENTER" layoutX="210.0" layoutY="34.0" prefHeight="58.0" prefWidth="588.0" text="KG - Trading Community" textAlignment="CENTER" textFill="#1e1636">
          <font>
             <Font size="46.0" />
@@ -156,5 +156,91 @@
       </Label>
       <Label fx:id="SellBoardTime1" layoutX="270.0" layoutY="1607.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
       <Label fx:id="SellBoardTime2" layoutX="615.0" layoutY="1607.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
+      <ImageView fitHeight="279.0" fitWidth="330.0" layoutX="259.0" layoutY="1688.0">
+         <image>
+            <Image url="@../image/noneImg.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="279.0" fitWidth="330.0" layoutX="606.0" layoutY="1688.0">
+         <image>
+            <Image url="@../image/noneImg.jpg" />
+         </image>
+      </ImageView>
+      <Line endX="595.0" layoutX="350.0" layoutY="1671.0" startX="-100.0" />
+      <Label layoutX="257.0" layoutY="1642.0" text="Sharing Board">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="892.0" layoutY="1646.0" onMouseClicked="#sharingBoardProc" text="More &gt;" textFill="#bbbbbb">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="SharingBoardTitle1" layoutX="270.0" layoutY="1977.0" prefHeight="16.0" prefWidth="313.0" text="Sharing Board Title1">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="SharingBoardTitle2" layoutX="615.0" layoutY="1977.0" prefHeight="16.0" prefWidth="313.0" text="Sharing Board Title2">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="SharingBoardNickName1" layoutX="270.0" layoutY="2000.0" prefHeight="16.0" prefWidth="313.0" text="Sharing Board NickName1">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="SharingBoardNickName2" layoutX="615.0" layoutY="2000.0" prefHeight="16.0" prefWidth="313.0" text="Sharing Board NickName2">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="SharingBoardTime1" layoutX="270.0" layoutY="2018.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
+      <Label fx:id="SharingBoardTime2" layoutX="615.0" layoutY="2018.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
+      <ImageView fitHeight="279.0" fitWidth="330.0" layoutX="259.0" layoutY="2099.0">
+         <image>
+            <Image url="@../image/noneImg.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="279.0" fitWidth="330.0" layoutX="606.0" layoutY="2099.0">
+         <image>
+            <Image url="@../image/noneImg.jpg" />
+         </image>
+      </ImageView>
+      <Line endX="595.0" layoutX="350.0" layoutY="2082.0" startX="-100.0" />
+      <Label layoutX="257.0" layoutY="2053.0" text="Free Board">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="892.0" layoutY="2055.0" onMouseClicked="#freeBoardProc" text="More &gt;" textFill="#bbbbbb">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="FreeBoardTitle1" layoutX="270.0" layoutY="2388.0" prefHeight="16.0" prefWidth="313.0" text="Free Board Title1">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="FreeBoardTitle2" layoutX="615.0" layoutY="2388.0" prefHeight="16.0" prefWidth="313.0" text="Free Board Title2">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="FreeBoardNickName1" layoutX="270.0" layoutY="2411.0" prefHeight="16.0" prefWidth="313.0" text="Free Board NickName1">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="FreeBoardNickName2" layoutX="615.0" layoutY="2411.0" prefHeight="16.0" prefWidth="313.0" text="Free Board NickName2">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="FreeBoardTime1" layoutX="270.0" layoutY="2429.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
+      <Label fx:id="FreeBoardTime2" layoutX="615.0" layoutY="2429.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
 	</children>
 </AnchorPane>
