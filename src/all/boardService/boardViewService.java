@@ -24,5 +24,7 @@ public interface boardViewService {
 	// 신고하기 창
 	public void reportView(Parent root);
 	
-	// public void getBoardViewByCategory(Parent root, String category); 
+	// 보드 디테일뷰에서 다음, 이전 게시물 창을 띄어주는 메서드
+	public void loadNextBoardInCategoryView(Parent root, String strpostNum, String category, String Sorting);
+	
 }

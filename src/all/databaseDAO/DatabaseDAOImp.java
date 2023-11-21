@@ -1,6 +1,5 @@
 package all.databaseDAO;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,7 +20,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	Connection con;
 	ResultSet rs;
 	PreparedStatement pstmt;
-	
+
 	// 합치기
 	boolean idChkCom;
 
@@ -40,7 +39,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 			System.err.println("오라클 연결 실패");
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	// 아이디 찾기 과정1 - 이름과 핸드폰 번호를 받아 일치하는 정보가 있으면 true, 없으면 false 반환
@@ -65,8 +64,9 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		}
 		return false;
 	}
-	
-	// 아이디 찾기 과정2 - 과정1이 true이면 (일치하는 정보가 있으면) 일치하는 정보중 member_id를 문자열 값으로 반환, false면 null값 반환
+
+	// 아이디 찾기 과정2 - 과정1이 true이면 (일치하는 정보가 있으면) 일치하는 정보중 member_id를 문자열 값으로 반환,
+	// false면 null값 반환
 	@Override
 	public String findId(String findName, String findPhoneNum) {
 		String sql = "select member_id from member " + "where member_name = ? and member_phonenum = ?";
@@ -87,7 +87,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		}
 		return null;
 	}
-	
+
 	// 비밀번호 찾기 과정1 - 아이디와 핸드폰 번호를 받아 일치하는 정보가 있으면 true, 없으면 false 반환
 	@Override
 	public boolean pwChk(String findId, String findPhoneNum) {
@@ -113,8 +113,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	// 입력받은 아이디, 핸드폰번호와 일치하는 정보중 비밀번호(member_pw)를 문자열 값으로 반환, false면 null값 반환
 	@Override
 	public String findPw(String findId, String findPhoneNum) {
-		String sql = "select member_pw from member " 
-		+ "where member_id = ? and member_phonenum = ?";
+		String sql = "select member_pw from member " + "where member_id = ? and member_phonenum = ?";
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -133,12 +132,11 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 
-	// 비밀번호 찾기 결과창에 이름 띄우기 - 과정 1이 true이면 (일치하는 정보가 있으면) 
+	// 비밀번호 찾기 결과창에 이름 띄우기 - 과정 1이 true이면 (일치하는 정보가 있으면)
 	// 입력받은 아이디, 핸드폰번호와 일치하는 정보중 이름(member_name)을 문자열 값으로 반환, false면 null값 반환
 	@Override
 	public String findUserName(String findId, String findPhoneNum) {
-		String sql = "select member_Name from member " 
-	+ "where member_id = ? and member_phonenum = ?";
+		String sql = "select member_Name from member " + "where member_id = ? and member_phonenum = ?";
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -156,20 +154,20 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		}
 		return null;
 	}
-	
+
 	// 입력받은 아이디와 비밀번호가 dao에 있는 아이디, 비밀번호와 일치하는 정보가 있으면 true를 일치하지 않으면 false를 반환
 	@Override
-	public boolean loginChk(String id,String pw) {
+	public boolean loginChk(String id, String pw) {
 		// TODO Auto-generated method stub
 		String sql = "select decode(count(*), 1, 'true', 'false') from member where member_id=? and member_pw=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
-			
+
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				return Boolean.parseBoolean(rs.getString(1));
 			}
 		} catch (Exception e) {
@@ -178,132 +176,132 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean insertMember(Member m) {
 		// TODO Auto-generated method stub
-		 if(idChkCom) {
-			 String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,?,?)";
-			 
-			 try {
-				 pstmt = con.prepareStatement(sql);
-				
-				 pstmt.setString(1, m.getId());
-	             pstmt.setString(2, m.getPw());
-	             pstmt.setString(3, m.getName());
-	             pstmt.setString(4, m.getNickName());            
-	             pstmt.setDate(5, m.getBirthDate());
-	             pstmt.setString(6, m.isGender());
-	             pstmt.setString(7,m.getEmail());
-	             pstmt.setString(8, m.getPhoneNum());
+		if (idChkCom) {
+			String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,?,?)";
 
-				 int result = pstmt.executeUpdate();
-				 
-				 if(result == 1) {
-					 cs.msgBox("회원가입","회원가입여부","회원가입에 성공하셨습니다.");
-					 return true;
-				 	}
-			 	} catch(Exception e) {
-			 		// TODO: handle exception
-			 		e.printStackTrace();
-			 		}
-		 } else { // 아이디 중복
-			 cs.msgBox("아이디","아이디중복","아이디 중복 확인하세요");
-		 	}
+			try {
+				pstmt = con.prepareStatement(sql);
+
+				pstmt.setString(1, m.getId());
+				pstmt.setString(2, m.getPw());
+				pstmt.setString(3, m.getName());
+				pstmt.setString(4, m.getNickName());
+				pstmt.setDate(5, m.getBirthDate());
+				pstmt.setString(6, m.isGender());
+				pstmt.setString(7, m.getEmail());
+				pstmt.setString(8, m.getPhoneNum());
+
+				int result = pstmt.executeUpdate();
+
+				if (result == 1) {
+					cs.msgBox("회원가입", "회원가입여부", "회원가입에 성공하셨습니다.");
+					return true;
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		} else { // 아이디 중복
+			cs.msgBox("아이디", "아이디중복", "아이디 중복 확인하세요");
+		}
 		return false;
 	}
-	
+
 	public String getGender(boolean gender) {
 		// TODO Auto-generated method stub
-		if(gender) {
+		if (gender) {
 			return "여성";
-		} 	
+		}
 		return "남성";
 	}
 
 	private boolean chkId(String id) {
 		// TODO Auto-generated method stub
-			boolean result = false;
-			String sql = "select decode(count(*),1,'false','true')" + "from member where member_id=?";
-			try {
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1,id);
-				
-				rs = pstmt.executeQuery();
-		
-				if(rs.next()) {
-					result = Boolean.parseBoolean(rs.getString(1));
-				} 
-				return result;
-			} catch(Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			 } 
-			 return true;
-	
+		boolean result = false;
+		String sql = "select decode(count(*),1,'false','true')" + "from member where member_id=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				result = Boolean.parseBoolean(rs.getString(1));
+			}
+			return result;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return true;
+
 	}
-	
+
 	@Override
 	public boolean dupID(String txtId) {
 		// TODO Auto-generated method stub
-		if(txtId.isEmpty()) {
-			cs.msgBox("아이디","아이디중복","아이디를 입력하세요");
+		if (txtId.isEmpty()) {
+			cs.msgBox("아이디", "아이디중복", "아이디를 입력하세요");
 			return false;
-		}else {
-			if(!chkId(txtId)) {
-				cs.msgBox("아이디","아이디중복","같은 아이디가 존재합니다. 다시 입력하세요");
+		} else {
+			if (!chkId(txtId)) {
+				cs.msgBox("아이디", "아이디중복", "같은 아이디가 존재합니다. 다시 입력하세요");
 				idChkCom = false;
 				return false;
-			}else {
-				cs.msgBox("아이디","아이디중복","사용가능한 아이디입니다.");
+			} else {
+				cs.msgBox("아이디", "아이디중복", "사용가능한 아이디입니다.");
 				idChkCom = true;
 				return true;
 			}
 		}
 	}
-	
+
 	// 전체 멤버 - 모든 멤버객체
 	public List<Member> selectAll1() {
 		// TODO Auto-generated method stub
 		List<Member> memberList = new ArrayList<Member>();
 		String sql = "select*from member";
-		
+
 		try {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				Member m =new Member();
+
+			while (rs.next()) {
+				Member m = new Member();
 				pstmt.setString(1, m.getName());
 				pstmt.setString(2, m.getId());
 				pstmt.setString(3, m.getNickName());
 				pstmt.setString(4, m.getPw());
 				pstmt.setDate(5, m.getBirthDate());
 				pstmt.setString(6, m.isGender());
-				pstmt.setString(7,m.getEmail());
+				pstmt.setString(7, m.getEmail());
 				pstmt.setString(8, m.getPhoneNum());
 
 				memberList.add(m);
 			}
 			return memberList;
 		} catch (Exception e) {
-			//TODO: handle exception
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	// 전체 게시판 - 모든 카테고리의 모든 게시물
 	@Override
 	public List<Board> selectAll() {
 		// TODO Auto-generated method stub
-		
+
 		List<Board> boardList = new ArrayList<Board>();
 		String sql = "select * from board";
 		try {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
 				Board b = new Board();
 				b.setNo(rs.getInt(1));
@@ -313,111 +311,111 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				b.setContents(rs.getString(6));
 				// 타임스탬프 분까지만 자리수 끊기
 				Timestamp timestamp = rs.getTimestamp(5);
-				
-	            if (timestamp != null) {
-	                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	                String dateStr = sdf.format(timestamp);
-	                b.setUploadDate(dateStr);
-	            }
+
+				if (timestamp != null) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					String dateStr = sdf.format(timestamp);
+					b.setUploadDate(dateStr);
+				}
 				boardList.add(b);
 			}
 			return boardList;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	// 카테고리 값을 정해주면 해당 카테고리에 있는 모든 게시물 정보를 갖는 리스트 생성
 	@Override
 	public List<Board> categoryBoardAll(String category) {
 		// TODO Auto-generated method stub
-		
+
 		List<Board> boardList = new ArrayList<Board>();
 		String sql = "select * from board where category = ?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, category);
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
 				Board b = new Board();
 				b.setNo(rs.getInt(1));
 				b.setNicName(rs.getString(2));
 				b.setTitle(rs.getString(3));
 				b.setCategori(rs.getString(4));
-				
+
 				// 타임스탬프 분까지만 자리수 끊기
 				Timestamp timestamp = rs.getTimestamp(5);
-	            if (timestamp != null) {
-	                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	                String dateStr = sdf.format(timestamp);
-	                b.setUploadDate(dateStr);
-	            }
-				
+				if (timestamp != null) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					String dateStr = sdf.format(timestamp);
+					b.setUploadDate(dateStr);
+				}
+				b.setContents(rs.getString(6));
 				boardList.add(b);
 			}
 			return boardList;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	// 메인화면 검색 - 전체 카테고리에서 검색 결과가 포함된 모든 게시물
 	@Override
-	public List<Board> searchResultAll(String text1,String text2) {
+	public List<Board> searchResultAll(String text1, String text2) {
 //		// TODO Auto-generated method stub
-	    List<Board> boardList = new ArrayList<>();
+		List<Board> boardList = new ArrayList<>();
 //		String sql = "select * from board where ? LIKE ?";
-	    String sql = "SELECT * FROM board WHERE " + text1 + " LIKE ?";
-	    
-	    try {
-	        pstmt = con.prepareStatement(sql);
-	        pstmt.setString(1, "%" + text2 + "%");
+		String sql = "SELECT * FROM board WHERE " + text1 + " LIKE ?";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + text2 + "%");
 //		     pstmt.setString(1, text1);
 //			pstmt.setString(2, "%"+text2+"%");
-	        rs = pstmt.executeQuery();
-	        while (rs.next()) {
-	            Board b = new Board();
-	            b.setNo(rs.getInt(1));
-	            b.setNicName(rs.getString(2));
-	            b.setTitle(rs.getString(3));
-	            b.setCategori(rs.getString(4));
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Board b = new Board();
+				b.setNo(rs.getInt(1));
+				b.setNicName(rs.getString(2));
+				b.setTitle(rs.getString(3));
+				b.setCategori(rs.getString(4));
 				// 타임스탬프 분까지만 자리수 끊기
 				Timestamp timestamp = rs.getTimestamp(5);
-	            if (timestamp != null) {
-	                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	                String dateStr = sdf.format(timestamp);
-	                b.setUploadDate(dateStr);
-	            }
-	            
-	            boardList.add(b);
-	        }
-	        return boardList;
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    return null;
+				if (timestamp != null) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					String dateStr = sdf.format(timestamp);
+					b.setUploadDate(dateStr);
+				}
+
+				boardList.add(b);
+			}
+			return boardList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	// db에 게시글 등록하기
 	@Override
 	public boolean uploadBoard(Board b) {
 		// TODO Auto-generated method stub
-		String sql="insert into board values(board_seq.nextval, ?, ?, ?, ?)";
+		String sql = "insert into board values(board_seq.nextval, ?, ?, ?, ?)";
 		try {
-			pstmt=con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, b.getTitle());
 			pstmt.setString(2, b.getCategori());
 			pstmt.setString(3, b.getContents());
 			pstmt.setBytes(4, b.getImagePath());
-			
-			int result=pstmt.executeUpdate();
-			
-			if(result==1) {
+
+			int result = pstmt.executeUpdate();
+
+			if (result == 1) {
 				return true;
 			}
 		} catch (SQLException e) {
@@ -431,14 +429,14 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	public Member memberInfo(String id) {
 		// TODO Auto-generated method stub
 		String sql = "select * from member where member_id = ?";
-		
+
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			
+
 			rs = pstmt.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 				Member m = new Member();
 				m.setNum(rs.getInt(1));
 				m.setId(rs.getString(2));
@@ -451,7 +449,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				m.setPhoneNum(rs.getString(9));
 				return m;
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -461,57 +459,56 @@ public class DatabaseDAOImp implements DatabaseDAO {
 
 	// 신고화면 검색 (게시물/board) - 검색 결과가 포함된 모든 정보
 	@Override
-	public List<Board> reportSearchResultAll1(String text1,String text2) {
+	public List<Board> reportSearchResultAll1(String text1, String text2) {
 //		// TODO Auto-generated method stub
-	    
-		    try {
-		    	List<Board> reportBoardList = new ArrayList<>();
-		    	String sql = "SELECT * FROM board WHERE " + text1 + " LIKE ?";
-		    	
-		        pstmt = con.prepareStatement(sql);
-		        pstmt.setString(1, "%" + text2 + "%");
-		        rs = pstmt.executeQuery();
-		        
-		        while (rs.next()) {
-		            Board b = new Board();
-		            
-		            b.setNo(rs.getInt(1));
-		            b.setNicName(rs.getString(2));
-		            b.setTitle(rs.getString(3));
-		            b.setCategori(rs.getString(4));
-		            
-					// 타임스탬프 분까지만 자리수 끊기
-					Timestamp timestamp = rs.getTimestamp(5);
-		            if (timestamp != null) {
-		                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		                String dateStr = sdf.format(timestamp);
-		                b.setUploadDate(dateStr);
-		            }
-		            
-		            reportBoardList.add(b);
-		        }
-		        return reportBoardList;
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		    }
-		    
-	    return null;
+
+		try {
+			List<Board> reportBoardList = new ArrayList<>();
+			String sql = "SELECT * FROM board WHERE " + text1 + " LIKE ?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + text2 + "%");
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Board b = new Board();
+
+				b.setNo(rs.getInt(1));
+				b.setNicName(rs.getString(2));
+				b.setTitle(rs.getString(3));
+				b.setCategori(rs.getString(4));
+
+				// 타임스탬프 분까지만 자리수 끊기
+				Timestamp timestamp = rs.getTimestamp(5);
+				if (timestamp != null) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+					String dateStr = sdf.format(timestamp);
+					b.setUploadDate(dateStr);
+				}
+
+				reportBoardList.add(b);
+			}
+			return reportBoardList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
-	
-	
+
 	// 신고화면 검색 (회원/member) - 검색 결과가 포함된 모든 정보
 	@Override
-	public List<Member> reportSearchResultAll2(String text1,String text2) {
-	    try {
-	    	List<Member> reportBoardList = new ArrayList<>();
-	    	String sql = "select * from member where "+ text1 + " LIKE ?";
-	    	
-	        pstmt = con.prepareStatement(sql);
-	        pstmt.setString(1, "%" + text2 + "%");
-	        rs = pstmt.executeQuery();
-	        
-	        while (rs.next()) {
-	            Member m = new Member();
+	public List<Member> reportSearchResultAll2(String text1, String text2) {
+		try {
+			List<Member> reportBoardList = new ArrayList<>();
+			String sql = "select * from member where " + text1 + " LIKE ?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + text2 + "%");
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Member m = new Member();
 				m.setNum(rs.getInt(1));
 				m.setId(rs.getString(2));
 				m.setPw(rs.getString(3));
@@ -521,65 +518,94 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				m.setGender(rs.getString(7));
 				m.setEmail(rs.getString(8));
 				m.setPhoneNum(rs.getString(9));
-	            
-	            reportBoardList.add(m);
-	        }
-	        return reportBoardList;
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    } 
-	    return null;
+
+				reportBoardList.add(m);
+			}
+			return reportBoardList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	// 리소스 닫는 메서드 추가
-	public void closeResources() {
-	    try {
-	        if (rs != null) {
-	            rs.close();
-	        }
-	        if (pstmt != null) {
-	            pstmt.close();
-	        }
-	        if (con != null) {
-	            con.close();
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	}
-	
-	// 메인화면에 띄울 가장 최신글 2개값만 가져오기 
-    public List<Board> getLatestBoardList(String Category) {
-        List<Board> latestList = new ArrayList<>();
-        String sql = "SELECT * FROM (SELECT * FROM board WHERE category = '"+ Category +"' ORDER BY board_no DESC) WHERE ROWNUM <= 2";
+	// 메인화면에 띄울 가장 최신글 2개값만 가져오기
+	@Override
+	public List<Board> getLatestBoardList(String Category) {
+		List<Board> latestList = new ArrayList<>();
+		String sql = "SELECT * FROM (SELECT * FROM board WHERE category = '" + Category
+				+ "' ORDER BY board_no DESC) WHERE ROWNUM <= 2";
 
-        try (Connection con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE", "c##sqluser", "1234");
-             PreparedStatement pstmt = con.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+		try (Connection con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE", "c##sqluser", "1234");
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
 
-            while (rs.next()) {
-                Board board = new Board();
-                board.setNo(rs.getInt("board_no"));
-                board.setNicName(rs.getString("board_memnick"));
-                board.setTitle(rs.getString("title"));
-                board.setCategori(rs.getString("category"));
-                board.setUploadDate(rs.getDate("contents_date").toString());
+			while (rs.next()) {
+				Board board = new Board();
+				board.setNo(rs.getInt("board_no"));
+				board.setNicName(rs.getString("board_memnick"));
+				board.setTitle(rs.getString("title"));
+				board.setCategori(rs.getString("category"));
+				board.setUploadDate(rs.getDate("contents_date").toString());
 				// 타임스탬프 분까지만 자리수 끊기
 				Timestamp timestamp = rs.getTimestamp("contents_date");
-	            if (timestamp != null) {
-	                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-	                String dateStr = sdf.format(timestamp);
-	                board.setUploadDate(dateStr);
-	            }
+				if (timestamp != null) {
+					SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+					String dateStr = sdf.format(timestamp);
+					board.setUploadDate(dateStr);
+				}
 //                board.setImagePath(null);
-                board.setContents(rs.getString("contents"));
-                board.setId(rs.getString("board_memid"));
-                latestList.add(board);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return latestList;
-    }
-	
+				board.setContents(rs.getString("contents"));
+				board.setId(rs.getString("board_memid"));
+				latestList.add(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return latestList;
+	}
+
+	// 다음, 이전 게시물을 찾는 메서드
+	@Override
+	public Board getNextPrevBoard(String postNum, String category, String Sorting) {
+		category = category.substring(0, category.length() - 2);
+
+		String a = null;
+		if (Sorting == "ASC") {
+			a = ">";
+		} else if (Sorting == "DESC") {
+			a = "<";
+		}
+
+		String sql = "SELECT * FROM board WHERE board_no " + a + " " + postNum + " AND category = '" + category
+				+ "' AND ROWNUM <= 1 ORDER BY board_no " + Sorting;
+
+		try (Connection con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE", "c##sqluser", "1234");
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					Board board = new Board();
+					board.setNo(rs.getInt("board_no"));
+					board.setNicName(rs.getString("board_memnick"));
+					board.setTitle(rs.getString("title"));
+					board.setCategori(rs.getString("category"));
+					board.setUploadDate(rs.getDate("contents_date").toString());
+					// 타임스탬프 분까지만 자리수 끊기
+					Timestamp timestamp = rs.getTimestamp("contents_date");
+					if (timestamp != null) {
+						SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+						String dateStr = sdf.format(timestamp);
+						board.setUploadDate(dateStr);
+					}
+					board.setContents(rs.getString("contents"));
+					board.setId(rs.getString("board_memid"));
+					return board;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		Board nextBoard = null;
+		return nextBoard;
+	}
+
 }

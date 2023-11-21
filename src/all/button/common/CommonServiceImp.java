@@ -143,7 +143,7 @@ public class CommonServiceImp implements CommonService{
 			membershipForm.showAndWait();
 		}
 		
-		// 내가 원하는 문구로 에러창을 띄우는 메서드
+		// 내가 원하는 문구로 에러창을 띄우는 메서드 (루트 있을 때)
 		@Override
 		public void customErrorView(Parent root, String text) {
 			// TODO Auto-generated method stub

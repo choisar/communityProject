@@ -95,7 +95,7 @@ public class BoardServiceImp implements BoardService {
 		                cs.errorView1(root);
 		            } else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 		                // 해당 게시물 보기
-		                openBoardDetailWindow(b);
+		                openBoardDetailWindow(root, b);
 		            }
 		        }
 		    }
@@ -123,7 +123,7 @@ public class BoardServiceImp implements BoardService {
 				Board b = listView.getSelectionModel().getSelectedItem();
 				if (b != null) {
 					// 해당 게시물 보기
-					openBoardDetailWindow(b);
+					openBoardDetailWindow(root, b);
 				}
 			}
 		});
@@ -151,7 +151,7 @@ public class BoardServiceImp implements BoardService {
 				Board b = listView.getSelectionModel().getSelectedItem();
 				if (b != null) {
 					// 해당 게시물 보기
-					openBoardDetailWindow(b);
+					openBoardDetailWindow(root, b);
 				}
 			}
 		});
@@ -178,7 +178,7 @@ public class BoardServiceImp implements BoardService {
 				Board b = listView.getSelectionModel().getSelectedItem();
 				if (b != null) {
 					// 해당 게시물 보기
-					openBoardDetailWindow(b);
+					openBoardDetailWindow(root, b);
 				}
 			}
 		});
@@ -240,44 +240,55 @@ public class BoardServiceImp implements BoardService {
 		}
 	}
 	
-	// 게시물 목록에서 클릭하면 해당 게시물 내용이 포함된 창이 출력되는 메서드 . 스크롤페인
+	// 보드 디테일뷰 - 게시물 목록에서 클릭하면 해당 게시물 내용이 포함된 창이 출력되는 메서드 . 스크롤페인
 	@Override
-	public void openBoardDetailWindow(Board selectedBoard) {
+	public void openBoardDetailWindow(Parent root, Board selectedBoard) {
+		Stage detailStage = new Stage();
+		
+		FXMLLoader detailLoader = new FXMLLoader(getClass().getResource("../fxml/boardDetail.fxml"));
+		
 		try {
-			FXMLLoader detailLoader = new FXMLLoader(getClass().getResource("../fxml/boardDetail.fxml"));
-			Parent detailRoot = detailLoader.load();
-
-			// 직접 FXML 요소에 접근
-			Text nicknameText = (Text) detailRoot.lookup("#nicknameText");
-			Label titleText = (Label) detailRoot.lookup("#titleText");
-			Text dateText = (Text) detailRoot.lookup("#dateText");
-			TextArea cts = (TextArea) detailRoot.lookup("#contents");
-			
-			cts.setText(selectedBoard.getContents());
-			nicknameText.setText(selectedBoard.getNicName());
-			dateText.setText(selectedBoard.getUploadDate());
-			titleText.setText(selectedBoard.getTitle());
-
-			Stage detailStage = new Stage();
-			detailStage.setScene(new Scene(detailRoot));
-
-			// ScrollPane
-			ScrollPane scrollPane = new ScrollPane();
-			scrollPane.setContent(detailRoot);
-
-			// Pannable.
-			scrollPane.setPannable(true);
-
-			Scene scene = new Scene(scrollPane, 980, 891);
-			detailStage.setScene(scene);
-
-			detailStage.setTitle("게시물 상세 정보");
-			detailStage.setResizable(false);
-			detailStage.show();
-		} catch (IOException e) {
+			root = detailLoader.load();
+			detailStage.setScene(new Scene(root));
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
-			showAlert("Error", "Error opening detail window.");
 		}
+		Controller ctrl = detailLoader.getController();
+		ctrl.setRoot(root);
+		
+		// 직접 FXML 요소에 접근
+		Text nicknameText = (Text) root.lookup("#nicknameText");
+		Label titleText = (Label) root.lookup("#titleText");
+		Label categoryText = (Label) root.lookup("#CategoryText");
+		Text dateText = (Text) root.lookup("#dateText");
+		TextArea contentsText = (TextArea) root.lookup("#contents");
+		
+		Label postNum = (Label) root.lookup("#PostNumber");
+		int postNumber = selectedBoard.getNo();
+		String postNumberAsString = String.valueOf(postNumber);
+		
+		postNum.setText("Post Number."+postNumberAsString);
+		categoryText.setText(selectedBoard.getCategori()+" >");
+		contentsText.setText(selectedBoard.getContents());
+		nicknameText.setText(selectedBoard.getNicName());
+		dateText.setText(selectedBoard.getUploadDate());
+		titleText.setText(selectedBoard.getTitle());
+
+
+		// ScrollPane
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setContent(root);
+
+		// Pannable.
+		scrollPane.setPannable(true);
+
+		Scene scene = new Scene(scrollPane, 980, 891);
+		detailStage.setScene(scene);
+
+		detailStage.setTitle("게시물 상세 정보");
+		detailStage.setResizable(false);
+		detailStage.show();
 	}
 
 	// ▲ ▲ ▲ 부속 메서드

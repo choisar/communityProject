@@ -1,5 +1,6 @@
 package all.boardService;
 
+import java.io.IOException;
 import java.util.List;
 
 import all.Controller;
@@ -7,27 +8,23 @@ import all.button.common.CommonService;
 import all.button.common.CommonServiceImp;
 import all.databaseDAO.DatabaseDAO;
 import all.databaseDAO.DatabaseDAOImp;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class boardViewServiceImp implements boardViewService {
 
-	DatabaseDAO dao = new DatabaseDAOImp();
+	DatabaseDAO dao;
 	CommonService cs = new CommonServiceImp();
 	BoardService bs;
 //	BoardService bs = new BoardServiceImp();
 	
     public boardViewServiceImp() {
+    	dao = new DatabaseDAOImp();
     	bs = new BoardServiceImp();
     }
 
@@ -346,6 +343,54 @@ public class boardViewServiceImp implements boardViewService {
         membershipForm.setResizable(false);
         membershipForm.show();
     }
+    
+    
+    // 보드 디테일뷰에서 다음, 이전 게시물 창을 띄어주는 메서드
+    @Override
+    public void loadNextBoardInCategoryView(Parent root, String strPostNum, String category, String Sorting) {
+        // 여기서 strPostNum보다 크거나 작은 가장 가까운 값을 가진 다음 게시물을 찾아야 함
+        Board next_prev_Board = dao.getNextPrevBoard(strPostNum, category, Sorting);
+
+        // 다음, 이전 게시물이 존재한다면 해당 게시물의 openBoardDetailWindow 호출 + 현재 창 닫기
+        if (next_prev_Board != null) {
+            try {
+                Parent newRoot = FXMLLoader.load(getClass().getResource("../fxml/boardDetail.fxml"));
+                bs.openBoardDetailWindow(newRoot, next_prev_Board);
+                
+                // 현재 창을 닫기
+                Stage currentStage = (Stage) root.getScene().getWindow();
+                currentStage.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                // 예외 처리: FXML 파일을 로드하는 동안 예외가 발생했을 때 실행할 내용
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        // 다음, 이전 게시물이 없다면 커스텀 에러창 호출
+        } else {
+        	// Sorting 값이 ASC일 때 (다음 게시물 값일 때)
+        	if(Sorting == "ASC") {
+        		try {
+        			Parent detailRoot = FXMLLoader.load(getClass().getResource("../fxml/boardDetail.fxml"));
+        			cs.customErrorView(detailRoot, "다음 게시물이 없습니다.");
+        		} catch (IOException e) {
+        			e.printStackTrace();
+        			// 예외 처리: FXML 파일을 로드하는 동안 예외가 발생했을 때 실행할 내용
+        		}
+        		// Sorting 값이 DESC일 때 (이전 게시물 값일 때)
+        	} else if(Sorting == "DESC") {
+        		try {
+        			Parent detailRoot = FXMLLoader.load(getClass().getResource("../fxml/boardDetail.fxml"));
+        			cs.customErrorView(detailRoot, "이전 게시물이 없습니다.");
+        		} catch (IOException e) {
+        			e.printStackTrace();
+        			// 예외 처리: FXML 파일을 로드하는 동안 예외가 발생했을 때 실행할 내용
+        		}
+        	}
+        }
+    }
+    
+    
     
     
 }

@@ -47,4 +47,7 @@ public interface DatabaseDAO {
 	// 로그인하면 입력받은 아이디와 같은 정보를 가지고 있는 Member m 객체 생성
 	Member memberInfo(String id);
 	
+	// 다음, 이전 게시물을 찾는 메서드
+	public Board getNextPrevBoard(String postNum, String category, String Sorting);
+	
 }

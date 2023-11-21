@@ -29,6 +29,7 @@ import javafx.scene.control.TextField;
 
 public class Controller{
 	private Parent root;
+	private Parent detailRoot;
 	private UserService us;
 	private AdminService as;
 	// 테이블 뷰 관련된 기능
@@ -195,5 +196,18 @@ public class Controller{
 	public void testProc() {
 		bBt.testProc(root);
 	}
+	// 보드 디테일뷰에서 카테고리, 리스트 누르면 해당 카테고리 게시판 창 띄우는 버튼
+	public void categoryBoardProc() {
+		bBt.categoryBoardProc(root);
+	}
+	// 보드 디테일뷰에서 Next -> (다음 게시물) 버튼
+	public void NextProc() {
+		bBt.NextProc(root);
+	}
+	// 보드 디테일뷰에서 Prev <- (이전 게시물) 버튼
+	public void PrevProc() {
+		bBt.PrevProc(root);
+	}
+	
 	
 }

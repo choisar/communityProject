@@ -18,7 +18,7 @@ public interface boardButton {
 	// 나눔 게시판 버튼
 	void sharingBoardProc(Parent root);
     // Q&A 게시판 버튼
-    public void QAProc(Parent root);
+    void QAProc(Parent root);
 	// 신고하기 버튼
 	void reportProc(Parent root);
 	// 신고화면 검색 버튼
@@ -35,5 +35,13 @@ public interface boardButton {
 	
 	// 테스트 버튼
 	void testProc(Parent root);
+	
+	// 보드 디테일뷰에서 카테고리, 리스트 누르면 해당 카테고리 게시판 창 띄우는 버튼
+	void categoryBoardProc(Parent detailRoot);
+	
+	// 보드 디테일뷰에서 다음 게시물(next ->) 버튼을 누르면 다음 게시물로 가는 버튼
+	void NextProc(Parent root);
+	// 보드 디테일뷰에서 이전 게시물(Prev ->) 버튼을 누르면 다음 게시물로 가는 버튼
+	void PrevProc(Parent root);
 	
 }

@@ -418,5 +418,61 @@ public class boardButtonImp implements boardButton {
 		test.columnResizePolicyProperty();
 //		test.setItems(null);
 	}
+	
+	// 보드 디테일뷰에서 카테고리, 리스트 누르면 해당 카테고리 게시판 창 띄우는 버튼
+	@Override
+	public void categoryBoardProc(Parent root) {
+	    Label categoryChk = (Label) root.lookup("#CategoryText");
+
+	    if (categoryChk.getText().equals("전체 게시판 >")) {
+	        bvs.allBoardView(root);
+	    } else if(categoryChk.getText().equals("자유 게시판 >")) {
+	    	bvs.freeBoardView(root);
+	    } else if(categoryChk.getText().equals("구매 게시판 >")) {
+	    	bvs.buyBoardView(root);
+	    } else if(categoryChk.getText().equals("판매 게시판 >")) {
+	    	bvs.sellBoardView(root);
+	    } else if(categoryChk.getText().equals("나눔 게시판 >")) {
+	    	bvs.sharingBoardView(root);
+	    } else if(categoryChk.getText().equals("QA 게시판 >")) {
+	    	bvs.QABoardView(root);
+	    }
+	}
+	
+	// 보드 디테일뷰에서 다음 게시물(next ->) 버튼을 누르면 다음 게시물로 가는 버튼
+	@Override
+	public void NextProc(Parent root) {
+		Label LabelPostNum = (Label) root.lookup("#PostNumber");
+		Label LabelCategory = (Label) root.lookup("#CategoryText");
+		
+		// LabelPostNum을 가져오면 숫자만 안가져오고 Post Number.## 으로 Post Number까지 가져와버려서 . 기준으로 나눠서 숫자만 가져오게 했어요
+		String input = LabelPostNum.getText();
+		// . 기준으로 나누기
+		String[] parts = input.split("\\.");
+		
+		String StrpostNum = parts[1];
+		String category = LabelCategory.getText();
+		
+	    bvs.loadNextBoardInCategoryView(root, StrpostNum, category, "ASC");
+	}
+	
+	// 보드 디테일뷰에서 이전 게시물(Prev <-) 버튼을 누르면 다음 게시물로 가는 버튼
+	@Override
+	public void PrevProc(Parent root) {
+		Label LabelPostNum = (Label) root.lookup("#PostNumber");
+		Label LabelCategory = (Label) root.lookup("#CategoryText");
+		
+		// LabelPostNum을 가져오면 숫자만 안가져오고 Post Number.## 으로 Post Number까지 가져와버려서 . 기준으로 나눠서 숫자만 가져오게 했어요
+		String input = LabelPostNum.getText();
+		// . 기준으로 나누기
+		String[] parts = input.split("\\.");
+		
+		String StrpostNum = parts[1];
+		String category = LabelCategory.getText();
+		
+	    bvs.loadNextBoardInCategoryView(root, StrpostNum, category, "DESC");
+	}
+	
+	
 
 }
