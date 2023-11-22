@@ -158,10 +158,6 @@ public class Controller{
 	public void logoutProc() {
 		lb.logoutProc(root);
 	}
-	// 아이디 중복 확인
-	public void idChkProc(ActionEvent e) {
-		jb.idChkProc(root);
-	}
 	//
 	public void infoProc() {
 		ib.infoProc(root);
