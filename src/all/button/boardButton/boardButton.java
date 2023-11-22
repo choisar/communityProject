@@ -1,5 +1,7 @@
 package all.button.boardButton;
 
+import java.util.List;
+
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 
@@ -29,7 +31,7 @@ public interface boardButton {
 	// 게시하기 버튼
 	void uploadProc(Parent root) throws Exception;
 	// 파일선택 버튼
-	String fileUpload(Parent root);
+	List<String> fileUpload(Parent root);
 	// 이미지를 바이트화 시키는 함수
 	byte[] convertImageToBytes(String imgAddr) throws Exception;
 	

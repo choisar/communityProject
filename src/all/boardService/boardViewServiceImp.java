@@ -1,6 +1,7 @@
 package all.boardService;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.util.List;
 
 import all.Controller;
@@ -14,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class boardViewServiceImp implements boardViewService {
@@ -215,33 +217,6 @@ public class boardViewServiceImp implements boardViewService {
 		membershipForm.setResizable(false);
 		membershipForm.show();
 	}
-	
-//	// 신고화면 검색 결과 게시판
-//	@Override
-//	public void reportSearchResultBoardView(Parent root, String text1, String text2) {
-//		// TODO Auto-generated method stub
-//		Stage membershipForm = new Stage();
-//
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/boardView/searchResult.fxml"));
-//
-//		root = null;
-//
-//		try {
-//			root = loader.load();
-//			membershipForm.setScene(new Scene(root));
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
-//		Controller ctrl = loader.getController();
-//		ctrl.setRoot(root);
-//
-//		bs.reportSerchResultListView(root, text1, text2);
-//
-//		membershipForm.setTitle("신고화면 검색 결과 게시판");
-//		membershipForm.setResizable(false);
-//		membershipForm.show();
-//	}
 
 	// 글쓰기 창
 	@Override
@@ -262,8 +237,8 @@ public class boardViewServiceImp implements boardViewService {
 		}
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
-		ComboBox<String> cmbCateg=(ComboBox<String>)root.lookup("#cmbCateg");
-		
+		ComboBox<String> cmbCateg = (ComboBox<String>) root.lookup("#cmbCateg");
+
 		cmbCateg.getItems().addAll("자유 게시판", "구매 게시판", "판매 게시판", "나눔 게시판");
 
 		membershipForm.setTitle("게시글 입력");
@@ -355,7 +330,8 @@ public class boardViewServiceImp implements boardViewService {
         if (next_prev_Board != null) {
             try {
                 Parent newRoot = FXMLLoader.load(getClass().getResource("../fxml/boardDetail.fxml"));
-                bs.openBoardDetailWindow(newRoot, next_prev_Board);
+                List<Image> imagelist = dao.getAllImages(next_prev_Board.getNo());
+                bs.openBoardDetailWindow(newRoot, next_prev_Board,imagelist);
                 
                 // 현재 창을 닫기
                 Stage currentStage = (Stage) root.getScene().getWindow();

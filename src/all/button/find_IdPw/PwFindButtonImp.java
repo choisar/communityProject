@@ -41,7 +41,6 @@ public class PwFindButtonImp implements PwFindButton {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		membershipForm.setTitle("비밀번호찾기");
 		membershipForm.setResizable(false);
 		membershipForm.initModality(Modality.APPLICATION_MODAL);
 		membershipForm.setAlwaysOnTop(true);
@@ -63,17 +62,17 @@ public class PwFindButtonImp implements PwFindButton {
 			Stage currentStage = (Stage) id.getScene().getWindow();
 			currentStage.close();
 		} else if(id.getText().isEmpty() && phoneNum.getText().isEmpty()){
-			cs.customErrorView(root, "정보를 입력해주세요.");
+			cs.customErrorView(root, "정보를 입력하세요.");
 			id.requestFocus();
 		} else if(id.getText().isEmpty() && !(phoneNum.getText().isEmpty())){
-			cs.customErrorView(root, "아이디를 입력해주세요.");
+			cs.customErrorView(root, "아이디를 입력하세요.");
 			id.requestFocus();
 		} else if(!(id.getText().isEmpty()) && phoneNum.getText().isEmpty()){
-			cs.customErrorView(root, "전화번호를 입력해주세요.");
+			cs.customErrorView(root, "핸드폰 번호를 입력하세요.");
 			phoneNum.requestFocus();
 		}else if(!(id.getText().isEmpty()) && !(phoneNum.getText().isEmpty())) {
 			if(!(dao.idChk(id.getText(), phoneNum.getText()))) {
-				cs.customErrorView(root,"입력하신 내용과\n 일치하는 정보가 없습니다.");
+				cs.customErrorView(root,"일치하는 정보가 없습니다.");
 				id.clear();
 				phoneNum.clear();
 				id.requestFocus();
@@ -107,7 +106,7 @@ public class PwFindButtonImp implements PwFindButton {
 		findPw.setText(pw);
 		
 		Label findNameLb = (Label) root.lookup("#findName");
-		findNameLb.setText("\""+findName+"\"");
+		findNameLb.setText( findName );
 
 		membershipForm.setResizable(false);
 		membershipForm.initModality(Modality.APPLICATION_MODAL);

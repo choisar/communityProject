@@ -23,22 +23,22 @@
          </cursor>
 		</Text>
 		<Text fx:id="dateText" fill="#7c7c7c" layoutX="80.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날짜 내용" />
-		<Button layoutX="832.0" layoutY="145.0" mnemonicParsing="false" onAction="#reportProc" prefHeight="30.0" prefWidth="102.0" stylesheets="@button.css" text="Report" />
+		<Button layoutX="832.0" layoutY="145.0" mnemonicParsing="false" onAction="#reportProc" prefHeight="30.0" prefWidth="102.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Report" />
 		<AmbientLight color="CHARTREUSE" lightOn="true" />
 		<Label fx:id="titleText" contentDisplay="CENTER" layoutX="41.0" layoutY="68.0" prefHeight="58.0" prefWidth="557.0" text="제목 내용">
 			<font>
-				<Font size="30.0" />
+				<Font name="System Bold" size="30.0" />
 			</font>
 		</Label>
-		<TextArea fx:id="contents" editable="false" layoutX="29.0" layoutY="562.0" prefHeight="698.0" prefWidth="906.0" style="-fx-border-color: #8c8c8c; -fx-border-width: 2; -fx-background-radius: 4; -fx-border-radius: 4;">
+		<TextArea fx:id="contents" editable="false" layoutX="29.0" layoutY="553.0" prefHeight="698.0" prefWidth="906.0" style="-fx-border-color: #1e1636; -fx-border-width: 2; -fx-background-radius: 2; -fx-border-radius: 2;" wrapText="true">
          <font>
-            <Font size="14.0" />
+            <Font size="18.0" />
          </font></TextArea>
-		<Button layoutX="860.0" layoutY="1277.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="30.0" prefWidth="73.0" stylesheets="@button.css" text="Cancel" />
+		<Button layoutX="847.0" layoutY="1269.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="40.0" prefWidth="88.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Cancel" />
       <Label fx:id="logChk" layoutX="71.0" layoutY="97.0" text="회원" textFill="TRANSPARENT" />
-      <Button layoutX="722.0" layoutY="18.0" mnemonicParsing="false" onAction="#PrevProc" prefWidth="78.0" stylesheets="@button.css" text="&lt;- Prev" />
-      <Button layoutX="810.0" layoutY="18.0" mnemonicParsing="false" onAction="#NextProc" stylesheets="@button.css" text="Next -&gt;" />
-      <Button layoutX="898.0" layoutY="18.0" mnemonicParsing="false" onAction="#categoryBoardProc" stylesheets="@button.css" text="List" />
+      <Button layoutX="680.0" layoutY="18.0" mnemonicParsing="false" onAction="#PrevProc" prefWidth="78.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="&lt;- Prev" />
+      <Button layoutX="768.0" layoutY="18.0" mnemonicParsing="false" onAction="#NextProc" style="-fx-border-width: 2;" stylesheets="@button.css" text="Next -&gt;" />
+      <Button layoutX="856.0" layoutY="18.0" mnemonicParsing="false" onAction="#categoryBoardProc" style="-fx-border-width: 2;" stylesheets="@button.css" text="List" />
       <ImageView layoutX="30.0" layoutY="130.0">
          <image>
             <Image url="@../image/profile.png" />
@@ -47,9 +47,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Line endX="106.0" layoutX="834.0" layoutY="185.0" startX="-807.0" />
+      <Line endX="99.0" layoutX="834.0" layoutY="185.0" startX="-807.0" stroke="#1e1636" style="-fx-stroke-width: 2;" />
       <ImageView fitHeight="350.0" fitWidth="382.0" layoutX="40.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="351.0" fitWidth="453.0" layoutX="39.0" layoutY="198.0">
+      <ImageView fx:id="Image1" fitHeight="351.0" fitWidth="460.0" layoutX="33.0" layoutY="194.0">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -57,7 +57,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="84.0" fitWidth="111.0" layoutX="497.0" layoutY="198.0">
+      <ImageView fx:id="Image2" fitHeight="172.0" fitWidth="210.0" layoutX="500.0" layoutY="194.0">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -65,7 +65,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="84.0" fitWidth="111.0" layoutX="497.0" layoutY="287.0">
+      <ImageView fx:id="Image3" fitHeight="172.0" fitWidth="210.0" layoutX="717.0" layoutY="194.0">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -73,7 +73,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="84.0" fitWidth="111.0" layoutX="497.0" layoutY="376.0">
+      <ImageView fx:id="Image4" fitHeight="172.0" fitWidth="210.0" layoutX="500.0" layoutY="373.0">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -81,7 +81,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="84.0" fitWidth="111.0" layoutX="497.0" layoutY="465.0">
+      <ImageView fx:id="Image5" fitHeight="172.0" fitWidth="210.0" layoutX="717.0" layoutY="373.0">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -98,5 +98,6 @@
          </cursor>
       </Label>
       <Label fx:id="PostNumber" layoutX="719.0" layoutY="157.0" prefHeight="18.0" prefWidth="102.0" text="Post Number. 12" />
+      <Button fx:id="cancelProc" layoutX="911.0" layoutY="18.0" mnemonicParsing="false" style="-fx-border-width: 2;" stylesheets="@button.css" text="X" />
 	</children>
 </AnchorPane>

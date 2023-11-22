@@ -41,7 +41,6 @@ public class IdFindButtonImp implements IdFindButton {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		membershipForm.setTitle("아이디찾기");
 		membershipForm.setResizable(false);
 		membershipForm.initModality(Modality.APPLICATION_MODAL);
 		membershipForm.setAlwaysOnTop(true);
@@ -62,17 +61,17 @@ public class IdFindButtonImp implements IdFindButton {
 			Stage currentStage = (Stage) name.getScene().getWindow();
 			currentStage.close();
 		} else if(name.getText().isEmpty() && phoneNum.getText().isEmpty()){
-			cs.customErrorView(root, "정보를 입력해주세요.");
+			cs.customErrorView(root, "정보를 입력하세요.");
 			name.requestFocus();
 		} else if(name.getText().isEmpty() && !(phoneNum.getText().isEmpty())){
-			cs.customErrorView(root, "이름을 입력해주세요.");
+			cs.customErrorView(root, "이름을 입력하세요.");
 			name.requestFocus();
 		} else if(!(name.getText().isEmpty()) && phoneNum.getText().isEmpty()){
-			cs.customErrorView(root, "전화번호를 입력해주세요.");
+			cs.customErrorView(root, "핸드폰 번호를 입력하세요.");
 			phoneNum.requestFocus();
 		}else if(!(name.getText().isEmpty()) && !(phoneNum.getText().isEmpty())) {
 			if(!(dao.idChk(name.getText(), phoneNum.getText()))) {
-				cs.customErrorView(root,"입력하신 내용과\n 일치하는 정보가 없습니다.");
+				cs.customErrorView(root,"일치하는 정보가 없습니다.");
 				name.clear();
 				phoneNum.clear();
 				name.requestFocus();
@@ -105,9 +104,8 @@ public class IdFindButtonImp implements IdFindButton {
 		findId.setText(id);
 		
 		Label findNameLb = (Label) root.lookup("#findName");
-		findNameLb.setText("\""+findName+"\"");
+		findNameLb.setText(findName);
 
-		membershipForm.setTitle("아이디 찾기");
 		membershipForm.setResizable(false);
 		membershipForm.initModality(Modality.APPLICATION_MODAL);
 		membershipForm.setAlwaysOnTop(true);

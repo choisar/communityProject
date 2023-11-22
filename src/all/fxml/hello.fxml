@@ -3,11 +3,20 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane layoutX="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="333.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
+<AnchorPane layoutX="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="197.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
    <children>
-      <Button layoutX="137.0" layoutY="80.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="30.0" prefWidth="60.0" stylesheets="@button.css" text="확인" />
-      <Label fx:id="helloNicName" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="38.0" prefHeight="15.0" prefWidth="100.0" text="&quot;&quot;" textFill="#1e1636" />
-      <Label fx:id="helloId" layoutX="126.0" layoutY="38.0" prefHeight="15.0" prefWidth="191.0" text="(**)님 안녕하세요!" textFill="#1e1636" />
+      <Button layoutX="69.0" layoutY="83.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="30.0" prefWidth="60.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="OK" />
+      <Label fx:id="helloNicName" alignment="CENTER" layoutX="18.0" layoutY="53.0" prefHeight="15.0" prefWidth="161.0" text="*** 홍길동 ***" textFill="#1e1636">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="helloId" layoutX="6.0" layoutY="103.0" prefHeight="15.0" prefWidth="76.0" text="(**)님 안녕하세요!" textFill="#1d163600" />
+      <Label layoutX="64.0" layoutY="14.0" text="Hello!">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

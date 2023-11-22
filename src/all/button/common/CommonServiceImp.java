@@ -166,7 +166,6 @@ public class CommonServiceImp implements CommonService{
 			Controller ctrl = loader.getController();
 			ctrl.setRoot(root);
 
-			membershipForm.setTitle("Error");
 			membershipForm.setResizable(false);
 			membershipForm.initModality(Modality.APPLICATION_MODAL);
 			membershipForm.setAlwaysOnTop(true);

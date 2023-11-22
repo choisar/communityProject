@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import all.Member;
@@ -37,7 +38,7 @@ public class boardButtonImp implements boardButton {
 	BoardService bs = new BoardServiceImp();
 	TableViewService tvs = new TableViewServiceImp();
 	boardViewService bvs = new boardViewServiceImp();
-	
+
 	public boardButtonImp() {
 		dao = new DatabaseDAOImp();
 	}
@@ -60,13 +61,13 @@ public class boardButtonImp implements boardButton {
 
 			// 카테고리 선택 X, 검색내용 X
 			if (text1 == null && text2.isEmpty()) {
-				cs.errorView4(root);
+				cs.customErrorView(root, "검색할 내용이 없습니다.");
 				// 카테고리 선택만 X
 			} else if (text1 == null && !text2.isEmpty()) {
-				cs.errorView3(root);
+				cs.customErrorView(root, "카테고리를 선택하세요.");
 				// 검색내용만 X
 			} else if (text2.isEmpty() && text1 != null) {
-				cs.errorView2(root);
+				cs.customErrorView(root, "검색할 내용을 입력하세요.");
 			} else if (!(text1 == null && text2.isEmpty())) {
 
 				// 입력받은 콤보박스 값을 dao에 있는 열(컬럼)이름으로 변경
@@ -81,7 +82,7 @@ public class boardButtonImp implements boardButton {
 				// 비회원일 때
 				if (logChk.getText().equals("비회원")) {
 					cs.errorView1(root);
-				// 회원일 때
+					// 회원일 때
 				} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 					// 새창 띄우기 값 true 일 때
 					if (bs.chk1(root)) {
@@ -92,120 +93,118 @@ public class boardButtonImp implements boardButton {
 						listView.getItems().clear();
 						listView.getColumns().clear();
 						List<Board> boardList = dao.searchResultAll(text1, text2);
-
-						if (boardList != null) {
+						if(boardList.isEmpty()) {
+							cs.customErrorView(root, "검색결과가 없습니다.");
+						} else {
 							tvs.configureBoardTableView(listView);
 							listView.setItems(FXCollections.observableArrayList(boardList));
-						} else {
-							System.out.println("게시판 목록을 가져올 수 없습니다.");
 						}
 					}
 				}
 			}
-
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 		} catch (Exception e) {
 			System.out.println("기타오류 - 관리자에게 문의하세요.");
 		}
 	}
-	
+
 	// 전체 게시판 버튼
 	@Override
 	public void allBoardProc(Parent root) {
-	    Label logChk = (Label) root.lookup("#logChk");
+		Label logChk = (Label) root.lookup("#logChk");
 
-	    if (logChk.getText().equals("비회원")) {
-	        cs.errorView1(root);
-	    } else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-	        if (bs.chk1(root)) {
-	            bvs.allBoardView(root);
-	        } else {
-	            tvs.loadAllBoardListView(root);
-	        }
-	    }
+		if (logChk.getText().equals("비회원")) {
+			cs.errorView1(root);
+		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			if (bs.chk1(root)) {
+				bvs.allBoardView(root);
+			} else {
+				tvs.loadAllBoardListView(root);
+			}
+		}
 	}
 
 	// 자유 게시판 버튼
-    @Override
-    public void freeBoardProc(Parent root) {
-        Label logChk = (Label) root.lookup("#logChk");
-        
-	    if (logChk.getText().equals("비회원")) {
-	        cs.errorView1(root);
-	    } else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-	        if (bs.chk1(root)) {
-	            bvs.freeBoardView(root);
-	        } else {
-	        	tvs.handleBoardView(root, logChk, "자유 게시판");
-	        }
-	    }
-    }
-    
-    // 구매 게시판 버튼
-    @Override
-    public void buyBoardProc(Parent root) {
-        Label logChk = (Label) root.lookup("#logChk");
-        
-	    if (logChk.getText().equals("비회원")) {
-	        cs.errorView1(root);
-	    } else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-	        if (bs.chk1(root)) {
-	            bvs.buyBoardView(root);
-	        } else {
-	        	tvs.handleBoardView(root, logChk, "구매 게시판");
-	        	
-	        }
-	    }
-    }
-    
-    // 판매 게시판 버튼
-    @Override
-    public void sellBoardProc(Parent root) {
-        Label logChk = (Label) root.lookup("#logChk");
-        
-	    if (logChk.getText().equals("비회원")) {
-	        cs.errorView1(root);
-	    } else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-	        if (bs.chk1(root)) {
-	            bvs.sellBoardView(root);
-	        } else {
-	        	tvs.handleBoardView(root, logChk, "판매 게시판");
-	        }
-	    }
-    }
-    
-    // 나눔 게시판 버튼
-    @Override
-    public void sharingBoardProc(Parent root) {
-        Label logChk = (Label) root.lookup("#logChk");
-        
-	    if (logChk.getText().equals("비회원")) {
-	        cs.errorView1(root);
-	    } else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-	        if (bs.chk1(root)) {
-	            bvs.sharingBoardView(root);
-	        } else {
-	        	tvs.handleBoardView(root, logChk, "나눔 게시판");
-	        }
-	    }
-    }
-    
-    // Q&A 게시판 버튼
-    @Override
-    public void QAProc(Parent root) {
-        Label logChk = (Label) root.lookup("#logChk");
-        
-	    if (logChk.getText().equals("비회원")) {
-	        cs.errorView1(root);
-	    } else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-	        if (bs.chk1(root)) {
-	            bvs.QABoardView(root);
-	        } else {
-	        	tvs.handleBoardView(root, logChk, "QA 게시판");
-	        }
-	    }
-    }
+	@Override
+	public void freeBoardProc(Parent root) {
+		Label logChk = (Label) root.lookup("#logChk");
+
+		if (logChk.getText().equals("비회원")) {
+			cs.errorView1(root);
+		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			if (bs.chk1(root)) {
+				bvs.freeBoardView(root);
+			} else {
+				tvs.handleBoardView(root, logChk, "자유 게시판");
+			}
+		}
+	}
+
+	// 구매 게시판 버튼
+	@Override
+	public void buyBoardProc(Parent root) {
+		Label logChk = (Label) root.lookup("#logChk");
+
+		if (logChk.getText().equals("비회원")) {
+			cs.errorView1(root);
+		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			if (bs.chk1(root)) {
+				bvs.buyBoardView(root);
+			} else {
+				tvs.handleBoardView(root, logChk, "구매 게시판");
+
+			}
+		}
+	}
+
+	// 판매 게시판 버튼
+	@Override
+	public void sellBoardProc(Parent root) {
+		Label logChk = (Label) root.lookup("#logChk");
+
+		if (logChk.getText().equals("비회원")) {
+			cs.errorView1(root);
+		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			if (bs.chk1(root)) {
+				bvs.sellBoardView(root);
+			} else {
+				tvs.handleBoardView(root, logChk, "판매 게시판");
+			}
+		}
+	}
+
+	// 나눔 게시판 버튼
+	@Override
+	public void sharingBoardProc(Parent root) {
+		Label logChk = (Label) root.lookup("#logChk");
+
+		if (logChk.getText().equals("비회원")) {
+			cs.errorView1(root);
+		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			if (bs.chk1(root)) {
+				bvs.sharingBoardView(root);
+			} else {
+				tvs.handleBoardView(root, logChk, "나눔 게시판");
+			}
+		}
+	}
+
+	// Q&A 게시판 버튼
+	@Override
+	public void QAProc(Parent root) {
+		Label logChk = (Label) root.lookup("#logChk");
+
+		if (logChk.getText().equals("비회원")) {
+			cs.errorView1(root);
+		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			if (bs.chk1(root)) {
+				bvs.QABoardView(root);
+			} else {
+				tvs.handleBoardView(root, logChk, "QA 게시판");
+			}
+		}
+	}
 
 	// 글쓰기 버튼
 	@Override
@@ -232,20 +231,20 @@ public class boardButtonImp implements boardButton {
 			bvs.reportView(root);
 		}
 	}
-	
+
 	// 신고화면 검색 버튼
 	@Override
 	public void reportSearchProc(Parent root) {
 		// TODO Auto-generated method stub
-		
+
 		try {
 			// 콤보박스 - 카테고리값
 			String text1 = bs.reportCombo1(root);
-			
+
 			// 텍스트 필드 - 검색내용
 			TextField searchText = (TextField) root.lookup("#reportSearchText");
 			String text2 = searchText.getText();
-			
+
 			// 카테고리 선택 X, 검색내용 X
 			if (text1 == null && text2.isEmpty()) {
 				cs.errorView4(root);
@@ -256,7 +255,7 @@ public class boardButtonImp implements boardButton {
 			} else if (text2.isEmpty() && text1 != null) {
 				cs.errorView2(root);
 			} else if (!(text1 == null && text2.isEmpty())) {
-				
+
 				if (text1.equals("게시물 이름")) {
 					text1 = "title";
 				} else if (text1.equals("닉네임")) {
@@ -264,47 +263,47 @@ public class boardButtonImp implements boardButton {
 				} else if (text1.equals("아이디")) {
 					text1 = "member_id";
 				}
-				
+
 				if (text1 == "title") {
 					TableView<Board> titleReportListView = (TableView<Board>) root.lookup("#reportTable");
 					titleReportListView.getItems().clear();
 					titleReportListView.getColumns().clear();
 					List<Board> titleReportList = dao.searchResultAll(text1, text2);
-					
+
 					if (titleReportList != null) {
 						tvs.configureBoardTableView1(titleReportListView, root);
 						titleReportListView.setItems(FXCollections.observableArrayList(titleReportList));
 					} else {
-						System.out.println("게시판 목록을 가져올 수 없습니다.");
+						cs.customErrorView(root, "Unable to get bulletin board list.");
 					}
-				} else if(text1 == "member_nickname") {
+				} else if (text1 == "member_nickname") {
 					TableView<Member> nickNameReportListView = (TableView<Member>) root.lookup("#reportTable");
 					nickNameReportListView.getItems().clear();
 					nickNameReportListView.getColumns().clear();
 					List<Member> nickNameReportList = dao.reportSearchResultAll2(text1, text2);
-					
+
 					if (nickNameReportList != null) {
 						tvs.configureBoardTableView2(nickNameReportListView, root);
 						nickNameReportListView.setItems(FXCollections.observableArrayList(nickNameReportList));
 					} else {
-						System.out.println("게시판 목록을 가져올 수 없습니다.");
+						cs.customErrorView(root, "Unable to get bulletin board list.");
 					}
-				} else if(text1 == "member_id") {
+				} else if (text1 == "member_id") {
 					TableView<Member> idReportListView = (TableView<Member>) root.lookup("#reportTable");
 					idReportListView.getItems().clear();
 					idReportListView.getColumns().clear();
 					List<Member> idReportList = dao.reportSearchResultAll2(text1, text2);
-					
+
 					if (idReportList != null) {
 						tvs.configureBoardTableView3(idReportListView, root);
 						idReportListView.setItems(FXCollections.observableArrayList(idReportList));
 					} else {
-						System.out.println("게시판 목록을 가져올 수 없습니다.");
+						cs.customErrorView(root, "Unable to get bulletin board list.");
 					}
 				}
-				
+
 			}
-			
+
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 		} catch (Exception e) {
@@ -316,17 +315,19 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void uploadProc(Parent root) throws Exception {
 		// TODO Auto-generated method stub
+		boolean postSuc = false;
+		boolean imgSuc = false;
 		TextField title = (TextField) root.lookup("#txtTitle");
 		TextArea contents = (TextArea) root.lookup("#txtContents");
 		TextArea imgAddr = (TextArea) root.lookup("#imgAddr");
 		ComboBox<String> cmbCateg = (ComboBox<String>) root.lookup("#cmbCateg");
 
 		if (title.getText().isEmpty()) {
-			cs.msgBox("입력", "입력 오류", "제목을 입력하세요");
+			cs.customErrorView(root, "Please enter a title.");
 			title.requestFocus();
 			return;
 		} else if (contents.getText().isEmpty()) {
-			cs.msgBox("입력", "입력 오류", "본문을 입력하세요");
+			cs.customErrorView(root, "Please enter the text.");
 			contents.requestFocus();
 			return;
 		}
@@ -336,7 +337,7 @@ public class boardButtonImp implements boardButton {
 		b.setContents(contents.getText());
 
 		if (cmbCateg.getValue() == null) {
-			cs.msgBox("입력", "입력오류", "카테고리를 선택해주세요.");
+			cs.customErrorView(root, "Please select a category.");
 			cmbCateg.requestFocus();
 			return;
 		} else {
@@ -356,42 +357,58 @@ public class boardButtonImp implements boardButton {
 			}
 		}
 
-		DatePicker UploadDate = (DatePicker) root.lookup("#UploadDate");
-		LocalDate date = UploadDate.getValue();
-		Date d = Date.valueOf(date);
-
-		b.setUploadDate(d.toString());
-
-		byte[] imageBytes = null;
-		if (imgAddr != null) {
-			imageBytes = convertImageToBytes((String) imgAddr.getText());
-			b.setImagePath(imageBytes);
+		postSuc = dao.uploadBoard(b);
+		all.boardService.ImagePath ip = new all.boardService.ImagePath();
+		System.out.println(imgAddr.getText());
+		if (postSuc) {
+			if (imgAddr.getText().equals("") || imgAddr.getText().equals("blank")) {
+				imgSuc = true;
+			} else {
+				byte[] imageBytes = null;
+				String[] imgPaths = imgAddr.getText().split("\\n");
+				System.out.println(imgPaths[0]);
+				for (String i : imgPaths) {
+					ip = new all.boardService.ImagePath();
+					imageBytes = convertImageToBytes(i);
+					System.out.println(imageBytes);
+					ip.setImageByte(imageBytes);
+					imgSuc = dao.uploadImg(ip, b);
+					if (!imgSuc) {
+						dao.imgDelete(ip);
+						imgAddr.clear();
+					}
+				}
+			}
 		}
 
-		if (dao.uploadBoard(b)) {
-			System.out.println("게시 완료");
+		if (postSuc && imgSuc) {
+			cs.customErrorView(root, "Posting completed");
 			Stage s = (Stage) root.getScene().getWindow();
 			s.close();
 		} else {
-			System.out.println("게시 실패");
+			cs.customErrorView(root, "Posting faild");
+			dao.imgDelete(ip);
 		}
 
 	}
 
 	// 파일선택 버튼
 	@Override
-	public String fileUpload(Parent root) {
+	public List<String> fileUpload(Parent root) {
 		// TODO Auto-generated method stub
 		TextArea imgAddr = (TextArea) root.lookup("#imgAddr");
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-		File selectedFile = fileChooser.showOpenDialog(root.getScene().getWindow());
-
-		if (selectedFile != null) {
-			imgAddr.setText(selectedFile.getPath());
-			return (String) imgAddr.getText();
+		List<File> selectedFiles = fileChooser.showOpenMultipleDialog(root.getScene().getWindow());
+		if (selectedFiles != null && !selectedFiles.isEmpty()) {
+			List<String> filePaths = new ArrayList<>();
+			for (File file : selectedFiles) {
+				filePaths.add(file.getPath());
+			}
+			imgAddr.setText(String.join("\n", filePaths));
+			return filePaths;
 		} else {
-			imgAddr.setText("아무것도 지정하지 않았습니다.");
+			imgAddr.setText("blank");
 		}
 		return null;
 	}
@@ -404,75 +421,76 @@ public class boardButtonImp implements boardButton {
 
 		try (FileInputStream fis = new FileInputStream(imageFile)) {
 			fis.read(imageBytes);
+		} catch (Exception e) {
+			cs.msgBox("ERROR", "이미지 바이트화 실패", "boardButtonImp - convertImageToBytes");
+			e.printStackTrace();
 		}
 
 		return imageBytes;
 	}
 
-	
 	// 테스트 버튼
 	public void testProc(Parent root) {
 		TableView<Member> test = (TableView<Member>) root.lookup("#ListView");
 		test.getItems().clear();
 		test.getColumns().clear();
 		test.columnResizePolicyProperty();
-//		test.setItems(null);
 	}
-	
+
 	// 보드 디테일뷰에서 카테고리, 리스트 누르면 해당 카테고리 게시판 창 띄우는 버튼
 	@Override
 	public void categoryBoardProc(Parent root) {
-	    Label categoryChk = (Label) root.lookup("#CategoryText");
+		Label categoryChk = (Label) root.lookup("#CategoryText");
 
-	    if (categoryChk.getText().equals("전체 게시판 >")) {
-	        bvs.allBoardView(root);
-	    } else if(categoryChk.getText().equals("자유 게시판 >")) {
-	    	bvs.freeBoardView(root);
-	    } else if(categoryChk.getText().equals("구매 게시판 >")) {
-	    	bvs.buyBoardView(root);
-	    } else if(categoryChk.getText().equals("판매 게시판 >")) {
-	    	bvs.sellBoardView(root);
-	    } else if(categoryChk.getText().equals("나눔 게시판 >")) {
-	    	bvs.sharingBoardView(root);
-	    } else if(categoryChk.getText().equals("QA 게시판 >")) {
-	    	bvs.QABoardView(root);
-	    }
+		if (categoryChk.getText().equals("전체 게시판 >")) {
+			bvs.allBoardView(root);
+		} else if (categoryChk.getText().equals("자유 게시판 >")) {
+			bvs.freeBoardView(root);
+		} else if (categoryChk.getText().equals("구매 게시판 >")) {
+			bvs.buyBoardView(root);
+		} else if (categoryChk.getText().equals("판매 게시판 >")) {
+			bvs.sellBoardView(root);
+		} else if (categoryChk.getText().equals("나눔 게시판 >")) {
+			bvs.sharingBoardView(root);
+		} else if (categoryChk.getText().equals("QA 게시판 >")) {
+			bvs.QABoardView(root);
+		}
 	}
-	
+
 	// 보드 디테일뷰에서 다음 게시물(next ->) 버튼을 누르면 다음 게시물로 가는 버튼
 	@Override
 	public void NextProc(Parent root) {
 		Label LabelPostNum = (Label) root.lookup("#PostNumber");
 		Label LabelCategory = (Label) root.lookup("#CategoryText");
-		
-		// LabelPostNum을 가져오면 숫자만 안가져오고 Post Number.## 으로 Post Number까지 가져와버려서 . 기준으로 나눠서 숫자만 가져오게 했어요
+
+		// LabelPostNum을 가져오면 숫자만 안가져오고 Post Number.## 으로 Post Number까지 가져와버려서 . 기준으로
+		// 나눠서 숫자만 가져오게 했어요
 		String input = LabelPostNum.getText();
 		// . 기준으로 나누기
 		String[] parts = input.split("\\.");
-		
+
 		String StrpostNum = parts[1];
 		String category = LabelCategory.getText();
-		
-	    bvs.loadNextBoardInCategoryView(root, StrpostNum, category, "ASC");
+
+		bvs.loadNextBoardInCategoryView(root, StrpostNum, category, "ASC");
 	}
-	
+
 	// 보드 디테일뷰에서 이전 게시물(Prev <-) 버튼을 누르면 다음 게시물로 가는 버튼
 	@Override
 	public void PrevProc(Parent root) {
 		Label LabelPostNum = (Label) root.lookup("#PostNumber");
 		Label LabelCategory = (Label) root.lookup("#CategoryText");
-		
-		// LabelPostNum을 가져오면 숫자만 안가져오고 Post Number.## 으로 Post Number까지 가져와버려서 . 기준으로 나눠서 숫자만 가져오게 했어요
+
+		// LabelPostNum을 가져오면 숫자만 안가져오고 Post Number.## 으로 Post Number까지 가져와버려서 . 기준으로
+		// 나눠서 숫자만 가져오게 했어요
 		String input = LabelPostNum.getText();
 		// . 기준으로 나누기
 		String[] parts = input.split("\\.");
-		
+
 		String StrpostNum = parts[1];
 		String category = LabelCategory.getText();
-		
-	    bvs.loadNextBoardInCategoryView(root, StrpostNum, category, "DESC");
+
+		bvs.loadNextBoardInCategoryView(root, StrpostNum, category, "DESC");
 	}
-	
-	
 
 }

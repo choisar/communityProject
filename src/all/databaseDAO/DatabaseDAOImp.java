@@ -1,10 +1,15 @@
 package all.databaseDAO;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,14 +17,20 @@ import java.util.List;
 
 import all.Member;
 import all.boardService.Board;
+import all.boardService.ImagePath;
 import all.button.common.CommonService;
 import all.button.common.CommonServiceImp;
+import javafx.scene.Parent;
+import javafx.scene.image.Image;
 
 public class DatabaseDAOImp implements DatabaseDAO {
 	CommonService cs;
 	Connection con;
 	ResultSet rs;
 	PreparedStatement pstmt;
+	static String nowId = "";
+	static int nowBoardNum = 0;
+	Parent root;
 
 	// 합치기
 	boolean idChkCom;
@@ -36,7 +47,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 			con = DriverManager.getConnection(url, user, pass);
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.err.println("오라클 연결 실패");
+			cs.msgBox("Oracle", "오라클 연결 실패", "DAOImp를 확인하세요");
 			e.printStackTrace();
 		}
 
@@ -158,20 +169,22 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	// 입력받은 아이디와 비밀번호가 dao에 있는 아이디, 비밀번호와 일치하는 정보가 있으면 true를 일치하지 않으면 false를 반환
 	@Override
 	public boolean loginChk(String id, String pw) {
-		// TODO Auto-generated method stub
 		String sql = "select decode(count(*), 1, 'true', 'false') from member where member_id=? and member_pw=?";
-		try {
-			pstmt = con.prepareStatement(sql);
+		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
 
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				return Boolean.parseBoolean(rs.getString(1));
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					if (Boolean.parseBoolean(rs.getString(1))) {
+						nowId = id;
+					}
+					return Boolean.parseBoolean(rs.getString(1));
+				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			// Exception handling (you might want to log the exception or perform other
+			// meaningful actions)
 			e.printStackTrace();
 		}
 		return false;
@@ -391,7 +404,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 					String dateStr = sdf.format(timestamp);
 					b.setUploadDate(dateStr);
 				}
-
+				b.setContents(rs.getString(6));
 				boardList.add(b);
 			}
 			return boardList;
@@ -404,14 +417,17 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	// db에 게시글 등록하기
 	@Override
 	public boolean uploadBoard(Board b) {
-		// TODO Auto-generated method stub
-		String sql = "insert into board values(board_seq.nextval, ?, ?, ?, ?)";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, b.getTitle());
-			pstmt.setString(2, b.getCategori());
-			pstmt.setString(3, b.getContents());
-			pstmt.setBytes(4, b.getImagePath());
+		String sql = "INSERT INTO board VALUES (board_seq.nextval, ?, ?, ?, SYSDATE, ?, ?)";
+		Member m = new Member();
+
+		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
+			m = memberInfo(nowId);
+			
+			pstmt.setString(1, m.getNickName());
+			pstmt.setString(2, b.getTitle());
+			pstmt.setString(3, b.getCategori());
+			pstmt.setString(4, b.getContents());
+			pstmt.setString(5, nowId);
 
 			int result = pstmt.executeUpdate();
 
@@ -419,11 +435,130 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				return true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// 예외 처리 (더 의미 있는 작업이나 로깅을 위해 더 추가할 수 있습니다)
+			cs.customErrorView(root, "DAO uploadBoard 메서드에서 문제 발생");
 			e.printStackTrace();
 		}
 		return false;
 	}
+	
+	// db에 해당 게시물의 이미지 저장하기
+	@Override
+	public boolean uploadImg(ImagePath ip, Board b) {
+		String sql1 = "SELECT board_no FROM board WHERE title=?";
+		String sql2 = "INSERT INTO board_img VALUES (?, ?)";
+
+		try (PreparedStatement pstmt1 = con.prepareStatement(sql1);) {
+			try {
+				pstmt1.setString(1, b.getTitle());
+				try (ResultSet rs = pstmt1.executeQuery()) {
+					if (rs.next()) {
+						ip.setImg_no(rs.getInt(1));
+						nowBoardNum = rs.getInt(1);
+					}
+				}
+			} catch (Exception e) {
+				// 예외 처리 (더 의미 있는 작업이나 로깅을 위해 더 추가할 수 있습니다)
+				cs.customErrorView(root, "uploadImg - 1 메서드에서 문제 발생");
+				e.printStackTrace();
+			}
+
+			try (PreparedStatement pstmt2 = con.prepareStatement(sql2);) {
+				pstmt2.setInt(1, ip.getImg_no());
+				pstmt2.setBytes(2, ip.getImageByte());
+
+				int result = pstmt2.executeUpdate();
+
+				if (result == 1) {
+					return true;
+				}
+			} catch (Exception e) {
+				// 예외 처리 (더 의미 있는 작업이나 로깅을 위해 더 추가할 수 있습니다)
+				cs.customErrorView(root, "uploadImg - 2 메서드에서 문제 발생");
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// 예외 처리 (더 의미 있는 작업이나 로깅을 위해 더 추가할 수 있습니다)
+			cs.customErrorView(root, "uploadImg - 메서드에서 전체적으로 문제 발생");
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	// DB - 게시물 번호를 주면 해당 게시물 번호에 저장된 모든 이미지를 리스트에 넣어줌
+	@Override
+	public List<Image> getAllImages(int boardNo) {
+	    List<Image> images = new ArrayList<>();
+	    String sql = "SELECT imagepath FROM board_img WHERE board_no = ?";
+	    
+	    try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+	        pstmt.setInt(1, boardNo);
+	        
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            while (rs.next()) {
+	                Blob imageBlob = rs.getBlob("imagepath");
+	                Image image = convertBlobToImage(imageBlob);
+	                if (image != null) {
+	                    images.add(image);
+	                }
+	            } 	
+	        }
+	    } catch (SQLException e) {
+	        // 예외 처리
+	        e.printStackTrace();
+	    }
+	    return images;
+	}
+	
+	// Blob 데이터를 JavaFX Image로 변환하는 메서드
+	@Override
+	public Image convertBlobToImage(Blob blob) {
+	    try (InputStream inputStream = blob.getBinaryStream()) {
+	        // BLOB 데이터를 바이트 배열로 읽음
+	        byte[] data = new byte[(int) blob.length()];
+	        inputStream.read(data);
+
+	        // 바이트 배열을 JavaFX Image로 변환
+	        ByteArrayInputStream bis = new ByteArrayInputStream(data);
+	        return new Image(bis);
+	    } catch (SQLException | IOException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+
+	
+	// 게시물 업로드에 문제가 생겼을 시, 이전까지 db에 업로드한 내용 삭제하기
+	@Override
+	public void imgDelete(ImagePath ip) {
+		String sql1 = "DELETE FROM board WHERE board_no=?";
+		String sql2 = "DELETE FROM board_img WHERE board_no=?";
+
+		try (PreparedStatement pstmt1 = con.prepareStatement(sql1);) {
+			try {
+				pstmt1.setInt(1, nowBoardNum);
+				pstmt1.executeUpdate();
+			} catch (Exception e) {
+				// 예외 처리 (더 의미 있는 작업이나 로깅을 위해 더 추가할 수 있습니다)
+				cs.customErrorView(root, "DAO imgDelete - 1 메서드에서 문제 발생");
+				e.printStackTrace();
+			}
+
+			try (PreparedStatement pstmt2 = con.prepareStatement(sql2);) {
+				pstmt2.setInt(1, nowBoardNum);
+				pstmt2.executeUpdate();
+			} catch (Exception e) {
+				// 예외 처리 (더 의미 있는 작업이나 로깅을 위해 더 추가할 수 있습니다)
+				cs.customErrorView(root, "DAO imgDelete - 2 메서드에서 문제 발생");
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// 예외 처리 (더 의미 있는 작업이나 로깅을 위해 더 추가할 수 있습니다)
+			cs.customErrorView(root, "DAO imgDelete - 3 메서드에서 문제 발생");
+			e.printStackTrace();
+		}
+	}
+	
 
 	// 로그인하면 입력받은 아이디와 같은 정보를 가지고 있는 Member m 객체 생성
 	public Member memberInfo(String id) {
@@ -545,7 +680,6 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				board.setNicName(rs.getString("board_memnick"));
 				board.setTitle(rs.getString("title"));
 				board.setCategori(rs.getString("category"));
-				board.setUploadDate(rs.getDate("contents_date").toString());
 				// 타임스탬프 분까지만 자리수 끊기
 				Timestamp timestamp = rs.getTimestamp("contents_date");
 				if (timestamp != null) {
@@ -553,7 +687,6 @@ public class DatabaseDAOImp implements DatabaseDAO {
 					String dateStr = sdf.format(timestamp);
 					board.setUploadDate(dateStr);
 				}
-//                board.setImagePath(null);
 				board.setContents(rs.getString("contents"));
 				board.setId(rs.getString("board_memid"));
 				latestList.add(board);
@@ -569,15 +702,18 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	public Board getNextPrevBoard(String postNum, String category, String Sorting) {
 		category = category.substring(0, category.length() - 2);
 
-		String a = null;
+		String sql = null;
 		if (Sorting == "ASC") {
-			a = ">";
+			sql = "SELECT * FROM board WHERE board_no > " + postNum + " AND category = '" + category
+					+ "' AND ROWNUM <= 1 ORDER BY board_no " + Sorting;
 		} else if (Sorting == "DESC") {
-			a = "<";
+			sql = "SELECT * FROM (\r\n"
+					+ "    SELECT * \r\n"
+					+ "    FROM board \r\n"
+					+ "    WHERE board_no < " + postNum + " AND category = '" + category + "' \r\n"
+					+ "    ORDER BY board_no DESC\r\n"
+					+ ") ";
 		}
-
-		String sql = "SELECT * FROM board WHERE board_no " + a + " " + postNum + " AND category = '" + category
-				+ "' AND ROWNUM <= 1 ORDER BY board_no " + Sorting;
 
 		try (Connection con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE", "c##sqluser", "1234");
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -607,5 +743,6 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		Board nextBoard = null;
 		return nextBoard;
 	}
+
 
 }

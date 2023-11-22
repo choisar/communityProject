@@ -2,23 +2,34 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="944.0" prefWidth="963.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
 	<children>
-		<Label layoutX="57.0" layoutY="49.0" text="제목" />
-		<TextField fx:id="txtTitle" layoutX="120.0" layoutY="45.0" prefHeight="23.0" prefWidth="313.0" />
-		<Label layoutX="57.0" layoutY="93.0" text="카테고리" />
-		<ComboBox fx:id="cmbCateg" layoutX="120.0" layoutY="89.0" prefHeight="22.0" prefWidth="314.0" />
-		<DatePicker fx:id="UploadDate" layoutX="506.0" layoutY="89.0" prefHeight="23.0" prefWidth="145.0" />
-		<TextArea fx:id="txtContents" layoutX="56.0" layoutY="224.0" prefHeight="489.0" prefWidth="596.0" />
-		<Button layoutX="56.0" layoutY="139.0" mnemonicParsing="false" onAction="#selOpenFile" text="파일첨부" />
-		<TextArea fx:id="imgAddr" layoutX="148.0" layoutY="139.0" prefHeight="62.0" prefWidth="503.0" />
-		<Button layoutX="616.0" layoutY="743.0" mnemonicParsing="false" onAction="#uploadProc" prefHeight="30.0" prefWidth="70.0" stylesheets="@button.css" text="저장" />
-		<Button layoutX="529.0" layoutY="743.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="30.0" prefWidth="70.0" stylesheets="@button.css" text="취소" />
+		<TextField fx:id="txtTitle" layoutX="32.0" layoutY="78.0" prefHeight="39.0" prefWidth="756.0" promptText="Title" style="-fx-background-color: white; -fx-border-color: #1e1636; -fx-border-radius: 4; -fx-border-width: 3;">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+		<ComboBox fx:id="cmbCateg" layoutX="800.0" layoutY="79.0" prefHeight="38.0" prefWidth="127.0" promptText="Category" style="-fx-background-color: white; -fx-border-color: #1e1636; -fx-border-radius: 4; -fx-border-width: 3;" />
+		<TextArea fx:id="txtContents" layoutX="29.0" layoutY="281.0" prefHeight="604.0" prefWidth="906.0" promptText="Text" style="-fx-border-color: #1e1636; -fx-background-color: white; -fx-border-radius: 4; -fx-border-width: 3;" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font></TextArea>
+		<Button layoutX="32.0" layoutY="134.0" mnemonicParsing="false" onAction="#selOpenFile" prefHeight="32.0" prefWidth="99.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Add File" />
+		<TextArea fx:id="imgAddr" editable="false" layoutX="145.0" layoutY="134.0" prefHeight="129.0" prefWidth="782.0" promptText="Image" style="-fx-border-color: #1e1636; -fx-background-color: white; -fx-border-radius: 4; -fx-border-width: 2;">
+         <font>
+            <Font size="14.0" />
+         </font></TextArea>
+		<Button layoutX="865.0" layoutY="899.0" mnemonicParsing="false" onAction="#uploadProc" prefHeight="30.0" prefWidth="70.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Post" />
+		<Button layoutX="778.0" layoutY="899.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="30.0" prefWidth="70.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Cancel" />
+      <Label contentDisplay="CENTER" layoutX="32.0" layoutY="14.0" prefHeight="58.0" prefWidth="588.0" text="Post" textAlignment="CENTER" textFill="#1e1636">
+         <font>
+            <Font size="46.0" />
+         </font>
+      </Label>
 	</children>
 </AnchorPane>

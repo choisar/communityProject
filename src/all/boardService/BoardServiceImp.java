@@ -1,6 +1,5 @@
 package all.boardService;
 
-import java.io.IOException;
 import java.util.List;
 
 import all.Controller;
@@ -22,6 +21,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -29,7 +30,7 @@ public class BoardServiceImp implements BoardService {
 	DatabaseDAO dao;
 	CommonService cs;
 	TableViewService tvs;
-	
+
 	public BoardServiceImp() {
 		tvs = new TableViewServiceImp();
 		dao = new DatabaseDAOImp();
@@ -57,13 +58,13 @@ public class BoardServiceImp implements BoardService {
 
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
-		
+
 		// 검색창 콤보박스
 		mainCombo(root);
 		// 메인화면에 띄울 전체 게시판 테이블뷰
 		createAllListView(root);
 
-		rootStage.setTitle("중고거래 커뮤니티");
+		rootStage.setTitle("KG - Trading Comunity");
 		rootStage.show();
 		// 사이즈 변경 불가
 		rootStage.setResizable(false);
@@ -85,20 +86,21 @@ public class BoardServiceImp implements BoardService {
 
 		// 게시물을 더블 클릭 했을 때 회원이면 게시물 내용 표시하는 창 출력, 비회원이면 로그인 오류창 출력
 		listView.setOnMouseClicked(event -> {
-			// 회원인 지 비회원인 지 확인하는 레이블 
+			// 회원인 지 비회원인 지 확인하는 레이블
 			Label logChk = (Label) root.lookup("#logChk");
-		    if (event.getClickCount() > 1) {
-		        Board b = listView.getSelectionModel().getSelectedItem();
-		        if (b != null) {
-		            if (logChk.getText().equals("비회원")) {
-		                // 로그인 안내창
-		                cs.errorView1(root);
-		            } else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
-		                // 해당 게시물 보기
-		                openBoardDetailWindow(root, b);
-		            }
-		        }
-		    }
+			if (event.getClickCount() > 1) {
+				Board b = listView.getSelectionModel().getSelectedItem();
+				if (b != null) {
+					if (logChk.getText().equals("비회원")) {
+						// 로그인 안내창
+						cs.errorView1(root);
+					} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+						// 해당 게시물 보기
+						List<Image> imagelist = dao.getAllImages(b.getNo());
+						openBoardDetailWindow(root, b, imagelist);
+					}
+				}
+			}
 		});
 
 	}
@@ -123,11 +125,12 @@ public class BoardServiceImp implements BoardService {
 				Board b = listView.getSelectionModel().getSelectedItem();
 				if (b != null) {
 					// 해당 게시물 보기
-					openBoardDetailWindow(root, b);
+					List<Image> imagelist = dao.getAllImages(b.getNo());
+					openBoardDetailWindow(root, b, imagelist);
 				}
 			}
 		});
-		
+
 	}
 
 	// 검색 결과의 테이블 뷰
@@ -140,8 +143,7 @@ public class BoardServiceImp implements BoardService {
 		if (boardList != null) {
 			tvs.configureBoardTableView(listView);
 			listView.setItems(FXCollections.observableArrayList(boardList));
-
-		} else {
+		} else if(boardList == null){
 			System.out.println("게시판 목록을 가져올 수 없습니다.");
 		}
 
@@ -151,11 +153,12 @@ public class BoardServiceImp implements BoardService {
 				Board b = listView.getSelectionModel().getSelectedItem();
 				if (b != null) {
 					// 해당 게시물 보기
-					openBoardDetailWindow(root, b);
+					List<Image> imagelist = dao.getAllImages(b.getNo());
+					openBoardDetailWindow(root, b, imagelist);
 				}
 			}
 		});
-		
+
 	}
 
 	// 신고화면 에서 입력받은 콤보박스 + 입력 내용 값 테이블 뷰
@@ -178,7 +181,8 @@ public class BoardServiceImp implements BoardService {
 				Board b = listView.getSelectionModel().getSelectedItem();
 				if (b != null) {
 					// 해당 게시물 보기
-					openBoardDetailWindow(root, b);
+					List<Image> imagelist = dao.getAllImages(b.getNo());
+					openBoardDetailWindow(root, b, imagelist);
 				}
 			}
 		});
@@ -213,7 +217,7 @@ public class BoardServiceImp implements BoardService {
 		String selectedValue = combo.getValue(); // 선택된 콤보박스의 값 가져오기
 		return selectedValue;
 	}
-	
+
 	// 신고화면 콤보 박스 2
 	@Override
 	public String reportCombo2(Parent root) {
@@ -239,42 +243,59 @@ public class BoardServiceImp implements BoardService {
 			return false;
 		}
 	}
-	
+
 	// 보드 디테일뷰 - 게시물 목록에서 클릭하면 해당 게시물 내용이 포함된 창이 출력되는 메서드 . 스크롤페인
 	@Override
-	public void openBoardDetailWindow(Parent root, Board selectedBoard) {
+	public void openBoardDetailWindow(Parent root, Board selectedBoard, List<Image> imagelist) {
 		Stage detailStage = new Stage();
-		
+
 		FXMLLoader detailLoader = new FXMLLoader(getClass().getResource("../fxml/boardDetail.fxml"));
-		
+
 		try {
 			root = detailLoader.load();
 			detailStage.setScene(new Scene(root));
+			Controller ctrl = detailLoader.getController();
+			ctrl.setRoot(root);
+
+			// 직접 FXML 요소에 접근
+			Text nicknameText = (Text) root.lookup("#nicknameText");
+			Label titleText = (Label) root.lookup("#titleText");
+			Label categoryText = (Label) root.lookup("#CategoryText");
+			Text dateText = (Text) root.lookup("#dateText");
+			TextArea contentsText = (TextArea) root.lookup("#contents");
+
+			Label postNum = (Label) root.lookup("#PostNumber");
+			int postNumber = selectedBoard.getNo();
+			String postNumberAsString = String.valueOf(postNumber);
+			
+			ImageView[] imageViews = {
+				    (ImageView) root.lookup("#Image1"),
+				    (ImageView) root.lookup("#Image2"),
+				    (ImageView) root.lookup("#Image3"),
+				    (ImageView) root.lookup("#Image4"),
+				    (ImageView) root.lookup("#Image5")
+				};
+
+				for (int i = 0; i < imagelist.size() && i < imageViews.length; i++) {
+				    Image image = imagelist.get(i);
+				    imageViews[i].setImage(image);
+				}
+
+			
+
+			postNum.setText("Post Number." + postNumberAsString);
+			categoryText.setText(selectedBoard.getCategori() + " >");
+			contentsText.setText(selectedBoard.getContents());
+			nicknameText.setText(selectedBoard.getNicName());
+			dateText.setText(selectedBoard.getUploadDate());
+			titleText.setText(selectedBoard.getTitle());
+			
+			
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		Controller ctrl = detailLoader.getController();
-		ctrl.setRoot(root);
-		
-		// 직접 FXML 요소에 접근
-		Text nicknameText = (Text) root.lookup("#nicknameText");
-		Label titleText = (Label) root.lookup("#titleText");
-		Label categoryText = (Label) root.lookup("#CategoryText");
-		Text dateText = (Text) root.lookup("#dateText");
-		TextArea contentsText = (TextArea) root.lookup("#contents");
-		
-		Label postNum = (Label) root.lookup("#PostNumber");
-		int postNumber = selectedBoard.getNo();
-		String postNumberAsString = String.valueOf(postNumber);
-		
-		postNum.setText("Post Number."+postNumberAsString);
-		categoryText.setText(selectedBoard.getCategori()+" >");
-		contentsText.setText(selectedBoard.getContents());
-		nicknameText.setText(selectedBoard.getNicName());
-		dateText.setText(selectedBoard.getUploadDate());
-		titleText.setText(selectedBoard.getTitle());
-
 
 		// ScrollPane
 		ScrollPane scrollPane = new ScrollPane();
@@ -299,5 +320,7 @@ public class BoardServiceImp implements BoardService {
 		alert.setContentText(content);
 		alert.showAndWait();
 	}
+	
+	
 
 }
