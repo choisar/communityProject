@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2491.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2460.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
 	<children>
 		<Button layoutX="50.0" layoutY="249.0" mnemonicParsing="false" onAction="#infoProc" prefHeight="30.0" prefWidth="58.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Info" textFill="#bbbbbb" />
 		<Button layoutX="128.0" layoutY="249.0" mnemonicParsing="false" onAction="#logoutProc" style="-fx-border-width: 2;" stylesheets="@button.css" text="Logout" textFill="#bbbbbb" />
@@ -26,7 +26,7 @@
 		<Label layoutX="85.0" layoutY="217.0" text="새 소식 0개" textFill="#1e1636" />
 		<Line endX="100.0" layoutX="124.0" layoutY="136.0" startX="-100.0" strokeWidth="2.0" />
 		<Line endX="100.0" layoutX="124.0" layoutY="292.0" startX="-100.0" strokeWidth="2.0" />
-		<Line endX="100.0" layoutX="124.0" layoutY="2470.0" startX="-100.0" strokeWidth="2.0" />
+		<Line endX="100.0" layoutX="124.0" layoutY="2444.0" startX="-100.0" strokeWidth="2.0" />
 		<Label fx:id="logChk" layoutX="32.0" layoutY="114.0" text="회원" textFill="#1d163600" />
       <Label fx:id="memberName" alignment="CENTER_RIGHT" layoutX="29.0" layoutY="166.0" prefHeight="18.0" prefWidth="104.0" text="memName" textFill="#1e1636" underline="true">
          <font>
@@ -36,8 +36,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Button layoutX="52.0" layoutY="2416.0" mnemonicParsing="false" onAction="#reportProc" prefHeight="35.0" prefWidth="140.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Report" textFill="#bbbbbb" />
-      <Line endX="100.0" layoutX="124.0" layoutY="2396.0" startX="-100.0" strokeWidth="2.0" />
+      <Button layoutX="52.0" layoutY="2390.0" mnemonicParsing="false" onAction="#reportProc" prefHeight="35.0" prefWidth="140.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Report" textFill="#bbbbbb" />
+      <Line endX="100.0" layoutX="124.0" layoutY="2370.0" startX="-100.0" strokeWidth="2.0" />
       <Label contentDisplay="CENTER" layoutX="210.0" layoutY="34.0" prefHeight="58.0" prefWidth="588.0" text="KG - Trading Community" textAlignment="CENTER" textFill="#1e1636">
          <font>
             <Font size="46.0" />
