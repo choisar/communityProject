@@ -482,7 +482,7 @@ public class loginButtonImp implements loginButton {
 	                    scrollPane.setContent(root);
 	                    scrollPane.setPannable(true);
 
-	                    Scene scene = new Scene(scrollPane, 982, 1000);
+	                    Scene scene = new Scene(scrollPane, 1010, 950);
 	                    LoginView.setScene(scene);
 	            		
 	            		LoginView.setTitle("KG - Trading Comunity");

@@ -98,6 +98,6 @@
          </cursor>
       </Label>
       <Label fx:id="PostNumber" layoutX="719.0" layoutY="157.0" prefHeight="18.0" prefWidth="102.0" text="Post Number. 12" />
-      <Button fx:id="cancelProc" layoutX="911.0" layoutY="18.0" mnemonicParsing="false" style="-fx-border-width: 2;" stylesheets="@button.css" text="X" />
+      <Button layoutX="911.0" layoutY="18.0" mnemonicParsing="false" onAction="#cancelProc" style="-fx-border-width: 2;" stylesheets="@button.css" text="X" />
 	</children>
 </AnchorPane>

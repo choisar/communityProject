@@ -70,11 +70,11 @@ public class TableViewServiceImp implements TableViewService {
 		TableColumn<Board, String> category = new TableColumn<Board, String>("Categori");
 		category.setMinWidth(80);
 		TableColumn<Board, String> title = new TableColumn<Board, String>("Title");
-		title.setMinWidth(330);
+		title.setMinWidth(260);
 		TableColumn<Board, String> nickname = new TableColumn<Board, String>("NickName");
-		nickname.setMinWidth(75);
+		nickname.setMinWidth(70);
 		TableColumn<Board, String> date = new TableColumn<Board, String>("Date");
-		date.setMinWidth(130);
+		date.setMinWidth(100);
 
 		boardNum.setCellValueFactory(new PropertyValueFactory<>("No"));
 		category.setCellValueFactory(new PropertyValueFactory<>("categori"));
@@ -89,8 +89,8 @@ public class TableViewServiceImp implements TableViewService {
 	    category.setStyle("-fx-alignment: CENTER;");
 	    date.setStyle("-fx-alignment: CENTER;");
 	    // 셀 가운데 왼쪽 정렬
-	    title.setStyle("-fx-alignment: CENTER-LEFT;");
 	    nickname.setStyle("-fx-alignment: CENTER-LEFT;");
+	    title.setStyle("-fx-alignment: CENTER-LEFT;");
 	}
 
 	// 중복 코드 줄이려고 만든 메서드 - 테이블 뷰에 컬럼 설정 - 신고 기능 - 게시물 테이블뷰

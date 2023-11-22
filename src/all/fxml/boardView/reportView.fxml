@@ -11,14 +11,14 @@
 
 <AnchorPane layoutX="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="671.0" prefWidth="596.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
 	<children>
-		<ComboBox fx:id="searchReportCombo1" layoutX="23.0" layoutY="19.0" prefHeight="30.0" prefWidth="119.0" promptText="Select" style="-fx-border-color: #1e1636; -fx-background-color: white; -fx-border-radius: 4;" />
-		<Button layoutX="501.0" layoutY="19.0" mnemonicParsing="false" onAction="#reportSearchProc" prefHeight="30.0" prefWidth="67.0" stylesheets="@../button.css" text="Search" />
-		<TextField fx:id="reportSearchText" layoutX="150.0" layoutY="19.0" prefHeight="30.0" prefWidth="343.0" promptText="Title" style="-fx-border-color: #1e1636; -fx-border-radius: 4;" />
-		<TableView fx:id="reportTable" layoutX="25.0" layoutY="60.0" prefHeight="265.0" prefWidth="544.0" stylesheets="@../tableview.css" />
-		<Button layoutX="502.0" layoutY="631.0" mnemonicParsing="false" stylesheets="@../button.css" text="Report" />
-		<Button layoutX="441.0" layoutY="631.0" mnemonicParsing="false" onAction="#cancelProc" stylesheets="@../button.css" text="Exit" />
-		<TextArea fx:id="reportContentsText" layoutX="25.0" layoutY="380.0" prefHeight="239.0" prefWidth="544.0" promptText="구체적인 신고사유를 작성해주세요." style="-fx-border-color: #1e1636;" />
-      <ComboBox fx:id="searchReportCombo2" layoutX="136.0" layoutY="338.0" prefHeight="30.0" prefWidth="119.0" promptText="Select" style="-fx-background-color: white; -fx-border-color: #1e1636; -fx-border-radius: 4;" />
+		<ComboBox fx:id="searchReportCombo1" layoutX="23.0" layoutY="19.0" prefHeight="32.0" prefWidth="119.0" promptText="Select" style="-fx-border-color: #1e1636; -fx-background-color: white; -fx-border-radius: 4; -fx-border-width: 2;" />
+		<Button layoutX="498.0" layoutY="19.0" mnemonicParsing="false" onAction="#reportSearchProc" prefHeight="30.0" prefWidth="70.0" style="-fx-border-width: 2;" stylesheets="@../button.css" text="Search" />
+		<TextField fx:id="reportSearchText" layoutX="150.0" layoutY="19.0" prefHeight="32.0" prefWidth="336.0" promptText="Title" style="-fx-border-color: #1e1636; -fx-border-radius: 4; -fx-border-width: 2;" />
+		<TableView fx:id="reportTable" layoutX="25.0" layoutY="60.0" prefHeight="265.0" prefWidth="544.0" style="-fx-border-width: 2;" stylesheets="@../tableview.css" />
+		<Button layoutX="502.0" layoutY="631.0" mnemonicParsing="false" style="-fx-border-width: 2;" stylesheets="@../button.css" text="Report" />
+		<Button layoutX="441.0" layoutY="631.0" mnemonicParsing="false" onAction="#cancelProc" style="-fx-border-width: 2;" stylesheets="@../button.css" text="Exit" />
+		<TextArea fx:id="reportContentsText" layoutX="25.0" layoutY="380.0" prefHeight="239.0" prefWidth="544.0" promptText="구체적인 신고사유를 작성해주세요." style="-fx-border-color: #1e1636; -fx-border-width: 2;" />
+      <ComboBox fx:id="searchReportCombo2" layoutX="136.0" layoutY="338.0" prefHeight="30.0" prefWidth="119.0" promptText="Select" style="-fx-background-color: white; -fx-border-color: #1e1636; -fx-border-radius: 4; -fx-border-width: 2;" />
       <Label layoutX="30.0" layoutY="345.0" text="Report details">
          <font>
             <Font size="14.0" />
