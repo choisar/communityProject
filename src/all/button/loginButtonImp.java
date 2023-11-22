@@ -298,7 +298,9 @@ public class loginButtonImp implements loginButton {
 	            if (dao.loginChk(insertId, insertPw)) {
 	                Member m = dao.memberInfo(insertId);
 	                if (m != null) {
-	                	
+	                	Stage s = (Stage) root.getScene().getWindow();
+	            		s.close();
+	            		
 	                	Stage LoginView = new Stage();
 	                	
 	                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/userLogin1.fxml"));
@@ -562,18 +564,7 @@ public class loginButtonImp implements loginButton {
 			Label helloNicName = (Label) root.lookup("#helloNicName");
 			helloNicName.setText("*** "+m.getNickName()+" ***");
 			
-			Label helloId1 = (Label) root.lookup("#helloId");
 			
-			String helloId2 = m.getId();
-			int lengthToMask = helloId2.length() - 4;
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < lengthToMask; i++) {
-			    sb.append("*");
-			}
-			String helloId3 = helloId2.substring(0, 4) + sb.toString();
-			
-			
-			helloId1.setText(helloId3+"님 안녕하세요!");
 			
 		} catch (Exception e) {
 			// TODO: handle exception

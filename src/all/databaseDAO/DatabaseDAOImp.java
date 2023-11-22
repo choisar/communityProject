@@ -32,9 +32,6 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	static int nowBoardNum = 0;
 	Parent root;
 
-	// 합치기
-	boolean idChkCom;
-
 	// 오라클 SQL 연결
 	public DatabaseDAOImp() {
 		cs = new CommonServiceImp();
@@ -193,7 +190,6 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	@Override
 	public boolean insertMember(Member m) {
 		// TODO Auto-generated method stub
-		if (idChkCom) {
 			String sql = "insert into member values(mem_seq.nextval,?,?,?,?,?,?,?,?)";
 
 			try {
@@ -218,9 +214,6 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
-		} else { // 아이디 중복
-			cs.msgBox("아이디", "아이디중복", "아이디 중복 확인하세요");
-		}
 		return false;
 	}
 
@@ -257,19 +250,11 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	@Override
 	public boolean dupID(String txtId) {
 		// TODO Auto-generated method stub
-		if (txtId.isEmpty()) {
-			cs.msgBox("아이디", "아이디중복", "아이디를 입력하세요");
+		if (!chkId(txtId)) {
 			return false;
 		} else {
-			if (!chkId(txtId)) {
-				cs.msgBox("아이디", "아이디중복", "같은 아이디가 존재합니다. 다시 입력하세요");
-				idChkCom = false;
-				return false;
-			} else {
-				cs.msgBox("아이디", "아이디중복", "사용가능한 아이디입니다.");
-				idChkCom = true;
-				return true;
-			}
+			return true;
+
 		}
 	}
 

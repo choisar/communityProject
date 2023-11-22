@@ -17,7 +17,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 
 
@@ -53,6 +55,115 @@ public class JoinButtonImp implements JoinButton{
 		Controller ctrl = loader.getController();
 
 		ctrl.setRoot(root);
+		
+		TextField txtId = (TextField) root.lookup("#txtId");
+		TextArea errorText = (TextArea) root.lookup("#errorText");
+		TextField txtName = (TextField) root.lookup("#txtName");
+		TextField txtnickName = (TextField) root.lookup("#txtnickName");
+		PasswordField txtPw = (PasswordField) root.lookup("#txtPw");
+		PasswordField txtPwOk = (PasswordField) root.lookup("#txtPwOk");
+		TextField txtEmail = (TextField) root.lookup("#txtEmail");
+		TextField txtphoneNum = (TextField) root.lookup("#txtphoneNum");
+		DatePicker birthDate = (DatePicker) root.lookup("#birthDate");
+		TextArea errorText2 = (TextArea) root.lookup("#errorText2");
+		txtId.requestFocus();
+
+		// 포커스 속성의 변화를 감지하는 리스너 등록
+		txtId.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if (!newVal) {
+				// 포커스가 벗어났을 때 실행되는 코드
+				String txtId1 = txtId.getText();
+				if (txtId1.isEmpty()) {
+					errorText.setText("아이디를 입력해주세요.");
+					txtId.requestFocus();
+				}else if(txtId1.length() <= 4) {
+					errorText.setText("아이디는 5자리 이상이어야 합니다.");
+					txtId.requestFocus();
+				} else if (dao.dupID(txtId1)) {
+					errorText.setText("사용 가능한 아이디입니다.");
+				}else {
+					errorText.setText("중복된 아이디입니다.");
+					txtId.requestFocus();
+				}
+			}
+		});
+
+		txtPw.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if (!newVal) {
+				// 포커스가 벗어났을 때 실행되는 코드
+				if (txtPw.getText().isEmpty()) {
+					errorText.clear();
+					errorText.setText("암호를 입력해주세요.");
+					txtPw.requestFocus();
+				}
+			}
+		});
+		txtPwOk.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if (!newVal) {
+				// 포커스가 벗어났을 때 실행되는 코드
+				if(txtPwOk.getText().isEmpty()) {
+					errorText.clear();
+					errorText.setText("암호 확인을 입력해주세요.");
+					txtPwOk.requestFocus();
+				}else if (!txtPwOk.getText().equals(txtPw.getText())) {
+					errorText.clear();
+					errorText.setText("암호가 불일치합니다.");
+					txtPwOk.clear();
+					txtPwOk.requestFocus();
+				}
+			}
+		});
+		txtEmail.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if (!newVal) {
+				// 포커스가 벗어났을 때 실행되는 코드
+				if (txtEmail.getText().isEmpty()) {
+					errorText.clear();
+					errorText.setText("이메일을 입력해주세요.");
+					txtEmail.requestFocus();
+				}else if(!txtEmail.getText().contains("@")) {
+					errorText.clear();
+					errorText.setText("이메일에는 @이 반드시 포합되어야 합니다.");
+					txtEmail.clear();
+					txtEmail.requestFocus();
+				}
+			}
+		});
+		txtName.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if (!newVal) {
+				if(txtName.getText().isEmpty()) {
+					errorText.clear();
+					errorText2.setText("이름을 입력해주세요.");
+					txtName.requestFocus();
+				}
+			}
+		});
+		txtnickName.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if (!newVal) {
+				if(txtnickName.getText().isEmpty()) {
+					errorText2.setText("닉네임을 입력해주세요.");
+					txtnickName.requestFocus();
+				}
+			}
+		});
+		birthDate.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if (!newVal) {
+				if(birthDate.getValue() == null) {
+					errorText2.clear();
+					errorText2.setText("생년월일을 선택해주세요");
+					birthDate.requestFocus();
+				}
+			}
+		});
+		txtphoneNum.focusedProperty().addListener((obs, oldVal, newVal) -> {
+			if (!newVal) {
+				if(txtphoneNum.getText().isEmpty()) {
+					errorText2.clear();
+					errorText2.setText("핸드폰 번호를 입력해주세요.");
+					txtphoneNum.requestFocus();
+				}
+			}
+		});
+
 
 		membershipForm.setTitle("회원가입장"); 
 		membershipForm.setAlwaysOnTop(false);
@@ -87,134 +198,69 @@ public class JoinButtonImp implements JoinButton{
 	public void joinMember(ActionEvent e) {
 		// TODO Auto-generated method stub
 		try {
-		Parent mem = (Parent) e.getSource();
-		Scene member = mem.getScene();
-		//Node mem = (Node) e.getSource();
-		//Scene scene = mem.getScene();
-		//Parent member = scene.getRoot();
-		all.Member m = new all.Member();
+			Parent mem = (Parent) e.getSource();
+			Scene member = mem.getScene();
+			//Node mem = (Node) e.getSource();
+			//Scene scene = mem.getScene();
+			//Parent member = scene.getRoot();
+			all.Member m = new all.Member();
 
-		TextField txtName = (TextField) member.lookup("#txtName");
-		TextField txtId = (TextField) member.lookup("#txtId");
-		TextField txtnickName = (TextField) member.lookup("#txtnickName");
-		PasswordField txtPw = (PasswordField) member.lookup("#txtPw");
-		PasswordField txtPwOk = (PasswordField) member.lookup("#txtPwOk");
-		TextField txtEmail = (TextField) member.lookup("#txtEmail");
-		TextField txtphoneNum = (TextField) member.lookup("#txtphoneNum");
-		DatePicker birthDate = (DatePicker) member.lookup("#birthDate");
-		
-		System.out.println(txtName.getText());
+			TextField txtName = (TextField) member.lookup("#txtName");
+			TextField txtId = (TextField) member.lookup("#txtId");
+			TextField txtnickName = (TextField) member.lookup("#txtnickName");
+			PasswordField txtPw = (PasswordField) member.lookup("#txtPw");
+			PasswordField txtPwOk = (PasswordField) member.lookup("#txtPwOk");
+			TextField txtEmail = (TextField) member.lookup("#txtEmail");
+			TextField txtphoneNum = (TextField) member.lookup("#txtphoneNum");
+			DatePicker birthDate = (DatePicker) member.lookup("#birthDate");		
 
-		if(txtName.getText() == null || txtName.getText().isEmpty()) {
-			cs.msgBox("입력오류", "이름 입력 오류", "이름이 입력 되지 않았습니다. 다시 입력하세요");
-			txtName.clear();
-			txtName.requestFocus();
-			return;
-		} else if(txtId.getText().length() <= 4) {
-			if(txtId.getText().isEmpty()) {
-				cs.msgBox("입력오류", "아이디 입력 오류", "아이디가 입력 되지 않았습니다. 다시 입력하세요");
-				txtId.clear();
-				txtId.requestFocus();
+			m.setName(txtName.getText());
+			m.setId(txtId.getText());
+			m.setPw(txtPw.getText());
+			m.setNickName(txtnickName.getText());
+			m.setEmail(txtEmail.getText());
+			m.setPhoneNum(txtphoneNum.getText());
+			LocalDate date = birthDate.getValue();
+			Date d = Date.valueOf(date);
+			m.setBirthDate(d);
+
+
+			ToggleButton rdoMan = (ToggleButton) member.lookup("#rdoMan");
+			ToggleButton rdoWoman = (ToggleButton) member.lookup("#rdoWoman");
+
+			rdoMan.setOnAction(event -> handleGenderSelection(rdoMan, rdoWoman));
+			rdoWoman.setOnAction(event -> handleGenderSelection(rdoWoman, rdoMan));
+			if(rdoMan.isSelected()) {
+				m.setGender("true");
 			}else {
-				cs.msgBox("입력오류", "아이디 최소 크기 오류", "아이디는 최소 5자리이어야 합니다.");
-				txtId.clear();
-				txtId.requestFocus();
+				m.setGender("false");
 			}
-			return;
-		} else if(txtnickName.getText().isEmpty()) {
-			cs.msgBox("입력오류", "닉네임입력 오류", "닉네임이 입력 되지 않았습니다. 다시 입력하세요");
-			txtnickName.clear();
-			txtnickName.requestFocus();
-			return;
-		}	else if(txtPw.getText().isEmpty()) {
-			cs.msgBox("입력오류", "비밀번호 입력 오류", "비밀번호가 입력 되지 않았습니다. 다시 입력하세요");
-			txtPw.clear();
-			txtPw.requestFocus();
-			return;
-		}// else if(txtPwOk.getText().isEmpty()) {
-		else if(!(txtPw.getText().equals(txtPwOk.getText()))) {
-			cs.msgBox("암호", "암호일치여부", "암호가 불일치합니다. 다시 입력하세요");
-			txtPwOk.clear();
-			txtPwOk.requestFocus();
-			return;	
-		}else if(birthDate.getValue() == null) {
-			cs.msgBox("입력오류", "생년월일 입력 오류", "생년월일이 입력 되지 않았습니다.");
-			birthDate.requestFocus();
-			return;
-			
-		}else if(txtEmail.getText().isEmpty()) {
-			cs.msgBox("입력오류", "이메일 입력 오류", "이메일이 입력 되지 않았습니다. 다시 입력하세요");
-			txtEmail.clear();
-			txtEmail.requestFocus();
-			return;
-		} else if(txtphoneNum.getText().isEmpty()) {
-			cs.msgBox("입력오류", "전화번호 입력 오류", "전화번호가 입력 되지 않았습니다. 다시 입력하세요");
-			txtphoneNum.clear();
-			txtphoneNum.requestFocus();
-			return;
-		} 
-		
+			if( dao.insertMember(m)) {
+				Stage s = (Stage) member.getWindow();
+				s.close();
+			} else {
+				return;
 
-		m.setName(txtName.getText());
-		m.setId(txtId.getText());
-		m.setPw(txtPw.getText());
-		m.setNickName(txtnickName.getText());
-		m.setEmail(txtEmail.getText());
-		m.setPhoneNum(txtphoneNum.getText());
-		LocalDate date = birthDate.getValue();
-		Date d = Date.valueOf(date);
-		m.setBirthDate(d);
+			}
+		}catch (Exception e1) {
+			cs.msgBox("오류", "정보 누락", "모든 정보를 입력해주세요.");
 
-
-		RadioButton rdoMan = (RadioButton) member.lookup("#rdoMan");
-		RadioButton rdoWoman = (RadioButton) member.lookup("#rdoWoman");
-
-		if(rdoMan.isSelected()) {
-			//			System.out.println("남성");
-			m.setGender("false");
-		}else if(rdoWoman.isSelected()) {
-			//			System.out.println("여성");
-			m.setGender("true");
-		} 
-
-
-		
-
-		if( dao.insertMember(m)) {
-			Stage s = (Stage) member.getWindow();
-			s.close();
-		} else {
-			txtId.clear();
-			txtPw.clear();
-			txtPwOk.clear();
-			txtName.clear();
-			txtnickName.clear();
-			txtEmail.clear();	
-			txtphoneNum.clear();
-
-		}
-		}catch (NullPointerException e2) {
-			// TODO: handle exception
-			e2.printStackTrace();
-			cs.msgBox("오류", "null", "null");
-		} catch (Exception e3) {
-			e3.printStackTrace();
-			cs.msgBox("오류", "exc", "exc");
-			
 		}
 
 
 	}
-	@Override
-	public void idChkProc(Parent root) {
-		// TODO Auto-generated method stub
-		TextField txtId = (TextField)root.lookup("#txtId");
+	
+	private void handleGenderSelection(ToggleButton selectedButton, ToggleButton otherButton) {
+		try {
+			// 선택된 경우 배경색 변경
+			selectedButton.setStyle("-fx-background-color: #ADD8E6;");
+			// 다른 버튼의 배경색 원래대로
+			otherButton.setStyle("-fx-background-color: #F08080;");
 
-		idChk=dao.dupID(txtId.getText());
-		if(!idChk) {
-			txtId.clear();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
-		return;
 	}
 
 

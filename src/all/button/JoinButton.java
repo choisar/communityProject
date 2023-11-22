@@ -11,7 +11,6 @@ public interface JoinButton {
 
 	void joinMember(ActionEvent event);
 
-	void idChkProc(Parent root);
 
 	
 }
