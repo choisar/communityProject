@@ -1,0 +1,81 @@
+
+#rdoMan {
+    /* 선택되지 않은 상태의 기본 스타일 */
+    -fx-background-color: #ffffff;
+    -fx-background-width: 2;
+    -fx-background-radius: 10;
+    
+    -fx-text-fill: #b5b4b4;
+    -fx-font-weight: bold;
+    
+    -fx-border-color: #b5b4b4;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+}
+
+#rdoMan:selected {
+    /* 선택됐을 때의 스타일 지정 */
+    -fx-background-color: #b5b4b4;
+    -fx-background-width: 2;
+    -fx-background-radius: 10;
+    
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    
+    -fx-border-color: #b5b4b4;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+}
+
+#rdoWoman {
+    /* 선택되지 않은 상태의 기본 스타일 */
+    -fx-background-color: #ffffff;
+    -fx-background-width: 2;
+    -fx-background-radius: 10;
+    
+    -fx-text-fill: #b5b4b4;
+    -fx-font-weight: bold;
+    
+    -fx-border-color: #b5b4b4;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+}
+
+#rdoWoman:selected {
+    /* 선택됐을 때의 스타일 지정 */
+    -fx-background-color: #b5b4b4;
+    -fx-background-width: 2;
+    -fx-background-radius: 10;
+    
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    
+    -fx-border-color: #b5b4b4;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+}
+
+#Go{
+    -fx-background-color: #ffffff;
+    -fx-background-width: 2;
+    -fx-background-radius: 10;
+    
+    -fx-text-fill: #b5b4b4;
+    -fx-font-weight: bold;
+    
+    -fx-border-color: #b5b4b4;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+}
+
+#Go:hover {
+    -fx-background-color:  #bbbbbb;
+    
+    
+    -fx-font-family: "Nirmala UI";
+    -fx-text-fill:  white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    
+}
+

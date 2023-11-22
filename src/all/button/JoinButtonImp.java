@@ -4,19 +4,16 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 import all.Controller;
-import all.Member;
 import all.button.common.CommonService;
 import all.button.common.CommonServiceImp;
 import all.databaseDAO.DatabaseDAO;
 import all.databaseDAO.DatabaseDAOImp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -40,6 +37,7 @@ public class JoinButtonImp implements JoinButton{
 	public void membershipProc(Parent root) {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/membership.fxml"));
 
 		root = null;
@@ -75,7 +73,6 @@ public class JoinButtonImp implements JoinButton{
 				String txtId1 = txtId.getText();
 				if (txtId1.isEmpty()) {
 					errorText.setText("아이디를 입력해주세요.");
-					txtId.requestFocus();
 				}else if(txtId1.length() <= 4) {
 					errorText.setText("아이디는 5자리 이상이어야 합니다.");
 					txtId.requestFocus();
@@ -94,7 +91,6 @@ public class JoinButtonImp implements JoinButton{
 				if (txtPw.getText().isEmpty()) {
 					errorText.clear();
 					errorText.setText("암호를 입력해주세요.");
-					txtPw.requestFocus();
 				}
 			}
 		});
@@ -104,7 +100,6 @@ public class JoinButtonImp implements JoinButton{
 				if(txtPwOk.getText().isEmpty()) {
 					errorText.clear();
 					errorText.setText("암호 확인을 입력해주세요.");
-					txtPwOk.requestFocus();
 				}else if (!txtPwOk.getText().equals(txtPw.getText())) {
 					errorText.clear();
 					errorText.setText("암호가 불일치합니다.");
@@ -119,10 +114,9 @@ public class JoinButtonImp implements JoinButton{
 				if (txtEmail.getText().isEmpty()) {
 					errorText.clear();
 					errorText.setText("이메일을 입력해주세요.");
-					txtEmail.requestFocus();
 				}else if(!txtEmail.getText().contains("@")) {
 					errorText.clear();
-					errorText.setText("이메일에는 @이 반드시 포합되어야 합니다.");
+					errorText.setText("이메일에는 @이 반드시 포함되어야 합니다.");
 					txtEmail.clear();
 					txtEmail.requestFocus();
 				}
@@ -133,7 +127,6 @@ public class JoinButtonImp implements JoinButton{
 				if(txtName.getText().isEmpty()) {
 					errorText.clear();
 					errorText2.setText("이름을 입력해주세요.");
-					txtName.requestFocus();
 				}
 			}
 		});
@@ -141,7 +134,6 @@ public class JoinButtonImp implements JoinButton{
 			if (!newVal) {
 				if(txtnickName.getText().isEmpty()) {
 					errorText2.setText("닉네임을 입력해주세요.");
-					txtnickName.requestFocus();
 				}
 			}
 		});
@@ -150,7 +142,6 @@ public class JoinButtonImp implements JoinButton{
 				if(birthDate.getValue() == null) {
 					errorText2.clear();
 					errorText2.setText("생년월일을 선택해주세요");
-					birthDate.requestFocus();
 				}
 			}
 		});
@@ -159,7 +150,6 @@ public class JoinButtonImp implements JoinButton{
 				if(txtphoneNum.getText().isEmpty()) {
 					errorText2.clear();
 					errorText2.setText("핸드폰 번호를 입력해주세요.");
-					txtphoneNum.requestFocus();
 				}
 			}
 		});
@@ -230,21 +220,24 @@ public class JoinButtonImp implements JoinButton{
 
 			rdoMan.setOnAction(event -> handleGenderSelection(rdoMan, rdoWoman));
 			rdoWoman.setOnAction(event -> handleGenderSelection(rdoWoman, rdoMan));
-			if(rdoMan.isSelected()) {
-				m.setGender("true");
-			}else {
-				m.setGender("false");
+			
+			// 토글 버튼이 null이거나 어느 버튼도 선택되지 않았을 때의 기본 처리
+			if (rdoMan == null || rdoWoman == null || (!rdoMan.isSelected() && !rdoWoman.isSelected())) {
+			    cs.customErrorView(root, "성별을 선택해주세요.");
+			    return;
 			}
-			if( dao.insertMember(m)) {
-				Stage s = (Stage) member.getWindow();
-				s.close();
-			} else {
-				return;
 
+			// 성별 선택에 따라 값을 설정
+			m.setGender(rdoMan.isSelected() ? "true" : "false");
+
+			if (dao.insertMember(m)) {
+			    Stage s = (Stage) member.getWindow();
+			    s.close();
+			} else {
+			    return;
 			}
 		}catch (Exception e1) {
-			cs.msgBox("오류", "정보 누락", "모든 정보를 입력해주세요.");
-
+			cs.customErrorView(root, "회원정보를 모두 입력해주세요.");
 		}
 
 

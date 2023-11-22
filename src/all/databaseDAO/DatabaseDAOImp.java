@@ -207,7 +207,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				int result = pstmt.executeUpdate();
 
 				if (result == 1) {
-					cs.msgBox("회원가입", "회원가입여부", "회원가입에 성공하셨습니다.");
+					cs.customErrorView(root, "회원가입이 완료되었습니다.");
 					return true;
 				}
 			} catch (Exception e) {

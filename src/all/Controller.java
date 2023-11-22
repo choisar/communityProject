@@ -23,9 +23,7 @@ import all.userService.admin.AdminServiceImp;
 import all.userService.user.UserService;
 import all.userService.user.UserServiceImp;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.control.TextField;
 
 public class Controller{
 	private Parent root;
@@ -85,10 +83,12 @@ public class Controller{
 	public void loginProc() {
 		lb.loginProc(root);
 	}
+	
 	// 회원가입 버튼
 	public void membershipProc() {
 		jb.membershipProc(root);
 	}
+	
 	// 취소 버튼
 	public void cancelProc(ActionEvent event) {
 		cs.windowClose(event);
@@ -149,11 +149,13 @@ public class Controller{
 	public void reportProc() {
 		bBt.reportProc(root);
 	}
+	
 	// 회원가입 
 	public void joinMember(ActionEvent event) {
 		// TODO Auto-generated method stub
 		jb.joinMember(event);
 	}
+	
 	// 로그아웃 버튼
 	public void logoutProc() {
 		lb.logoutProc(root);
