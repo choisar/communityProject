@@ -29,6 +29,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	Connection con;
 	ResultSet rs;
 	PreparedStatement pstmt;
+	Statement stmt;
 	static String nowId = "";
 	static int nowBoardNum = 0;
 	Parent root;
@@ -925,6 +926,25 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return false;
 	}
 
+	@Override
+	   public void deleteBoardRow(int no) {
+	      // TODO Auto-generated method stub
+	      String sql = "delete from board where board_no = " + no;
+	      int result;
+	      try {
+	         stmt = con.createStatement();
+	         result = stmt.executeUpdate(sql);
+	         
+	         if (result == 1) {
+	            System.out.println("삭제 완료");
+	         }else {
+	            System.out.println("삭제 실패");
+	         }
+	      }catch (Exception e) {
+	         // TODO: handle exception
+	         e.printStackTrace();
+	      }
+	   }
 	
 
 }

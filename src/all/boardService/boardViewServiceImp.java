@@ -32,7 +32,7 @@ public class boardViewServiceImp implements boardViewService {
 
 	// 전체 게시판
 	@Override
-	public void allBoardView(Parent root) {
+	public void allBoardView(Parent root, String memId) {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 		
@@ -50,18 +50,6 @@ public class boardViewServiceImp implements boardViewService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 		
-		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("../../fxml/userLogin1.fxml"));
-		Parent root1 = null;
-		try {
-			root1 = loader1.load();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		Label userIdLabel = (Label)root1.lookup("#memberId");
-		String memId = userIdLabel.getText();
-		
 		bs.createAllListView(root,memId);
 		
 		membershipForm.setTitle("자유 게시판");
@@ -71,7 +59,7 @@ public class boardViewServiceImp implements boardViewService {
 	
 	// 자유 게시판
 	@Override
-	public void freeBoardView(Parent root) {
+	public void freeBoardView(Parent root, String memId) {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
@@ -88,8 +76,10 @@ public class boardViewServiceImp implements boardViewService {
 		}
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
+		
+		
 
-		bs.createCategoryListView(root, "자유 게시판");
+		bs.createCategoryListView(root, "자유 게시판", memId);
 		
 		membershipForm.setTitle("자유 게시판");
 		membershipForm.setResizable(false);
@@ -98,7 +88,7 @@ public class boardViewServiceImp implements boardViewService {
 
 	// 구매 게시판
 	@Override
-	public void buyBoardView(Parent root) {
+	public void buyBoardView(Parent root, String memId) {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
@@ -116,7 +106,7 @@ public class boardViewServiceImp implements boardViewService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		bs.createCategoryListView(root, "구매 게시판");
+		bs.createCategoryListView(root, "구매 게시판", memId);
 
 		membershipForm.setTitle("구매 게시판");
 		membershipForm.setResizable(false);
@@ -125,7 +115,7 @@ public class boardViewServiceImp implements boardViewService {
 
 	// 판매 게시판
 	@Override
-	public void sellBoardView(Parent root) {
+	public void sellBoardView(Parent root, String memId) {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
@@ -143,7 +133,7 @@ public class boardViewServiceImp implements boardViewService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		bs.createCategoryListView(root, "판매 게시판");
+		bs.createCategoryListView(root, "판매 게시판", memId);
 
 		membershipForm.setTitle("판매 게시판");
 		membershipForm.setResizable(false);
@@ -152,7 +142,7 @@ public class boardViewServiceImp implements boardViewService {
 
 	// 나눔 게시판
 	@Override
-	public void sharingBoardView(Parent root) {
+	public void sharingBoardView(Parent root, String memId) {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
@@ -170,7 +160,7 @@ public class boardViewServiceImp implements boardViewService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		bs.createCategoryListView(root, "나눔 게시판");
+		bs.createCategoryListView(root, "나눔 게시판", memId);
 
 		membershipForm.setTitle("나눔 게시판");
 		membershipForm.setResizable(false);
@@ -179,7 +169,7 @@ public class boardViewServiceImp implements boardViewService {
 	
 	// Q&A 게시판
 	@Override
-	public void QABoardView(Parent root) {
+	public void QABoardView(Parent root, String memId) {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
@@ -197,7 +187,7 @@ public class boardViewServiceImp implements boardViewService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 
-		bs.createCategoryListView(root, "QA 게시판");
+		bs.createCategoryListView(root, "QA 게시판", memId);
 
 		membershipForm.setTitle("Q&A 게시판");
 		membershipForm.setResizable(false);
@@ -206,7 +196,7 @@ public class boardViewServiceImp implements boardViewService {
 
 	// 검색 결과 게시판
 	@Override
-	public void searchResultBoardView(Parent root, String text1, String text2) {
+	public void searchResultBoardView(Parent root, String text1, String text2, String memId) {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
 
@@ -223,7 +213,7 @@ public class boardViewServiceImp implements boardViewService {
 		}
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
-		bs.serchResultListView(root, text1, text2);
+		bs.serchResultListView(root, text1, text2, memId);
 		
 		membershipForm.setTitle("검색 결과 게시판");
 		membershipForm.setResizable(false);

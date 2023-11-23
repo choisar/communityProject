@@ -54,6 +54,8 @@ public class boardButtonImp implements boardButton {
 
 		// 회원인 지 비회원인 지 확인하는 레이블
 		Label logChk = (Label) root.lookup("#logChk");
+		Label memIdLabel = (Label) root.lookup("#memberId");
+		String memId = memIdLabel.getText().toString();
 
 		try {
 			// 콤보박스 - 카테고리값
@@ -90,7 +92,7 @@ public class boardButtonImp implements boardButton {
 				} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 					// 새창 띄우기 값 true 일 때
 					if (bs.chk1(root)) {
-						bvs.searchResultBoardView(root, text1, text2);
+						bvs.searchResultBoardView(root, text1, text2, memId);
 					// 새창 띄우기 값 false 일 때
 					} else {
 						TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
@@ -101,7 +103,6 @@ public class boardButtonImp implements boardButton {
 							cs.customErrorView(root, "검색결과가 없습니다.");
 						} else {
 							Board b = listView.getSelectionModel().getSelectedItem();
-							String memId = null;
 							tvs.configureBoardTableView(listView, memId);
 							listView.setItems(FXCollections.observableArrayList(boardList));
 						}
@@ -119,14 +120,16 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void allBoardProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
+		Label memIdLabel = (Label) root.lookup("#memberId");
+		String memId = memIdLabel.getText().toString();
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			if (bs.chk1(root)) {
-				bvs.allBoardView(root);
+				bvs.allBoardView(root, memId);
 			} else {
-				tvs.loadAllBoardListView(root);
+				tvs.loadAllBoardListView(root, memId);
 			}
 		}
 	}
@@ -135,14 +138,16 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void freeBoardProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
+		Label memIdLabel = (Label) root.lookup("#memberId");
+		String memId = memIdLabel.getText().toString();
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			if (bs.chk1(root)) {
-				bvs.freeBoardView(root);
+				bvs.freeBoardView(root, memId);
 			} else {
-				tvs.handleBoardView(root, logChk, "자유 게시판");
+				tvs.handleBoardView(root, logChk, "자유 게시판", memId);
 			}
 		}
 	}
@@ -151,14 +156,16 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void buyBoardProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
+		Label memIdLabel = (Label) root.lookup("#memberId");
+		String memId = memIdLabel.getText().toString();
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			if (bs.chk1(root)) {
-				bvs.buyBoardView(root);
+				bvs.buyBoardView(root, memId);
 			} else {
-				tvs.handleBoardView(root, logChk, "구매 게시판");
+				tvs.handleBoardView(root, logChk, "구매 게시판", memId);
 
 			}
 		}
@@ -168,14 +175,16 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void sellBoardProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
+		Label memIdLabel = (Label) root.lookup("#memberId");
+		String memId = memIdLabel.getText().toString();
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			if (bs.chk1(root)) {
-				bvs.sellBoardView(root);
+				bvs.sellBoardView(root, memId);
 			} else {
-				tvs.handleBoardView(root, logChk, "판매 게시판");
+				tvs.handleBoardView(root, logChk, "판매 게시판", memId);
 			}
 		}
 	}
@@ -184,14 +193,16 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void sharingBoardProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
+		Label memIdLabel = (Label) root.lookup("#memberId");
+		String memId = memIdLabel.getText().toString();
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			if (bs.chk1(root)) {
-				bvs.sharingBoardView(root);
+				bvs.sharingBoardView(root, memId);
 			} else {
-				tvs.handleBoardView(root, logChk, "나눔 게시판");
+				tvs.handleBoardView(root, logChk, "나눔 게시판", memId);
 			}
 		}
 	}
@@ -200,14 +211,16 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void QAProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
+		Label memIdLabel = (Label) root.lookup("#memberId");
+		String memId = memIdLabel.getText().toString();
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
 			if (bs.chk1(root)) {
-				bvs.QABoardView(root);
+				bvs.QABoardView(root, memId);
 			} else {
-				tvs.handleBoardView(root, logChk, "QA 게시판");
+				tvs.handleBoardView(root, logChk, "QA 게시판", memId);
 			}
 		}
 	}
@@ -522,19 +535,21 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void categoryBoardProc(Parent root) {
 		Label categoryChk = (Label) root.lookup("#CategoryText");
-
+		Label memIdLabel = (Label) root.lookup("#memberId");
+		String memId = memIdLabel.getText().toString();
+		
 		if (categoryChk.getText().equals("전체 게시판 >")) {
-			bvs.allBoardView(root);
+			bvs.allBoardView(root, memId);
 		} else if (categoryChk.getText().equals("자유 게시판 >")) {
-			bvs.freeBoardView(root);
+			bvs.freeBoardView(root, memId);
 		} else if (categoryChk.getText().equals("구매 게시판 >")) {
-			bvs.buyBoardView(root);
+			bvs.buyBoardView(root, memId);
 		} else if (categoryChk.getText().equals("판매 게시판 >")) {
-			bvs.sellBoardView(root);
+			bvs.sellBoardView(root, memId);
 		} else if (categoryChk.getText().equals("나눔 게시판 >")) {
-			bvs.sharingBoardView(root);
+			bvs.sharingBoardView(root, memId);
 		} else if (categoryChk.getText().equals("QA 게시판 >")) {
-			bvs.QABoardView(root);
+			bvs.QABoardView(root, memId);
 		}
 	}
 

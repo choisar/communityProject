@@ -66,6 +66,8 @@ public interface DatabaseDAO {
 	
 	// 다음, 이전 게시물을 찾는 메서드
 	Board getNextPrevBoard(String postNum, String category, String Sorting);
+	
+	void deleteBoardRow(int no);
 
 	
 }

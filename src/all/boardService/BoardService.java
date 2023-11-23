@@ -13,9 +13,9 @@ public interface BoardService {
 	// 전체 카테고리의 모든 게시물을 출력하는 테이블뷰 생성
 	void createAllListView(Parent root, String memId);
 	// 선택한 카테고리 <자유, 구매, 판매, 나눔> 의 모든 게시물을 출력하는 테이블뷰 생성
-	void createCategoryListView(Parent root, String string);
+	void createCategoryListView(Parent root, String string, String memId);
 	// 카테고리에 상관없이 검색 결과가 포함된 모든 게시물을 출력하는 테이블뷰 생성
-	void serchResultListView(Parent root, String text1, String text2);
+	void serchResultListView(Parent root, String text1, String text2, String memId);
 	// 신고화면 에서 입력받은 콤보박스 + 입력 내용 값 테이블 뷰
 	void reportSerchResultListView(Parent root, String text1, String text2);
 	

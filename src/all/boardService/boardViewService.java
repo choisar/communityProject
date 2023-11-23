@@ -4,19 +4,19 @@ import javafx.scene.Parent;
 
 public interface boardViewService {
 	// 전체 게시판
-	public void allBoardView(Parent root);
+	public void allBoardView(Parent root, String memId);
 	// 자유 게시판
-	public void freeBoardView(Parent root);
+	public void freeBoardView(Parent root, String memId);
 	// 구매 게시판
-	public void buyBoardView(Parent root);
+	public void buyBoardView(Parent root, String memId);
 	// 판매 게시판
-	public void sellBoardView(Parent root);
+	public void sellBoardView(Parent root, String memId);
 	// 나눔 게시판
-	public void sharingBoardView(Parent root);
+	public void sharingBoardView(Parent root, String memId);
 	// Q&A 게시판
-	public void QABoardView(Parent root);
+	public void QABoardView(Parent root, String memId);
 	// 검색 결과 게시판
-	public void searchResultBoardView(Parent root, String text1, String text2);
+	public void searchResultBoardView(Parent root, String text1, String text2, String memId);
 	// 신고화면 검색 결과 게시판
 //	public void reportSearchResultBoardView(Parent root, String text1, String text2);
 	// 글쓰기 창

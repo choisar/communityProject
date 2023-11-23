@@ -112,13 +112,12 @@ public class BoardServiceImp implements BoardService {
 
 	// 선택한 카테고리 <자유, 구매, 판매, 나눔> 의 테이블 뷰
 	@Override
-	public void createCategoryListView(Parent root, String Category) {
+	public void createCategoryListView(Parent root, String Category, String memId) {
 		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
 		listView.getItems().clear();
 		listView.getColumns().clear();
 		List<Board> boardList = dao.categoryBoardAll(Category);
 		if (boardList != null) {
-			String memId = null;
 			tvs.configureBoardTableView(listView, memId);
 			listView.setItems(FXCollections.observableArrayList(boardList));
 		} else {
@@ -141,13 +140,12 @@ public class BoardServiceImp implements BoardService {
 
 	// 검색 결과의 테이블 뷰
 	@Override
-	public void serchResultListView(Parent root, String text1, String text2) {
+	public void serchResultListView(Parent root, String text1, String text2, String memId) {
 		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
 		listView.getItems().clear();
 		listView.getColumns().clear();
 		List<Board> boardList = dao.searchResultAll(text1, text2);
 		if (boardList != null) {
-			String memId = null;
 			tvs.configureBoardTableView(listView, memId);
 			listView.setItems(FXCollections.observableArrayList(boardList));
 		} else if(boardList == null){
