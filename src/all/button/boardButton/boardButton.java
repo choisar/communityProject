@@ -35,9 +35,6 @@ public interface boardButton {
 	// 이미지를 바이트화 시키는 함수
 	byte[] convertImageToBytes(String imgAddr) throws Exception;
 	
-	// 테스트 버튼
-	void testProc(Parent root);
-	
 	// 보드 디테일뷰에서 카테고리, 리스트 누르면 해당 카테고리 게시판 창 띄우는 버튼
 	void categoryBoardProc(Parent detailRoot);
 	
@@ -45,5 +42,6 @@ public interface boardButton {
 	void NextProc(Parent root);
 	// 보드 디테일뷰에서 이전 게시물(Prev ->) 버튼을 누르면 다음 게시물로 가는 버튼
 	void PrevProc(Parent root);
+	
 	
 }

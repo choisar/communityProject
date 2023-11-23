@@ -55,7 +55,7 @@ public class JoinButtonImp implements JoinButton{
 		ctrl.setRoot(root);
 		
 		TextField txtId = (TextField) root.lookup("#txtId");
-		TextArea errorText = (TextArea) root.lookup("#errorText");
+		TextField errorText = (TextField) root.lookup("#errorText");
 		TextField txtName = (TextField) root.lookup("#txtName");
 		TextField txtnickName = (TextField) root.lookup("#txtnickName");
 		PasswordField txtPw = (PasswordField) root.lookup("#txtPw");
@@ -63,7 +63,7 @@ public class JoinButtonImp implements JoinButton{
 		TextField txtEmail = (TextField) root.lookup("#txtEmail");
 		TextField txtphoneNum = (TextField) root.lookup("#txtphoneNum");
 		DatePicker birthDate = (DatePicker) root.lookup("#birthDate");
-		TextArea errorText2 = (TextArea) root.lookup("#errorText2");
+		TextField errorText2 = (TextField) root.lookup("#errorText2");
 		txtId.requestFocus();
 
 		// 포커스 속성의 변화를 감지하는 리스너 등록

@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import all.Controller;
 import all.Member;
 import all.boardService.Board;
 import all.databaseDAO.DatabaseDAO;
@@ -20,13 +21,16 @@ import all.button.common.CommonServiceImp;
 import all.boardService.tableViewService.TableViewService;
 import all.boardService.tableViewService.TableViewServiceImp;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -431,10 +435,87 @@ public class boardButtonImp implements boardButton {
 
 	// 테스트 버튼
 	public void testProc(Parent root) {
-		TableView<Member> test = (TableView<Member>) root.lookup("#ListView");
-		test.getItems().clear();
-		test.getColumns().clear();
-		test.columnResizePolicyProperty();
+		// TODO Auto-generated method stub
+		Stage testView = new Stage();
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/test1.fxml"));
+		
+		root = null;
+		
+		try {
+			root = loader.load();
+			testView.setScene(new Scene(root));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		Controller ctrl = loader.getController();
+		ctrl.setRoot(root);
+		
+		TextField t1 = (TextField)root.lookup("#text1");
+		TextField t2 = (TextField)root.lookup("#text2");
+		TextField t3 = (TextField)root.lookup("#text3");
+		TextField t4 = (TextField)root.lookup("#text4");
+		TextField t5 = (TextField)root.lookup("#text5");
+		TextField t6 = (TextField)root.lookup("#text6");
+		
+		int str1 = Integer.parseInt(t5.getText());
+		int str2 = Integer.parseInt(t6.getText());
+		
+		
+		if(str1 >= 0 || str1 <= 12) {
+			System.err.println("1 ~ 12 사이의 값을 입력해주세요");
+			t5.requestFocus();
+			t5.clear();
+		}
+		
+		if(str2 >= 0 || str2 <= 31) {
+			System.err.println("1 ~ 31 사이의 값을 입력해주세요");
+			t6.requestFocus();
+			t6.clear();
+		}
+		
+		
+		
+		// t1 길이 제한 및 포커스 이동
+		t1.textProperty().addListener((observable, oldValue, newValue) -> {
+		    if (newValue.length() > 4) {
+		        t1.setText(oldValue); // 길이가 4를 초과하면 이전 값으로 되돌림
+		    } else if (newValue.length() == 4) {
+		        t2.requestFocus(); // 길이가 4이면 다음 텍스트 필드로 포커스 이동
+		    }
+		});
+
+		// t2 길이 제한 및 포커스 이동
+		t2.textProperty().addListener((observable, oldValue, newValue) -> {
+		    if (newValue.length() > 4) {
+		        t2.setText(oldValue); // 길이가 4를 초과하면 이전 값으로 되돌림
+		    } else if (newValue.length() == 4) {
+		        t3.requestFocus(); // 길이가 4이면 다음 텍스트 필드로 포커스 이동
+		    }
+		});
+
+		// t3 길이 제한 및 포커스 이동
+		t3.textProperty().addListener((observable, oldValue, newValue) -> {
+		    if (newValue.length() > 4) {
+		        t3.setText(oldValue); // 길이가 4를 초과하면 이전 값으로 되돌림
+		    } else if (newValue.length() == 4) {
+		        t4.requestFocus(); // 길이가 4이면 다음 텍스트 필드로 포커스 이동
+		    }
+		});
+
+		// t4 길이 제한 및 포커스 이동
+		t4.textProperty().addListener((observable, oldValue, newValue) -> {
+		    if (newValue.length() > 4) {
+		        t4.setText(oldValue); // 길이가 4를 초과하면 이전 값으로 되돌림
+		    } else if (newValue.length() == 4) {
+		        t1.requestFocus(); // 길이가 4이면 다음 텍스트 필드로 포커스 이동
+		    }
+		});
+		
+		testView.setTitle("Test");
+		testView.setResizable(false);
+		testView.show();
 	}
 
 	// 보드 디테일뷰에서 카테고리, 리스트 누르면 해당 카테고리 게시판 창 띄우는 버튼
@@ -492,5 +573,24 @@ public class boardButtonImp implements boardButton {
 
 		bvs.loadNextBoardInCategoryView(root, StrpostNum, category, "DESC");
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

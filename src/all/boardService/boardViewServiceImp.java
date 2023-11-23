@@ -212,7 +212,7 @@ public class boardViewServiceImp implements boardViewService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 		bs.serchResultListView(root, text1, text2);
-
+		
 		membershipForm.setTitle("검색 결과 게시판");
 		membershipForm.setResizable(false);
 		membershipForm.show();

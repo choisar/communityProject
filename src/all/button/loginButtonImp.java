@@ -35,6 +35,7 @@ public class loginButtonImp implements loginButton {
 		bs = new BoardServiceImp();
 	}
 	
+	// 로그인 버튼
 	@Override
 	public void loginProc(Parent root) {
     	
@@ -89,8 +90,8 @@ public class loginButtonImp implements loginButton {
 			    			List<Board> buyLatestBoard = dao.getLatestBoardList("구매 게시판");
 			    			
 			    			// 메인화면에 이미지 넣어주기
-			    			int buyBoard1seq = buyLatestBoard.get(1).getNo();
-			    			int buyBoard2seq = buyLatestBoard.get(0).getNo();
+			    			int buyBoard1seq = buyLatestBoard.get(0).getNo();
+			    			int buyBoard2seq = buyLatestBoard.get(1).getNo();
 			    			List<Image> buyLatestImage1 = dao.getAllImages(buyBoard1seq);
 			    			List<Image> buyLatestImage2 = dao.getAllImages(buyBoard2seq);
 			    			ImageView image1 = (ImageView)root.lookup("#BuyBoardImage1");
@@ -126,8 +127,8 @@ public class loginButtonImp implements loginButton {
 			    			List<Board> sellLatestBoard = dao.getLatestBoardList("판매 게시판");
 			    			
 			    			// 메인화면에 이미지 넣어주기
-			    			int sellBoard1seq = sellLatestBoard.get(1).getNo();
-			    			int sellBoard2seq = sellLatestBoard.get(0).getNo();
+			    			int sellBoard1seq = sellLatestBoard.get(0).getNo();
+			    			int sellBoard2seq = sellLatestBoard.get(1).getNo();
 			    			List<Image> sellLatestImage1 = dao.getAllImages(sellBoard1seq);
 			    			List<Image> sellLatestImage2 = dao.getAllImages(sellBoard2seq);
 			    			ImageView sellImageView1 = (ImageView)root.lookup("#SellBoardImage1");
@@ -163,8 +164,8 @@ public class loginButtonImp implements loginButton {
 			    			List<Board> sharingLatestBoard = dao.getLatestBoardList("나눔 게시판");
 			    			
 			    			// 메인화면에 이미지 넣어주기
-			    			int sharingBoard1seq = sharingLatestBoard.get(1).getNo();
-			    			int sharingBoard2seq = sharingLatestBoard.get(0).getNo();
+			    			int sharingBoard1seq = sharingLatestBoard.get(0).getNo();
+			    			int sharingBoard2seq = sharingLatestBoard.get(1).getNo();
 			    			List<Image> sharingLatestImage1 = dao.getAllImages(sharingBoard1seq);
 			    			List<Image> sharingLatestImage2 = dao.getAllImages(sharingBoard2seq);
 			    			ImageView sharingImageView1 = (ImageView)root.lookup("#SharingBoardImage1");
@@ -204,8 +205,8 @@ public class loginButtonImp implements loginButton {
 			    			List<Board> freeLatestBoard = dao.getLatestBoardList("자유 게시판");
 			    			
 			    			// 메인화면에 이미지 넣어주기
-			    			int freeBoard1seq = freeLatestBoard.get(1).getNo();
-			    			int freeBoard2seq = freeLatestBoard.get(0).getNo();
+			    			int freeBoard1seq = freeLatestBoard.get(0).getNo();
+			    			int freeBoard2seq = freeLatestBoard.get(1).getNo();
 			    			List<Image> freeLatestImage1 = dao.getAllImages(freeBoard1seq);
 			    			List<Image> freeLatestImage2 = dao.getAllImages(freeBoard2seq);
 			    			ImageView freeImageView1 = (ImageView)root.lookup("#FreeBoardImage1");

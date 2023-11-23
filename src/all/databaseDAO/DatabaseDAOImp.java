@@ -22,6 +22,7 @@ import all.button.common.CommonService;
 import all.button.common.CommonServiceImp;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 public class DatabaseDAOImp implements DatabaseDAO {
 	CommonService cs;
@@ -376,6 +377,11 @@ public class DatabaseDAOImp implements DatabaseDAO {
 //		     pstmt.setString(1, text1);
 //			pstmt.setString(2, "%"+text2+"%");
 			rs = pstmt.executeQuery();
+			
+			if(!(rs.next())) {
+				cs.customErrorView(root, "검색결과가 없습니다");
+			}
+			
 			while (rs.next()) {
 				Board b = new Board();
 				b.setNo(rs.getInt(1));
@@ -727,6 +733,35 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		}
 		Board nextBoard = null;
 		return nextBoard;
+	}
+	
+	// 메인화면에서 
+	public Board mainReturnBoard(String a) {
+		
+		try {
+			Board b = new Board();
+			b.setNo(rs.getInt("board_no"));
+			b.setNicName(rs.getString("board_memnick"));
+			b.setTitle(rs.getString("title"));
+			b.setCategori(rs.getString("category"));
+			b.setUploadDate(rs.getDate("contents_date").toString());
+			
+			// 타임스탬프 분까지만 자리수 끊기
+			Timestamp timestamp = rs.getTimestamp("contents_date");
+			if (timestamp != null) {
+				SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+				String dateStr = sdf.format(timestamp);
+				b.setUploadDate(dateStr);
+			}
+			
+			b.setContents(rs.getString("contents"));
+			b.setId(rs.getString("board_memid"));
+			return b;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return null;
 	}
 
 

@@ -39,7 +39,7 @@ public class TableViewServiceImp implements TableViewService {
 			configureBoardTableView(listView);
 			listView.setItems(FXCollections.observableArrayList(boardList));
 		} else {
-			System.out.println("게시판 목록을 가져올 수 없습니다.");
+			return;
 		}
 	}
 
@@ -57,7 +57,7 @@ public class TableViewServiceImp implements TableViewService {
 			configureBoardTableView(listView);
 			listView.setItems(FXCollections.observableArrayList(boardList));
 		} else {
-			System.out.println("게시판 목록을 가져올 수 없습니다.");
+			return;
 		}
 	}
 

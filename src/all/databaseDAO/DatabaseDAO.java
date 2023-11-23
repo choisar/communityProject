@@ -61,6 +61,6 @@ public interface DatabaseDAO {
 	Member memberInfo(String id);
 	
 	// 다음, 이전 게시물을 찾는 메서드
-	public Board getNextPrevBoard(String postNum, String category, String Sorting);
+	Board getNextPrevBoard(String postNum, String category, String Sorting);
 	
 }
