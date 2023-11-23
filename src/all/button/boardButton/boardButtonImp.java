@@ -31,6 +31,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -536,8 +538,25 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void categoryBoardProc(Parent root) {
 		Label categoryChk = (Label) root.lookup("#CategoryText");
-		Label memIdLabel = (Label) root.lookup("#memberId");
-		String memId = memIdLabel.getText().toString();
+		
+		FXMLLoader detailLoader = new FXMLLoader(getClass().getResource("../../fxml/userLogin1.fxml"));
+		
+		Parent root1 = null;
+		
+		String memId = null;
+		
+		try {
+			root1 = detailLoader.load();
+			Controller ctrl = detailLoader.getController();
+			ctrl.setRoot(root);
+			Label memIdLabel = (Label) root1.lookup("#memberId");
+			memId = memIdLabel.getText().toString();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
 		
 		if (categoryChk.getText().equals("전체 게시판 >")) {
 			bvs.allBoardView(root, memId);
