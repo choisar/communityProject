@@ -309,31 +309,46 @@ public class TableViewServiceImp implements TableViewService {
 	    nickname.setCellValueFactory(new PropertyValueFactory<>("nicName"));
 	    date.setCellValueFactory(new PropertyValueFactory<>("uploadDate"));
 
+	    
+	    buttonColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+	    
+	    System.out.println(memId);
+
+	    Callback<TableColumn<Board, Void>, TableCell<Board, Void>> cellFactory = param -> new TableCell<Board, Void>() {
+	        private final Button button = new Button("-");
+
+	        {
+	            button.setOnAction(event -> {
+	                // 버튼 클릭 시 수행할 동작을 추가하세요.
+	                // 해당 행의 정보를 얻거나 삭제 등의 동작 수행 가능
+	            });
+	        }
+
+	        @Override
+	        protected void updateItem(Void item, boolean empty) {
+	            super.updateItem(item, empty);
+	            if (empty) {
+	                setGraphic(null);
+	            } else {
+	                // 특정 조건을 만족하는 특정 행에만 버튼을 띄웁니다.
+	                Board board = getTableView().getItems().get(getIndex());
+	                if (board != null && memId.equals("\""+board.getId().toString()+"\"")) {
+	                    setGraphic(button);
+	                } else {
+	                    setGraphic(null);
+	                }
+	            }
+	        }
+	    };
+	    
+	    buttonColumn.setCellFactory(cellFactory);
+	    
+	    // 기존 코드에 추가된 버튼 열을 테이블에 추가합니다.
 	    listView.getColumns().addAll(boardNum, category, title, nickname, date, buttonColumn);
 	    
-		Callback<TableColumn<Board, Void>, TableCell<Board, Void>> cellFactory = param -> {
-			final TableCell<Board, Void> cell = new TableCell<Board, Void>() {
-				private final Button button = new Button("+");
-
-				{
-					button.setOnAction(event -> {
-						
-					});
-				}
-
-				@Override
-				protected void updateItem(Void item, boolean empty) {
-					super.updateItem(item, empty);
-					if (empty) {
-						setGraphic(null);
-					} else {
-						setGraphic(button);
-					}
-				}
-			};
-			return cell;
-		};
 	}
+	
+	
 
 
 
