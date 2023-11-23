@@ -65,7 +65,7 @@ public class TableViewServiceImp implements TableViewService {
    public void configureBoardTableViewClick(TableView<Board> listView) {
       listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
       TableColumn<Board, Integer> boardNum = new TableColumn<>("No.");
-      boardNum.setMinWidth(30);
+      boardNum.setMinWidth(10);
       TableColumn<Board, String> category = new TableColumn<Board, String>("Categori");
       category.setMinWidth(80);
       TableColumn<Board, String> title = new TableColumn<Board, String>("Title");
@@ -77,8 +77,8 @@ public class TableViewServiceImp implements TableViewService {
       
       // #####
       
-      TableColumn<Board, String> Button = new TableColumn<Board, String>("삭제");
-      Button.setMinWidth(30);
+      TableColumn<Board, String> Button = new TableColumn<Board, String>("Delete");
+      Button.setMinWidth(20);
       
       
       int a = 1;
@@ -134,7 +134,7 @@ public class TableViewServiceImp implements TableViewService {
    public void configureBoardTableView(TableView<Board> listView, String memId) {
        listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
        TableColumn<Board, Integer> boardNum = new TableColumn<>("No.");
-       boardNum.setMinWidth(15);
+       boardNum.setMinWidth(20);
        TableColumn<Board, String> category = new TableColumn<>("Category");
        category.setMinWidth(80);
        TableColumn<Board, String> title = new TableColumn<>("Title");
@@ -143,8 +143,8 @@ public class TableViewServiceImp implements TableViewService {
        nickname.setMinWidth(70);
        TableColumn<Board, String> date = new TableColumn<>("Date");
        date.setMinWidth(100);
-       TableColumn<Board, Void> buttonColumn = new TableColumn<>("삭제");
-       buttonColumn.setMinWidth(25);
+       TableColumn<Board, Void> buttonColumn = new TableColumn<>("Delete");
+       buttonColumn.setMinWidth(30);
 
        boardNum.setCellValueFactory(new PropertyValueFactory<>("No"));
        category.setCellValueFactory(new PropertyValueFactory<>("categori"));

@@ -54,8 +54,6 @@ public class boardButtonImp implements boardButton {
 
 		// 회원인 지 비회원인 지 확인하는 레이블
 		Label logChk = (Label) root.lookup("#logChk");
-		Label memIdLabel = (Label) root.lookup("#memberId");
-		String memId = memIdLabel.getText().toString();
 
 		try {
 			// 콤보박스 - 카테고리값
@@ -90,6 +88,8 @@ public class boardButtonImp implements boardButton {
 					cs.errorView1(root);
 					// 회원일 때
 				} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+					Label memIdLabel = (Label) root.lookup("#memberId");
+					String memId = memIdLabel.getText().toString();
 					// 새창 띄우기 값 true 일 때
 					if (bs.chk1(root)) {
 						bvs.searchResultBoardView(root, text1, text2, memId);
@@ -120,12 +120,13 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void allBoardProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
-		Label memIdLabel = (Label) root.lookup("#memberId");
-		String memId = memIdLabel.getText().toString();
+		
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			Label memIdLabel = (Label) root.lookup("#memberId");
+			String memId = memIdLabel.getText().toString();
 			if (bs.chk1(root)) {
 				bvs.allBoardView(root, memId);
 			} else {
@@ -138,12 +139,12 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void freeBoardProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
-		Label memIdLabel = (Label) root.lookup("#memberId");
-		String memId = memIdLabel.getText().toString();
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			Label memIdLabel = (Label) root.lookup("#memberId");
+			String memId = memIdLabel.getText().toString();
 			if (bs.chk1(root)) {
 				bvs.freeBoardView(root, memId);
 			} else {
@@ -156,12 +157,12 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void buyBoardProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
-		Label memIdLabel = (Label) root.lookup("#memberId");
-		String memId = memIdLabel.getText().toString();
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			Label memIdLabel = (Label) root.lookup("#memberId");
+			String memId = memIdLabel.getText().toString();
 			if (bs.chk1(root)) {
 				bvs.buyBoardView(root, memId);
 			} else {
@@ -175,12 +176,12 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void sellBoardProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
-		Label memIdLabel = (Label) root.lookup("#memberId");
-		String memId = memIdLabel.getText().toString();
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			Label memIdLabel = (Label) root.lookup("#memberId");
+			String memId = memIdLabel.getText().toString();
 			if (bs.chk1(root)) {
 				bvs.sellBoardView(root, memId);
 			} else {
@@ -193,12 +194,12 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void sharingBoardProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
-		Label memIdLabel = (Label) root.lookup("#memberId");
-		String memId = memIdLabel.getText().toString();
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			Label memIdLabel = (Label) root.lookup("#memberId");
+			String memId = memIdLabel.getText().toString();
 			if (bs.chk1(root)) {
 				bvs.sharingBoardView(root, memId);
 			} else {
@@ -211,12 +212,12 @@ public class boardButtonImp implements boardButton {
 	@Override
 	public void QAProc(Parent root) {
 		Label logChk = (Label) root.lookup("#logChk");
-		Label memIdLabel = (Label) root.lookup("#memberId");
-		String memId = memIdLabel.getText().toString();
 
 		if (logChk.getText().equals("비회원")) {
 			cs.errorView1(root);
 		} else if (logChk.getText().equals("회원") || logChk.getText().equals("관리자")) {
+			Label memIdLabel = (Label) root.lookup("#memberId");
+			String memId = memIdLabel.getText().toString();
 			if (bs.chk1(root)) {
 				bvs.QABoardView(root, memId);
 			} else {
