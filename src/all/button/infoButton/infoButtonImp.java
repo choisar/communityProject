@@ -47,6 +47,12 @@ public class infoButtonImp implements infoButton {
 	            backProc(ctrl.getRoot());
 	        });
 	    }
+	    
+	 // aaa.fxml(나의정보) 창의 상단 왼쪽부분에 로그인된 닉네임이 뜨는 것과 관련됨
+	    Label txtlabel2 = (Label) newRoot.lookup("#NickName");
+	    if (txtlabel2 != null) { 
+	    	txtlabel2.setText(dao.selectNick());
+	    }
 
 	    s.setTitle("내정보");
 	    s.show();
@@ -60,7 +66,7 @@ public class infoButtonImp implements infoButton {
 
 
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource("../fxml/userLogin.fxml"));
+				getClass().getResource("../../fxml/userLogin1.fxml"));
 		
 		root = null;
 		
@@ -85,15 +91,17 @@ public class infoButtonImp implements infoButton {
 	@Override
 	public void deleteProc(Parent root) {
 		// TODO Auto-generated method stub
-		List<Member> memberList = dao.selectAll1();
-			memberList.remove(dao);
-			System.out.println("회 원 탈 퇴");
-			cs.msgBox("회원탈최","회원탈퇴 여부","탈퇴 완료했습니다.");
+		boolean deleteResult = dao.removeMem();
+		if(deleteResult) {
+			cs.customErrorView(root, "회원탈퇴 되었습니다.");
+		} else {
+			cs.customErrorView(root, "회원탈퇴 실패했습니다. 관리자에게 문의하세요.");
+		}
 			
 			Stage s = (Stage) root.getScene().getWindow();
 			s.close();
 			FXMLLoader loader = new FXMLLoader(
-					getClass().getResource("../fxml/main.fxml"));
+					getClass().getResource("../../fxml/main.fxml"));
 			
 			root = null;
 			
@@ -104,11 +112,9 @@ public class infoButtonImp implements infoButton {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
-			
+		
 			Controller ctrl = loader.getController();
 			ctrl.setRoot(root);
-			
-		
 			
 			s.setTitle("이전화면");
 			s.show();

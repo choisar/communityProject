@@ -4,8 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 
 public interface proButton {
-	void profileProc();
+	
+	void profileProc(Parent root);
 
-
+	void storeProc(Parent root);
 	
 }

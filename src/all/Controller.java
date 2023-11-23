@@ -262,21 +262,24 @@ public class Controller{
 		cs.windowClose(event);
 	}
 	
-	//
+	// userLogin.fxml 내정보 버튼
 	public void infoProc() {
 		ib.infoProc(root);
 	}
-	// 
+	// aaa.fxml 뒤로가기 화살표
 	public void backProc() {
 		ib.backProc(root);
 	}
-	// 
+	// aaa.fxml 탈퇴 버튼
 	public void deleteProc() {
 		ib.deleteProc(root);
 	}
-	// 
+	// aaa.fxml 프로필 수정 버튼
 	public void profileProc() {
-		pb.profileProc();
+		pb.profileProc(root);
 	}
-	
+	// infoupdate.fxml 저장하기 버튼
+	public void storeProc() {
+		pb.storeProc(root);
+	}
 }

@@ -32,6 +32,9 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	static String nowId = "";
 	static int nowBoardNum = 0;
 	Parent root;
+	
+	// 합치기
+		boolean idChkCom;
 
 	// 오라클 SQL 연결
 	public DatabaseDAOImp() {
@@ -248,16 +251,26 @@ public class DatabaseDAOImp implements DatabaseDAO {
 
 	}
 
-	@Override
-	public boolean dupID(String txtId) {
-		// TODO Auto-generated method stub
-		if (!chkId(txtId)) {
-			return false;
-		} else {
-			return true;
-
+	// 회원가입 아이디 중복확인
+		@Override
+		public boolean dupID(Parent root,String txtId) {
+			// TODO Auto-generated method stub
+			if(txtId.isEmpty()) {
+				cs.customErrorView(root, "아이디 중복 확인하세요.");
+				return false;
+			}else {
+				if(!chkId(txtId)) {
+					cs.customErrorView(root, "같은 아이디가 존재합니다. 다시 입력하세요");
+					idChkCom = false;
+					return false;
+				}else {
+					cs.customErrorView(root,  "사용가능한 아이디 입니다.");
+					idChkCom = true;
+					return true;
+				}
+			}
 		}
-	}
+
 
 	// 전체 멤버 - 모든 멤버객체
 	public List<Member> selectAll1() {
@@ -583,6 +596,37 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 
+	public Member memberInfo() {
+		// TODO Auto-generated method stub
+		String sql = "select * from member where member_id = ?";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nowId);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				Member m = new Member();
+				m.setNum(rs.getInt(1));
+				m.setId(nowId);
+				m.setPw(rs.getString(3));
+				m.setName(rs.getString(4));
+				m.setNickName(rs.getString(5));
+				m.setBirthDate(rs.getDate(6));
+				m.setGender(rs.getString(7));
+				m.setEmail(rs.getString(8));
+				m.setPhoneNum(rs.getString(9));
+				return m;
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	// 신고화면 검색 (게시물/board) - 검색 결과가 포함된 모든 정보
 	@Override
 	public List<Board> reportSearchResultAll1(String text1, String text2) {
@@ -764,5 +808,117 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return null;
 	}
 
+	// 탈퇴 버튼을 눌렀을때 정보가 삭제되게끔 해주는 메서드
+	public boolean removeMem() {
+		// TODO Auto-generated method stub
+		String sql1 = "select * from board where board_memid=?";
+		String sql2 = "delete from board where board_memid=?";
+		String sql4 = "delete from board_img where board_no=?";
+		try(PreparedStatement pstmt = con.prepareStatement(sql1)) {
+			pstmt.setString(1, nowId);
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					int boaredNum = rs.getInt("board_no");
+					
+					try(PreparedStatement pstmt1 = con.prepareStatement(sql4)) {
+						pstmt1.setInt(1, boaredNum);
+						
+						pstmt1.executeQuery();
+
+					} catch(Exception e) {
+						System.out.println("게시글삭제");
+						e.printStackTrace();
+					}
+					
+					try(PreparedStatement pstmt1 = con.prepareStatement(sql2)) {
+						pstmt1.setString(1, nowId);
+						
+						pstmt1.executeQuery();
+						
+					} catch(Exception e) {
+						System.out.println("게시글삭제");
+						e.printStackTrace();
+					}
+				}
+			}
+		}catch(Exception e) {
+			System.out.println("1");
+			e.printStackTrace();
+		}
+		
+		System.out.println(nowId);
+		
+	
+		String sql3 = "delete from member where member_id=?";
+		try(PreparedStatement pstmt = con.prepareStatement(sql3)) {
+			System.out.println(nowId);
+			pstmt.setString(1, nowId);
+
+			int removeResult = pstmt.executeUpdate();
+			System.out.println(removeResult);
+			if(removeResult > 0) {
+				return true;
+			} else {
+				return false;
+			}
+
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	// 나의 정보 창 왼쪽 상단 닉네임 부분에 해당 아이디의 닉네임이 뜬다.
+	public String selectNick() {
+		// TODO Auto-generated method stub
+		String sql = "select member_nickname from member where member_id='"+nowId+"'";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			rs.next();
+			String nickname = rs.getString(1);
+			return nickname;
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	// 프로필 수정에서 변경된 정보를 저장해주는 메서드
+	public boolean updateMember(Parent root, Member m) {
+		// TODO Auto-generated method stub
+			String sql = "update member set member_name=?,member_nickname=?,member_pw=?,member_birthdate=?,member_gender=?,member_email=?,member_phonenum=? where member_id=?"; 
+			try {
+				pstmt = con.prepareStatement(sql);
+
+				pstmt.setString(1, m.getName());
+				pstmt.setString(2, m.getNickName());
+				pstmt.setString(3, m.getPw());
+				pstmt.setDate(4, m.getBirthDate());
+				pstmt.setString(5, m.isGender());
+				pstmt.setString(6,m.getEmail());
+				pstmt.setString(7, m.getPhoneNum());
+				pstmt.setString(8, m.getId());
+
+				int result = pstmt.executeUpdate();
+
+				if(result == 1) {
+					System.out.println("수정완료");
+					cs.customErrorView(root,"프로필이 수정되었습니다." );
+					return true;
+				}
+			} catch(Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		
+		return false;
+	}
+
+	
 
 }

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Controller">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
 	<columnConstraints>
 		<ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="117.0" />
 		<ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="256.0" />
@@ -61,7 +61,7 @@
 				<Font size="15.0" />
 			</font>
 		</Label>
-    	<TextField fx:id="txtid" prefHeight="23.0" prefWidth="187.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+    	<TextField fx:id="txtId" prefHeight="23.0" prefWidth="187.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="15.0" right="40.0" />
          </GridPane.margin>
@@ -165,7 +165,7 @@
 		<!-- 회원가입, 취소 버튼 -->
 		<HBox alignment="CENTER" prefHeight="121.0" prefWidth="745.0" spacing="150.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
 			<children>
-				<Button mnemonicParsing="false" onAction="" prefWidth="120.0" text="저 장 하 기">
+				<Button mnemonicParsing="false" onAction="#storeProc" prefWidth="120.0" text="저 장 하 기">
 					<font>
 						<Font size="17.0" />
 					</font>
