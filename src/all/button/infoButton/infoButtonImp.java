@@ -17,17 +17,19 @@ public class infoButtonImp implements infoButton {
 
 	DatabaseDAOImp dao;
 	CommonService cs;
+	proButton pb;
 	
 	public infoButtonImp() {
 		// TODO Auto-generated constructor stub
 		dao = new DatabaseDAOImp();
 		cs = new CommonServiceImp();
-	}
+		pb = new proButtonImp();
+		}
 
 	@Override
 	public void infoProc(Parent root) {
 	    Stage s = (Stage) root.getScene().getWindow();
-	    FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/aaa.fxml"));
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/infoupdate.fxml"));
 	    Parent newRoot = null;
 
 	    try {
@@ -41,21 +43,11 @@ public class infoButtonImp implements infoButton {
 	    Controller ctrl = loader.getController();
 	    ctrl.setRoot(newRoot);
 
-	    Label txtlabel = (Label) newRoot.lookup("#txtlabel");
-	    if (txtlabel != null) { // txtlabel이 null인지 안전하게 체크
-	        txtlabel.setOnMouseClicked(e -> {
-	            backProc(ctrl.getRoot());
-	        });
-	    }
-	    
-	 // aaa.fxml(나의정보) 창의 상단 왼쪽부분에 로그인된 닉네임이 뜨는 것과 관련됨
-	    Label txtlabel2 = (Label) newRoot.lookup("#NickName");
-	    if (txtlabel2 != null) { 
-	    	txtlabel2.setText(dao.selectNick());
-	    }
-
 	    s.setTitle("내정보");
 	    s.show();
+	    
+	    pb.profileProc(newRoot);
+	    
 	}
 
 	@Override

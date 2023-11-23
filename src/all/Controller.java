@@ -266,15 +266,15 @@ public class Controller{
 	public void infoProc() {
 		ib.infoProc(root);
 	}
-	// aaa.fxml 뒤로가기 화살표
+	// infoupdate.fxml 뒤로가기 버튼
 	public void backProc() {
 		ib.backProc(root);
 	}
-	// aaa.fxml 탈퇴 버튼
+	// infoupdate.fxml 탈퇴 버튼
 	public void deleteProc() {
 		ib.deleteProc(root);
 	}
-	// aaa.fxml 프로필 수정 버튼
+	// infoProc() 안에서 사용하는 메서드
 	public void profileProc() {
 		pb.profileProc(root);
 	}
