@@ -62,6 +62,7 @@ public class loginButtonImp implements loginButton {
 	            	
 	            	
 	                Member m = dao.memberInfo(insertId);
+	                
 	                if (m != null) {
 	                	
 	                	Stage s = (Stage) root.getScene().getWindow();
@@ -79,11 +80,14 @@ public class loginButtonImp implements loginButton {
 		            		ctrl.setRoot(root);
 		                    
 		                    Label memberName = (Label) root.lookup("#memberName");
+		                    Label memberId = (Label) root.lookup("#memberId");
 		                    memberName.setText("\"" + m.getName() + "\"");
-
+		                    memberId.setText("\"" + m.getId() + "\"");
+		                    String memId = memberId.getText();
+		                    
 		                    bs.chk1(root);
 		                    bs.mainCombo(root);
-		                    bs.createAllListView(root);
+		                    bs.createAllListView(root,memId);
 
 		                    // ######## 최신글 ###########	
 			    			// 구매 게시판, 판매 게시판, 나눔 게시판, 자유 게시판의 최신글 각각 2개씩 정보 가져옴
@@ -302,7 +306,8 @@ public class loginButtonImp implements loginButton {
 		ctrl.setRoot(root);
 
 		bs.mainCombo(root);
-		bs.createAllListView(root);
+		String memId = "로그인 안함";
+		bs.createAllListView(root,memId);
 
 		s.setTitle("KG - Trading Comunity");
 		s.show();

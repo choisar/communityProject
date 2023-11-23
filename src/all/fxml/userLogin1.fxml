@@ -290,5 +290,6 @@
       </Label>
       <Label fx:id="FreeBoardTime1" layoutX="270.0" layoutY="2429.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
       <Label fx:id="FreeBoardTime2" layoutX="615.0" layoutY="2429.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
+      <Label fx:id="memberId" layoutX="44.0" layoutY="63.0" text="Label" />
 	</children>
 </AnchorPane>

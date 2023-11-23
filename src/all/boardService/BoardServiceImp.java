@@ -62,7 +62,8 @@ public class BoardServiceImp implements BoardService {
 		// 검색창 콤보박스
 		mainCombo(root);
 		// 메인화면에 띄울 전체 게시판 테이블뷰
-		createAllListView(root);
+		String memId = "로그인 안함";
+		createAllListView(root, memId);
 
 		rootStage.setTitle("KG - Trading Comunity");
 		rootStage.show();
@@ -72,13 +73,17 @@ public class BoardServiceImp implements BoardService {
 
 	// 전체 게시판의 테이블 뷰
 	@Override
-	public void createAllListView(Parent root) {
+	public void createAllListView(Parent root, String memId) {
 		TableView<Board> listView = (TableView<Board>) root.lookup("#ListView");
 		listView.getItems().clear();
 		listView.getColumns().clear();
 		List<Board> boardList = dao.selectAll();
 		if (boardList != null) {
-			tvs.configureBoardTableView(listView);
+			
+//			if() {
+//				
+//			}
+			tvs.configureBoardTableView(listView, memId);
 			listView.setItems(FXCollections.observableArrayList(boardList));
 		} else {
 			System.out.println("게시판 목록을 가져올 수 없습니다.");
@@ -113,7 +118,8 @@ public class BoardServiceImp implements BoardService {
 		listView.getColumns().clear();
 		List<Board> boardList = dao.categoryBoardAll(Category);
 		if (boardList != null) {
-			tvs.configureBoardTableView(listView);
+			String memId = null;
+			tvs.configureBoardTableView(listView, memId);
 			listView.setItems(FXCollections.observableArrayList(boardList));
 		} else {
 			System.out.println("게시판 목록을 가져올 수 없습니다.");
@@ -141,7 +147,8 @@ public class BoardServiceImp implements BoardService {
 		listView.getColumns().clear();
 		List<Board> boardList = dao.searchResultAll(text1, text2);
 		if (boardList != null) {
-			tvs.configureBoardTableView(listView);
+			String memId = null;
+			tvs.configureBoardTableView(listView, memId);
 			listView.setItems(FXCollections.observableArrayList(boardList));
 		} else if(boardList == null){
 			System.out.println("게시판 목록을 가져올 수 없습니다.");
@@ -151,6 +158,7 @@ public class BoardServiceImp implements BoardService {
 		listView.setOnMouseClicked(event -> {
 			if (event.getClickCount() > 1) {
 				Board b = listView.getSelectionModel().getSelectedItem();
+				
 				if (b != null) {
 					// 해당 게시물 보기
 					List<Image> imagelist = dao.getAllImages(b.getNo());
@@ -168,7 +176,10 @@ public class BoardServiceImp implements BoardService {
 		listView.getColumns().clear();
 		List<Board> boardList = dao.searchResultAll(text1, text2);
 		if (boardList != null) {
-			tvs.configureBoardTableView(listView);
+			Board b = listView.getSelectionModel().getSelectedItem();
+			
+			String memId = null;
+			tvs.configureBoardTableView(listView, memId);
 			listView.setItems(FXCollections.observableArrayList(boardList));
 
 		} else {

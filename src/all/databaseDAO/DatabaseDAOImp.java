@@ -308,6 +308,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				b.setTitle(rs.getString(3));
 				b.setCategori(rs.getString(4));
 				b.setContents(rs.getString(6));
+				b.setId(rs.getString(7));
 				// 타임스탬프 분까지만 자리수 끊기
 				Timestamp timestamp = rs.getTimestamp(5);
 
@@ -353,6 +354,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 					b.setUploadDate(dateStr);
 				}
 				b.setContents(rs.getString(6));
+				b.setId(rs.getString(7));
 				boardList.add(b);
 			}
 			return boardList;
@@ -396,6 +398,8 @@ public class DatabaseDAOImp implements DatabaseDAO {
 					b.setUploadDate(dateStr);
 				}
 				b.setContents(rs.getString(6));
+				b.setId(rs.getString(7));
+				
 				boardList.add(b);
 			}
 			return boardList;
@@ -611,6 +615,8 @@ public class DatabaseDAOImp implements DatabaseDAO {
 					String dateStr = sdf.format(timestamp);
 					b.setUploadDate(dateStr);
 				}
+				b.setContents(rs.getString(6));
+				b.setId(rs.getString(7));
 
 				reportBoardList.add(b);
 			}

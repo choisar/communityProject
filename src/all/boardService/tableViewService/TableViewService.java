@@ -14,7 +14,9 @@ public interface TableViewService {
 	// 중복 코드 줄이려고 만든 메서드 - 전체 게시판 테이블 뷰
 	void loadAllBoardListView(Parent root);
 	// 중복 코드 줄이려고 만든 메서드 - 테이블 뷰에 컬럼 설정
-	void configureBoardTableView(TableView<Board> listView);
+	void configureBoardTableView(TableView<Board> listView,String memId);
+	// 중복 코드 줄이려고 만든 메서드 - 테이블 뷰에 컬럼 설정 - 클릭했을 때
+	public void configureBoardTableViewClick(TableView<Board> listView);
 	// 중복 코드 줄이려고 만든 메서드 - 테이블 뷰에 컬럼 설정 - 신고 기능 게시물용
 	void configureBoardTableView1(TableView<Board> listView, Parent root);
 	// 중복 코드 줄이려고 만든 메서드 - 테이블 뷰에 컬럼 설정 - 신고 기능 게시물용

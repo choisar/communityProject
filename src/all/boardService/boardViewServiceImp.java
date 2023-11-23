@@ -50,7 +50,19 @@ public class boardViewServiceImp implements boardViewService {
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
 		
-		bs.createAllListView(root);
+		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("../../fxml/userLogin1.fxml"));
+		Parent root1 = null;
+		try {
+			root1 = loader1.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Label userIdLabel = (Label)root1.lookup("#memberId");
+		String memId = userIdLabel.getText();
+		
+		bs.createAllListView(root,memId);
 		
 		membershipForm.setTitle("자유 게시판");
 		membershipForm.setResizable(false);

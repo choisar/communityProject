@@ -100,7 +100,9 @@ public class boardButtonImp implements boardButton {
 						if(boardList.isEmpty()) {
 							cs.customErrorView(root, "검색결과가 없습니다.");
 						} else {
-							tvs.configureBoardTableView(listView);
+							Board b = listView.getSelectionModel().getSelectedItem();
+							String memId = null;
+							tvs.configureBoardTableView(listView, memId);
 							listView.setItems(FXCollections.observableArrayList(boardList));
 						}
 					}
