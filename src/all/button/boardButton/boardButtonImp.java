@@ -365,18 +365,16 @@ public class boardButtonImp implements boardButton {
 
 		postSuc = dao.uploadBoard(b);
 		all.boardService.ImagePath ip = new all.boardService.ImagePath();
-		System.out.println(imgAddr.getText());
+
 		if (postSuc) {
 			if (imgAddr.getText().equals("") || imgAddr.getText().equals("blank")) {
 				imgSuc = true;
 			} else {
 				byte[] imageBytes = null;
 				String[] imgPaths = imgAddr.getText().split("\\n");
-				System.out.println(imgPaths[0]);
 				for (String i : imgPaths) {
 					ip = new all.boardService.ImagePath();
 					imageBytes = convertImageToBytes(i);
-					System.out.println(imageBytes);
 					ip.setImageByte(imageBytes);
 					imgSuc = dao.uploadImg(ip, b);
 					if (!imgSuc) {

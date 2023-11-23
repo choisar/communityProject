@@ -312,7 +312,6 @@ public class TableViewServiceImp implements TableViewService {
 	    
 	    buttonColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
 	    
-	    System.out.println(memId);
 
 	    Callback<TableColumn<Board, Void>, TableCell<Board, Void>> cellFactory = param -> new TableCell<Board, Void>() {
 	        private final Button button = new Button("-");
