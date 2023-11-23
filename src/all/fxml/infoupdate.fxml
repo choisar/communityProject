@@ -1,181 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Controller">
-	<columnConstraints>
-		<ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="117.0" />
-		<ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="256.0" />
-		<ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="141.0" />
-		<ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="244.0" />
-	</columnConstraints>
-	<rowConstraints>
-		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-	</rowConstraints>
+<AnchorPane layoutX="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="633.0" prefWidth="429.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
 	<children>
-		<!-- 제목 레이블 -->
-		<Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="800.0" text="프  로  필  수  정" GridPane.columnSpan="4">
-			<font>
-				<Font size="25.0" />
-			</font>
-			<GridPane.margin>
-				<Insets />
-			</GridPane.margin>
-			<opaqueInsets>
-				<Insets />
-			</opaqueInsets>
-		</Label>
-		<!-- 이름 레이블 -->
-		<Label alignment="CENTER" prefHeight="19.0" prefWidth="137.0" text=" 이     름" GridPane.rowIndex="1">
-			<font>
-				<Font size="15.0" />
-			</font>
-		</Label>
-		<!-- 이름 입력 텍스트 필드 -->
-		<TextField fx:id="txtName" prefHeight="23.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-			<GridPane.margin>
-				<Insets left="15.0" right="40.0" />
-			</GridPane.margin>
-		</TextField>
-		<!-- 아이디 레이블 -->
-		<Label prefHeight="19.0" prefWidth="162.0" text="         아   이   디" GridPane.columnIndex="2" GridPane.rowIndex="1">
-			<font>
-				<Font size="15.0" />
-			</font>
-		</Label>
-    	<TextField fx:id="txtid" prefHeight="23.0" prefWidth="187.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets left="15.0" right="40.0" />
-         </GridPane.margin>
-      </TextField>
-		<!-- 닉네임 레이블 -->
-		<Label alignment="CENTER" prefHeight="15.0" prefWidth="147.0" text="닉 네 임" GridPane.rowIndex="2">
-			<font>
-				<Font size="15.0" />
-			</font>
-		</Label>
-		<!-- 닉네임 입력 텍스트 필드 -->
-		<TextField fx:id="txtnickName" prefHeight="23.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-			<GridPane.margin>
-				<Insets left="15.0" right="40.0" />
-			</GridPane.margin>
-		</TextField>
-		<!-- 패스워드, 패스워드 확인 레이블 -->
-		<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="26.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
+		<TextField fx:id="txtId" disable="true" layoutX="73.0" layoutY="39.0" prefHeight="25.0" prefWidth="320.0" promptText="ID" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="74.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="122.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
+		<PasswordField fx:id="txtPw" layoutX="73.0" layoutY="88.0" prefHeight="25.0" prefWidth="320.0" promptText="PW" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="276.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="170.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
+		<PasswordField fx:id="txtPwOk" layoutX="73.0" layoutY="136.0" prefHeight="25.0" prefWidth="320.0" promptText="PW Chk" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
+		<TextField fx:id="txtEmail" layoutX="73.0" layoutY="184.0" prefHeight="25.0" prefWidth="320.0" promptText="E-mail" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="324.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="372.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="420.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
+		<TextField fx:id="txtName" layoutX="73.0" layoutY="290.0" prefHeight="25.0" prefWidth="320.0" promptText="Name" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
+		<TextField fx:id="txtnickName" layoutX="73.0" layoutY="338.0" prefHeight="25.0" prefWidth="320.0" promptText="Nick Name" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
+		<DatePicker fx:id="birthDate" layoutX="147.0" layoutY="386.0" prefHeight="23.0" prefWidth="153.0" />
+		<Label layoutX="81.0" layoutY="390.0" text="Birth" textFill="#bbbbbb" />
+		<TextField fx:id="txtphoneNum" layoutX="73.0" layoutY="433.0" prefHeight="25.0" prefWidth="320.0" promptText="Phone Number" style="-fx-border-color: transparent; -fx-background-color: transparent;" />
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="32.0" layoutY="468.0" stroke="#b5b4b4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" width="370.0" />
+		<HBox alignment="CENTER" layoutX="70.0" layoutY="468.0" prefHeight="50.0" prefWidth="291.0" spacing="50.0">
 			<children>
-				<Label prefHeight="19.0" prefWidth="137.0" text="       패 스 워 드">
-					<font>
-						<Font size="15.0" />
-					</font>
-				</Label>
-				<Label prefHeight="19.0" prefWidth="163.0" text="     패 스 워 드 확 인">
-					<font>
-						<Font size="15.0" />
-					</font>
-				</Label>
-			</children>
-		</VBox>
-		<!-- 패스워드, 패스워드 확인 입력 패스워드필드 -->
-		<VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
-			<children>
-				<PasswordField fx:id="txtPw" />
-				<PasswordField fx:id="txtPwOk" alignment="CENTER" />
-			</children>
-			<padding>
-				<Insets left="15.0" right="40.0" />
-			</padding>
-		</VBox>
-		<!-- 생년월일 레이블 -->
-		<Label alignment="CENTER" contentDisplay="CENTER" text="       생 년 월 일 " GridPane.rowIndex="3">
-			<font>
-				<Font size="15.0" />
-			</font>
-		</Label>
-		<!-- 생년월일 데이트 픽커 -->
-		<DatePicker fx:id="birthDate" prefHeight="23.0" prefWidth="141.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-			<GridPane.margin>
-				<Insets left="72.0" right="28.0" />
-			</GridPane.margin>
-		</DatePicker>
-		<!-- 성별 레이블 -->
-		<Label alignment="CENTER" prefHeight="19.0" prefWidth="189.0" text=" 성     별" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="3">
-			<font>
-				<Font size="15.0" />
-			</font>
-		</Label>
-		<!-- 성별 입력 라디오 버튼 -->
-		<HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
-			<children>
-				<RadioButton fx:id="rdoMan" mnemonicParsing="false" selected="true" text="남 성">
-					<HBox.margin>
-						<Insets left="15.0" />
-					</HBox.margin>
+				<ToggleButton fx:id="rdoMan" accessibleRole="RADIO_BUTTON" mnemonicParsing="false" prefHeight="27.0" prefWidth="95.0" selected="true" stylesheets="@toggle.css" text="Man" textFill="#b5adad">
                <toggleGroup>
-                  <ToggleGroup fx:id="genderGroup" />
+                  <ToggleGroup fx:id="gender" />
                </toggleGroup>
-				</RadioButton>
-				<RadioButton fx:id="rdoWoman" mnemonicParsing="false" text="여 성" toggleGroup="$genderGroup" />
-			</children>
-			<padding>
-				<Insets left="30.0" top="30.0" />
-			</padding>
-		</HBox>
-		<!-- 이메일 레이블 -->
-		<Label prefHeight="19.0" prefWidth="139.0" text="         이 메 일" GridPane.rowIndex="4">
-			<font>
-				<Font size="15.0" />
-			</font>
-		</Label>
-		<!-- 이메일 입력 텍스트필드 -->
-		<TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="4">
-			<GridPane.margin>
-				<Insets left="15.0" right="40.0" />
-			</GridPane.margin>
-		</TextField>
-		<!-- 전화번호 레이블 -->
-		<Label contentDisplay="CENTER" prefHeight="19.0" prefWidth="162.0" text="         전 화 번 호" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-			<font>
-				<Font size="15.0" />
-			</font>
-		</Label>
-		<!-- 전화번호 입력 텍스트필드 -->
-		<TextField fx:id="txtphoneNum" GridPane.columnIndex="3" GridPane.rowIndex="4">
-			<GridPane.margin>
-				<Insets left="15.0" right="40.0" />
-			</GridPane.margin>
-		</TextField>
-		<!-- 회원가입, 취소 버튼 -->
-		<HBox alignment="CENTER" prefHeight="121.0" prefWidth="745.0" spacing="150.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
-			<children>
-				<Button mnemonicParsing="false" onAction="" prefWidth="120.0" text="저 장 하 기">
-					<font>
-						<Font size="17.0" />
-					</font>
-				</Button>
-				<Button mnemonicParsing="false" onAction="#cancelProc" prefWidth="120.0" text="취  소">
-					<font>
-						<Font size="17.0" />
-					</font>
-				</Button>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+				</ToggleButton>
+				<ToggleButton fx:id="rdoWoman" accessibleRole="RADIO_BUTTON" mnemonicParsing="false" prefHeight="27.0" prefWidth="95.0" stylesheets="@toggle.css" text="Woman" textFill="#b5adad" toggleGroup="$gender">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ToggleButton>
 			</children>
 		</HBox>
+		<Button fx:id="Ok" layoutX="140.0" layoutY="572.0" mnemonicParsing="false" onAction="#storeProc" prefHeight="43.0" prefWidth="160.0" stylesheets="@toggle.css" text="OK" textFill="#bbbbbb">
+			<font>
+				<Font name="Nirmala UI Bold" size="16.0" />
+			</font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+		</Button>
+		<ImageView layoutX="45.0" layoutY="41.0">
+			<image>
+				<Image url="@../image/정보.png" />
+			</image>
+		</ImageView>
+		<ImageView layoutX="46.0" layoutY="91.0">
+			<image>
+				<Image url="@../image/비밀번호.png" />
+			</image>
+		</ImageView>
+		<ImageView layoutX="40.0" layoutY="181.0">
+			<image>
+				<Image url="@../image/이메일.png" />
+			</image>
+		</ImageView>
+		<ImageView layoutX="46.0" layoutY="139.0">
+			<image>
+				<Image url="@../image/비밀번호.png" />
+			</image>
+		</ImageView>
+		<ImageView layoutX="45.0" layoutY="292.0">
+			<image>
+				<Image url="@../image/정보.png" />
+			</image>
+		</ImageView>
+		<ImageView layoutX="45.0" layoutY="340.0">
+			<image>
+				<Image url="@../image/정보.png" />
+			</image>
+		</ImageView>
+		<ImageView layoutX="48.0" layoutY="435.0">
+			<image>
+				<Image url="@../image/핸드폰.png" />
+			</image>
+		</ImageView>
+		<ImageView layoutX="39.0" layoutY="382.0">
+			<image>
+				<Image url="@../image/달력.png" />
+			</image>
+		</ImageView>
+      <TextField fx:id="errorText" layoutX="37.0" layoutY="233.0" prefHeight="29.0" prefWidth="360.0" style="-fx-background-color: white; -fx-border-color: #b5b4b4; -fx-border-radius: 2; -fx-border-width: 2;">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="errorText2" layoutX="37.0" layoutY="531.0" prefHeight="29.0" prefWidth="360.0" style="-fx-background-color: white; -fx-border-color: #b5b4b4; -fx-border-radius: 2; -fx-border-width: 2;">
+         <font>
+            <Font size="11.0" />
+         </font></TextField>
+      <Button fx:id="Back" layoutX="38.0" layoutY="572.0" mnemonicParsing="false" onAction="#backProc" prefHeight="43.0" prefWidth="87.0" stylesheets="@toggle.css" text="Back">
+         <font>
+            <Font name="Nirmala UI Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="Delete" layoutX="318.0" layoutY="572.0" mnemonicParsing="false" onAction="#deleteProc" prefHeight="43.0" prefWidth="87.0" stylesheets="@toggle.css" text="Delete">
+         <font>
+            <Font name="Nirmala UI Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
 	</children>
-</GridPane>
+</AnchorPane>

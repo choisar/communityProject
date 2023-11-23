@@ -76,7 +76,7 @@ public class JoinButtonImp implements JoinButton{
 				}else if(txtId1.length() <= 4) {
 					errorText.setText("아이디는 5자리 이상이어야 합니다.");
 					txtId.requestFocus();
-				} else if (dao.dupID(txtId1)) {
+				} else if (dao.dupID(ctrl.getRoot(),txtId1)) {
 					errorText.setText("사용 가능한 아이디입니다.");
 				}else {
 					errorText.setText("중복된 아이디입니다.");
@@ -204,6 +204,58 @@ public class JoinButtonImp implements JoinButton{
 			TextField txtphoneNum = (TextField) member.lookup("#txtphoneNum");
 			DatePicker birthDate = (DatePicker) member.lookup("#birthDate");		
 
+			System.out.println(txtName.getText());
+
+			if(txtName.getText() == null || txtName.getText().isEmpty()) {
+				cs.customErrorView(root, "이름이 입력 되지 않았습니다. 다시 입력하세요");
+				txtName.clear();
+				txtName.requestFocus();
+				return;
+			} else if(txtId.getText().length() <= 4) {
+				if(txtId.getText().isEmpty()) {
+					cs.customErrorView(root, "아이디가 입력 되지 않았습니다. 다시 입력하세요");
+					txtId.clear();
+					txtId.requestFocus();
+				}else {
+					cs.customErrorView(root,"아이디는 최소 5자리이어야 합니다.");
+					txtId.clear();
+					txtId.requestFocus();
+				}
+				return;
+			} else if(txtnickName.getText().isEmpty()) {
+				cs.customErrorView(root,"닉네임이 입력 되지 않았습니다. 다시 입력하세요.");
+				txtnickName.clear();
+				txtnickName.requestFocus();
+				return;
+			}	else if(txtPw.getText().isEmpty()) {
+				cs.customErrorView(root, "비밀번호가 입력 되지 않았습니다. 다시 입력하세요.");
+				txtPw.clear();
+				txtPw.requestFocus();
+				return;
+			}// else if(txtPwOk.getText().isEmpty()) {
+			else if(!(txtPw.getText().equals(txtPwOk.getText()))) {
+				cs.customErrorView(root,"암호가 불일치합니다. 다시 입력하세요.");
+				txtPwOk.clear();
+				txtPwOk.requestFocus();
+				return;	
+			}else if(birthDate.getValue() == null) {
+				cs.customErrorView(root,"생년월일 정보가 없습니다. 다시 입력하세요.");
+				birthDate.requestFocus();
+				return;
+				
+			}else if(txtEmail.getText().isEmpty()) {
+				cs.customErrorView(root,"이메일이 입력 되지 않았습니다. 다시 입력하세요.");
+				txtEmail.clear();
+				txtEmail.requestFocus();
+				return;
+			} else if(txtphoneNum.getText().isEmpty()) {
+				cs.customErrorView(root,"전화번호가 입력 되지 않았습니다. 다시 입력하세요");
+				txtphoneNum.clear();
+				txtphoneNum.requestFocus();
+				return;
+			} 
+			
+			
 			m.setName(txtName.getText());
 			m.setId(txtId.getText());
 			m.setPw(txtPw.getText());
@@ -241,6 +293,19 @@ public class JoinButtonImp implements JoinButton{
 		}
 
 
+	}
+	
+	@Override
+	public void idChkProc(Parent root) {
+		// TODO Auto-generated method stub
+		TextField txtId = (TextField)root.lookup("#txtId");
+
+		idChk = dao.dupID(root, txtId.getText());
+		if(!idChk) {
+			txtId.clear();
+		}
+		
+		return;
 	}
 	
 	private void handleGenderSelection(ToggleButton selectedButton, ToggleButton otherButton) {

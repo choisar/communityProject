@@ -17,17 +17,19 @@ public class infoButtonImp implements infoButton {
 
 	DatabaseDAOImp dao;
 	CommonService cs;
+	proButton pb;
 	
 	public infoButtonImp() {
 		// TODO Auto-generated constructor stub
 		dao = new DatabaseDAOImp();
 		cs = new CommonServiceImp();
-	}
+		pb = new proButtonImp();
+		}
 
 	@Override
 	public void infoProc(Parent root) {
 	    Stage s = (Stage) root.getScene().getWindow();
-	    FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/aaa.fxml"));
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/infoupdate.fxml"));
 	    Parent newRoot = null;
 
 	    try {
@@ -41,15 +43,11 @@ public class infoButtonImp implements infoButton {
 	    Controller ctrl = loader.getController();
 	    ctrl.setRoot(newRoot);
 
-	    Label txtlabel = (Label) newRoot.lookup("#txtlabel");
-	    if (txtlabel != null) { // txtlabel이 null인지 안전하게 체크
-	        txtlabel.setOnMouseClicked(e -> {
-	            backProc(ctrl.getRoot());
-	        });
-	    }
-
 	    s.setTitle("내정보");
 	    s.show();
+	    
+	    pb.profileProc(newRoot);
+	    
 	}
 
 	@Override
@@ -60,7 +58,7 @@ public class infoButtonImp implements infoButton {
 
 
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource("../fxml/userLogin.fxml"));
+				getClass().getResource("../../fxml/userLogin1.fxml"));
 		
 		root = null;
 		
@@ -85,15 +83,17 @@ public class infoButtonImp implements infoButton {
 	@Override
 	public void deleteProc(Parent root) {
 		// TODO Auto-generated method stub
-		List<Member> memberList = dao.selectAll1();
-			memberList.remove(dao);
-			System.out.println("회 원 탈 퇴");
-			cs.msgBox("회원탈최","회원탈퇴 여부","탈퇴 완료했습니다.");
+		boolean deleteResult = dao.removeMem();
+		if(deleteResult) {
+			cs.customErrorView(root, "회원탈퇴 되었습니다.");
+		} else {
+			cs.customErrorView(root, "회원탈퇴 실패했습니다. 관리자에게 문의하세요.");
+		}
 			
 			Stage s = (Stage) root.getScene().getWindow();
 			s.close();
 			FXMLLoader loader = new FXMLLoader(
-					getClass().getResource("../fxml/main.fxml"));
+					getClass().getResource("../../fxml/main.fxml"));
 			
 			root = null;
 			
@@ -104,11 +104,9 @@ public class infoButtonImp implements infoButton {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
-			
+		
 			Controller ctrl = loader.getController();
 			ctrl.setRoot(root);
-			
-		
 			
 			s.setTitle("이전화면");
 			s.show();

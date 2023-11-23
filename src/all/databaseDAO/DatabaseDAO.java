@@ -5,6 +5,7 @@ import java.util.List;
 
 import all.boardService.Board;
 import all.boardService.ImagePath;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import all.Member;
 import all.boardService.Board;
@@ -54,13 +55,17 @@ public interface DatabaseDAO {
 	// 로그인
 	boolean loginChk(String id,String pw);
 	boolean insertMember(Member m);
-	boolean dupID(String txtId);
+	boolean dupID(Parent root, String txtId);
 	List<Member> selectAll1();
 	
 	// 로그인하면 입력받은 아이디와 같은 정보를 가지고 있는 Member m 객체 생성
 	Member memberInfo(String id);
 	
+	// 탈퇴하면 아이디가 가지고 있는 정보를 삭제
+	public boolean removeMem();
+	
 	// 다음, 이전 게시물을 찾는 메서드
 	Board getNextPrevBoard(String postNum, String category, String Sorting);
+
 	
 }
