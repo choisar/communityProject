@@ -147,7 +147,7 @@ public class TableViewServiceImp implements TableViewService {
        buttonColumn.setMinWidth(25);
 
        boardNum.setCellValueFactory(new PropertyValueFactory<>("No"));
-       category.setCellValueFactory(new PropertyValueFactory<>("category"));
+       category.setCellValueFactory(new PropertyValueFactory<>("categori"));
        title.setCellValueFactory(new PropertyValueFactory<>("title"));
        nickname.setCellValueFactory(new PropertyValueFactory<>("nicName"));
        date.setCellValueFactory(new PropertyValueFactory<>("uploadDate"));
