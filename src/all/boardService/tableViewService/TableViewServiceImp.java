@@ -2,7 +2,6 @@ package all.boardService.tableViewService;
 
 import java.util.List;
 
-
 import all.Member;
 import all.boardService.Board;
 import all.databaseDAO.DatabaseDAO;

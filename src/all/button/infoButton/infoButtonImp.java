@@ -1,16 +1,13 @@
 package all.button.infoButton;
 
-import java.util.List;
 
 import all.Controller;
-import all.Member;
 import all.button.common.CommonService;
 import all.button.common.CommonServiceImp;
 import all.databaseDAO.DatabaseDAOImp;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class infoButtonImp implements infoButton {
@@ -87,34 +84,5 @@ public class infoButtonImp implements infoButton {
 			s.show();
 	}
 	
-//	@Override
-//	public void deleteProc(Parent root) {
-//	    boolean deleteResult = dao.removeMem();
-//	    if (deleteResult) {
-//	        cs.customErrorView(root, "회원탈퇴 되었습니다.");
-//	    } else {
-//	        cs.customErrorView(root, "회원탈퇴 실패했습니다. 관리자에게 문의하세요.");
-//	    }
-//
-//	    try {
-//	        // 현재 실행 중인 모든 창을 닫는다
-//	        Stage currentStage = (Stage) root.getScene().getWindow();
-//	        currentStage.close();
-//
-//	        // 새로운 창을 열어서 보여준다
-//	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/main.fxml"));
-//	        Parent newRoot = loader.load();
-//	        Stage newStage = new Stage();
-//	        newStage.setScene(new Scene(newRoot));
-//
-//	        Controller ctrl = loader.getController();
-//	        ctrl.setRoot(newRoot);
-//
-//	        newStage.setTitle("이전화면");
-//	        newStage.show();
-//	    } catch (Exception e) {
-//	        e.printStackTrace();
-//	    }
-//	}
 	
 }

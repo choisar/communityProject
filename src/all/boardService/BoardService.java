@@ -1,6 +1,5 @@
 package all.boardService;
 
-import java.sql.Blob;
 import java.util.List;
 
 import javafx.scene.Parent;

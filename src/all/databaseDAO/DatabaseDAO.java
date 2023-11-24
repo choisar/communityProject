@@ -8,7 +8,6 @@ import all.boardService.ImagePath;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import all.Member;
-import all.boardService.Board;
 
 public interface DatabaseDAO {
 	
@@ -46,7 +45,6 @@ public interface DatabaseDAO {
 	// 게시물 업로드에 문제가 생겼을 시, 이전까지 db에 업로드한 내용 삭제하기
 	void imgDelete(ImagePath ip);
 	
-	// 선준
 	// DB - 게시물 번호를 주면 해당 게시물 번호에 저장된 모든 이미지를 리스트에 넣어줌
 	List<Image> getAllImages(int boardNo);
 	// Blob 데이터를 JavaFX Image로 변환하는 메서드

@@ -1,0 +1,122 @@
+-- 1. 멤버 테이블
+create table member (
+    member_no number not null, -- 게시물 번호
+    member_id varchar2(50) not null primary key, -- 회원 아이디 / 프라이머리 키
+    member_pw varchar2(50) not null, -- 회원 비밀번호
+    member_name varchar2(50) not null, -- 회원 이름
+    member_nickname varchar2(50) not null, -- 회원 닉네임
+    member_birthdate date not null, -- 회원 생년월일
+    member_gender varchar2(50) not null, -- 회원 성별
+    member_email varchar2(100) not null, -- 회원 이메일
+    member_phonenum varchar2(50) not null -- 회원 핸드폰
+    );
+    
+-- 멤버 시퀀스
+create SEQUENCE mem_seq
+    start with 1
+    increment by 1
+    nocache;
+    
+-- 멤버 테이블 입력 예시
+insert into member values(mem_seq.nextval,'wlfjddl4256','sunzun1234','황선준','국비 황선준','1998.07.28','남성','wlfjddl4256@naver.com','01045699923');
+
+insert into member values(mem_seq.nextval,'까마귀ID','1234','까마귀','까마귀','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'말똥가리ID','1234','말똥가리','말똥가리','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'두견ID','1234','두견','두견','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'아비ID','1234','아비','아비','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'부엉이ID','1234','부엉이','부엉이','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'메추라기ID','1234','메추라기','메추라기','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'꿩ID','1234','꿩','꿩','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'마도요ID','1234','마도요','마도요','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'닭ID','1234','닭','닭','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'독수리ID','1234','독수리','독수리','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'종다리ID','1234','종다리','종다리','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'병아리ID','1234','병아리','병아리','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'갈매기ID','1234','갈매기','갈매기','1998.07.28','남성','1234@naver.com','01012345678');
+insert into member values(mem_seq.nextval,'비둘기ID','1234','비둘기','비둘기','1998.07.28','남성','1234@naver.com','01012345678');
+
+-- 보드 테이블    
+create table board(
+   board_no number primary key, -- 게시물 번호
+   board_memnick varchar2(50), -- 게시물 작성자 닉네임
+   title varchar2(50) not null, -- 제목
+   category varchar2(50) not null, -- 카테고리 (자유 게시판, 구매 게시판, 판매 게시판, 나눔 게시판, Q&A게시판)
+   contents_date date, -- 게시물 작성일
+   contents varchar2(1000) not null, -- -- 게시물 본문
+   board_memid varchar2(50), -- 게시물 작성자 아이디
+   foreign key(board_memid) references member(member_id) -- 외래키 지정
+);
+
+create table board_img(
+   board_no number, -- 게시물 번호
+   imagepath blob, -- 이미지
+   FOREIGN key(board_no) REFERENCES board(board_no) -- 외래키 지정
+);
+
+-- 보드 시퀀스
+create sequence board_seq 
+start with 1
+INCREMENT by 1
+nocache;
+
+-- 보드 테이블 입력 예시
+
+-- 자유 게시판
+insert into board values(board_seq.nextval,'말똥가리','오늘 점심 뭐 먹지','자유 게시판',TO_DATE('2023-11-17 19:15:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','말똥가리ID');
+insert into board values(board_seq.nextval,'까마귀','내일 점심 뭐 먹지','자유 게시판',TO_DATE('2023-11-18 12:14:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','까마귀ID');
+insert into board values(board_seq.nextval,'두견','오늘 저녁 뭐 먹지','자유 게시판',TO_DATE('2023-11-19 15:23:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용', '두견ID');
+-- 구매 게시판
+insert into board values(board_seq.nextval,'아비','아이폰13 pro 구매 원해요','구매 게시판',TO_DATE('2023-11-14 19:51:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용','아비ID');
+insert into board values(board_seq.nextval,'부엉이','기계식 키보드 구매 원해요','구매 게시판',TO_DATE('2023-11-16 21:35:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용', '부엉이ID');
+insert into board values(board_seq.nextval,'메추라기','아이폰 충전기 삽니다','구매 게시판',TO_DATE('2023-11-17 05:41:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용', '메추라기ID');
+-- 판매 게시판
+insert into board values(board_seq.nextval,'꿩','어제 먹다 남은 치킨 팔아요','판매 게시판',TO_DATE('2023-11-16 12:31:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용', '꿩ID');
+insert into board values(board_seq.nextval,'마도요','디스커버리 롱패딩 팔아요','판매 게시판',TO_DATE('2023-11-15 18:06:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용', '마도요ID');
+-- 나눔 게시판
+insert into board values(board_seq.nextval,'닭','C타입 충전기 가져가세요','나눔 게시판',TO_DATE('2023-11-13 22:16:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용', '닭ID');
+insert into board values(board_seq.nextval,'독수리','거실에 있는 소파 나눔합니다','나눔 게시판',TO_DATE('2023-11-12 08:01:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용', '독수리ID');
+insert into board values(board_seq.nextval,'종다리','어제 먹다 남은 햄버거 나눔합니다','나눔 게시판',TO_DATE('2023-11-11 03:48:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용', '종다리ID');
+insert into board values(board_seq.nextval,'병아리','영화티켓 나눔합니다','나눔 게시판',TO_DATE('2023-11-15 14:34:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용', '병아리ID');
+-- Q&A 게시판
+insert into board values(board_seq.nextval,'갈매기','회원탈퇴가 안됩니다.','QA 게시판',TO_DATE('2023-11-11 03:48:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용', '갈매기ID');
+insert into board values(board_seq.nextval,'비둘기','이벤트 열어주세요.','QA 게시판',TO_DATE('2023-11-15 14:34:00', 'YYYY-MM-DD HH24:MI:SS') ,'게시글 내용', '비둘기ID');
+
+--3. 코멘트 테이블
+CREATE TABLE comment_table (
+    comment_id NUMBER PRIMARY KEY, --  
+    comment_text VARCHAR2(255), -- 댓글 내용
+    comment_date DATE, -- 댓글 작성일
+    member_id VARCHAR2(50), -- 댓글 작성자 아이디
+    board_id NUMBER, -- 게시물 작성자 아이디
+    FOREIGN KEY (member_id) REFERENCES member(member_id), -- 외래키 지정
+);
+
+-- 코멘트 시퀀스
+create sequence comment_seq 
+start with 1
+INCREMENT by 1
+nocache;
+
+-- 코멘트 테이블 입력 예시
+DECLARE
+    nickname1 VARCHAR2(50);
+BEGIN
+    SELECT member_nickname INTO nickname1 FROM member WHERE member_id = 'hong';
+    insert into comment1 values(comment_seq.nextval,'hong',nickname1,'잘 봤습니다.', sysdate);
+    commit;
+EXCEPTION
+    WHEN OTHERS THEN
+        -- 예외 처리 로직 추가
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLCODE || ' - ' || SQLERRM);
+        ROLLBACK; -- 롤백을 사용하여 트랜잭션을 취소
+END;
+
+commit;
+select * from board;
+select * from member;
+drop table comment;
+
+drop table comment_table;
+drop table board;
+drop table board_img;
+drop table member;

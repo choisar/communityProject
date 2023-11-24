@@ -3,7 +3,6 @@ package all.button.boardButton;
 import java.util.List;
 
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
 
 public interface boardButton {
 
