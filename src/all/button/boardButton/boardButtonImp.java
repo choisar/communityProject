@@ -637,6 +637,7 @@ public class boardButtonImp implements boardButton {
 	        // 이후 테이블 뷰에 변경된 데이터를 추가합니다.
 	        tableView.getItems().addAll(b);
 	    }
+	    
 	    Label insertIdLabel = (Label) root.lookup("#memberId");
 	    String insertId = insertIdLabel.getText().replaceAll("\"", "");
 	    

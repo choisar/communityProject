@@ -36,7 +36,7 @@ public class JoinButtonImp implements JoinButton{
 	public void membershipProc(Parent root) {
 		// TODO Auto-generated method stub
 		Stage membershipForm = new Stage();
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/membership.fxml"));
 
 		root = null;
@@ -52,7 +52,7 @@ public class JoinButtonImp implements JoinButton{
 		Controller ctrl = loader.getController();
 
 		ctrl.setRoot(root);
-		
+
 		TextField txtId = (TextField) root.lookup("#txtId");
 		TextField errorText = (TextField) root.lookup("#errorText");
 		TextField txtName = (TextField) root.lookup("#txtName");
@@ -204,10 +204,10 @@ public class JoinButtonImp implements JoinButton{
 			DatePicker birthDate = (DatePicker) member.lookup("#birthDate");		
 
 
-			if(txtName.getText() == null || txtName.getText().isEmpty()) {
+			if(txtId.getText() == null || txtId.getText().isEmpty()) {
 				cs.customErrorView(root, "이름이 입력 되지 않았습니다. 다시 입력하세요");
-				txtName.clear();
-				txtName.requestFocus();
+				txtId.clear();
+				txtId.requestFocus();
 				return;
 			} else if(txtId.getText().length() <= 4) {
 				if(txtId.getText().isEmpty()) {
@@ -220,40 +220,46 @@ public class JoinButtonImp implements JoinButton{
 					txtId.requestFocus();
 				}
 				return;
-			} else if(txtnickName.getText().isEmpty()) {
-				cs.customErrorView(root,"닉네임이 입력 되지 않았습니다. 다시 입력하세요.");
-				txtnickName.clear();
-				txtnickName.requestFocus();
-				return;
-			}	else if(txtPw.getText().isEmpty()) {
-				cs.customErrorView(root, "비밀번호가 입력 되지 않았습니다. 다시 입력하세요.");
+			}	
+			else if(txtPw.getText().isEmpty()) {
+				cs.customErrorView(root, "비밀번호가 입력 되지 않았습니다.");
 				txtPw.clear();
 				txtPw.requestFocus();
 				return;
-			}// else if(txtPwOk.getText().isEmpty()) {
+			}
 			else if(!(txtPw.getText().equals(txtPwOk.getText()))) {
-				cs.customErrorView(root,"암호가 불일치합니다. 다시 입력하세요.");
+				cs.customErrorView(root,"암호가 불일치합니다.");
 				txtPwOk.clear();
 				txtPwOk.requestFocus();
 				return;	
-			}else if(birthDate.getValue() == null) {
-				cs.customErrorView(root,"생년월일 정보가 없습니다. 다시 입력하세요.");
-				birthDate.requestFocus();
-				return;
-				
 			}else if(txtEmail.getText().isEmpty()) {
-				cs.customErrorView(root,"이메일이 입력 되지 않았습니다. 다시 입력하세요.");
+				cs.customErrorView(root,"이메일이 입력 되지 않았습니다.");
 				txtEmail.clear();
 				txtEmail.requestFocus();
 				return;
+			} else if(txtName.getText().isEmpty()) {
+				cs.customErrorView(root,"이름이 입력 되지 않았습니다.");
+				txtName.clear();
+				txtName.requestFocus();
+				return;
+			} else if(txtnickName.getText().isEmpty()) {
+				cs.customErrorView(root,"닉네임이 입력 되지 않았습니다.");
+				txtnickName.clear();
+				txtnickName.requestFocus();
+				return;
+			}else if(birthDate.getValue() == null) {
+				cs.customErrorView(root,"생년월일 정보가 없습니다.");
+				birthDate.requestFocus();
+				return;
+
 			} else if(txtphoneNum.getText().isEmpty()) {
-				cs.customErrorView(root,"전화번호가 입력 되지 않았습니다. 다시 입력하세요");
+				cs.customErrorView(root,"전화번호가 입력 되지 않았습니다.");
 				txtphoneNum.clear();
 				txtphoneNum.requestFocus();
 				return;
 			} 
-			
-			
+
+
 			m.setName(txtName.getText());
 			m.setId(txtId.getText());
 			m.setPw(txtPw.getText());
@@ -270,21 +276,21 @@ public class JoinButtonImp implements JoinButton{
 
 			rdoMan.setOnAction(event -> handleGenderSelection(rdoMan, rdoWoman));
 			rdoWoman.setOnAction(event -> handleGenderSelection(rdoWoman, rdoMan));
-			
+
 			// 토글 버튼이 null이거나 어느 버튼도 선택되지 않았을 때의 기본 처리
 			if (rdoMan == null || rdoWoman == null || (!rdoMan.isSelected() && !rdoWoman.isSelected())) {
-			    cs.customErrorView(root, "성별을 선택해주세요.");
-			    return;
+				cs.customErrorView(root, "성별을 선택해주세요.");
+				return;
 			}
 
 			// 성별 선택에 따라 값을 설정
 			m.setGender(rdoMan.isSelected() ? "true" : "false");
 
 			if (dao.insertMember(m)) {
-			    Stage s = (Stage) member.getWindow();
-			    s.close();
+				Stage s = (Stage) member.getWindow();
+				s.close();
 			} else {
-			    return;
+				return;
 			}
 		}catch (Exception e1) {
 			cs.customErrorView(root, "회원정보를 모두 입력해주세요.");
@@ -292,7 +298,7 @@ public class JoinButtonImp implements JoinButton{
 
 
 	}
-	
+
 	@Override
 	public void idChkProc(Parent root) {
 		// TODO Auto-generated method stub
@@ -302,10 +308,10 @@ public class JoinButtonImp implements JoinButton{
 		if(!idChk) {
 			txtId.clear();
 		}
-		
+
 		return;
 	}
-	
+
 	private void handleGenderSelection(ToggleButton selectedButton, ToggleButton otherButton) {
 		try {
 			// 선택된 경우 배경색 변경

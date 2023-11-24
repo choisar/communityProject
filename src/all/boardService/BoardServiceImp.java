@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -58,6 +59,10 @@ public class BoardServiceImp implements BoardService {
 
 		Controller ctrl = loader.getController();
 		ctrl.setRoot(root);
+		
+		
+        TextField inId = (TextField)root.lookup("#txtId");
+        inId.requestFocus();
 
 		// 검색창 콤보박스
 		mainCombo(root);

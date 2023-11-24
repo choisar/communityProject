@@ -17,8 +17,7 @@ public interface boardViewService {
 	public void QABoardView(Parent root, String memId);
 	// 검색 결과 게시판
 	public void searchResultBoardView(Parent root, String text1, String text2, String memId);
-	// 신고화면 검색 결과 게시판
-//	public void reportSearchResultBoardView(Parent root, String text1, String text2);
+
 	// 글쓰기 창
 	public void uploadBoardView(Parent root);
 	// 신고하기 창

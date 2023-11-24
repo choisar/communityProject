@@ -52,6 +52,7 @@ public class IdFindButtonImp implements IdFindButton {
 	public void idFindOkProc(Parent root) {
 		TextField name = (TextField)root.lookup("#txtName");
 		TextField phoneNum  = (TextField)root.lookup("#txtPhoneNum");
+		name.requestFocus();
 		String findName = name.getText();
 		String findPhoneNum = phoneNum.getText();
 		

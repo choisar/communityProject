@@ -10,25 +10,26 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2460.0" prefWidth="1315.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2832.0" prefWidth="1690.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="all.Controller">
 	<children>
-		<Button layoutX="50.0" layoutY="249.0" mnemonicParsing="false" onAction="#infoProc" prefHeight="30.0" prefWidth="58.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Info" textFill="#bbbbbb" />
-		<Button layoutX="128.0" layoutY="249.0" mnemonicParsing="false" onAction="#logoutProc" style="-fx-border-width: 2;" stylesheets="@button.css" text="Logout" textFill="#bbbbbb" />
-		<Label layoutX="139.0" layoutY="160.0" prefHeight="30.0" prefWidth="16.0" text="님" textFill="#1e1636" textOverrun="CLIP">
+		<Button layoutX="134.0" layoutY="348.0" mnemonicParsing="false" onAction="#infoProc" prefHeight="30.0" prefWidth="72.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Info" textFill="#bbbbbb" />
+		<Button layoutX="226.0" layoutY="348.0" mnemonicParsing="false" onAction="#logoutProc" style="-fx-border-width: 2;" stylesheets="@button.css" text="Logout" textFill="#bbbbbb" />
+		<Label layoutX="239.0" layoutY="243.0" prefHeight="30.0" prefWidth="16.0" text="님" textFill="#1e1636" textOverrun="CLIP">
 			<font>
 				<Font size="14.0" />
 			</font>
 		</Label>
-		<Label layoutX="79.0" layoutY="193.0" text="내 게시물 0개" textFill="#1e1636" />
-		<Label layoutX="85.0" layoutY="217.0" text="새 소식 0개" textFill="#1e1636" />
-		<Line endX="100.0" layoutX="124.0" layoutY="136.0" startX="-100.0" strokeWidth="2.0" />
-		<Line endX="100.0" layoutX="124.0" layoutY="292.0" startX="-100.0" strokeWidth="2.0" />
-		<Line endX="100.0" layoutX="124.0" layoutY="2444.0" startX="-100.0" strokeWidth="2.0" />
-		<Label fx:id="logChk" layoutX="32.0" layoutY="114.0" text="회원" textFill="#1d163600" />
-      <Label fx:id="memberName" alignment="CENTER_RIGHT" layoutX="29.0" layoutY="166.0" prefHeight="18.0" prefWidth="104.0" text="memName" textFill="#1e1636" underline="true">
+		<Label layoutX="177.0" layoutY="285.0" text="내 게시물 0개" textFill="#1e1636" />
+		<Label layoutX="183.0" layoutY="310.0" text="새 소식 0개" textFill="#1e1636" />
+		<Line endX="120.0" layoutX="202.0" layoutY="219.0" startX="-100.0" strokeWidth="2.0" />
+		<Line endX="120.0" layoutX="202.0" layoutY="408.0" startX="-100.0" strokeWidth="2.0" />
+		<Line endX="120.0" layoutX="202.0" layoutY="2649.0" startX="-100.0" strokeWidth="2.0" />
+		<Label fx:id="logChk" layoutX="147.0" layoutY="188.0" text="회원" textFill="#1d163600" />
+      <Label fx:id="memberName" alignment="CENTER_RIGHT" layoutX="129.0" layoutY="249.0" onMouseClicked="#infoProc" prefHeight="18.0" prefWidth="104.0" text="memName" textFill="#1e1636" underline="true">
          <font>
             <Font size="14.0" />
          </font>
@@ -36,43 +37,24 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Button layoutX="52.0" layoutY="2390.0" mnemonicParsing="false" onAction="#reportProc" prefHeight="35.0" prefWidth="140.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Report" textFill="#bbbbbb" />
-      <Line endX="100.0" layoutX="124.0" layoutY="2370.0" startX="-100.0" strokeWidth="2.0" />
-      <Label contentDisplay="CENTER" layoutX="403.0" layoutY="34.0" prefHeight="58.0" prefWidth="588.0" text="KG - Trading Community" textAlignment="CENTER" textFill="#1e1636">
-         <font>
-            <Font size="46.0" />
-         </font>
-      </Label>
-      <CheckBox fx:id="newViewBoolean" layoutX="53.0" layoutY="321.0" mnemonicParsing="false" selected="true" style="-fx-background-color: transparent;" text="New Tap" textFill="#1e1636" />
-      <TableView fx:id="ListView" layoutX="248.0" layoutY="156.0" prefHeight="636.0" prefWidth="1032.0" style="-fx-border-width: 2;" stylesheets="@tableview.css">
+      <Button layoutX="129.0" layoutY="2572.0" mnemonicParsing="false" onAction="#reportProc" prefHeight="40.0" prefWidth="170.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Report" textFill="#bbbbbb" />
+      <Line endX="120.0" layoutX="202.0" layoutY="2531.0" startX="-100.0" strokeWidth="2.0" />
+      <CheckBox fx:id="newViewBoolean" layoutX="131.0" layoutY="441.0" mnemonicParsing="false" selected="true" style="-fx-background-color: transparent;" text="New Tap" textFill="#1e1636" />
+      <TableView fx:id="ListView" layoutX="482.0" layoutY="253.0" prefHeight="658.0" prefWidth="1032.0" style="-fx-border-width: 2;" stylesheets="@tableview.css">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="879.0" layoutY="116.0" mnemonicParsing="false" onAction="#searchProc" style="-fx-border-width: 2;" stylesheets="@button.css" text="Search" textFill="#bbbbbb" />
-      <Button layoutX="1224.0" layoutY="116.0" mnemonicParsing="false" onAction="#writingProc" prefHeight="30.0" prefWidth="54.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Post" textFill="#bbbbbb" />
-      <TextField fx:id="boardNameSearch" layoutX="368.0" layoutY="116.0" prefHeight="32.0" prefWidth="502.0" promptText="Title" style="-fx-background-color: transparent; -fx-border-color: #1e1636; -fx-border-radius: 4; -fx-border-width: 2;">
+      <Button layoutX="1458.0" layoutY="199.0" mnemonicParsing="false" onAction="#writingProc" prefHeight="30.0" prefWidth="54.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Post" textFill="#bbbbbb" />
+      <ComboBox fx:id="searchCombo" layoutX="483.0" layoutY="199.0" prefHeight="32.0" prefWidth="112.0" promptText="Select" style="-fx-background-color: transparent; -fx-border-color: #1e1636; -fx-border-radius: 4; -fx-border-width: 2;" />
+      <TextField fx:id="boardNameSearch" layoutX="602.0" layoutY="199.0" prefHeight="32.0" prefWidth="502.0" promptText="Title" style="-fx-background-color: transparent; -fx-border-color: #1e1636; -fx-border-radius: 4; -fx-border-width: 2;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <ComboBox fx:id="searchCombo" layoutX="249.0" layoutY="116.0" prefHeight="32.0" prefWidth="112.0" promptText="Select" style="-fx-background-color: transparent; -fx-border-color: #1e1636; -fx-border-radius: 4; -fx-border-width: 2;" />
-      <Label layoutX="32.0" layoutY="114.0" text="Member" textFill="#1d1636" />
-      <Button layoutX="52.0" layoutY="424.0" mnemonicParsing="false" onAction="#freeBoardProc" prefHeight="35.0" prefWidth="140.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Free" textFill="#bbbbbb" />
-      <Button layoutX="52.0" layoutY="485.0" mnemonicParsing="false" onAction="#buyBoardProc" prefHeight="35.0" prefWidth="140.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Buy" textFill="#bbbbbb" />
-      <Button layoutX="52.0" layoutY="547.0" mnemonicParsing="false" onAction="#sellBoardProc" prefHeight="35.0" prefWidth="140.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Sell" textFill="#bbbbbb" />
-      <Button layoutX="52.0" layoutY="607.0" mnemonicParsing="false" onAction="#sharingBoardProc" prefHeight="35.0" prefWidth="140.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Sharing" textFill="#bbbbbb">
-         <font>
-            <Font name="Arial Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button layoutX="52.0" layoutY="360.0" mnemonicParsing="false" onAction="#allBoardProc" prefHeight="35.0" prefWidth="140.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="All" textFill="#bbbbbb" />
-      <Button layoutX="52.0" layoutY="667.0" mnemonicParsing="false" onAction="#QAProc" prefHeight="35.0" prefWidth="140.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Q &amp; A" textFill="#bbbbbb">
-         <font>
-            <Font name="Arial Bold" size="12.0" />
-         </font>
-      </Button>
-      <ImageView fx:id="BuyBoardImage1" fitHeight="279.0" fitWidth="330.0" layoutX="259.0" layoutY="866.0" onMouseClicked="#mainBuyDetailView1Proc">
+      <Button layoutX="1113.0" layoutY="199.0" mnemonicParsing="false" onAction="#searchProc" style="-fx-border-width: 2;" stylesheets="@button.css" text="Search" textFill="#bbbbbb" />
+      <Label layoutX="130.0" layoutY="197.0" text="Member" textFill="#1d1636" />
+      <ImageView fx:id="BuyBoardImage1" fitHeight="279.0" fitWidth="330.0" layoutX="493.0" layoutY="998.0" onMouseClicked="#mainBuyDetailView1Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -80,7 +62,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="BuyBoardImage2" fitHeight="279.0" fitWidth="330.0" layoutX="606.0" layoutY="866.0" onMouseClicked="#mainBuyDetailView2Proc">
+      <ImageView fx:id="BuyBoardImage2" fitHeight="279.0" fitWidth="330.0" layoutX="840.0" layoutY="998.0" onMouseClicked="#mainBuyDetailView2Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -88,17 +70,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Line endX="940.6666259765625" layoutX="350.0" layoutY="849.0" startX="-100.0" strokeWidth="2.0" />
-      <Label layoutX="257.0" layoutY="820.0" text="Buy Board">
+      <Line endX="940.6666259765625" layoutX="584.0" layoutY="981.0" startX="-100.0" strokeWidth="2.0" />
+      <Label layoutX="491.0" layoutY="952.0" text="Buy Board">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="1239.0" layoutY="824.0" onMouseClicked="#buyBoardProc" text="More &gt;" textFill="#bbbbbb">
+      <Label layoutX="1473.0" layoutY="956.0" onMouseClicked="#buyBoardProc" text="More &gt;" textFill="#bbbbbb">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Label>
-      <Label fx:id="BuyBoardTitle1" layoutX="269.0" layoutY="1155.0" onMouseClicked="#mainBuyDetailView1Proc" prefHeight="16.0" prefWidth="313.0" text="Buy Board Title1">
+      <Label fx:id="BuyBoardTitle1" layoutX="503.0" layoutY="1287.0" onMouseClicked="#mainBuyDetailView1Proc" prefHeight="16.0" prefWidth="313.0" text="Buy Board Title1">
          <font>
             <Font size="17.0" />
          </font>
@@ -106,7 +88,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="BuyBoardTitle2" layoutX="614.0" layoutY="1155.0" onMouseClicked="#mainBuyDetailView2Proc" prefHeight="16.0" prefWidth="313.0" text="Buy Board Title2">
+      <Label fx:id="BuyBoardTitle2" layoutX="848.0" layoutY="1287.0" onMouseClicked="#mainBuyDetailView2Proc" prefHeight="16.0" prefWidth="313.0" text="Buy Board Title2">
          <font>
             <Font size="17.0" />
          </font>
@@ -114,19 +96,19 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="BuyBoardNickName1" layoutX="270.0" layoutY="1178.0" prefHeight="16.0" prefWidth="313.0" text="Buy Board NickName1">
+      <Label fx:id="BuyBoardNickName1" layoutX="504.0" layoutY="1310.0" prefHeight="16.0" prefWidth="313.0" text="Buy Board NickName1">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="BuyBoardNickName2" layoutX="615.0" layoutY="1178.0" prefHeight="16.0" prefWidth="313.0" text="Buy Board NickName2">
+      <Label fx:id="BuyBoardNickName2" layoutX="849.0" layoutY="1310.0" prefHeight="16.0" prefWidth="313.0" text="Buy Board NickName2">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="BuyBoardTime1" layoutX="270.0" layoutY="1196.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
-      <Label fx:id="BuyBoardTime2" layoutX="615.0" layoutY="1196.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
-      <ImageView fx:id="SellBoardImage1" fitHeight="279.0" fitWidth="330.0" layoutX="259.0" layoutY="1277.0" onMouseClicked="#mainSellDetailView1Proc">
+      <Label fx:id="BuyBoardTime1" layoutX="504.0" layoutY="1328.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
+      <Label fx:id="BuyBoardTime2" layoutX="849.0" layoutY="1328.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
+      <ImageView fx:id="SellBoardImage1" fitHeight="279.0" fitWidth="330.0" layoutX="493.0" layoutY="1440.0" onMouseClicked="#mainSellDetailView1Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -134,7 +116,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="SellBoardImage2" fitHeight="279.0" fitWidth="330.0" layoutX="606.0" layoutY="1277.0" onMouseClicked="#mainSellDetailView2Proc">
+      <ImageView fx:id="SellBoardImage2" fitHeight="279.0" fitWidth="330.0" layoutX="840.0" layoutY="1440.0" onMouseClicked="#mainSellDetailView2Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -142,17 +124,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Line endX="940.6666259765625" layoutX="350.0" layoutY="1260.0" startX="-100.0" strokeWidth="2.0" />
-      <Label layoutX="257.0" layoutY="1231.0" text="Sell Board">
+      <Line endX="940.6666259765625" layoutX="584.0" layoutY="1423.0" startX="-100.0" strokeWidth="2.0" />
+      <Label layoutX="491.0" layoutY="1394.0" text="Sell Board">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="1239.0" layoutY="1235.0" onMouseClicked="#sellBoardProc" text="More &gt;" textFill="#bbbbbb">
+      <Label layoutX="1473.0" layoutY="1398.0" onMouseClicked="#sellBoardProc" text="More &gt;" textFill="#bbbbbb">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Label>
-      <Label fx:id="SellBoardTitle1" layoutX="269.0" layoutY="1566.0" onMouseClicked="#mainSellDetailView1Proc" prefHeight="16.0" prefWidth="313.0" text="Sell Board Title1">
+      <Label fx:id="SellBoardTitle1" layoutX="503.0" layoutY="1729.0" onMouseClicked="#mainSellDetailView1Proc" prefHeight="16.0" prefWidth="313.0" text="Sell Board Title1">
          <font>
             <Font size="17.0" />
          </font>
@@ -160,7 +142,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="SellBoardTitle2" layoutX="614.0" layoutY="1566.0" onMouseClicked="#mainSellDetailView2Proc" prefHeight="16.0" prefWidth="313.0" text="Sell Board Title2">
+      <Label fx:id="SellBoardTitle2" layoutX="848.0" layoutY="1729.0" onMouseClicked="#mainSellDetailView2Proc" prefHeight="16.0" prefWidth="313.0" text="Sell Board Title2">
          <font>
             <Font size="17.0" />
          </font>
@@ -168,19 +150,19 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="SellBoardNickName1" layoutX="270.0" layoutY="1589.0" prefHeight="16.0" prefWidth="313.0" text="Sell Board NickName1">
+      <Label fx:id="SellBoardNickName1" layoutX="504.0" layoutY="1752.0" prefHeight="16.0" prefWidth="313.0" text="Sell Board NickName1">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="SellBoardNickName2" layoutX="615.0" layoutY="1589.0" prefHeight="16.0" prefWidth="313.0" text="Sell Board NickName2">
+      <Label fx:id="SellBoardNickName2" layoutX="849.0" layoutY="1752.0" prefHeight="16.0" prefWidth="313.0" text="Sell Board NickName2">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="SellBoardTime1" layoutX="270.0" layoutY="1607.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
-      <Label fx:id="SellBoardTime2" layoutX="615.0" layoutY="1607.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
-      <ImageView fx:id="SharingBoardImage1" fitHeight="279.0" fitWidth="330.0" layoutX="259.0" layoutY="1688.0" onMouseClicked="#mainSharingDetailView1Proc">
+      <Label fx:id="SellBoardTime1" layoutX="504.0" layoutY="1770.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
+      <Label fx:id="SellBoardTime2" layoutX="849.0" layoutY="1770.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
+      <ImageView fx:id="SharingBoardImage1" fitHeight="279.0" fitWidth="330.0" layoutX="493.0" layoutY="1882.0" onMouseClicked="#mainSharingDetailView1Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -188,7 +170,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="SharingBoardImage2" fitHeight="279.0" fitWidth="330.0" layoutX="606.0" layoutY="1688.0" onMouseClicked="#mainSharingDetailView2Proc">
+      <ImageView fx:id="SharingBoardImage2" fitHeight="279.0" fitWidth="330.0" layoutX="840.0" layoutY="1882.0" onMouseClicked="#mainSharingDetailView2Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -196,18 +178,18 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Line endX="940.6666259765625" layoutX="350.0" layoutY="1671.0" startX="-100.0" strokeWidth="2.0" />
-      <Label layoutX="257.0" layoutY="1642.0" text="Sharing Board">
+      <Line endX="940.6666259765625" layoutX="584.0" layoutY="1865.0" startX="-100.0" strokeWidth="2.0" />
+      <Label layoutX="491.0" layoutY="1836.0" text="Sharing Board">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="1239.0" layoutY="1646.0" onMouseClicked="#sharingBoardProc" text="More &gt;" textFill="#bbbbbb">
+      <Label layoutX="1473.0" layoutY="1840.0" onMouseClicked="#sharingBoardProc" text="More &gt;" textFill="#bbbbbb">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="SharingBoardTitle1" layoutX="269.0" layoutY="1977.0" onMouseClicked="#mainSharingDetailView1Proc" prefHeight="16.0" prefWidth="313.0" text="Sharing Board Title1">
+      <Label fx:id="SharingBoardTitle1" layoutX="503.0" layoutY="2171.0" onMouseClicked="#mainSharingDetailView1Proc" prefHeight="16.0" prefWidth="313.0" text="Sharing Board Title1">
          <font>
             <Font size="17.0" />
          </font>
@@ -215,7 +197,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="SharingBoardTitle2" layoutX="614.0" layoutY="1977.0" onMouseClicked="#mainSharingDetailView2Proc" prefHeight="16.0" prefWidth="313.0" text="Sharing Board Title2">
+      <Label fx:id="SharingBoardTitle2" layoutX="848.0" layoutY="2171.0" onMouseClicked="#mainSharingDetailView2Proc" prefHeight="16.0" prefWidth="313.0" text="Sharing Board Title2">
          <font>
             <Font size="17.0" />
          </font>
@@ -223,19 +205,19 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="SharingBoardNickName1" layoutX="270.0" layoutY="2000.0" prefHeight="16.0" prefWidth="313.0" text="Sharing Board NickName1">
+      <Label fx:id="SharingBoardNickName1" layoutX="504.0" layoutY="2194.0" prefHeight="16.0" prefWidth="313.0" text="Sharing Board NickName1">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="SharingBoardNickName2" layoutX="615.0" layoutY="2000.0" prefHeight="16.0" prefWidth="313.0" text="Sharing Board NickName2">
+      <Label fx:id="SharingBoardNickName2" layoutX="849.0" layoutY="2194.0" prefHeight="16.0" prefWidth="313.0" text="Sharing Board NickName2">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="SharingBoardTime1" layoutX="270.0" layoutY="2018.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
-      <Label fx:id="SharingBoardTime2" layoutX="615.0" layoutY="2018.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
-      <ImageView fx:id="FreeBoardImage1" fitHeight="279.0" fitWidth="330.0" layoutX="259.0" layoutY="2099.0" onMouseClicked="#mainFreeDetailView1Proc">
+      <Label fx:id="SharingBoardTime1" layoutX="504.0" layoutY="2212.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
+      <Label fx:id="SharingBoardTime2" layoutX="849.0" layoutY="2212.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
+      <ImageView fx:id="FreeBoardImage1" fitHeight="279.0" fitWidth="330.0" layoutX="493.0" layoutY="2324.0" onMouseClicked="#mainFreeDetailView1Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -243,7 +225,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="FreeBoardImage2" fitHeight="279.0" fitWidth="330.0" layoutX="606.0" layoutY="2099.0" onMouseClicked="#mainFreeDetailView2Proc">
+      <ImageView fx:id="FreeBoardImage2" fitHeight="279.0" fitWidth="330.0" layoutX="840.0" layoutY="2324.0" onMouseClicked="#mainFreeDetailView2Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -251,18 +233,18 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Line endX="940.6666259765625" layoutX="350.0" layoutY="2082.0" startX="-100.0" strokeWidth="2.0" />
-      <Label layoutX="257.0" layoutY="2053.0" text="Free Board">
+      <Line endX="940.6666259765625" layoutX="584.0" layoutY="2307.0" startX="-100.0" strokeWidth="2.0" />
+      <Label layoutX="491.0" layoutY="2278.0" text="Free Board">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="1239.0" layoutY="2055.0" onMouseClicked="#freeBoardProc" text="More &gt;" textFill="#bbbbbb">
+      <Label layoutX="1473.0" layoutY="2280.0" onMouseClicked="#freeBoardProc" text="More &gt;" textFill="#bbbbbb">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="FreeBoardTitle1" layoutX="269.0" layoutY="2388.0" onMouseClicked="#mainFreeDetailView1Proc" prefHeight="16.0" prefWidth="313.0" text="Free Board Title1">
+      <Label fx:id="FreeBoardTitle1" layoutX="503.0" layoutY="2613.0" onMouseClicked="#mainFreeDetailView1Proc" prefHeight="16.0" prefWidth="313.0" text="Free Board Title1">
          <font>
             <Font size="17.0" />
          </font>
@@ -270,7 +252,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="FreeBoardTitle2" layoutX="614.0" layoutY="2388.0" onMouseClicked="#mainFreeDetailView2Proc" prefHeight="16.0" prefWidth="313.0" text="Free Board Title2">
+      <Label fx:id="FreeBoardTitle2" layoutX="848.0" layoutY="2613.0" onMouseClicked="#mainFreeDetailView2Proc" prefHeight="16.0" prefWidth="313.0" text="Free Board Title2">
          <font>
             <Font size="17.0" />
          </font>
@@ -278,21 +260,21 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="FreeBoardNickName1" layoutX="270.0" layoutY="2411.0" prefHeight="16.0" prefWidth="313.0" text="Free Board NickName1">
+      <Label fx:id="FreeBoardNickName1" layoutX="504.0" layoutY="2636.0" prefHeight="16.0" prefWidth="313.0" text="Free Board NickName1">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="FreeBoardNickName2" layoutX="615.0" layoutY="2411.0" prefHeight="16.0" prefWidth="313.0" text="Free Board NickName2">
+      <Label fx:id="FreeBoardNickName2" layoutX="849.0" layoutY="2636.0" prefHeight="16.0" prefWidth="313.0" text="Free Board NickName2">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="FreeBoardTime1" layoutX="270.0" layoutY="2429.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
-      <Label fx:id="FreeBoardTime2" layoutX="615.0" layoutY="2429.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
-      <Label fx:id="memberId" layoutX="44.0" layoutY="63.0" text="memberId" textFill="TRANSPARENT" />
-      <Button layoutX="1139.0" layoutY="116.0" mnemonicParsing="false" onAction="#RefreshProc" style="-fx-border-width: 2;" stylesheets="@button.css" text="Refresh" />
-      <ImageView fx:id="BuyBoardImage3" fitHeight="279.0" fitWidth="330.0" layoutX="953.0" layoutY="866.0" onMouseClicked="#mainBuyDetailView3Proc">
+      <Label fx:id="FreeBoardTime1" layoutX="504.0" layoutY="2654.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time1" textFill="#bbbbbb" />
+      <Label fx:id="FreeBoardTime2" layoutX="849.0" layoutY="2654.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time2" textFill="#bbbbbb" />
+      <Label fx:id="memberId" layoutX="109.0" layoutY="181.0" text="memberId" textFill="TRANSPARENT" />
+      <Button layoutX="1373.0" layoutY="199.0" mnemonicParsing="false" onAction="#RefreshProc" style="-fx-border-width: 2;" stylesheets="@button.css" text="Refresh" />
+      <ImageView fx:id="BuyBoardImage3" fitHeight="279.0" fitWidth="330.0" layoutX="1187.0" layoutY="998.0" onMouseClicked="#mainBuyDetailView3Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -300,7 +282,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Label fx:id="BuyBoardTitle3" layoutX="961.0" layoutY="1155.0" onMouseClicked="#mainBuyDetailView3Proc" prefHeight="16.0" prefWidth="313.0" text="Buy Board Title3">
+      <Label fx:id="BuyBoardTitle3" layoutX="1195.0" layoutY="1287.0" onMouseClicked="#mainBuyDetailView3Proc" prefHeight="16.0" prefWidth="313.0" text="Buy Board Title3">
          <font>
             <Font size="17.0" />
          </font>
@@ -308,13 +290,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="BuyBoardNickName3" layoutX="962.0" layoutY="1178.0" prefHeight="16.0" prefWidth="313.0" text="Buy Board NickName3">
+      <Label fx:id="BuyBoardNickName3" layoutX="1196.0" layoutY="1310.0" prefHeight="16.0" prefWidth="313.0" text="Buy Board NickName3">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="BuyBoardTime3" layoutX="962.0" layoutY="1196.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time3" textFill="#bbbbbb" />
-      <ImageView fx:id="SellBoardImage3" fitHeight="279.0" fitWidth="330.0" layoutX="953.0" layoutY="1277.0" onMouseClicked="#mainSellDetailView3Proc">
+      <Label fx:id="BuyBoardTime3" layoutX="1196.0" layoutY="1328.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time3" textFill="#bbbbbb" />
+      <ImageView fx:id="SellBoardImage3" fitHeight="279.0" fitWidth="330.0" layoutX="1187.0" layoutY="1440.0" onMouseClicked="#mainSellDetailView3Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -322,7 +304,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Label fx:id="SellBoardTitle3" layoutX="961.0" layoutY="1566.0" onMouseClicked="#mainSellDetailView3Proc" prefHeight="16.0" prefWidth="313.0" text="Sell Board Title3">
+      <Label fx:id="SellBoardTitle3" layoutX="1195.0" layoutY="1729.0" onMouseClicked="#mainSellDetailView3Proc" prefHeight="16.0" prefWidth="313.0" text="Sell Board Title3">
          <font>
             <Font size="17.0" />
          </font>
@@ -330,13 +312,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="SellBoardNickName3" layoutX="962.0" layoutY="1589.0" prefHeight="16.0" prefWidth="313.0" text="Sell Board NickName3">
+      <Label fx:id="SellBoardNickName3" layoutX="1196.0" layoutY="1752.0" prefHeight="16.0" prefWidth="313.0" text="Sell Board NickName3">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="SellBoardTime3" layoutX="962.0" layoutY="1607.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time3" textFill="#bbbbbb" />
-      <ImageView fx:id="SharingBoardImage3" fitHeight="279.0" fitWidth="330.0" layoutX="953.0" layoutY="1688.0" onMouseClicked="#mainSharingDetailView3Proc">
+      <Label fx:id="SellBoardTime3" layoutX="1196.0" layoutY="1770.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time3" textFill="#bbbbbb" />
+      <ImageView fx:id="SharingBoardImage3" fitHeight="279.0" fitWidth="330.0" layoutX="1187.0" layoutY="1882.0" onMouseClicked="#mainSharingDetailView3Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -344,7 +326,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Label fx:id="SharingBoardTitle3" layoutX="961.0" layoutY="1977.0" onMouseClicked="#mainSharingDetailView3Proc" prefHeight="16.0" prefWidth="313.0" text="Sharing Board Title3">
+      <Label fx:id="SharingBoardTitle3" layoutX="1195.0" layoutY="2171.0" onMouseClicked="#mainSharingDetailView3Proc" prefHeight="16.0" prefWidth="313.0" text="Sharing Board Title3">
          <font>
             <Font size="17.0" />
          </font>
@@ -352,13 +334,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="SharingBoardNickName3" layoutX="962.0" layoutY="2000.0" prefHeight="16.0" prefWidth="313.0" text="Sharing Board NickName3">
+      <Label fx:id="SharingBoardNickName3" layoutX="1196.0" layoutY="2194.0" prefHeight="16.0" prefWidth="313.0" text="Sharing Board NickName3">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="SharingBoardTime3" layoutX="962.0" layoutY="2018.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time3" textFill="#bbbbbb" />
-      <ImageView fx:id="FreeBoardImage3" fitHeight="279.0" fitWidth="330.0" layoutX="953.0" layoutY="2099.0" onMouseClicked="#mainFreeDetailView3Proc">
+      <Label fx:id="SharingBoardTime3" layoutX="1196.0" layoutY="2212.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time3" textFill="#bbbbbb" />
+      <ImageView fx:id="FreeBoardImage3" fitHeight="279.0" fitWidth="330.0" layoutX="1187.0" layoutY="2324.0" onMouseClicked="#mainFreeDetailView3Proc">
          <image>
             <Image url="@../image/noneImg.jpg" />
          </image>
@@ -366,7 +348,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Label fx:id="FreeBoardTitle3" layoutX="961.0" layoutY="2388.0" onMouseClicked="#mainFreeDetailView3Proc" prefHeight="16.0" prefWidth="313.0" text="Free Board Title3">
+      <Label fx:id="FreeBoardTitle3" layoutX="1195.0" layoutY="2613.0" onMouseClicked="#mainFreeDetailView3Proc" prefHeight="16.0" prefWidth="313.0" text="Free Board Title3">
          <font>
             <Font size="17.0" />
          </font>
@@ -374,11 +356,45 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="FreeBoardNickName3" layoutX="962.0" layoutY="2411.0" prefHeight="16.0" prefWidth="313.0" text="Free Board NickName3">
+      <Label fx:id="FreeBoardNickName3" layoutX="1196.0" layoutY="2636.0" prefHeight="16.0" prefWidth="313.0" text="Free Board NickName3">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="FreeBoardTime3" layoutX="962.0" layoutY="2429.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time3" textFill="#bbbbbb" />
+      <Label fx:id="FreeBoardTime3" layoutX="1196.0" layoutY="2654.0" prefHeight="15.0" prefWidth="163.0" text="00:00 Time3" textFill="#bbbbbb" />
+      <Label fx:id="ProName" contentDisplay="CENTER" layoutX="641.0" layoutY="89.0" prefHeight="58.0" prefWidth="588.0" text="KG - Trading Community" textAlignment="CENTER" textFill="#1e1636">
+         <font>
+            <Font size="46.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="119.0" fitWidth="112.0" layoutX="595.0" layoutY="23.0">
+         <image>
+            <Image url="@../image/로고.png" />
+         </image>
+      </ImageView>
+      <Line endX="1559.0" layoutX="115.0" layoutY="2723.0" startX="-100.0" strokeWidth="2.0" />
+      <ImageView fitHeight="78.0" fitWidth="807.0" layoutX="532.0" layoutY="2737.0">
+         <image>
+            <Image url="@../image/하단%20배너.png" />
+         </image>
+      </ImageView>
+      <VBox fx:id="Scroll1" layoutX="129.0" layoutY="504.0" prefHeight="478.0" prefWidth="191.0" spacing="50.0">
+         <children>
+            <Button layoutX="129.0" mnemonicParsing="false" onAction="#allBoardProc" prefHeight="40.0" prefWidth="170.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="All" textFill="#bbbbbb" />
+            <Button mnemonicParsing="false" onAction="#freeBoardProc" prefHeight="40.0" prefWidth="170.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Free" textFill="#bbbbbb" />
+            <Button mnemonicParsing="false" onAction="#buyBoardProc" prefHeight="40.0" prefWidth="170.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Buy" textFill="#bbbbbb" />
+            <Button mnemonicParsing="false" onAction="#sellBoardProc" prefHeight="40.0" prefWidth="170.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Sell" textFill="#bbbbbb" />
+            <Button mnemonicParsing="false" onAction="#sharingBoardProc" prefHeight="40.0" prefWidth="170.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Sharing" textFill="#bbbbbb">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#QAProc" prefHeight="40.0" prefWidth="170.0" style="-fx-border-width: 2;" stylesheets="@button.css" text="Q &amp; A" textFill="#bbbbbb">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
 	</children>
 </AnchorPane>

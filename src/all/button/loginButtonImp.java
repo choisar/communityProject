@@ -10,17 +10,24 @@ import all.boardService.BoardServiceImp;
 import all.button.common.CommonService;
 import all.button.common.CommonServiceImp;
 import all.databaseDAO.DatabaseDAOImp;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class loginButtonImp implements loginButton {
 	DatabaseDAOImp dao;
@@ -78,7 +85,7 @@ public class loginButtonImp implements loginButton {
 	            			
 	            			Controller ctrl = loader.getController();
 		            		ctrl.setRoot(root);
-		                    
+		            		
 		                    Label memberName = (Label) root.lookup("#memberName");
 		                    memberName.setText("\"" + m.getName() + "\"");
 		                    
@@ -308,11 +315,40 @@ public class loginButtonImp implements loginButton {
 			    					
 			    				}
 			    			}
+			    			
+			    			VBox scr = (VBox) root.lookup("#Scroll1");
 
 			    			// ScrollPane 설정
 			    			ScrollPane scrollPane = new ScrollPane();
-			    			scrollPane.setContent(root);
+			    			scrollPane.setContent(root); // VBox인 scr을 ScrollPane의 Content로 설정
 			    			scrollPane.setPannable(true);
+
+			    			// VBox 내의 컨텐츠들을 초기 Y 좌표로 설정
+			    			scr.getChildren().forEach(node -> {
+			    			    if (node instanceof Button) {
+			    			        node.setTranslateY(node.getLayoutY());
+			    			    }
+			    			});
+
+			    			// 스크롤 이벤트 처리
+			    			scrollPane.vvalueProperty().addListener((observable, oldValue, newValue) -> {
+			    			    double scrollPosition = newValue.doubleValue();
+			    			    double contentHeight = scr.getHeight();
+			    			    double scrollableHeight = contentHeight - scrollPane.getHeight();
+
+			    			    // 스크롤 위치에 따라 VBox의 이동 비율 조정 (원하는 비율에 따라 계산값 수정 필요)
+			    			    double translateY = -scrollableHeight * scrollPosition * 3.0; // 예시로 0.25 비율로 설정
+
+			    			    // Timeline을 사용하여 부드러운 이동 구현
+			    			    Timeline timeline = new Timeline(
+			    			            new KeyFrame(Duration.millis(300), // 이동 시간 설정 (milliseconds)
+			    			                    new KeyValue(scr.translateYProperty(), translateY, Interpolator.EASE_BOTH)
+			    			            )
+			    			    );
+			    			    timeline.play();
+			    			});
+			    			
+			    			
 			    			
 			    			Scene scene = new Scene(scrollPane, 1315, 950);
 			    			LoginView.setScene(scene);

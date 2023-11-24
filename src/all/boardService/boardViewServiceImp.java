@@ -23,7 +23,6 @@ public class boardViewServiceImp implements boardViewService {
 	DatabaseDAO dao;
 	CommonService cs = new CommonServiceImp();
 	BoardService bs;
-//	BoardService bs = new BoardServiceImp();
 	
     public boardViewServiceImp() {
     	dao = new DatabaseDAOImp();
