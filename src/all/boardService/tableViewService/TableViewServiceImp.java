@@ -60,85 +60,16 @@ public class TableViewServiceImp implements TableViewService {
       }
    }
 
-   // 중복 코드 줄이려고 만든 메서드 - 테이블 뷰에 컬럼 설정
-   @Override
-   public void configureBoardTableViewClick(TableView<Board> listView) {
-      listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-      TableColumn<Board, Integer> boardNum = new TableColumn<>("No.");
-      boardNum.setMinWidth(10);
-      TableColumn<Board, String> category = new TableColumn<Board, String>("Categori");
-      category.setMinWidth(80);
-      TableColumn<Board, String> title = new TableColumn<Board, String>("Title");
-      title.setMinWidth(260);
-      TableColumn<Board, String> nickname = new TableColumn<Board, String>("NickName");
-      nickname.setMinWidth(70);
-      TableColumn<Board, String> date = new TableColumn<Board, String>("Date");
-      date.setMinWidth(100);
-      
-      // #####
-      
-      TableColumn<Board, String> Button = new TableColumn<Board, String>("Delete");
-      Button.setMinWidth(20);
-      
-      
-      int a = 1;
-      
-      if (a == 1) {
-          // 버튼을 추가하는 새로운 컬럼 생성
-          TableColumn<Board, Void> buttonColumn = new TableColumn<>("삭제");
-          buttonColumn.setMinWidth(35);
-
-          Callback<TableColumn<Board, Void>, TableCell<Board, Void>> cellFactory = param -> new TableCell<Board, Void>() {
-              private final Button button = new Button("-");
-
-              {
-                  button.setOnAction(event -> {
-                      // 버튼 클릭 시 실행할 동작 정의
-                      // 삭제기능 메서드 넣기
-                     
-                  });
-              }
-
-              @Override
-              protected void updateItem(Void item, boolean empty) {
-                  super.updateItem(item, empty);
-                  setGraphic(empty ? null : button);
-              }
-
-            
-          };
-
-          buttonColumn.setCellFactory(cellFactory);
-          listView.getColumns().addAll(boardNum, category, title, nickname, date, buttonColumn);
-      } else {
-          listView.getColumns().addAll(boardNum, category, title, nickname, date);
-      }
-         
-      // ######
-      boardNum.setCellValueFactory(new PropertyValueFactory<>("No"));
-      category.setCellValueFactory(new PropertyValueFactory<>("categori"));
-      title.setCellValueFactory(new PropertyValueFactory<>("title"));
-      nickname.setCellValueFactory(new PropertyValueFactory<>("nicName"));
-      date.setCellValueFactory(new PropertyValueFactory<>("uploadDate"));
-      
-       // 셀 가운데 정렬
-       boardNum.setStyle("-fx-alignment: CENTER;");
-       category.setStyle("-fx-alignment: CENTER;");
-       date.setStyle("-fx-alignment: CENTER;");
-       // 셀 가운데 왼쪽 정렬
-       nickname.setStyle("-fx-alignment: CENTER-LEFT;");
-       title.setStyle("-fx-alignment: CENTER-LEFT;");
-   }
-
    @Override
    public void configureBoardTableView(TableView<Board> listView, String memId) {
        listView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+       
        TableColumn<Board, Integer> boardNum = new TableColumn<>("No.");
        boardNum.setMinWidth(20);
        TableColumn<Board, String> category = new TableColumn<>("Category");
        category.setMinWidth(80);
        TableColumn<Board, String> title = new TableColumn<>("Title");
-       title.setMinWidth(260);
+       title.setMinWidth(400);
        TableColumn<Board, String> nickname = new TableColumn<>("NickName");
        nickname.setMinWidth(70);
        TableColumn<Board, String> date = new TableColumn<>("Date");
@@ -151,10 +82,6 @@ public class TableViewServiceImp implements TableViewService {
        title.setCellValueFactory(new PropertyValueFactory<>("title"));
        nickname.setCellValueFactory(new PropertyValueFactory<>("nicName"));
        date.setCellValueFactory(new PropertyValueFactory<>("uploadDate"));
-
-       
-       buttonColumn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
-       
 
        Callback<TableColumn<Board, Void>, TableCell<Board, Void>> cellFactory = param -> new TableCell<Board, Void>() {
            private final Button button = new Button("-");
@@ -169,8 +96,10 @@ public class TableViewServiceImp implements TableViewService {
            }
            protected void handleDeleteButtonClick(Board rowData) {
              // TODO Auto-generated method stub
-             System.out.println(rowData.getId() + "삭제");
+        	   
              dao.deleteBoardRow(rowData.getNo());
+             listView.getItems().remove(rowData); // 삭제된 항목 제거
+             listView.refresh(); // 리스트뷰 다시 그리기
           }
 
            @Override
@@ -196,6 +125,10 @@ public class TableViewServiceImp implements TableViewService {
        
        // 기존 코드에 추가된 버튼 열을 테이블에 추가합니다.
        listView.getColumns().addAll(boardNum, category, title, nickname, date, buttonColumn);
+       
+       boardNum.setSortType(TableColumn.SortType.ASCENDING);
+       listView.getSortOrder().add(boardNum);
+       boardNum.setSortable(true);
        
        // 셀 가운데 정렬
        boardNum.setStyle("-fx-alignment: CENTER;");

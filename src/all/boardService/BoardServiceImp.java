@@ -284,11 +284,15 @@ public class BoardServiceImp implements BoardService {
 				    (ImageView) root.lookup("#Image4"),
 				    (ImageView) root.lookup("#Image5")
 				};
-
+				
+			
+				
+			if(imagelist != null) {
 				for (int i = 0; i < imagelist.size() && i < imageViews.length; i++) {
-				    Image image = imagelist.get(i);
-				    imageViews[i].setImage(image);
+					Image image = imagelist.get(i);
+					imageViews[i].setImage(image);
 				}
+			}
 
 			
 

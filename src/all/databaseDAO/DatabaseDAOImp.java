@@ -495,6 +495,30 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	}
 	
 	// DB - 게시물 번호를 주면 해당 게시물 번호에 저장된 모든 이미지를 리스트에 넣어줌
+//	@Override
+//	public List<Image> getAllImages(int boardNo) {
+//	    List<Image> images = new ArrayList<>();
+//	    String sql = "SELECT imagepath FROM board_img WHERE board_no = ?";
+//	    
+//	    try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+//	        pstmt.setInt(1, boardNo);
+//	        
+//	        try (ResultSet rs = pstmt.executeQuery()) {
+//	            while (rs.next()) {
+//	                Blob imageBlob = rs.getBlob("imagepath");
+//	                Image image = convertBlobToImage(imageBlob);
+//	                if (image != null) {
+//	                    images.add(image);
+//	                }
+//	            } 	
+//	        }
+//	    } catch (SQLException e) {
+//	        // 예외 처리
+//	        e.printStackTrace();
+//	    }
+//	    return images;
+//	}
+	
 	@Override
 	public List<Image> getAllImages(int boardNo) {
 	    List<Image> images = new ArrayList<>();
@@ -510,12 +534,19 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	                if (image != null) {
 	                    images.add(image);
 	                }
-	            } 	
+	            }
+	            
+	            // 결과가 없을 때 images 리스트가 비어있으면 null 반환
+	            if (images.isEmpty()) {
+	                return null;
+	            }
 	        }
 	    } catch (SQLException e) {
 	        // 예외 처리
 	        e.printStackTrace();
+	        return null;
 	    }
+	    
 	    return images;
 	}
 	
@@ -710,7 +741,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	public List<Board> getLatestBoardList(String Category) {
 		List<Board> latestList = new ArrayList<>();
 		String sql = "SELECT * FROM (SELECT * FROM board WHERE category = '" + Category
-				+ "' ORDER BY board_no DESC) WHERE ROWNUM <= 2";
+				+ "' ORDER BY board_no DESC) WHERE ROWNUM <= 3";
 
 		try (Connection con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE", "c##sqluser", "1234");
 				PreparedStatement pstmt = con.prepareStatement(sql);
@@ -833,7 +864,6 @@ public class DatabaseDAOImp implements DatabaseDAO {
 						pstmt1.executeQuery();
 
 					} catch(Exception e) {
-						System.out.println("게시글삭제");
 						e.printStackTrace();
 					}
 					
@@ -843,26 +873,21 @@ public class DatabaseDAOImp implements DatabaseDAO {
 						pstmt1.executeQuery();
 						
 					} catch(Exception e) {
-						System.out.println("게시글삭제");
 						e.printStackTrace();
 					}
 				}
 			}
 		}catch(Exception e) {
-			System.out.println("1");
 			e.printStackTrace();
 		}
 		
-		System.out.println(nowId);
 		
 	
 		String sql3 = "delete from member where member_id=?";
 		try(PreparedStatement pstmt = con.prepareStatement(sql3)) {
-			System.out.println(nowId);
 			pstmt.setString(1, nowId);
 
 			int removeResult = pstmt.executeUpdate();
-			System.out.println(removeResult);
 			if(removeResult > 0) {
 				return true;
 			} else {
@@ -914,8 +939,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 				int result = pstmt.executeUpdate();
 
 				if(result == 1) {
-					System.out.println("수정완료");
-					cs.customErrorView(root,"프로필이 수정되었습니다." );
+					cs.customErrorView(root,"수정되었습니다." );
 					return true;
 				}
 			} catch(Exception e) {
@@ -926,25 +950,75 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		return false;
 	}
 
+//	@Override
+//	   public void deleteBoardRow(int no) {
+//	      // TODO Auto-generated method stub
+//			String sql = "DELETE FROM board WHERE board_no = " + no;
+//	      int result;
+//	      try {
+//	         stmt = con.createStatement();
+//	         result = stmt.executeUpdate(sql);
+//	         
+//	         if (result == 1) {
+//	            cs.customErrorView(root, "삭제가 완료되었습니다.");
+//	         }else {
+//	        	 cs.customErrorView(root, "삭제 실패");
+//	         }
+//	      }catch (Exception e) {
+//	         // TODO: handle exception
+//	         e.printStackTrace();
+//	      }
+//	   }
+	
 	@Override
-	   public void deleteBoardRow(int no) {
-	      // TODO Auto-generated method stub
-	      String sql = "delete from board where board_no = " + no;
-	      int result;
-	      try {
-	         stmt = con.createStatement();
-	         result = stmt.executeUpdate(sql);
-	         
-	         if (result == 1) {
-	            System.out.println("삭제 완료");
-	         }else {
-	            System.out.println("삭제 실패");
-	         }
-	      }catch (Exception e) {
-	         // TODO: handle exception
-	         e.printStackTrace();
-	      }
-	   }
+	public void deleteBoardRow(int no) {
+	    try {
+	        boolean hasImage = false;
+
+	        // Step 1: Check if there are records in board_img table associated with board_no
+	        String checkBoardImgSQL = "SELECT COUNT(*) FROM board_img WHERE board_no = ?";
+	        PreparedStatement pstmtCheck = con.prepareStatement(checkBoardImgSQL);
+	        pstmtCheck.setInt(1, no);
+	        ResultSet rs = pstmtCheck.executeQuery();
+	        if (rs.next()) {
+	            int count = rs.getInt(1);
+	            if (count > 0) {
+	                hasImage = true;
+	            }
+	        }
+	        rs.close();
+	        pstmtCheck.close();
+
+	        // Step 2: If there are no records in board_img table or records were successfully deleted, proceed to delete from board table
+	        if (!hasImage || deleteBoardImages(no)) {
+	            String deleteBoardSQL = "DELETE FROM board WHERE board_no = ?";
+	            PreparedStatement pstmtDelete = con.prepareStatement(deleteBoardSQL);
+	            pstmtDelete.setInt(1, no);
+	            int result = pstmtDelete.executeUpdate();
+	            pstmtDelete.close();
+
+	            if (result > 0) {
+	                cs.customErrorView(root, "삭제가 완료되었습니다.");
+	            } else {
+	                cs.customErrorView(root, "보드 삭제 실패");
+	            }
+	        } else {
+	            cs.customErrorView(root, "보드 이미지 삭제 실패");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        // Handle exceptions here
+	    }
+	}
+	
+	private boolean deleteBoardImages(int no) throws SQLException {
+	    String deleteBoardImgSQL = "DELETE FROM board_img WHERE board_no = ?";
+	    PreparedStatement pstmt = con.prepareStatement(deleteBoardImgSQL);
+	    pstmt.setInt(1, no);
+	    int deletedRows = pstmt.executeUpdate();
+	    pstmt.close();
+	    return deletedRows > 0;
+	}
 	
 
 }

@@ -46,6 +46,16 @@ public class MainViewButtonImp implements MainViewButton{
 		bs.openBoardDetailWindow(root, b, imagelist);
 	}
 	
+	// 메인 화면 하단 구매 게시판의 세 번째 게시물 제목을 눌렀을 때
+	@Override
+	public void mainBuyDetailView3Proc(Parent root) {
+		// TODO Auto-generated method stub
+		List<Board> buyLatestBoard = dao.getLatestBoardList("구매 게시판");
+		Board b = buyLatestBoard.get(2);
+		List<Image> imagelist = dao.getAllImages(b.getNo());
+		bs.openBoardDetailWindow(root, b, imagelist);
+	}
+	
 	// 메인 화면 하단 판매 게시판의 첫 번째 게시물 제목을 눌렀을 때
 	@Override
 	public void mainSellDetailView1Proc(Parent root) {
@@ -102,6 +112,34 @@ public class MainViewButtonImp implements MainViewButton{
 		
 		List<Board> freeLatestBoard = dao.getLatestBoardList("자유 게시판");
 		Board b = freeLatestBoard.get(1);
+		List<Image> imagelist = dao.getAllImages(b.getNo());
+		bs.openBoardDetailWindow(root, b, imagelist);
+	}
+	
+	// 메인 화면 하단 판매 게시판의 세 번째 게시물 제목을 눌렀을 때
+	@Override
+	public void mainSellDetailView3Proc(Parent root) {
+		// TODO Auto-generated method stub
+		List<Board> sellLatestBoard = dao.getLatestBoardList("판매 게시판");
+		Board b = sellLatestBoard.get(2);
+		List<Image> imagelist = dao.getAllImages(b.getNo());
+		bs.openBoardDetailWindow(root, b, imagelist);
+	}
+	// 메인 화면 하단 나눔 게시판의 세 번째 게시물 제목을 눌렀을 때
+	@Override
+	public void mainSharingDetailView3Proc(Parent root) {
+		// TODO Auto-generated method stub
+		List<Board> sharingLatestBoard = dao.getLatestBoardList("나눔 게시판");
+		Board b = sharingLatestBoard.get(2);
+		List<Image> imagelist = dao.getAllImages(b.getNo());
+		bs.openBoardDetailWindow(root, b, imagelist);
+	}
+	// 메인 화면 하단 자유 게시판의 세 번째 게시물 제목을 눌렀을 때
+	@Override
+	public void mainFreeDetailView3Proc(Parent root) {
+		// TODO Auto-generated method stub
+		List<Board> freeLatestBoard = dao.getLatestBoardList("자유 게시판");
+		Board b = freeLatestBoard.get(2);
 		List<Image> imagelist = dao.getAllImages(b.getNo());
 		bs.openBoardDetailWindow(root, b, imagelist);
 	}

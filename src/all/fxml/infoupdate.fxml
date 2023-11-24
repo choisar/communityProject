@@ -51,7 +51,7 @@
                </cursor></ToggleButton>
 			</children>
 		</HBox>
-		<Button fx:id="Ok" layoutX="140.0" layoutY="572.0" mnemonicParsing="false" onAction="#storeProc" prefHeight="43.0" prefWidth="160.0" stylesheets="@toggle.css" text="OK" textFill="#bbbbbb">
+		<Button fx:id="Go" layoutX="140.0" layoutY="572.0" mnemonicParsing="false" onAction="#storeProc" prefHeight="43.0" prefWidth="160.0" stylesheets="@toggle.css" text="OK" textFill="#bbbbbb">
 			<font>
 				<Font name="Nirmala UI Bold" size="16.0" />
 			</font>
@@ -108,7 +108,7 @@
          <font>
             <Font size="11.0" />
          </font></TextField>
-      <Button fx:id="Back" layoutX="38.0" layoutY="572.0" mnemonicParsing="false" onAction="#backProc" prefHeight="43.0" prefWidth="87.0" stylesheets="@toggle.css" text="Back">
+      <Button fx:id="Go" layoutX="38.0" layoutY="572.0" mnemonicParsing="false" onAction="#cancelProc" prefHeight="43.0" prefWidth="87.0" stylesheets="@toggle.css" text="Back">
          <font>
             <Font name="Nirmala UI Bold" size="16.0" />
          </font>
@@ -116,7 +116,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="Delete" layoutX="318.0" layoutY="572.0" mnemonicParsing="false" onAction="#deleteProc" prefHeight="43.0" prefWidth="87.0" stylesheets="@toggle.css" text="Delete">
+      <Button fx:id="Go" layoutX="318.0" layoutY="572.0" mnemonicParsing="false" onAction="#deleteProc" prefHeight="43.0" prefWidth="87.0" stylesheets="@toggle.css" text="Delete">
          <font>
             <Font name="Nirmala UI Bold" size="16.0" />
          </font>

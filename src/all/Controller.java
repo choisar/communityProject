@@ -148,7 +148,10 @@ public class Controller{
 	}
 	
 	// =================================================== 게시물 관련 =================================================== //
-	
+	// 새로고침
+	public void RefreshProc() {
+		bBt.RefreshProc(root);
+	}
 	// 게시물 작성
 	public void writingProc() {
 		bBt.writingProc(root);
@@ -227,6 +230,10 @@ public class Controller{
 	public void mainBuyDetailView2Proc() {
 		mv.mainBuyDetailView2Proc(root);
 	}
+	// 메인 화면 하단 구매 게시판의 세 번째 게시물 제목을 눌렀을 때
+	public void mainBuyDetailView3Proc() {
+		mv.mainBuyDetailView3Proc(root);
+	}
 	
 	// 메인 화면 하단 판매 게시판의 첫 번째 게시물 제목을 눌렀을 때
 	public void mainSellDetailView1Proc() {
@@ -235,6 +242,10 @@ public class Controller{
 	// 메인 화면 하단 판매 게시판의 두 번째 게시물 제목을 눌렀을 때
 	public void mainSellDetailView2Proc() {
 		mv.mainSellDetailView2Proc(root);
+	}
+	// 메인 화면 하단 판매 게시판의 세 번째 게시물 제목을 눌렀을 때
+	public void mainSellDetailView3Proc() {
+		mv.mainSellDetailView3Proc(root);
 	}
 	
 	// 메인 화면 하단 나눔 게시판의 첫 번째 게시물 제목을 눌렀을 때
@@ -245,6 +256,10 @@ public class Controller{
 	public void mainSharingDetailView2Proc() {
 		mv.mainSharingDetailView2Proc(root);
 	}
+	// 메인 화면 하단 나눔 게시판의 세 번째 게시물 제목을 눌렀을 때
+	public void mainSharingDetailView3Proc() {
+		mv.mainSharingDetailView3Proc(root);
+	}
 	
 	// 메인 화면 하단 자유 게시판의 첫 번째 게시물 제목을 눌렀을 때
 	public void mainFreeDetailView1Proc() {
@@ -253,6 +268,10 @@ public class Controller{
 	// 메인 화면 하단 자유 게시판의 두 번째 게시물 제목을 눌렀을 때
 	public void mainFreeDetailView2Proc() {
 		mv.mainFreeDetailView2Proc(root);
+	}
+	// 메인 화면 하단 자유 게시판의 세 번째 게시물 제목을 눌렀을 때
+	public void mainFreeDetailView3Proc() {
+		mv.mainFreeDetailView3Proc(root);
 	}
 	
 	// ======================================================= 기타 ======================================================= //
@@ -265,10 +284,6 @@ public class Controller{
 	// userLogin.fxml 내정보 버튼
 	public void infoProc() {
 		ib.infoProc(root);
-	}
-	// infoupdate.fxml 뒤로가기 버튼
-	public void backProc() {
-		ib.backProc(root);
 	}
 	// infoupdate.fxml 탈퇴 버튼
 	public void deleteProc() {

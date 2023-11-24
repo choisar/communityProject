@@ -49,42 +49,40 @@ public class proButtonImp implements proButton {
 		TextField txtEmail = (TextField) root.lookup("#txtEmail");
 		TextField txtphoneNum = (TextField) root.lookup("#txtphoneNum");
 
-		System.out.println(txtName.getText()+"님의 정보");
-
 		if(txtName.getText().isEmpty()) {
-			cs.customErrorView(root, "이름이 입력 되지 않았습니다. 다시 입력하세요.");
+			cs.customErrorView(root, "이름을 입력하세요.");
 			txtName.requestFocus();
 			return;
 		} else if(txtId.getText().isEmpty()) {
-			cs.customErrorView(root, "아이디가 입력 되지 않았습니다. 다시 입력하세요.");
+			cs.customErrorView(root, "아이디를 입력하세요.");
 			txtId.requestFocus();
 			return;
 		} else if(txtnickName.getText().isEmpty()) {
-			cs.customErrorView(root, "닉네임이 입력 되지 않았습니다. 다시 입력하세요.");
+			cs.customErrorView(root, "닉네임을 입력하세요.");
 			txtnickName.requestFocus();
 			return;
 		}	else if(txtPw.getText().isEmpty()) {
-			cs.customErrorView(root, "비밀번호가 입력 되지 않았습니다. 다시 입력하세요.");
+			cs.customErrorView(root, "비밀번호를 입력하세요.");
 			txtPw.requestFocus();
 			return;
 		} else if(txtPwOk.getText().isEmpty()) {
-			cs.customErrorView(root, "비밀번호 확인란이 비었습니다. 다시 입력하세요.");
+			cs.customErrorView(root, "비밀번호를 입력하세요.");
 			txtPwOk.requestFocus();
 			return;	
 		}  else if(txtEmail.getText().isEmpty()) {
-			cs.customErrorView(root, "이메일이 입력 되지 않았습니다. 다시 입력하세요.");
+			cs.customErrorView(root, "이메일을 입력하세요.");
 			txtEmail.requestFocus();
 			return;
 		} else if(txtphoneNum.getText().isEmpty()) {
-			cs.customErrorView(root, "전화번호가 입력 되지 않았습니다. 다시 입력하세요.");
+			cs.customErrorView(root, "전화번호를 입력하세요.");
 			txtphoneNum.requestFocus();
 			return;
 		} 
 
 		if(txtPw.getText().equals(txtPwOk.getText())) {
-			cs.customErrorView(root, "암호가 일치합니다.");
+			cs.customErrorView(root, "비밀번호가 일치합니다.");
 		} else {
-			cs.customErrorView(root, "암호가 불일치합니다. 다시 입력하세요.");
+			cs.customErrorView(root, "비밀번호를 확인하세요.");
 
 			txtPw.clear();
 			txtPwOk.clear();
@@ -165,7 +163,6 @@ public class proButtonImp implements proButton {
 		txtEmail.setText(mem.getEmail());
 		txtphoneNum.setText(mem.getPhoneNum());
 
-		System.out.println(mem.isGender());
 		if(mem.isGender().equals("여성")) {
 			rdoWoman.setSelected(true);
 		} else {

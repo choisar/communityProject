@@ -2,6 +2,9 @@ package all.button.boardButton;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -345,11 +348,11 @@ public class boardButtonImp implements boardButton {
 		ComboBox<String> cmbCateg = (ComboBox<String>) root.lookup("#cmbCateg");
 
 		if (title.getText().isEmpty()) {
-			cs.customErrorView(root, "Please enter a title.");
+			cs.customErrorView(root, "제목을 입력하세요.");
 			title.requestFocus();
 			return;
 		} else if (contents.getText().isEmpty()) {
-			cs.customErrorView(root, "Please enter the text.");
+			cs.customErrorView(root, "내용을 입력하세요.");
 			contents.requestFocus();
 			return;
 		}
@@ -359,7 +362,7 @@ public class boardButtonImp implements boardButton {
 		b.setContents(contents.getText());
 
 		if (cmbCateg.getValue() == null) {
-			cs.customErrorView(root, "Please select a category.");
+			cs.customErrorView(root, "카테고리를 선택하세요.");
 			cmbCateg.requestFocus();
 			return;
 		} else {
@@ -377,6 +380,8 @@ public class boardButtonImp implements boardButton {
 				b.setCategori("나눔 게시판");
 				break;
 			}
+			
+			
 		}
 
 		postSuc = dao.uploadBoard(b);
@@ -399,14 +404,31 @@ public class boardButtonImp implements boardButton {
 					}
 				}
 			}
-		}
+		}	
 
 		if (postSuc && imgSuc) {
-			cs.customErrorView(root, "Posting completed");
-			Stage s = (Stage) root.getScene().getWindow();
-			s.close();
+			
+		    FXMLLoader loader = new FXMLLoader(getClass().getResource("../../fxml/userLogin1.fxml"));
+		    Parent root1 = loader.load();
+
+		    // 새로운 TableView 객체 가져오기
+		    TableView<Board> bb = (TableView<Board>) root1.lookup("#ListView");
+
+		    // 새로운 데이터를 가져오는 예시
+		    List<Board> updatedData = dao.selectAll(); // DAO에서 모든 게시글을 가져오는 메서드 호출
+
+		    // 기존 테이블의 아이템들을 지우고, 새로운 데이터로 갱신
+		    bb.getItems().clear();
+		    bb.getItems().addAll(updatedData);
+		    bb.getItems().add(b);
+		    bb.refresh();
+			
+			cs.customErrorView(root, "게시글 작성 완료");
+
+	        Stage s = (Stage) root.getScene().getWindow();
+	        s.close();
 		} else {
-			cs.customErrorView(root, "Posting faild");
+			cs.customErrorView(root, "게시글 작성 실패");
 			dao.imgDelete(ip);
 		}
 
@@ -609,7 +631,468 @@ public class boardButtonImp implements boardButton {
 		bvs.loadNextBoardInCategoryView(root, StrpostNum, category, "DESC");
 	}
 	
+	public void RefreshProc(Parent root) {
+		
+	    // 테이블 뷰가 root 안에 있다고 가정하고 root에서 해당 테이블 뷰를 찾아옵니다.
+	    TableView<Board> tableView = (TableView<Board>) root.lookup("#ListView");
+
+	    if (tableView != null) {
+	        // 데이터를 업데이트하는 작업을 수행하고 테이블 뷰를 새로 고칩니다.
+	        tableView.getItems().clear(); // 기존 항목 제거
+	        // 새로운 데이터를 가져오거나 데이터 소스에서 새로운 값을 로드하는 등의 작업을 수행합니다.
+            List<Board> b = dao.selectAll();
+	        // 이후 테이블 뷰에 변경된 데이터를 추가합니다.
+	        tableView.getItems().addAll(b);
+	    }
+	    Label insertIdLabel = (Label) root.lookup("#memberId");
+	    String insertId = insertIdLabel.getText().replaceAll("\"", "");
+	    
+	    Member m = dao.memberInfo(insertId);
+	    
+	    Label memberName = (Label) root.lookup("#memberName");
+        memberName.setText("\"" + m.getName().toString() + "\"");
+        
+        Label memberId = (Label) root.lookup("#memberId");
+        memberId.setText("\"" + m.getId() + "\"");
+        
+        updateUI(root);
+        
+		
+	}
 	
+	public void updateUI(Parent root) {
+		
+		
+//		// 구매 게시판, 판매 게시판, 나눔 게시판, 자유 게시판의 최신글 각각 2개씩 정보 가져옴
+//		List<Board> buyLatestBoard = dao.getLatestBoardList("구매 게시판");
+//		
+//		// 메인화면에 이미지 넣어주기
+//		if(!(buyLatestBoard.isEmpty())) {
+//			int buyBoard1seq = buyLatestBoard.get(0).getNo();
+//			int buyBoard2seq = buyLatestBoard.get(1).getNo();
+//			List<Image> buyLatestImage1 = dao.getAllImages(buyBoard1seq);
+//			List<Image> buyLatestImage2 = dao.getAllImages(buyBoard2seq);
+//			ImageView image1 = (ImageView)root.lookup("#BuyBoardImage1");
+//			ImageView image2 = (ImageView)root.lookup("#BuyBoardImage2");
+//
+//			if(buyLatestImage1 != null) {
+//				image1.setImage(buyLatestImage1.get(0));
+//			} else {
+//				image1.setImage(null);
+//			}
+//			
+//			
+//			if(buyLatestImage2 != null) {
+//				image2.setImage(buyLatestImage2.get(0));
+//			}else {
+//				image2.setImage(null);
+//			}
+//			
+//			Label BuyBoardTitle1 = (Label)root.lookup("#BuyBoardTitle1");
+//			Label BuyBoardTitle2 = (Label)root.lookup("#BuyBoardTitle2");
+//			Label BuyBoardNickName1 = (Label)root.lookup("#BuyBoardNickName1");
+//			Label BuyBoardNickName2 = (Label)root.lookup("#BuyBoardNickName2");
+//			Label BuyBoardTime1 = (Label)root.lookup("#BuyBoardTime1");
+//			Label BuyBoardTime2 = (Label)root.lookup("#BuyBoardTime2");
+//			
+//			if (buyLatestBoard.size() >= 2) {
+//				// 첫 번째 줄 정보 가져오기
+//				Board buyBoard1 = buyLatestBoard.get(0);
+//				BuyBoardTitle1.setText(buyBoard1.getTitle());
+//				BuyBoardNickName1.setText(buyBoard1.getNicName());
+//				BuyBoardTime1.setText(buyBoard1.getUploadDate());
+//				// 두 번째 줄 정보 가져오기
+//				Board buyBoard2 = buyLatestBoard.get(1);
+//				BuyBoardTitle2.setText(buyBoard2.getTitle());
+//				BuyBoardNickName2.setText(buyBoard2.getNicName());
+//				BuyBoardTime2.setText(buyBoard2.getUploadDate());
+//				
+//			}
+//		}
+//		
+//		List<Board> sellLatestBoard = dao.getLatestBoardList("판매 게시판");
+//		
+//		// 메인화면에 이미지 넣어주기
+//		if(!(sellLatestBoard.isEmpty())) {
+//			int sellBoard1seq = sellLatestBoard.get(0).getNo();
+//			int sellBoard2seq = sellLatestBoard.get(1).getNo();
+//			List<Image> sellLatestImage1 = dao.getAllImages(sellBoard1seq);
+//			List<Image> sellLatestImage2 = dao.getAllImages(sellBoard2seq);
+//			ImageView sellImageView1 = (ImageView)root.lookup("#SellBoardImage1");
+//			ImageView sellImageView2 = (ImageView)root.lookup("#SellBoardImage2");
+//			
+//			if(sellLatestImage1 != null) {
+//				sellImageView1.setImage(sellLatestImage1.get(0));
+//			} else {
+//				sellImageView1.setImage(null);
+//			}
+//			
+//			
+//			if(sellLatestImage2 != null) {
+//				sellImageView2.setImage(sellLatestImage2.get(0));
+//			}else {
+//				sellImageView2.setImage(null);
+//			}
+//			
+//			
+//			Label SellBoardTitle1 = (Label)root.lookup("#SellBoardTitle1");
+//			Label SellBoardTitle2 = (Label)root.lookup("#SellBoardTitle2");
+//			Label SellBoardNickName1 = (Label)root.lookup("#SellBoardNickName1");
+//			Label SellBoardNickName2 = (Label)root.lookup("#SellBoardNickName2");
+//			Label SellBoardTime1 = (Label)root.lookup("#SellBoardTime1");
+//			Label SellBoardTime2 = (Label)root.lookup("#SellBoardTime2");
+//			
+//			if (sellLatestBoard.size() >= 2) {
+//				// 첫 번째 줄 정보 가져오기
+//				Board sellBoard1 = sellLatestBoard.get(0);
+//				SellBoardTitle1.setText(sellBoard1.getTitle());
+//				SellBoardNickName1.setText(sellBoard1.getNicName());
+//				SellBoardTime1.setText(sellBoard1.getUploadDate());
+//				// 두 번째 줄 정보 가져오기
+//				Board sellBoard2 = sellLatestBoard.get(1);
+//				SellBoardTitle2.setText(sellBoard2.getTitle());
+//				SellBoardNickName2.setText(sellBoard2.getNicName());
+//				SellBoardTime2.setText(sellBoard2.getUploadDate());
+//				
+//			}
+//		}
+//		
+//		List<Board> sharingLatestBoard = dao.getLatestBoardList("나눔 게시판");
+//		
+//		if(!(sharingLatestBoard.isEmpty())) {
+//			// 메인화면에 이미지 넣어주기
+//			int sharingBoard1seq = sharingLatestBoard.get(0).getNo();
+//			int sharingBoard2seq = sharingLatestBoard.get(1).getNo();
+//			List<Image> sharingLatestImage1 = dao.getAllImages(sharingBoard1seq);
+//			List<Image> sharingLatestImage2 = dao.getAllImages(sharingBoard2seq);
+//			ImageView sharingImageView1 = (ImageView)root.lookup("#SharingBoardImage1");
+//			ImageView sharingImageView2 = (ImageView)root.lookup("#SharingBoardImage2");
+//			
+//			if(sharingLatestImage1 != null) {
+//				sharingImageView1.setImage(sharingLatestImage1.get(0));
+//			} else {
+//				sharingImageView1.setImage(null);
+//			}
+//			
+//			
+//			if(sharingLatestImage2 != null) {
+//				sharingImageView2.setImage(sharingLatestImage2.get(0));
+//			}else {
+//				sharingImageView2.setImage(null);
+//			}
+//			
+//			Label SharingBoardTitle1 = (Label) root.lookup("#SharingBoardTitle1");
+//			Label SharingBoardTitle2 = (Label) root.lookup("#SharingBoardTitle2");
+//			Label SharingBoardNickName1 = (Label) root.lookup("#SharingBoardNickName1");
+//			Label SharingBoardNickName2 = (Label) root.lookup("#SharingBoardNickName2");
+//			Label SharingBoardTime1 = (Label) root.lookup("#SharingBoardTime1");
+//			Label SharingBoardTime2 = (Label) root.lookup("#SharingBoardTime2");
+//			
+//			
+//			
+//			if (sharingLatestBoard.size() >= 2) {
+//				// 첫 번째 줄 정보 가져오기
+//				Board sharingBoard1 = sharingLatestBoard.get(0);
+//				SharingBoardTitle1.setText(sharingBoard1.getTitle());
+//				SharingBoardNickName1.setText(sharingBoard1.getNicName());
+//				SharingBoardTime1.setText(sharingBoard1.getUploadDate());
+//				
+//				// 두 번째 줄 정보 가져오기
+//				Board sharingBoard2 = sharingLatestBoard.get(1);
+//				SharingBoardTitle2.setText(sharingBoard2.getTitle());
+//				SharingBoardNickName2.setText(sharingBoard2.getNicName());
+//				SharingBoardTime2.setText(sharingBoard2.getUploadDate());
+//			}
+//		}
+//		
+//		List<Board> freeLatestBoard = dao.getLatestBoardList("자유 게시판");
+//		
+//		// 메인화면에 이미지 넣어주기
+//		if(!(freeLatestBoard.isEmpty())) {
+//			int freeBoard1seq = freeLatestBoard.get(0).getNo();
+//			int freeBoard2seq = freeLatestBoard.get(1).getNo();
+//			List<Image> freeLatestImage1 = dao.getAllImages(freeBoard1seq);
+//			List<Image> freeLatestImage2 = dao.getAllImages(freeBoard2seq);
+//			ImageView freeImageView1 = (ImageView)root.lookup("#FreeBoardImage1");
+//			ImageView freeImageView2 = (ImageView)root.lookup("#FreeBoardImage2");
+//			
+//			if(freeLatestImage1 != null) {
+//				freeImageView1.setImage(freeLatestImage1.get(0));
+//			} else {
+//				freeImageView1.setImage(null);
+//			}
+//			
+//			
+//			if(freeLatestImage2 != null) {
+//				freeImageView2.setImage(freeLatestImage2.get(0));
+//			}else {
+//				freeImageView2.setImage(null);
+//			}
+//			
+//			Label freeBoardTitle1 = (Label)root.lookup("#FreeBoardTitle1");
+//			Label freeBoardTitle2 = (Label)root.lookup("#FreeBoardTitle2");
+//			Label freeBoardNickName1 = (Label)root.lookup("#FreeBoardNickName1");
+//			Label freeBoardNickName2 = (Label)root.lookup("#FreeBoardNickName2");
+//			Label freeBoardTime1 = (Label)root.lookup("#FreeBoardTime1");
+//			Label freeBoardTime2 = (Label)root.lookup("#FreeBoardTime2");
+//			
+//			if (freeLatestBoard.size() >= 2) {
+//				// 첫 번째 줄 정보 가져오기
+//				Board freeBoard1 = freeLatestBoard.get(0);
+//				freeBoardTitle1.setText(freeBoard1.getTitle());
+//				freeBoardNickName1.setText(freeBoard1.getNicName());
+//				freeBoardTime1.setText(freeBoard1.getUploadDate());
+//				// 두 번째 줄 정보 가져오기
+//				Board freeBoard2 = freeLatestBoard.get(1);
+//				freeBoardTitle2.setText(freeBoard2.getTitle());
+//				freeBoardNickName2.setText(freeBoard2.getNicName());
+//				freeBoardTime2.setText(freeBoard2.getUploadDate());
+//				
+//			}
+//		}
+		// 구매 게시판, 판매 게시판, 나눔 게시판, 자유 게시판의 최신글 각각 2개씩 정보 가져옴
+		List<Board> buyLatestBoard = dao.getLatestBoardList("구매 게시판");
+		
+		// 메인화면에 이미지 넣어주기
+		if(!(buyLatestBoard.isEmpty())) {
+			int buyBoard1seq = buyLatestBoard.get(0).getNo();
+			int buyBoard2seq = buyLatestBoard.get(1).getNo();
+			int buyBoard3seq = buyLatestBoard.get(2).getNo();
+			List<Image> buyLatestImage1 = dao.getAllImages(buyBoard1seq);
+			List<Image> buyLatestImage2 = dao.getAllImages(buyBoard2seq);
+			List<Image> buyLatestImage3 = dao.getAllImages(buyBoard3seq);
+			ImageView image1 = (ImageView)root.lookup("#BuyBoardImage1");
+			ImageView image2 = (ImageView)root.lookup("#BuyBoardImage2");
+			ImageView image3 = (ImageView)root.lookup("#BuyBoardImage3");
+			
+			if(buyLatestImage1 != null) {
+				image1.setImage(buyLatestImage1.get(0));
+			} else {
+				image1.setImage(null);
+			}
+			if(buyLatestImage2 != null) {
+				image2.setImage(buyLatestImage2.get(0));
+			}else {
+				image2.setImage(null);
+			}
+			if(buyLatestImage3 != null) {
+				image3.setImage(buyLatestImage3.get(0));
+			}else {
+				image3.setImage(null);
+			}
+			
+			Label BuyBoardTitle1 = (Label)root.lookup("#BuyBoardTitle1");
+			Label BuyBoardTitle2 = (Label)root.lookup("#BuyBoardTitle2");
+			Label BuyBoardTitle3 = (Label)root.lookup("#BuyBoardTitle3");
+			Label BuyBoardNickName1 = (Label)root.lookup("#BuyBoardNickName1");
+			Label BuyBoardNickName2 = (Label)root.lookup("#BuyBoardNickName2");
+			Label BuyBoardNickName3 = (Label)root.lookup("#BuyBoardNickName3");
+			Label BuyBoardTime1 = (Label)root.lookup("#BuyBoardTime1");
+			Label BuyBoardTime2 = (Label)root.lookup("#BuyBoardTime2");
+			Label BuyBoardTime3 = (Label)root.lookup("#BuyBoardTime3");
+			
+			if (buyLatestBoard.size() >= 2) {
+				// 첫 번째 줄 정보 가져오기
+				Board buyBoard1 = buyLatestBoard.get(0);
+				BuyBoardTitle1.setText(buyBoard1.getTitle());
+				BuyBoardNickName1.setText(buyBoard1.getNicName());
+				BuyBoardTime1.setText(buyBoard1.getUploadDate());
+				// 두 번째 줄 정보 가져오기
+				Board buyBoard2 = buyLatestBoard.get(1);
+				BuyBoardTitle2.setText(buyBoard2.getTitle());
+				BuyBoardNickName2.setText(buyBoard2.getNicName());
+				BuyBoardTime2.setText(buyBoard2.getUploadDate());
+				// 세 번째 줄 정보 가져오기
+				Board buyBoard3 = buyLatestBoard.get(2);
+				BuyBoardTitle3.setText(buyBoard3.getTitle());
+				BuyBoardNickName3.setText(buyBoard3.getNicName());
+				BuyBoardTime3.setText(buyBoard3.getUploadDate());
+				
+			}
+		}
+		
+		List<Board> sellLatestBoard = dao.getLatestBoardList("판매 게시판");
+		
+		// 메인화면에 이미지 넣어주기
+		if(!(sellLatestBoard.isEmpty())) {
+			int sellBoard1seq = sellLatestBoard.get(0).getNo();
+			int sellBoard2seq = sellLatestBoard.get(1).getNo();
+			int sellBoard3seq = sellLatestBoard.get(2).getNo();
+			List<Image> sellLatestImage1 = dao.getAllImages(sellBoard1seq);
+			List<Image> sellLatestImage2 = dao.getAllImages(sellBoard2seq);
+			List<Image> sellLatestImage3 = dao.getAllImages(sellBoard3seq);
+			ImageView sellImageView1 = (ImageView)root.lookup("#SellBoardImage1");
+			ImageView sellIimageView2 = (ImageView)root.lookup("#SellBoardImage2");
+			ImageView sellIimageView3 = (ImageView)root.lookup("#SellBoardImage3");
+			
+			if(sellLatestImage1 != null) {
+				sellImageView1.setImage(sellLatestImage1.get(0));
+			} else {
+				sellImageView1.setImage(null);
+			}
+			if(sellLatestImage2 != null) {
+				sellIimageView2.setImage(sellLatestImage2.get(0));
+			} else {
+				sellIimageView2.setImage(null);
+			}
+			if(sellLatestImage3 != null) {
+				sellIimageView3.setImage(sellLatestImage3.get(0));
+			} else {
+				sellIimageView3.setImage(null);
+			}
+			
+			Label SellBoardTitle1 = (Label)root.lookup("#SellBoardTitle1");
+			Label SellBoardTitle2 = (Label)root.lookup("#SellBoardTitle2");
+			Label SellBoardTitle3 = (Label)root.lookup("#SellBoardTitle3");
+			Label SellBoardNickName1 = (Label)root.lookup("#SellBoardNickName1");
+			Label SellBoardNickName2 = (Label)root.lookup("#SellBoardNickName2");
+			Label SellBoardNickName3 = (Label)root.lookup("#SellBoardNickName3");
+			Label SellBoardTime1 = (Label)root.lookup("#SellBoardTime1");
+			Label SellBoardTime2 = (Label)root.lookup("#SellBoardTime2");
+			Label SellBoardTime3 = (Label)root.lookup("#SellBoardTime3");
+			
+			if (sellLatestBoard.size() >= 2) {
+				// 첫 번째 줄 정보 가져오기
+				Board sellBoard1 = sellLatestBoard.get(0);
+				SellBoardTitle1.setText(sellBoard1.getTitle());
+				SellBoardNickName1.setText(sellBoard1.getNicName());
+				SellBoardTime1.setText(sellBoard1.getUploadDate());
+				// 두 번째 줄 정보 가져오기
+				Board sellBoard2 = sellLatestBoard.get(1);
+				SellBoardTitle2.setText(sellBoard2.getTitle());
+				SellBoardNickName2.setText(sellBoard2.getNicName());
+				SellBoardTime2.setText(sellBoard2.getUploadDate());
+				// 세 번째 줄 정보 가져오기
+				Board sellBoard3 = sellLatestBoard.get(2);
+				SellBoardTitle3.setText(sellBoard3.getTitle());
+				SellBoardNickName3.setText(sellBoard3.getNicName());
+				SellBoardTime3.setText(sellBoard3.getUploadDate());
+				
+			}
+		}
+		
+		List<Board> sharingLatestBoard = dao.getLatestBoardList("나눔 게시판");
+		
+		if(!(sharingLatestBoard.isEmpty())) {
+			// 메인화면에 이미지 넣어주기
+			int sharingBoard1seq = sharingLatestBoard.get(0).getNo();
+			int sharingBoard2seq = sharingLatestBoard.get(1).getNo();
+			int sharingBoard3seq = sharingLatestBoard.get(2).getNo();
+			List<Image> sharingLatestImage1 = dao.getAllImages(sharingBoard1seq);
+			List<Image> sharingLatestImage2 = dao.getAllImages(sharingBoard2seq);
+			List<Image> sharingLatestImage3 = dao.getAllImages(sharingBoard3seq);
+			ImageView sharingImageView1 = (ImageView)root.lookup("#SharingBoardImage1");
+			ImageView sharingImageView2 = (ImageView)root.lookup("#SharingBoardImage2");
+			ImageView sharingImageView3 = (ImageView)root.lookup("#SharingBoardImage3");
+			
+			if(sharingLatestImage1 != null) {
+				sharingImageView1.setImage(sharingLatestImage1.get(0));
+			} else {
+				sharingImageView1.setImage(null);
+			}
+			if(sharingLatestImage2 != null) {
+				sharingImageView2.setImage(sharingLatestImage2.get(0));
+			} else {
+				sharingImageView2.setImage(null);
+			}
+			if(sharingLatestImage3 != null) {
+				sharingImageView3.setImage(sharingLatestImage3.get(0));
+			} else {
+				sharingImageView3.setImage(null);
+			}
+			
+			Label SharingBoardTitle1 = (Label) root.lookup("#SharingBoardTitle1");
+			Label SharingBoardTitle2 = (Label) root.lookup("#SharingBoardTitle2");
+			Label SharingBoardTitle3 = (Label) root.lookup("#SharingBoardTitle3");
+			Label SharingBoardNickName1 = (Label) root.lookup("#SharingBoardNickName1");
+			Label SharingBoardNickName2 = (Label) root.lookup("#SharingBoardNickName2");
+			Label SharingBoardNickName3 = (Label) root.lookup("#SharingBoardNickName3");
+			Label SharingBoardTime1 = (Label) root.lookup("#SharingBoardTime1");
+			Label SharingBoardTime2 = (Label) root.lookup("#SharingBoardTime2");
+			Label SharingBoardTime3 = (Label) root.lookup("#SharingBoardTime3");
+			
+			
+			
+			if (sharingLatestBoard.size() >= 2) {
+				// 첫 번째 줄 정보 가져오기
+				Board sharingBoard1 = sharingLatestBoard.get(0);
+				SharingBoardTitle1.setText(sharingBoard1.getTitle());
+				SharingBoardNickName1.setText(sharingBoard1.getNicName());
+				SharingBoardTime1.setText(sharingBoard1.getUploadDate());
+				// 두 번째 줄 정보 가져오기
+				Board sharingBoard2 = sharingLatestBoard.get(1);
+				SharingBoardTitle2.setText(sharingBoard2.getTitle());
+				SharingBoardNickName2.setText(sharingBoard2.getNicName());
+				SharingBoardTime2.setText(sharingBoard2.getUploadDate());
+				// 세 번째 줄 정보 가져오기
+				Board sharingBoard3 = sharingLatestBoard.get(2);
+				SharingBoardTitle3.setText(sharingBoard3.getTitle());
+				SharingBoardNickName3.setText(sharingBoard3.getNicName());
+				SharingBoardTime3.setText(sharingBoard3.getUploadDate());
+			}
+		}
+		
+		List<Board> freeLatestBoard = dao.getLatestBoardList("자유 게시판");
+		
+		// 메인화면에 이미지 넣어주기
+		if(!(freeLatestBoard.isEmpty())) {
+			int freeBoard1seq = freeLatestBoard.get(0).getNo();
+			int freeBoard2seq = freeLatestBoard.get(1).getNo();
+			int freeBoard3seq = freeLatestBoard.get(2).getNo();
+			List<Image> freeLatestImage1 = dao.getAllImages(freeBoard1seq);
+			List<Image> freeLatestImage2 = dao.getAllImages(freeBoard2seq);
+			List<Image> freeLatestImage3 = dao.getAllImages(freeBoard3seq);
+			ImageView freeImageView1 = (ImageView)root.lookup("#FreeBoardImage1");
+			ImageView freeImageView2 = (ImageView)root.lookup("#FreeBoardImage2");
+			ImageView freeImageView3 = (ImageView)root.lookup("#FreeBoardImage3");
+			
+			if(freeLatestImage1 != null) {
+				freeImageView1.setImage(freeLatestImage1.get(0));
+			} else {
+				freeImageView1.setImage(null);
+			}
+			if(freeLatestImage2 != null) {
+				freeImageView2.setImage(freeLatestImage2.get(0));
+			} else {
+				freeImageView2.setImage(null);
+			}
+			if(freeLatestImage3 != null) {
+				freeImageView3.setImage(freeLatestImage3.get(0));
+			} else {
+				freeImageView3.setImage(null);
+			}
+			
+			Label freeBoardTitle1 = (Label)root.lookup("#FreeBoardTitle1");
+			Label freeBoardTitle2 = (Label)root.lookup("#FreeBoardTitle2");
+			Label freeBoardTitle3 = (Label)root.lookup("#FreeBoardTitle3");
+			Label freeBoardNickName1 = (Label)root.lookup("#FreeBoardNickName1");
+			Label freeBoardNickName2 = (Label)root.lookup("#FreeBoardNickName2");
+			Label freeBoardNickName3 = (Label)root.lookup("#FreeBoardNickName3");
+			Label freeBoardTime1 = (Label)root.lookup("#FreeBoardTime1");
+			Label freeBoardTime2 = (Label)root.lookup("#FreeBoardTime2");
+			Label freeBoardTime3 = (Label)root.lookup("#FreeBoardTime3");
+			
+			if (freeLatestBoard.size() >= 2) {
+				// 첫 번째 줄 정보 가져오기
+				Board freeBoard1 = freeLatestBoard.get(0);
+				freeBoardTitle1.setText(freeBoard1.getTitle());
+				freeBoardNickName1.setText(freeBoard1.getNicName());
+				freeBoardTime1.setText(freeBoard1.getUploadDate());
+				// 두 번째 줄 정보 가져오기
+				Board freeBoard2 = freeLatestBoard.get(1);
+				freeBoardTitle2.setText(freeBoard2.getTitle());
+				freeBoardNickName2.setText(freeBoard2.getNicName());
+				freeBoardTime2.setText(freeBoard2.getUploadDate());
+				// 세 번째 줄 정보 가져오기
+				Board freeBoard3 = freeLatestBoard.get(2);
+				freeBoardTitle3.setText(freeBoard3.getTitle());
+				freeBoardNickName3.setText(freeBoard3.getNicName());
+				freeBoardTime3.setText(freeBoard3.getUploadDate());
+				
+			}
+		}
+		
+	}
 	
 	
 	

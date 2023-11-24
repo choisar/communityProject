@@ -204,7 +204,6 @@ public class JoinButtonImp implements JoinButton{
 			TextField txtphoneNum = (TextField) member.lookup("#txtphoneNum");
 			DatePicker birthDate = (DatePicker) member.lookup("#birthDate");		
 
-			System.out.println(txtName.getText());
 
 			if(txtName.getText() == null || txtName.getText().isEmpty()) {
 				cs.customErrorView(root, "이름이 입력 되지 않았습니다. 다시 입력하세요");
