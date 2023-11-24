@@ -494,30 +494,6 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	}
 	
 	// DB - 게시물 번호를 주면 해당 게시물 번호에 저장된 모든 이미지를 리스트에 넣어줌
-//	@Override
-//	public List<Image> getAllImages(int boardNo) {
-//	    List<Image> images = new ArrayList<>();
-//	    String sql = "SELECT imagepath FROM board_img WHERE board_no = ?";
-//	    
-//	    try (PreparedStatement pstmt = con.prepareStatement(sql)) {
-//	        pstmt.setInt(1, boardNo);
-//	        
-//	        try (ResultSet rs = pstmt.executeQuery()) {
-//	            while (rs.next()) {
-//	                Blob imageBlob = rs.getBlob("imagepath");
-//	                Image image = convertBlobToImage(imageBlob);
-//	                if (image != null) {
-//	                    images.add(image);
-//	                }
-//	            } 	
-//	        }
-//	    } catch (SQLException e) {
-//	        // 예외 처리
-//	        e.printStackTrace();
-//	    }
-//	    return images;
-//	}
-	
 	@Override
 	public List<Image> getAllImages(int boardNo) {
 	    List<Image> images = new ArrayList<>();
@@ -665,7 +641,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	// 신고화면 검색 (게시물/board) - 검색 결과가 포함된 모든 정보
 	@Override
 	public List<Board> reportSearchResultAll1(String text1, String text2) {
-//		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 
 		try {
 			List<Board> reportBoardList = new ArrayList<>();
@@ -948,33 +924,13 @@ public class DatabaseDAOImp implements DatabaseDAO {
 		
 		return false;
 	}
-
-//	@Override
-//	   public void deleteBoardRow(int no) {
-//	      // TODO Auto-generated method stub
-//			String sql = "DELETE FROM board WHERE board_no = " + no;
-//	      int result;
-//	      try {
-//	         stmt = con.createStatement();
-//	         result = stmt.executeUpdate(sql);
-//	         
-//	         if (result == 1) {
-//	            cs.customErrorView(root, "삭제가 완료되었습니다.");
-//	         }else {
-//	        	 cs.customErrorView(root, "삭제 실패");
-//	         }
-//	      }catch (Exception e) {
-//	         // TODO: handle exception
-//	         e.printStackTrace();
-//	      }
-//	   }
 	
+	// 게시물 삭제
 	@Override
 	public void deleteBoardRow(int no) {
 	    try {
 	        boolean hasImage = false;
 
-	        // Step 1: Check if there are records in board_img table associated with board_no
 	        String checkBoardImgSQL = "SELECT COUNT(*) FROM board_img WHERE board_no = ?";
 	        PreparedStatement pstmtCheck = con.prepareStatement(checkBoardImgSQL);
 	        pstmtCheck.setInt(1, no);
@@ -988,7 +944,6 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	        rs.close();
 	        pstmtCheck.close();
 
-	        // Step 2: If there are no records in board_img table or records were successfully deleted, proceed to delete from board table
 	        if (!hasImage || deleteBoardImages(no)) {
 	            String deleteBoardSQL = "DELETE FROM board WHERE board_no = ?";
 	            PreparedStatement pstmtDelete = con.prepareStatement(deleteBoardSQL);
@@ -1010,6 +965,7 @@ public class DatabaseDAOImp implements DatabaseDAO {
 	    }
 	}
 	
+	// 이미지 삭제
 	private boolean deleteBoardImages(int no) throws SQLException {
 	    String deleteBoardImgSQL = "DELETE FROM board_img WHERE board_no = ?";
 	    PreparedStatement pstmt = con.prepareStatement(deleteBoardImgSQL);

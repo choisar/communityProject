@@ -41,6 +41,7 @@ public interface boardButton {
 	void NextProc(Parent root);
 	// 보드 디테일뷰에서 이전 게시물(Prev ->) 버튼을 누르면 다음 게시물로 가는 버튼
 	void PrevProc(Parent root);
+	
 	// 새로고침
 	void RefreshProc(Parent root);
 	
